@@ -5,6 +5,7 @@ export const Div = styled.div`
     height: 100vh;
     box-sizing: border-box;
     display: flex;
-    flex-wrap: wrap;
-
+    flex-direction: column;
+    background-color: white;
+    color: black;
 `
