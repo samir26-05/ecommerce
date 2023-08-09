@@ -1,9 +1,13 @@
 import { Div } from "./styled"
+import DemoAutoPlay from "./DemoAutoPlay"
+
 
 export default function Body() {
   return (
     <Div>
-        AQUI VA EL CONTENIDO DEL BODY
+      
+        <DemoAutoPlay/>
+ 
     </Div>
   )
 }
