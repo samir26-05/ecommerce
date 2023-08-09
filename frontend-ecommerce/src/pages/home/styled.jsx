@@ -6,4 +6,6 @@ export const Div = styled.div`
     border: solid 2px orange;
     display: flex;
     flex-direction: column;
+    background-color: white;
+    color: black;
 `
