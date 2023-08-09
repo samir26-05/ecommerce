@@ -16,9 +16,10 @@ export const FlexRow = styled.div`
 
 export const Title = styled.div`
   font-weight: 700;
-  font-size: 3rem;
+  text-transform: uppercase;
+  font-size: 2.5rem;
   text-decoration: none;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   line-height: 4rem;
   color: ${fontColor};
 `;
