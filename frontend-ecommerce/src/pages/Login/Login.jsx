@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import { Box, Checkbox } from "@mui/material";
 import { Btn, Login_Register, SignInBtn, Span } from "./Styled";
-import { FlexDirCol, FlexRow, Text } from "../../components/StyledMain";
+import { FlexDirCol, FlexRow } from "../../components/StyledMain";
 import TextField from "@mui/material/TextField";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
@@ -83,7 +83,7 @@ function BasicTextFields({ Placeholder }) {
     <Box
       component="form"
       sx={{
-        "& > :not(style)": { m: 1, width: "25ch" },
+        "& > :not(style)": { m: 1, width: "35ch" }, 
       }}
       noValidate
       autoComplete="off"
