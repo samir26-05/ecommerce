@@ -12,6 +12,19 @@ import TextField from "@mui/material/TextField";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 export default function LoginDrawer() {
   const [haveAccount, setHaveAccount] = useState(true);
 
@@ -50,6 +63,26 @@ export default function LoginDrawer() {
       </List>
     </Box>
   );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div>
       {["right"].map((anchor) => (
@@ -68,7 +101,32 @@ export default function LoginDrawer() {
   );
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
+
+
+
+
+
+
+
+
+
 
 function BasicTextFields({ Placeholder }) {
   return (
@@ -84,6 +142,17 @@ function BasicTextFields({ Placeholder }) {
     </Box>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
 
 const Login = () => {
   return (
@@ -106,6 +175,21 @@ const Login = () => {
     </FlexDirCol>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const Register = () => {
   return (
