@@ -40,8 +40,7 @@ export default function LoginDrawer() {
       role="presentation"
     >
       <List style={{ paddingTop: "0" }}>
-        <Text>
-          <FlexRow style={{ marginBottom: "1rem" }}>
+          <FlexRow style={{ marginBottom: "1rem", fontSize:"1.2rem" }}>
             <Login_Register
               onClick={() => setHaveAccount(true)}
               Page={haveAccount}
@@ -55,7 +54,6 @@ export default function LoginDrawer() {
               Registarse
             </Login_Register>
           </FlexRow>
-        </Text>
         {haveAccount ? <Login /> : <Register />}
       </List>
     </Box>
