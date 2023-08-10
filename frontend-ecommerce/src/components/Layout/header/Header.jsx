@@ -1,4 +1,5 @@
 import * as React from 'react';
+import LoginDrawer from "../../../pages/Login/Login";
 import { Div } from "./styled"
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import '../header/styledHeader.css'
 
 const pages = ['Hombre', 'Mujer', 'Niño'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Dashboard', ];
 
 const Header = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -68,6 +69,7 @@ const Header = () => {
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
+            <LoginDrawer/>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -94,6 +96,7 @@ const Header = () => {
         </Toolbar>
       </Container>
     </AppBar>
+    
     </Div>
    );
 }

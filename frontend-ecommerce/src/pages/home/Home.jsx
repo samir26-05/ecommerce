@@ -4,13 +4,13 @@ import Footer from "../../components/Layout/footer/Footer";
 import { Div } from "./styled";
 
 const HomePage = () => {
-    return ( 
-        <Div>
-            <Header/>
-                <Body/>
-            <Footer/>
-        </Div>
-    );
-}
- 
+  return (
+    <Div>
+      <Header />
+      <Body />
+      <Footer />
+    </Div>
+  );
+};
+
 export default HomePage;

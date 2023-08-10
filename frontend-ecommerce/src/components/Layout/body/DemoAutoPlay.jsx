@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import Pagination from './Pagination'; // Update the import path as needed
 
 //image
-import carritoNegro from './img/carritoNegro.jpg'
-import damaNegro from './img/damaNegro.jpg'
-import ropaNegro from './img/ropaNegro.jpg'
+import carritoNegro from '../../../assets/Img/carritoNegro.jpg'
+import damaNegro from '../../../assets/Img/damaNegro.jpg'
+import ropaNegro from '../../../assets/Img/ropaNegro.jpg'
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
