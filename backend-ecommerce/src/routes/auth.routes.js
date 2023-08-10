@@ -1,5 +1,6 @@
-import {Router} from "express";
+import { Router } from "express";
+import * as Login from "../controllers/auth.controllers.js";
 const router = Router();
 
-
-export default router
+router.get("/", Login.LoginUser);
+export default router;
