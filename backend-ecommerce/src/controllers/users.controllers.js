@@ -1,6 +1,5 @@
-import { users } from "../models/users.js";
+import { users,Validusers } from "../models/users.js";
 import { encryptPassword } from "../libs/Bcryptjs.js";
-import { isValidEmail } from "../libs/ValidGmail.js";
 
 export const getUsuarios = async (req, res) => {
   try {
@@ -32,56 +31,21 @@ export const UserDelete = async (req, res) => {
 };
 export const CrearUsuario = async (req, res) => {
   try {
-    const {
-      username,
-      email,
-      password_hash,
-      first_name,
-      last_name,
-      address,
-      phone_number,
-      is_admin,
-    } = req.body;
-    // validar si ya se encuentra el usuario
-    const usuario = await users.findOne({ where: { username } });
-    if (usuario) {
-      return res.status(404).json({ message: "ya existe el usuario" });
+    // validar primero si todos los datos estan bien
+    const result = await Validusers(req.body)
+    console.log(result)
+    if(result.error){
+      return res.status(400).json({error: JSON.parse(result.error.message)});
+      
     }
-    if(!isValidEmail(email)){
-      return res.status(400).json({message: "correo invalido"})
-    }
-    // Validar si el correo electrónico ya está registrado
-    const correo = await users.findOne({ where: { email } });
-    if (correo) {
-      return res.status(404).json({ message: "ya esta registrado el correo" });
-    }
-    // Validar si el número de teléfono ya está registrado
-    const telefono = await users.findOne({
-      where: { phone_number },
-      attributes: ["phone_number"],
-    });
-    if (telefono) {
-      return res
-        .status(404)
-        .json({ message: "ya se encuenta registrado este telefono" });
-    }
-    // Validar si el número de teléfono tiene 10 dígitos
-    if (!/^\d{10}$/.test(phone_number)) {
-      return res
-        .status(400)
-        .json({ message: "El número de teléfono debe tener 10 dígitos" });
-    }
+    const Encryptada = await encryptPassword(req.body.password_hash) 
     const NewUsers = await users.create({
-      username,
-      email: email.toLowerCase(),
-      password_hash: await encryptPassword(password_hash),
-      first_name,
-      last_name,
-      address,
-      phone_number,
+      ...result.data,
+      password_hash: Encryptada
     });
     res.status(200).json({ message: "Usuario creado exitosamente", NewUsers });
   } catch (error) {
-    res.send({ message: "ocurrio un erro", error: error.message });
+    console.error('Error en la creación de usuario:', error);
+    res.status(500).send({ message: "ocurrio un error", error:error.message });
   }
 };
