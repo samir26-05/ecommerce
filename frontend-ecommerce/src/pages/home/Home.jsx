@@ -5,11 +5,12 @@ import { Div } from "./styled";
 
 const HomePage = () => {
   return (
-    <Div>
-      <Header />
-      <Body />
-      <Footer />
-    </Div>
+      <Div>
+        <Header />
+        <Body />
+        <Footer/>
+        
+      </Div>
   );
 };
 
