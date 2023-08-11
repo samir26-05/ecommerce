@@ -5,7 +5,7 @@ export const LoginUser = async (req, res) => {
     const { email, contraseña } = req.body;
     const usuario = await users.findOne({
       where: { email },
-      attributes: ["email", "password_hash"],
+      attributes: ["email", "password_hash","username"],
     });
     // validar si el correo existe
     if (!usuario) {
@@ -15,10 +15,11 @@ export const LoginUser = async (req, res) => {
     }
     // validar si la contraseña esta correcta
     const isPasswordValid = await compare(contraseña, usuario.password_hash);
+    const username = usuario.username 
     if (isPasswordValid) {
       return res
         .status(200)
-        .json({ message: "Inicio de sesion correctamente" });
+        .json({ message: "Inicio de sesion correctamente",username });
     } else {
       return res.status(401).json({ message: "Contraseña incorrecta" });
     }
