@@ -5,7 +5,7 @@ export const LoginUser = async (req, res) => {
     const { email, contraseña } = req.body;
     const usuario = await users.findOne({
       where: { email },
-      attributes: ["email", "password_hash","username"],
+      attributes: ["email", "password_hash","first_name"],
     });
     // validar si el correo existe
     if (!usuario) {
@@ -15,7 +15,7 @@ export const LoginUser = async (req, res) => {
     }
     // validar si la contraseña esta correcta
     const isPasswordValid = await compare(contraseña, usuario.password_hash);
-    const username = usuario.username 
+    const username = usuario.first_name 
     if (isPasswordValid) {
       return res
         .status(200)
