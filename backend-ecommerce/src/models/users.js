@@ -7,10 +7,6 @@ export const users = sequelize.define("users", {
     primaryKey: true,
     autoIncrement: true,
   },
-  username: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -43,13 +39,6 @@ export const users = sequelize.define("users", {
 });
 
 const userSchema = z.object({
-  username: z.string().refine(async (value) => {
-      const existeUser = await users.findOne({ where: { username: value } });
-      if (existeUser) {
-        return false;
-      }
-      return true;
-    }, { message: "El nombre de usuario ya está registrado" }),
   email: z
     .string()
     .email()

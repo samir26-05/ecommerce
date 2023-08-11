@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
-
-export const sequelize = new Sequelize('ecommerce','root','',{
-    host : '192.168.12.43',
+import { DATABASE_NAME,HOST,DATABASE_USER,PASSWORD } from "./config.js";
+export const sequelize = new Sequelize(DATABASE_NAME,DATABASE_USER,PASSWORD,{
+    host : HOST,
     dialect: 'mysql'
 });
