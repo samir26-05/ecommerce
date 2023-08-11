@@ -4,8 +4,7 @@ export const Div = styled.div`
     width: 100vw;
     height: 100vh;
     box-sizing: border-box;
+    margin: 0;
     display: flex;
-    flex-direction: column;
-    background-color: white;
-    color: black;
+    flex-wrap: wrap;
 `

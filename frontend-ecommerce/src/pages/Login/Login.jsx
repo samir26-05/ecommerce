@@ -9,6 +9,7 @@ import { FlexDirCol, FlexRow } from "../../components/StyledMain";
 import TextField from "@mui/material/TextField";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
+import { Link } from 'react-router-dom';
 
 export default function LoginDrawer() {
   const [haveAccount, setHaveAccount] = useState(true);
@@ -58,6 +59,8 @@ export default function LoginDrawer() {
       </List>
     </Box>
   );
+
+
   return (
     <div>
       {["right"].map((anchor) => (
@@ -76,7 +79,9 @@ export default function LoginDrawer() {
   );
 }
 
+
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
 
 function BasicTextFields({ Placeholder }) {
   return (
@@ -93,6 +98,7 @@ function BasicTextFields({ Placeholder }) {
   );
 }
 
+
 const Login = () => {
   return (
     <FlexDirCol style={{ gap: ".5rem" }}>
@@ -104,7 +110,11 @@ const Login = () => {
         </Span>
         <Span>¿Olvidaste tu contraseña?</Span>
       </FlexRow>
-      <Btn>Iniciar Sesión</Btn>
+
+      
+      <Link to={"/user"}>
+        <Btn>Iniciar Sesión</Btn>
+      </Link>
       <FlexDirCol style={{ gap: ".5rem" }}>
         <SignInBtn bgcolor="#003aaf">
           <FacebookIcon /> Continuar con Facebook
@@ -116,6 +126,21 @@ const Login = () => {
     </FlexDirCol>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const Register = () => {
   return (

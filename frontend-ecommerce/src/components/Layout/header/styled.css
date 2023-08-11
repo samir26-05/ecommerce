@@ -1,0 +1,14 @@
+.Typography{
+      text-decoration: none;
+}
+
+.box-primary{
+      display: flex;
+      flex-direction: row;
+}
+
+.btn-primary{
+      width: 10%;
+      position: relative;
+      top: 15px;
+}
