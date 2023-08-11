@@ -3,11 +3,9 @@ import { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import Welcome from "../../assets/Img/Welcome.jpg";
 import { Box, Checkbox } from "@mui/material";
-import { Btn, LoginImg, SignInBtn, Span } from "./Styled";
-import { FlexDirCol, FlexRow, Text } from "../../components/StyledMain";
+import { Btn, Login_Register, SignInBtn, Span } from "./Styled";
+import { FlexDirCol, FlexRow } from "../../components/StyledMain";
 import TextField from "@mui/material/TextField";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
@@ -35,17 +33,27 @@ export default function LoginDrawer() {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 400 }}
+      sx={{
+        width: anchor === "top" || anchor === "bottom" ? "auto" : 400,
+        overflow: "hidden",
+      }}
       role="presentation"
     >
-      <List style={{ padding: "0" }}>
-        <ListItem disablePadding>
-          <LoginImg src={Welcome} />
-        </ListItem>
-        <Text style={{ display:"flex", gap:"1rem", justifyContent:"center"}}>
-          <Button variant="contained" style={{backgroundColor:"black"}} onClick={() => setHaveAccount(true)}>Iniciar Sesión</Button>
-          <Button variant="contained" style={{backgroundColor:"black"}} onClick={() => setHaveAccount(false)}>Registarse</Button>
-        </Text>
+      <List style={{ paddingTop: "0" }}>
+          <FlexRow style={{ marginBottom: "1rem", fontSize:"1.2rem" }}>
+            <Login_Register
+              onClick={() => setHaveAccount(true)}
+              Page={haveAccount}
+            >
+              Iniciar Sesión
+            </Login_Register>
+            <Login_Register
+              onClick={() => setHaveAccount(false)}
+              Page={haveAccount}
+            >
+              Registarse
+            </Login_Register>
+          </FlexRow>
         {haveAccount ? <Login /> : <Register />}
       </List>
     </Box>
@@ -75,7 +83,7 @@ function BasicTextFields({ Placeholder }) {
     <Box
       component="form"
       sx={{
-        "& > :not(style)": { m: 1, width: "25ch" },
+        "& > :not(style)": { m: 1, width: "35ch" }, 
       }}
       noValidate
       autoComplete="off"
@@ -87,36 +95,31 @@ function BasicTextFields({ Placeholder }) {
 
 const Login = () => {
   return (
-    <FlexDirCol style={{ gap: "1rem" }}>
-      <SignInBtn bgcolor="#003aaf">
-        <FacebookIcon /> Continuar con Facebook
-      </SignInBtn>
-      <SignInBtn bgcolor="#aaaaaa">
-        <GoogleIcon /> Continuar con Google
-      </SignInBtn>
+    <FlexDirCol style={{ gap: ".5rem" }}>
       <BasicTextFields Placeholder={"E-mail"} />
       <BasicTextFields Placeholder={"Contraseña"} />
       <FlexRow style={{ justifyContent: "space-between" }}>
         <Span>
-          <Checkbox {...label} /> Recordar contraseña
+          <Checkbox {...label} style={{color:"black"}}/> Recordar contraseña
         </Span>
         <Span>¿Olvidaste tu contraseña?</Span>
       </FlexRow>
       <Btn>Iniciar Sesión</Btn>
+      <FlexDirCol style={{ gap: ".5rem" }}>
+        <SignInBtn bgcolor="#003aaf">
+          <FacebookIcon /> Continuar con Facebook
+        </SignInBtn>
+        <SignInBtn bgcolor="#fff">
+          <GoogleIcon /> Continuar con Google
+        </SignInBtn>
+      </FlexDirCol>
     </FlexDirCol>
   );
 };
 
 const Register = () => {
   return (
-    <FlexDirCol style={{ gap: "1rem" }}>
-      <SignInBtn bgcolor="#003aaf">
-        <FacebookIcon /> Continuar con Facebook
-      </SignInBtn>
-      <SignInBtn bgcolor="#aaaaaa">
-        <GoogleIcon /> Continuar con Google
-      </SignInBtn>
-      <BasicTextFields Placeholder={"Nombre de Usuario"} />
+    <FlexDirCol style={{ gap: ".2rem" }}>
       <BasicTextFields Placeholder={"Nombres"} />
       <BasicTextFields Placeholder={"Apellidos"} />
       <BasicTextFields Placeholder={"E-mail"} />
@@ -125,6 +128,14 @@ const Register = () => {
       <BasicTextFields Placeholder={"Contraseña"} type="password" />
       <BasicTextFields Placeholder={"Confirmar Contraseña"} type="password" />
       <Btn>Crear Cuenta</Btn>
+      <FlexDirCol style={{ gap: ".5rem" }}>
+        <SignInBtn bgcolor="#003aaf">
+          <FacebookIcon /> Continuar con Facebook
+        </SignInBtn>
+        <SignInBtn bgcolor="#fff">
+          <GoogleIcon /> Continuar con Google
+        </SignInBtn>
+      </FlexDirCol>
     </FlexDirCol>
   );
 };

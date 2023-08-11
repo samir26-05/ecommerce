@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import NavHorizontal from './NavHorizontal';
 import { Div } from '../styled';
-import HomePage from '../../home/Home'
 import { Link } from 'react-router-dom';
 
 function TabPanel(props) {
