@@ -1,15 +1,16 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0a858623baca4ed21364705c1d5264181c6c3788
 
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
 }
 
 a {
@@ -83,5 +84,8 @@ button:focus-visible {
   height: 100%;
   overflow: hidden;
 } */
+<<<<<<< HEAD
 =======
 >>>>>>> f7e84d366e8ae7866da9787cc30fda4f112133f4
+=======
+>>>>>>> 0a858623baca4ed21364705c1d5264181c6c3788

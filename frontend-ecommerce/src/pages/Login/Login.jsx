@@ -60,7 +60,6 @@ export default function LoginDrawer() {
     </Box>
   );
 
-
   return (
     <div>
       {["right"].map((anchor) => (
@@ -98,7 +97,6 @@ function BasicTextFields({ Placeholder }) {
   );
 }
 
-
 const Login = () => {
   return (
     <FlexDirCol style={{ gap: ".5rem" }}>
@@ -126,21 +124,6 @@ const Login = () => {
     </FlexDirCol>
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const Register = () => {
   return (

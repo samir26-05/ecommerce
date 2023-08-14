@@ -47,7 +47,9 @@ export default function NavHorizontal() {
     <Box sx={{ width: '100%', position:'relative' }}>
 
       <Box>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+      <h3 style={{ position: "fixed", paddingButton: "50px", left: 570 }}>Mis compras</h3>
+
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{paddingTop:50}}>
           <Tab label="Online" {...a11yProps(0)} />
           <Tab label="Tienda" {...a11yProps(1)} />
         </Tabs>
