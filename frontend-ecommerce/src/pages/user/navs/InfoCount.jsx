@@ -10,7 +10,7 @@ import DataPersonal from '../forms/DataPersonal';
 export default function InfoCountUser() {
     return (
         <div>
-            <h3 style={{ paddingButton: "50px", left: 570 }}>Mis compras</h3>
+            <h3 style={{ paddingButton: "50px", left: 570 }}>ACCEDE A TU CUENTA</h3>
             <div>
                 <Accordion >
                     <AccordionSummary
@@ -48,11 +48,11 @@ export default function InfoCountUser() {
                         aria-controls="panel2a-content"
                         id="panel2a-header"
                     >
-                        <Typography>DATOS PERSONALES</Typography>
+                        <Typography>DATOS PERSONALES Y FACTURACION</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            Si quieres cambiar el mail y/o la contrseña asociados a tu cuenta completa los siguientes campos.
+                            Si quieres cambiar informacion personal asociados a tu cuenta completa los siguientes campos.
                         </Typography>
                         <Typography>
                             Consulta y modifica tus datos personales. Datos de facturación

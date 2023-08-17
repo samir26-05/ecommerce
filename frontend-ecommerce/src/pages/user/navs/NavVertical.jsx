@@ -49,13 +49,14 @@ export default function NavVertical() {
 
   return (
     <Div >
-      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224 }}>
+      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224}}>
         <Tabs onChange={handleChange} sx={{ width: 500, marginTop: 5, marginLeft: "50px", display: "flex", flexDirection: "column" }} >
             <h3 style={{ position: "fixed", marginTop: "0px", left: 70 }}>Hola</h3>
-            <Tab label="Mis compras" {...a11yProps(1)} sx={{ position: "fixed", marginTop: "80px" }} />
-            <Tab label="Datos personales y direcciones" {...a11yProps(2)} sx={{ position: "fixed", marginTop: "110px" }} />
+            <Tab label="Mis compras" {...a11yProps(1)} sx={{ position: "fixed", marginTop: "80px", outline:"none"}} />
+            <Tab label="Datos personales y direcciones" {...a11yProps(2)} sx={{ position: "fixed", marginTop: "130px" }} />
 
-            <Link to={"/"}>
+
+            <Link to={"/"} style={{ textDecoration: "none" }}>
               <Tab label="Cerrar sesión" {...a11yProps(3)} sx={{ position: "fixed", marginTop: "200px" }} />
             </Link>
         </Tabs>
@@ -72,3 +73,4 @@ export default function NavVertical() {
     </Div>
   );
 }
+

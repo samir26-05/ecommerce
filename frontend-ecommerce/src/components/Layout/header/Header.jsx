@@ -5,10 +5,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import './styled.css'
 import { Carrito } from "./Carrito";
-import { ProductList } from "./ProductList";
+/* import { ProductList } from "./ProductList"; 
+ import { CardProduct } from "../body/card/CardProduct"; */
 import { useState } from "react";
+import './styled.css'
 import "../../../car.css"
 
 const pages = ['Inicio', 'Mujer', 'Hombre'];
@@ -23,12 +24,7 @@ const Header = () => {
     <AppBar position="sticky" style={{ backgroundColor: "#ffffff" }}>
       <Container maxWidth="">
         <Toolbar disableGutters>
-          <Typography
-            className="Typography"
-            variant="h1"
-            noWrap
-            component="a"
-            href="/home"
+          <Typography className="Typography" variant="h1" noWrap component="a" href="/home"
             sx={{
               mr: 3,
               display: { xs: 'none', md: 'flex' },
@@ -41,11 +37,7 @@ const Header = () => {
               },
             }}>KALARY
           </Typography>
-          <Typography
-            variant="h3"
-            noWrap
-            component="a"
-            href="/home"
+          <Typography variant="h3" noWrap component="a" href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -58,55 +50,29 @@ const Header = () => {
             }}>KALARY
           </Typography>
 
-          <Box
-            className='box-primary'
-            sx={{
-              flexGrow: 1,
-              display: { xs: 'none', md: 'flex' },
-            }}>
+          <Box className='box-primary' sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
             {pages.map((page) => (
-              <Button
-                className="ja"
-                variant=""
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  fontWeight: 'bold',
-                  my: 1,
-                  color: 'black',
-                  margin: '0 15px',
-                }}>
+              <Button className="ja" variant="" key={page} onClick={handleCloseNavMenu} sx={{ fontWeight: 'bold', my: 1, color: 'black', margin: '0 15px', }}> 
                 {page}
               </Button>
             ))}
           </Box>
 
-          <Carrito
-            allProducts={allProducts}
-            setAllProducts={setAllProducts}
-            total={total}
-            setTotal={setTotal}
-            countProducts={countProducts}
-            setCountProducts={setCountProducts}
-          />
-          <Box sx={{
-            fontWeight: 'bold',
-            my: 1,
-            color: 'black',
-            margin: '0 15px',
-
-          }}>
+          <Carrito allProducts={allProducts} setAllProducts={setAllProducts} total={total} setTotal={setTotal} countProducts={countProducts} setCountProducts={setCountProducts} />
+          <Box sx={{ fontWeight: 'bold', my: 1, color: 'black',  margin: '0 15px' }}>
             <LoginDrawer />
           </Box>
         </Toolbar>
       </Container>
-     {/*  <ProductList
+
+       {/*  <ProductList
         allProducts={allProducts}
         setAllProducts={setAllProducts}
         total={total}
         setTotal={setTotal}
         countProducts={countProducts}
         setCountProducts={setCountProducts} /> */}
+      
     </AppBar>
   );
 }

@@ -1,30 +1,37 @@
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import { Button, TextField, FormControlLabel, Radio } from '@mui/material';
 
 export default function DataPersonal() {
   return (
     <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch', top:'20px' },
+        '& .MuiTextField-root': { m: 1, width: '25ch', top: '20px' },
       }}
       noValidate
       autoComplete="off"
     >
       <div>
-        <TextField id="outlined-multiline-flexible" label="Multiline" multiline maxRows={4} />
-        <TextField id="outlined-textarea" label="Multiline Placeholder" placeholder="Placeholder" multiline />
-        <TextField id="outlined-multiline-static" label="Multiline" multiline rows={4} defaultValue="Default Value" />
+        <TextField id="outlined-multiline-flexible" label="Nombre*" multiline maxRows={3} />
+        <TextField id="outlined-multiline-flexible" label="Apellidos*" multiline maxRows={3} />
+        <TextField id="outlined-multiline-flexible" label="Direccion*" multiline maxRows={3} />
+        <TextField id="outlined-multiline-flexible" label="Completa tu direccion" multiline maxRows={3} />
       </div>
       <div>
-        <TextField id="filled-multiline-flexible" label="Multiline" multiline maxRows={4} variant="filled" />
-        <TextField id="filled-textarea" label="Multiline Placeholder" placeholder="Placeholder" multiline variant="filled" />
-        <TextField id="filled-multiline-static" label="Multiline" multiline rows={4} defaultValue="Default Value" variant="filled" />
+        <TextField id="outlined-multiline-flexible" label="Cod. Postal*" multiline maxRows={3} />
+        <TextField id="outlined-multiline-flexible" label="Departamento*" multiline maxRows={3} />
+        <TextField id="outlined-multiline-flexible" label="Municipio*" multiline maxRows={3} />
+        <TextField id="outlined-multiline-flexible" label="Region*" multiline maxRows={3} />
       </div>
       <div>
-        <TextField id="standard-multiline-flexible" label="Multiline" multiline maxRows={4} variant="standard" />
-        <TextField id="standard-textarea" label="Multiline Placeholder" placeholder="Placeholder" multiline variant="standard" />
-        <TextField id="standard-multiline-static" label="Multiline" multiline rows={4} defaultValue="Default Value" variant="standard" />
+        <TextField id="outlined-multiline-flexible" label="Telefono movil*" multiline maxRows={3} />
+        <TextField id="outlined-multiline-flexible" label="No. Documento*" multiline maxRows={3} />
+        <FormControlLabel value="Hombre" control={<Radio />} label="Hombre" sx={{marginTop:4}} maxRows={3}/>
+        <FormControlLabel value="Mujer" control={<Radio />} label="Mujer" sx={{marginTop:4}} maxRows={3}/>
+        <TextField id="outlined-multiline-flexible" label="Fecha de nacimiento*" multiline maxRows={3} />
+      </div>
+      <div>
+        <Button variant="contained" style={{ backgroundColor: "black", marginTop: "45px", marginLeft: 430 }}>CAMBIAR</Button>
       </div>
     </Box>
   );

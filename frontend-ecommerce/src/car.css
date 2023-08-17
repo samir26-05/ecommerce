@@ -63,6 +63,9 @@ img {
 	z-index: 1;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 	border-radius: 10px;
+	width: 450px;
+	height: 60vh;
+	overflow: auto;
 }
 
 .cart-product {
@@ -70,7 +73,6 @@ img {
 	align-items: center;
 	justify-content: space-between;
 	padding: 30px;
-
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -90,12 +92,14 @@ img {
 	font-weight: 700;
 	font-size: 20px;
 	margin-left: 10px;
+	margin-top: -20px;
 }
 
 .cantidad-producto-carrito {
 	color: #000;
-	font-weight: 400;
+	font-weight: 700;
 	font-size: 20px;
+	margin-top: 30px;
 }
 
 .icon-close {
@@ -194,24 +198,34 @@ img {
 	display: none;
 }
 
-.btn-clear-all {
+.btn-clear-all,
+.btn-add-car {
 	border: none;
 	background-color: #000;
 	color: #fff;
 	padding: 15px 0;
 	display: block;
-	width: 100%;
+	width: 80%;
+	margin-left: 50px;
 	margin-top: 10px;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	font-family: inherit;
 	cursor: pointer;
-  font-size: 16px;
-  transition: all .3s ease;
+	font-size: 16px;
+	transition: all .3s ease;
 }
 
-.btn-clear-all:hover{
-  background-color: #333;
-  transform: scale(1.03);
-  border-radius: 0;
+.btn-add-car {
+	background-color: #fff;
+	width: 20%;
+	margin-left: 200px;
+	color: #fff;
+
+}
+
+.btn-clear-all:hover {
+	background-color: #333;
+	transform: scale(1.03);
+	border-radius: 0;
 }

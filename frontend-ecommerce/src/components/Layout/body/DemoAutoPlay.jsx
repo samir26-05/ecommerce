@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import Pagination from './Pagination'; // Update the import path as needed
+import Pagination from './Pagination';
 
 //image
 import carritoNegro from '../../../assets/Img/carritoNegro.jpg'
@@ -13,11 +13,12 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const styles = {
   root: {
     position: 'relative',
+    marginTop:'130px'
     
   },
   slide: {
     padding: 15,
-    minHeight: 530,
+    minHeight: 700,
     minWidth: 605.8,
     color: '#fff',
     
@@ -49,6 +50,7 @@ function DemoAutoPlay() {
   };
 
   return (
+    
     <div style={styles.root}>
       <AutoPlaySwipeableViews
         index={index}

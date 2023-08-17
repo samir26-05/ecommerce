@@ -1,12 +1,9 @@
 import { useState } from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { Button } from '@mui/material';
+import { Button, Box, Typography, Tab, Tabs } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
 import { Img, Div } from './styled';
 import bgr from '../../../assets/Img/bgr.png'
-import SendIcon from '@mui/icons-material/Send';
+import { Link } from 'react-router-dom';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -65,7 +62,10 @@ export default function NavHorizontal() {
           <Img src={bgr} alt="" />
           <h4>Aún no tienes compras en tienda</h4>
           <span>Pero puedes hacer tu pedido online ¡y te lo mandamos a casa!</span><br />
-          <Button variant="contained" style={{ backgroundColor: "black" }}>Compra online</Button>
+          <Link to={"/"}>
+            <Button variant="contained" style={{ backgroundColor: "black" }}>Compra online</Button>
+          </Link>
+          
         </CustomTabPanel>
       </Div>
     </Box>

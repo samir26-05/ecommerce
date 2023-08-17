@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import { Button, TextField } from '@mui/material';
 
 export default function UpdateEmail() {
   return (
@@ -12,19 +12,14 @@ export default function UpdateEmail() {
       autoComplete="off"
     >
       <div>
-        <TextField id="outlined-multiline-flexible" label="Multiline" multiline maxRows={4} />
-        <TextField id="outlined-textarea" label="Multiline Placeholder" placeholder="Placeholder" multiline />
-        <TextField id="outlined-multiline-static" label="Multiline" multiline rows={4} defaultValue="Default Value" />
+        <TextField id="outlined-multiline-flexible" label="Tu Email es" multiline maxRows={2} />
+        <TextField id="outlined-multiline-flexible" label="Nuevo Email" multiline maxRows={2} />
+        <TextField id="outlined-multiline-flexible" label="Confirmar nuevo Email" multiline maxRows={2} />
+        <TextField id="outlined-multiline-flexible" label="Tu contraseña" multiline maxRows={2} />
+        
       </div>
       <div>
-        <TextField id="filled-multiline-flexible" label="Multiline" multiline maxRows={4} variant="filled" />
-        <TextField id="filled-textarea" label="Multiline Placeholder" placeholder="Placeholder" multiline variant="filled" />
-        <TextField id="filled-multiline-static" label="Multiline" multiline rows={4} defaultValue="Default Value" variant="filled" />
-      </div>
-      <div>
-        <TextField id="standard-multiline-flexible" label="Multiline" multiline maxRows={4} variant="standard" />
-        <TextField id="standard-textarea" label="Multiline Placeholder" placeholder="Placeholder" multiline variant="standard" />
-        <TextField id="standard-multiline-static" label="Multiline" multiline rows={4} defaultValue="Default Value" variant="standard" />
+        <Button variant="contained" style={{ backgroundColor: "black", marginTop:"45px", marginLeft: 430 }}>CAMBIAR</Button>
       </div>
     </Box>
   );

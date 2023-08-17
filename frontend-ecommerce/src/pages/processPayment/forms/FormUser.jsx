@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import {CssBaseline, AppBar, Box, Container, Paper, Stepper, Step, StepLabel, Button, Typography} from '@mui/material';
+import { CssBaseline, AppBar, Box, Container, Paper, Stepper, Step, StepLabel, Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom'; // Importa el componente Link de React Router o utiliza el método de navegación que prefieras
 
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 
-const steps = ['Direccion de envio', 'Detalle de pago', 'Revise su orden'];
+const steps = ['Dirección de envío', 'Detalle de pago', 'Revise su orden'];
 
 function getStepContent(step) {
   switch (step) {
@@ -16,7 +17,7 @@ function getStepContent(step) {
     case 2:
       return <Review />;
     default:
-      throw new Error('Unknown step');
+      throw new Error('Paso desconocido');
   }
 }
 
@@ -43,6 +44,7 @@ function FormUserPayment() {
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
       >
+        {/* Contenido de la barra de la aplicación si lo tienes */}
       </AppBar>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
@@ -62,25 +64,36 @@ function FormUserPayment() {
                 Gracias por su compra.
               </Typography>
               <Typography variant="subtitle1">
-              Su número de orden es #2001539. 
-              Le hemos enviado por correo electrónico la confirmación de su pedido y le enviaremos una actualización cuando su pedido haya sido enviado.
+                Su número de orden es #2001539. 
+                Le hemos enviado por correo electrónico la confirmación de su pedido y le enviaremos una actualización cuando su pedido haya sido enviado.
               </Typography>
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                <Button
+                  variant=""
+                  component={Link} // Utiliza el componente Link aquí
+                  to="/" // Establece la URL de tu página principal aquí
+                  style={{ backgroundColor: "black", color:"white"}}
+                >
+                  Volver al comercio
+                </Button>
+              </Box>
             </React.Fragment>
           ) : (
             <React.Fragment>
               {getStepContent(activeStep)}
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
                 {activeStep !== 0 && (
-                  <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                  <Button onClick={handleBack} sx={{ ml: 1 }} style={{ backgroundColor: "black", color:"white"}}>
                     Atrás
                   </Button>
                 )}
                 <Button
-                  variant="contained"
+                  variant=""
                   onClick={handleNext}
-                  sx={{ mt: 3, ml: 1 }}
+                  sx={{ ml: 1 }}
+                  style={{ backgroundColor: "black", color:"white"}}
                 >
-                  {activeStep === steps.length - 1 ? 'Pagar' : 'Siguiente'}
+                  {activeStep === steps.length - 1 ? 'Pagar' : 'Siguiente' }
                 </Button>
               </Box>
             </React.Fragment>
