@@ -2,13 +2,13 @@ import { FlexDirCol, FlexRow, Title } from "../../../StyledMain";
 import { BasicImg } from "./Styled";
 import Basic1 from "../../../../assets/Img/Basic1.png";
 import Basic2 from "../../../../assets/Img/Basic2.png";
-import MultipleItems from "./News";
+import News from "./News";
 
 const SectionsBody = () => {
   return (
     <FlexDirCol>
       <Basics />
-      <MultipleItems/>
+      <News/>
     </FlexDirCol>
   );
 };
@@ -22,7 +22,7 @@ const Basics = () => {
         width: "100%",
         justifyContent: "space-evenly",
         height: "100vh",
-        backgroundColor: "#c8c8c8",
+        backgroundColor: "#e6e6e6",
       }}
     >
       <FlexRow
