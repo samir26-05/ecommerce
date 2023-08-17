@@ -29,7 +29,7 @@ export const ProductList = ({ allProducts, setAllProducts, countProducts, setCou
 				<Container sx={{ py: 15 }} maxWidth="lg">
 					<Grid container spacing={1.5}>
 						{data.map((product) => (
-							<Grid item key={product.id} xs={12} sm={3} md={3}>
+							<Grid item key={product.id} xs={12} sm={3} md={4}>
 								<Card sx={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }} >
 									<CardMedia component="img" sx={{ width: '100%', height: '100%' }} src={product.img} alt={product.nameProduct} />
 									<CardContent sx={{ flexGrow: 1 }}>
@@ -45,7 +45,7 @@ export const ProductList = ({ allProducts, setAllProducts, countProducts, setCou
 									</CardContent>
 									<CardActions>
 										<button className='btn-add-car' size="small" onClick={() => onAddProduct(product)}>
-											<AddShoppingCartIcon style={{ color: 'white' }}/>
+											<AddShoppingCartIcon />
 										</button>
 									</CardActions>
 								</Card>
