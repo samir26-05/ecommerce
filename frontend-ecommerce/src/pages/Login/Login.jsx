@@ -111,26 +111,19 @@ const Login = () => {
 
   const [users, setUsers] = useState({
     email: '',
-    password_hash: '',
+    contraseña: '',
   });
-
-  const handleInputJoin = (campo, valor) => {
-    setUsers((datosPrevios) => ({ ...datosPrevios, [campo]: valor }));
-  };
+  
+const inputChange = ({target}) =>{
+    const {name, value} = target;
+    setUsers({
+      ...users,
+      [name]: value 
+    })
+}
 
   const handleLogin = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.get('http://localhost:3000/login/create', {
-        email: users.email,
-        contraseña: users.password_hash  // Asegúrate de que estás usando 'contraseña' en lugar de 'password_hash'
-      });
-      alert(response.data.message);
-      // Realizar cualquier acción adicional después del inicio de sesión exitoso
-    } catch (error) {
-      console.log('Error en el inicio de sesión:', error.message);
-      // Manejar el error de manera apropiada
-    }
+
   };
   
   return (
@@ -140,23 +133,19 @@ const Login = () => {
 
       <input
           className="controls"
-          type="text"
-          name="email"
+          type="text"  
           placeholder="Ingrese su correo"
           required
-          onChange={(event) => {
-            handleInputJoin("email",event.target.value);
-          }}
+          onChange= {inputChange}
+          name="email"
         />
         <input
           className="controls"
           type="password"
-          name="password"
           placeholder="Ingrese su contraseña"
           required
-          onChange={(event) => {
-            handleInputJoin("password_hash",event.target.value);
-          }}
+          onChange= {inputChange}
+          name="contraseña"
         />
         <button type="submit"></button>
       </form>

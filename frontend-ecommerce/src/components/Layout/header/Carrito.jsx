@@ -1,14 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FlexRow } from '../../StyledMain';
+import '../../../car.css';
+import cesta from '../../../assets/Img/cesta.png';
 
-export const Carrito = ({
-	allProducts,
-	setAllProducts,
-	total,
-	countProducts,
-	setCountProducts,
-	setTotal,
-}) => {
+export const Carrito = ({ allProducts, setAllProducts, total, countProducts, setCountProducts, setTotal }) => {
 	const [active, setActive] = useState(false);
 
 	const onDeleteProduct = product => {
@@ -54,25 +50,27 @@ export const Carrito = ({
 				</div>
 
 				<div
-					className={`container-cart-products ${
-						active ? '' : 'hidden-cart'
-					}`}
-				>
-					{allProducts.length ? (
+					className={`container-cart-products ${active ? '' : 'hidden-cart'}`} >{allProducts.length ? (
 						<>
-							<div className='row-product'>
+							<div className='row-product' style={{position: 'fixed', zIndex: 1}}>
 								{allProducts.map(product => (
 									<div className='cart-product' key={product.id}>
-										<div className='info-cart-product'>
+										<div className='info-cart-product' >
+											<img src={product.img} alt="" style={{ width: 120, height: 120 }} />
 											<span className='cantidad-producto-carrito'>
 												{product.quantity}
 											</span>
-											<p className='titulo-producto-carrito'>
-												{product.nameProduct}
-											</p>
-											<span className='precio-producto-carrito'>
-												${product.price}
-											</span>
+
+
+											<div style={{ display: FlexRow, justifyContent: 'space-around', marginTop: 30, textAlign: 'center' }}>
+												<p className='titulo-producto-carrito' >
+													{product.nameProduct}
+												</p>
+												<span className='precio-producto-carrito'>
+													${product.price}
+												</span>
+											</div>
+
 										</div>
 										<svg
 											xmlns='http://www.w3.org/2000/svg'
@@ -97,17 +95,25 @@ export const Carrito = ({
 								<h3>Total:</h3>
 								<span className='total-pagar'>${total}</span>
 							</div>
-							<Link to={"/payment"}><button className='btn-clear-all'>
+							<Link to={"/payment"}><button className='btn-clear-all' >
 								Pagar
 							</button></Link>
-							
+
 
 							<button className='btn-clear-all' onClick={onCleanCart}>
 								Vaciar Carrito
 							</button>
+							<img src="" alt="" />
 						</>
 					) : (
-						<p className='cart-empty'>El carrito está vacío</p>
+						<>
+						<div style={{display:'flex', flexDirection:'column', alignItems:"center",textAlign:"center", marginTop:"150px"}}>
+							<img src={cesta} alt="" style={{width:200}}/>
+							<h3 className='cart-empty'>El carrito está vacío</h3>
+							<h4>Aún no tienes compras en tienda</h4>
+          					<span>Pero puedes hacer tu pedido online ¡y te lo mandamos a casa!</span><br />
+						</div>
+						</>
 					)}
 				</div>
 			</div>
