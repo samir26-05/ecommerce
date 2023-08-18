@@ -1,14 +1,18 @@
-.Typography{
+.Typography {
       text-decoration: none;
 }
 
-.box-primary{
+.box-primary {
       display: flex;
       flex-direction: row;
 }
 
-.btn-primary{
+.btn-primary {
       width: 10%;
       position: relative;
       top: 15px;
+}
+
+.whithoutOutline {
+      outline: none !important;
 }
