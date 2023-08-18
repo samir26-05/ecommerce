@@ -52,7 +52,7 @@ export const Carrito = ({ allProducts, setAllProducts, total, countProducts, set
 				<div
 					className={`container-cart-products ${active ? '' : 'hidden-cart'}`} >{allProducts.length ? (
 						<>
-							<div className='row-product' style={{position: 'fixed', zIndex: 1}}>
+							<div className='row-product' style={{position: 'fixed', zIndex: 3}}>
 								{allProducts.map(product => (
 									<div className='cart-product' key={product.id}>
 										<div className='info-cart-product' >

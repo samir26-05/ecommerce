@@ -1,7 +1,6 @@
 import { Div } from "./styled"
 import Footer from "../footer/Footer"
-import DemoAutoPlay from "./DemoAutoPlay"
-import { CardProduct } from "./card/CardProduct"
+import DemoAutoPlay from "./carrusel/DemoAutoPlay"
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import LoginDrawer from "../../../pages/Login/Login";
@@ -11,7 +10,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Carrito } from "../header/Carrito";
-import { ProductList } from "../header/ProductList";
+import { ProductList } from "./products/ProductList";
 import '../header/styled.css'
 import "../../../car.css"
 import SectionsBody from "./Sections/SectionsBody"
@@ -36,7 +35,7 @@ export default function Body() {
               },
             }}>
               KALARY
-            </Typography> 
+            </Typography>
 
             <Box className='box-primary' sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
@@ -63,13 +62,13 @@ export default function Body() {
             countProducts={countProducts}
             setCountProducts={setCountProducts} />
           <SectionsBody />
-        <Footer />
+          <Footer />
         </Div>
       </AppBar>
 
       <Div>
 
-        
+
       </Div>
     </>
   )

@@ -4,9 +4,9 @@ import { autoPlay } from 'react-swipeable-views-utils';
 import Pagination from './Pagination';
 
 //image
-import carritoNegro from '../../../assets/Img/carritoNegro.jpg'
-import damaNegro from '../../../assets/Img/damaNegro.jpg'
-import ropaNegro from '../../../assets/Img/ropaNegro.jpg'
+import carritoNegro from '../../../../assets/Img/carritoNegro.jpg'
+import damaNegro from '../../../../assets/Img/damaNegro.jpg'
+import ropaNegro from '../../../../assets/Img/ropaNegro.jpg'
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 

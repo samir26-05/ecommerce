@@ -25,6 +25,7 @@ import Slider9_2 from "../../../../assets/Img/Slider9.2.jpg";
 import Slider10_1 from "../../../../assets/Img/Slider10.1.jpg";
 import Slider10_2 from "../../../../assets/Img/Slider10.2.jpg";
 
+
 function Contacto() {
   useEffect(() => {
     const swiper = new Swiper(".slide-content", {
