@@ -1,43 +1,52 @@
-import * as React from 'react';
 import LoginDrawer from "../../../pages/Login/Login";
-import { Div } from "./styled"
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import '../header/styledHeader.css'
+import './styled.css'
+import { Carrito } from "./Carrito";
+import { ProductList } from "./ProductList";
+import { useState } from "react";
+import "../../../car.css"
 
-const pages = ['Hombre', 'Mujer', 'Niño'];
-const settings = ['Profile', 'Account', 'Dashboard', ];
+const pages = ['Inicio', 'Mujer', 'Hombre'];
 
 const Header = () => {
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
   const handleCloseNavMenu = () => {
   };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  return ( 
-    <Div>
-      <AppBar position="sticky" style={{backgroundColor: "#ffffff"}}>
+  const [allProducts, setAllProducts] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [countProducts, setCountProducts] = useState(0);
+  return (
+    <AppBar position="sticky" style={{ backgroundColor: "#ffffff" }}>
       <Container maxWidth="">
         <Toolbar disableGutters>
-          <Typography className='Typography' variant="h1" noWrap component="a" href="/home"
-          sx={{mr: 3,display: { xs: 'none', md: 'flex' }}}>BERSHKA</Typography>
-          <Typography variant="h3" noWrap component="a" href="/home" sx={{
+          <Typography
+            className="Typography"
+            variant="h1"
+            noWrap
+            component="a"
+            href="/home"
+            sx={{
+              mr: 3,
+              display: { xs: 'none', md: 'flex' },
+              color: '#000',
+              textDecoration: 'none',
+              letterSpacing: '.8rem',
+              fontWeight: 700,
+              "&:hover": {
+                color: '#d8d8d8',
+              },
+            }}>KALARY
+          </Typography>
+          <Typography
+            variant="h3"
+            noWrap
+            component="a"
+            href="/home"
+            sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
@@ -45,60 +54,61 @@ const Header = () => {
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: '#000000',
-              textDecoration: 'none',}}>BERSHKA
+              textDecoration: 'none',
+            }}>KALARY
           </Typography>
 
-
-          <Box className='Box' sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
+          <Box
+            className='box-primary'
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', md: 'flex' },
+            }}>
             {pages.map((page) => (
               <Button
-              variant="outlined"
-                className='la'
-                style={{color: '#000000', border: 'none', margin: '0 20px', }}
+                className="ja"
+                variant=""
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 1, color: 'black', display: 'block', border: 'none'}}>
+                sx={{
+                  fontWeight: 'bold',
+                  my: 1,
+                  color: 'black',
+                  margin: '0 15px',
+                }}>
                 {page}
               </Button>
             ))}
           </Box>
 
-          <Box className='ja' sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <LoginDrawer/>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+          <Carrito
+            allProducts={allProducts}
+            setAllProducts={setAllProducts}
+            total={total}
+            setTotal={setTotal}
+            countProducts={countProducts}
+            setCountProducts={setCountProducts}
+          />
+          <Box sx={{
+            fontWeight: 'bold',
+            my: 1,
+            color: 'black',
+            margin: '0 15px',
+
+          }}>
+            <LoginDrawer />
           </Box>
         </Toolbar>
       </Container>
+     {/*  <ProductList
+        allProducts={allProducts}
+        setAllProducts={setAllProducts}
+        total={total}
+        setTotal={setTotal}
+        countProducts={countProducts}
+        setCountProducts={setCountProducts} /> */}
     </AppBar>
-    
-    </Div>
-   );
+  );
 }
- 
+
 export default Header;

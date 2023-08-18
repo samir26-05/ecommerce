@@ -16,9 +16,10 @@ const Footer = () => {
   };
 
   return (
-    <div  style={{ display:"flex", width:"100%", justifyContent:"center"}}>
-      <div style={{ display:"flex", flexDirection:"column", width:"80%", justifyContent:"space-around", marginTop: "40px", height: "300px" }}>
+    <div  style={{ display:"flex", width:"100vw", justifyContent:"center"}}>
+      <div style={{ display:"flex", flexDirection:"column", width:"80%", justifyContent:"space-around", marginTop: "40px", height: "400px" }}>
         <div>
+          <div style={{paddingTop:"40px", borderTop: "1px solid #e9e9e9"}} />
           <Grid container spacing={4}>
             <Grid item xs={12} sm={3}>
               <Typography variant="h6">Horarios de Atención</Typography>

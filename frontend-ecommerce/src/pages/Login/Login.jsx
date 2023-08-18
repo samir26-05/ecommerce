@@ -10,6 +10,7 @@ import TextField from "@mui/material/TextField";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 export default function LoginDrawer() {
   const [haveAccount, setHaveAccount] = useState(true);
@@ -59,6 +60,7 @@ export default function LoginDrawer() {
       </List>
     </Box>
   );
+
   return (
     <div>
       {["right"].map((anchor) => (
@@ -76,6 +78,7 @@ export default function LoginDrawer() {
     </div>
   );
 }
+
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -107,35 +110,38 @@ const Login = () => {
   
 
   const [users, setUsers] = useState({
-    user: '',
-    password: '',
+    email: '',
+    password_hash: '',
   });
-  
+
   const handleInputJoin = (campo, valor) => {
-    users((datosPrevios) => ({ ...datosPrevios, [campo]: valor }));
+    setUsers((datosPrevios) => ({ ...datosPrevios, [campo]: valor }));
   };
 
-  const conx = async(event) => { 
+  const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.get("http://localhost:3000/login",{
-          ...users
+      const response = await axios.get('http://localhost:3000/login/create', {
+        email: users.email,
+        contraseña: users.password_hash  // Asegúrate de que estás usando 'contraseña' en lugar de 'password_hash'
       });
-      console.log(response);
-  } catch (error) {
-      console.log(error);
-  }
-   }
+      alert(response.data.message);
+      // Realizar cualquier acción adicional después del inicio de sesión exitoso
+    } catch (error) {
+      console.log('Error en el inicio de sesión:', error.message);
+      // Manejar el error de manera apropiada
+    }
+  };
   
   return (
     <FlexDirCol style={{ gap: ".5rem" }}>
 
-      <form onSubmit={conx}>
+      <form onSubmit={handleLogin}>
 
       <input
           className="controls"
           type="text"
-          name="nombre"
+          name="email"
           placeholder="Ingrese su correo"
           required
           onChange={(event) => {
@@ -144,15 +150,18 @@ const Login = () => {
         />
         <input
           className="controls"
-          type="text"
-          name="nombre"
+          type="password"
+          name="password"
           placeholder="Ingrese su contraseña"
           required
           onChange={(event) => {
-            handleInputJoin("email",event.target.value);
+            handleInputJoin("password_hash",event.target.value);
           }}
         />
+        <button type="submit"></button>
       </form>
+
+      
       
       <BasicTextFields Placeholder={"E-mail"} />
       <BasicTextFields Placeholder={"Contraseña"} />
@@ -163,6 +172,11 @@ const Login = () => {
         <Span>¿Olvidaste tu contraseña?</Span>
       </FlexRow>
       <Btn type="submit" value="registrar">Iniciar Sesión</Btn>
+
+      
+      <Link to={"/user"}>
+        <Btn>Iniciar Sesión</Btn>
+      </Link>
       <FlexDirCol style={{ gap: ".5rem" }}>
         <SignInBtn bgcolor="#003aaf">
           <FacebookIcon /> Continuar con Facebook
