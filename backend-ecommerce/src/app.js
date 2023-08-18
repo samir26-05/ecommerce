@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import  RouteUsers  from "./routes/users.routes.js"
 import LoginUsers from "./routes/auth.routes.js";
+import ProductRoute from "./routes/products.routes.js";
 import cors from "cors";
 
 
@@ -16,4 +17,5 @@ app.get('/',(req,res ) => {
 // Routas 
 app.use('/users',RouteUsers)
 app.use('/login',LoginUsers)
+app.use('/products',ProductRoute)
 export default app
