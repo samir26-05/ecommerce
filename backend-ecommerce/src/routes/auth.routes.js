@@ -1,6 +1,6 @@
 import { Router } from "express";
-import * as Login from "../controllers/auth.controllers.js";
+import * as Login from "../controllers/Login_register/auth.controllers.js";
 const router = Router();
 
-router.get("/", Login.LoginUser);
+router.post("/", Login.LoginUser);
 export default router;
