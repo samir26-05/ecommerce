@@ -1,5 +1,5 @@
 import {Router} from "express";
-import * as UserControlles from "../controllers/users.controllers.js"
+import * as UserControlles from "../controllers/Login_register/users.controllers.js"
 const router = Router();
 
 router.get('/:id',UserControlles.getUsuarioId,)

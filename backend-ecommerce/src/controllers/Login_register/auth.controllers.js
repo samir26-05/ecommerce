@@ -1,5 +1,5 @@
-import { users } from "../models/users.js";
-import { compare } from "../libs/Bcryptjs.js";
+import { users } from "../../models/Login/users.js";
+import { compare } from "../../libs/Bcryptjs.js";
 export const LoginUser = async (req, res) => {
   try {
     const { email, contraseña } = req.body;
@@ -25,5 +25,6 @@ export const LoginUser = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: "ocurrio un error", error: error.message });
+    console.log(error);
   }
 };

@@ -1,5 +1,5 @@
-import { users,Validusers } from "../models/users.js";
-import { encryptPassword } from "../libs/Bcryptjs.js";
+import { Validusers,users } from "../../models/Login/users.js";
+import { encryptPassword } from "../../libs/Bcryptjs.js";
 
 export const getUsuarios = async (req, res) => {
   try {
@@ -33,7 +33,6 @@ export const CrearUsuario = async (req, res) => {
   try {
     // validar primero si todos los datos estan bien
     const result = await Validusers(req.body)
-    console.log(result)
     if(result.error){
       return res.status(400).json({error: JSON.parse(result.error.message)});
       
