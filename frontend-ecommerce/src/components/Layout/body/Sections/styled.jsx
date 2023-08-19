@@ -7,8 +7,8 @@ export const BasicImg = styled.img`
   }
 `;
 
-
 export const NewsImg = styled.div`
+  transition: all 0.2s ease-in-out;
   background-image: url(${({ img1 }) => img1});
   &:hover {
     background-image: url(${({ img2 }) => img2});
@@ -45,9 +45,10 @@ export const Div = styled.div`
     border-radius: 25px;
     background-color: #fff;
   }
+  /* 
   .card:hover {
     border: #000 1px solid;
-  }
+  } */
   .image-content,
   .card-content {
     display: flex;

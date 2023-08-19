@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import NavHorizontal from './NavHorizontal';
 import InfoCountUser from './InfoCount';
 import { Div } from '../styled';
-import Products from '../../infoProduct/Products';
+import Products from '../../../components/Layout/body/products/ProductList'
 
 
 function TabPanel(props) {
