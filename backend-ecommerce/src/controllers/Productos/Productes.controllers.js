@@ -14,7 +14,7 @@ export const getProductosCamisas = async(req, res) => {
 }
 export const getProductshirtsName = async (req, res) => {
     try {
-        const {name} = req.body
+        const {name} = req.params
         const Camisa = await Productos.findOne({
             where: { name },
             include: variantshirts
