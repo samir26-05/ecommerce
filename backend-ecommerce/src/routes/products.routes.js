@@ -6,7 +6,7 @@ const router = Router()
 
 // listar productos 
 router.post('/create', Product.CrearProductshirts)
-router.get('/name', Product.getProductshirtsName)
+router.get('/:name?', Product.getProductshirtsName)
 router.get('/',Product.getProductosCamisas)
 router.post('/upload',multerUpload.single("file"),uploadFile)
 
