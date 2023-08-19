@@ -28,7 +28,7 @@ export const Section1 = styled.div`
 width: 40%;
 height: 100%;
 box-sizing: border-box;
-`;
+`; 
 
 export const BoxImg = styled.div`
 width: 100%;
@@ -61,7 +61,7 @@ box-sizing: border-box;
 
 export const Title = styled.h1`
 font-size: 1.5rem;
-    font-weight: 700;
+font-weight: 700;
 `;
 
 export const Reference = styled.div`
@@ -86,29 +86,37 @@ export const Image = styled.div`
 `;
 
 export const BoxSize = styled.div`
-margin-bottom: 16px;
+width: 80%;
+margin: 5% 10% 0 10%;
+height: 20%;
+box-sizing: border-box;
 `;
 
 export const TitleSize = styled.div`
-
+font-size: 1.5rem;
+font-weight: 700;
 `;
 
 export const Sizes = styled.ul`
-list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: -16px;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: center;
+justify-content: space-between;
 `;
 
 export const Size = styled.li`
 border: 1px solid #000;
-    background-color: #000;
-    color: #fff;
-    border-radius: 30px;
+width: 30px;
+height: 30px;
+border-radius: 50px;
 `;
 
 export const BoxBuys = styled.div`
-
+width: 80%;
+margin: 5% 10% 0 10%;
+height: 20%;
+box-sizing: border-box;
 `;
 
 export const ButtonBuys = styled.div`
