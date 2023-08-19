@@ -109,45 +109,47 @@ const Login = () => {
   
   
 
-  const [users, setUsers] = useState({
-    email: '',
-    contraseña: '',
-  });
-  
-const inputChange = ({target}) =>{
-    const {name, value} = target;
-    setUsers({
-      ...users,
-      [name]: value 
+  const [email,setemail] = useState("");
+  const [contraseña,setcontraseña] = useState("");
+
+
+  const Add = async(event) => {
+  event.preventDefault();
+    try {
+
+    const response = await axios.post("http://localhost:3000/login",{
+      email:email,
+      contraseña:contraseña
     })
-}
-
-  const handleLogin = async (event) => {
-
-  };
+    alert(response.data.message);
+    } catch (error) {
+      console.error(error)
+      alert(error.response.data.error)
+    }
+  }
   
   return (
     <FlexDirCol style={{ gap: ".5rem" }}>
 
-      <form onSubmit={handleLogin}>
+      <form onSubmit={Add}>
 
       <input
           className="controls"
-          type="text"  
-          placeholder="Ingrese su correo"
-          required
-          onChange= {inputChange}
+          type="email"
           name="email"
+          placeholder="Ingrese su email"
+          required
+          onChange={(e) => setemail(e.target.value) }
         />
         <input
           className="controls"
           type="password"
+          name="contraseña"
           placeholder="Ingrese su contraseña"
           required
-          onChange= {inputChange}
-          name="contraseña"
+          onChange={(e) => setcontraseña(e.target.value)}
         />
-        <button type="submit"></button>
+        <button type="submit" value="iniciar sesion"></button>
       </form>
 
       
