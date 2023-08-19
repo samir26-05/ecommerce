@@ -28,7 +28,7 @@ export const Section1 = styled.div`
 width: 40%;
 height: 100%;
 box-sizing: border-box;
-`;
+`; 
 
 export const BoxImg = styled.div`
 width: 100%;
