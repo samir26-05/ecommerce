@@ -124,7 +124,7 @@ const Login = () => {
     alert(response.data.message);
     } catch (error) {
       console.error(error)
-      alert(error.response.data.error)
+      alert("Usuario no existe", error.response.data.error)
     }
   }
   
@@ -182,7 +182,7 @@ const Login = () => {
 
 export const Register = () => {
 
-  const [Propiedaddes,setpropieda] = useState({
+  const [register,setRegister] = useState({
     email: "",
     password_hash: "",
     first_name: "",
@@ -191,15 +191,15 @@ export const Register = () => {
     phone_number: ""
   })
   const handleInputChange = (campo, valor) => {
-    setpropieda((datosPrevios) => ({ ...datosPrevios, [campo]: valor }));
+    setRegister((datosPrevios) => ({ ...datosPrevios, [campo]: valor }));
   };
-  console.log(Propiedaddes)
+  console.log(register)
   
   const add = async (event) =>{
     event.preventDefault();
     try {
         const response = await axios.post("http://localhost:3000/users/register",{
-            ...Propiedaddes
+            ...register
         });
         console.log(response);
     } catch (error) {
