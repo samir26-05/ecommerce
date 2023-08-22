@@ -13,7 +13,7 @@ import {
   Video,
   Title,
   Reference,
-  Price,  
+  Price,
   TitleSize,
   Sizes,
   ButtonBuys,

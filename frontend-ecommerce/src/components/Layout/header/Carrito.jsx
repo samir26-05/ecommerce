@@ -16,6 +16,7 @@ export const Carrito = ({
   hover,
 }) => {
   const [active, setActive] = useState(false);
+  allProducts = ['1','kjfdsbhfbasd', 123, 'jhaljk']
 
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
