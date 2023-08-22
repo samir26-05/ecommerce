@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { Button, TextField } from '@mui/material';
 import { PiUploadThin } from 'react-icons/pi'
-import NavHorizontal from '../navs/NavHorizontal';
 
 export default function FormProducts() {
 
@@ -11,7 +10,7 @@ export default function FormProducts() {
   const section = ['Selecciona una opción', 'Damas', 'Caballero'];
   const categorie = ['Selecciona una opción', 'Camisas', 'Camisetas', 'Shorts', 'Pantalones', 'Zapatos', 'Zandalias', 'Accesorios'];
   const size = ['Selecciona una opción', 'S', 'M', 'L', 'XL'];
-  const colors = ['Selecciona una opción', 'rojo','azul','verde','amarillo','naranja','morado','rosa','marrón','gris','negro','blanco',];
+  const colors = ['Selecciona una opción', 'rojo', 'azul', 'verde', 'amarillo', 'naranja', 'morado', 'rosa', 'marrón', 'gris', 'negro', 'blanco',];
 
   const handleImageChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -23,12 +22,8 @@ export default function FormProducts() {
   };
 
   return (
-
-    
     <Box component="form" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch', top: '20px' } }} noValidate autoComplete="off" >
-
-    <NavHorizontal type="products" />
-      <h3 style={{ paddingButton: "50px", left: 570 }}>AGREGAR NUEVO PRODUCTO AL COMERCIO</h3>
+    
       <div>
         <TextField id="outlined-multiline-flexible" label="Nombre*" multiline maxRows={3} />
         <TextField id="outlined-multiline-flexible" label="Descripcion*" multiline maxRows={3} />
@@ -37,9 +32,9 @@ export default function FormProducts() {
           {
             section.map((seccion, index) => {
               return (
-                  <option key={index} value={seccion}>
-                    {seccion}
-                  </option>
+                <option key={index} value={seccion}>
+                  {seccion}
+                </option>
               )
             })
           }
@@ -47,36 +42,36 @@ export default function FormProducts() {
       </div>
       <div>
         <TextField id="filled-select-currency-native" select label="Categoria" defaultValue="EUR" SelectProps={{ native: true, }} helperText="Please select your currency" variant="filled" >
-        {
+          {
             categorie.map((categoria, index) => {
               return (
-                  <option key={index} value={categoria}>
-                    {categoria}
-                  </option>
+                <option key={index} value={categoria}>
+                  {categoria}
+                </option>
               )
             })
           }
         </TextField>
 
         <TextField id="filled-select-currency-native" select label="Talla" defaultValue="EUR" SelectProps={{ native: true, }} helperText="Please select your currency" variant="filled" >
-        {
+          {
             size.map((talla, index) => {
               return (
-                  <option key={index} value={talla}>
-                    {talla}
-                  </option>
+                <option key={index} value={talla}>
+                  {talla}
+                </option>
               )
             })
           }
         </TextField>
 
         <TextField id="filled-select-currency-native" select label="Color" defaultValue="EUR" SelectProps={{ native: true, }} helperText="Please select your currency" variant="filled" >
-        {
+          {
             colors.map((color, index) => {
               return (
-                  <option key={index} value={color}>
-                    {color}
-                  </option>
+                <option key={index} value={color}>
+                  {color}
+                </option>
               )
             })
           }

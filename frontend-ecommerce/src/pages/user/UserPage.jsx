@@ -4,13 +4,13 @@ import Footer from "../../components/Layout/footer/Footer";
 import NavVertical from "./navs/NavVertical";
 
 const UserPage = () => {
-  return ( 
+  return (
     <Div>
-        <Header/>
-          <NavVertical/>
-        <Footer/>
+      <Header />
+      <NavVertical />
+      <Footer />
     </Div>
-   );
+  );
 }
- 
+
 export default UserPage;
