@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import { Button, TextField } from '@mui/material';
 import { PiUploadThin } from 'react-icons/pi'
 import NavHorizontal from '../navs/NavHorizontal';
+import '../../../components/Layout/header/styled.css'
 
 export default function FormProducts() {
 
@@ -103,7 +104,7 @@ export default function FormProducts() {
         )}
       </div>
       <div>
-        <Button variant="contained" style={{ backgroundColor: "black", marginTop: 45 }}>CREAR PRODUCTO</Button>
+        <Button variant="contained" className='whithoutOutline' style={{ backgroundColor: "black", marginTop: 45 }}>CREAR PRODUCTO</Button>
       </div>
 
     </Box>

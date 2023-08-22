@@ -54,13 +54,13 @@ export default function NavVertical() {
       <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224, marginTop:"5%"}}>
         <Tabs onChange={handleChange} sx={{ width: 500, marginTop: 5, marginLeft: "50px", display: "flex", flexDirection: "column" }} >
             <h3 style={{ position: "fixed", marginTop: "0px", left: 70 }}>Hola</h3>
-            <Tab label="Mis compras" {...a11yProps(1)} sx={{ position: "fixed", marginTop: "80px", outline:"none"}} />
-            <Tab label="Datos personales y direcciones" {...a11yProps(2)} sx={{ position: "fixed", marginTop: "130px" }} />
-            <Tab label="Productos" {...a11yProps(3)} sx={{ position: "fixed", marginTop: "180px" }} />
+            <Tab label="Mis compras" className='whithoutOutline' {...a11yProps(1)} sx={{ position: "fixed", marginTop: "80px", outline:"none"}} />
+            <Tab label="Datos personales y direcciones" className='whithoutOutline' {...a11yProps(2)} sx={{ position: "fixed", marginTop: "130px" }} />
+            <Tab label="Productos" className='whithoutOutline' {...a11yProps(3)} sx={{ position: "fixed", marginTop: "180px" }} />
 
 
             <Link to={"/"} style={{ textDecoration: "none" }}>
-              <Tab label="Cerrar sesión" {...a11yProps(4)} sx={{ position: "fixed", marginTop: "250px" }} />
+              <Tab label="Cerrar sesión" className='whithoutOutline' {...a11yProps(4)} sx={{ position: "fixed", marginTop: "250px" }} />
             </Link>
         </Tabs>
 

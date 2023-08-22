@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FlexRow } from "../../StyledMain";
@@ -14,13 +13,13 @@ export const Carrito = ({
   setTotal,
   color,
   hover,
+  pageUsed,
 }) => {
   const [active, setActive] = useState(false);
-  allProducts = ['1','kjfdsbhfbasd', 123, 'jhaljk']
+  allProducts = [];
 
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
-		console.log(results, '❤️❤️❤️❤️');
 
     setTotal(total - product.price * product.quantity);
     setCountProducts(countProducts - product.quantity);
@@ -42,7 +41,7 @@ export const Carrito = ({
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
-            stroke={hover ? "#000" : "#fff" && color}
+            stroke={hover ? "#000" : "#fff" && pageUsed ? "#fff" : color}
             className="icon-cart"
           >
             <path
@@ -56,13 +55,15 @@ export const Carrito = ({
           </div>
         </div>
 
-<<<<<<<<< Temporary merge branch 1
         <div
           className={`container-cart-products ${active ? "" : "hidden-cart"}`}
         >
           {allProducts.length ? (
             <>
-              <div className="row-product">
+              <div
+                className="row-product"
+                style={{ position: "fixed", zIndex: 3 }}
+              >
                 {allProducts.map((product) => (
                   <div className="cart-product" key={product.id}>
                     <div className="info-cart-product">
@@ -74,18 +75,6 @@ export const Carrito = ({
                       <span className="cantidad-producto-carrito">
                         {product.quantity}
                       </span>
-				<div
-					className={`container-cart-products ${active ? '' : 'hidden-cart'}`} >{allProducts.length ? (
-						<>
-							<div className='row-product' style={{position: 'fixed', zIndex: 3}}>
-								{allProducts.map(product => (
-									<div className='cart-product' key={product.id}>
-										<div className='info-cart-product' >
-											<img src={product.img} alt="" style={{ width: 120, height: 120 }} />
-											<span className='cantidad-producto-carrito'>
-												{product.quantity}
-											</span>
->>>>>>>>> Temporary merge branch 2
 
                       <div
                         style={{

@@ -14,11 +14,8 @@ import "../../../car.css";
 
 const pages = ["Inicio", "Mujer", "Hombre"];
 
-const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCantProducts }) => {
+const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCantProducts, isUsed }) => {
   const handleCloseNavMenu = () => {};
-  const [allProducts, setAllProducts] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [countProducts, setCountProducts] = useState(0);
 
   const [hovered, setHovered] = useState(false);
 
@@ -55,16 +52,16 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
   }, []);
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="relative">
       <Container
         maxWidth=""
         sx={{
-          position: "fixed",
+          position: isUsed ? '' : "fixed",
           zIndex: 3,
           transition: "all 0.2s ease-in-out",
         }}
         style={{
-          backgroundColor: hovered ? "#fff" : "#00000000" && headerColor,
+          backgroundColor: (hovered ? "#fff" : "#00000000" && isUsed ? '#000' : headerColor),
         }}
       >
         <Toolbar disableGutters>
@@ -79,7 +76,7 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
             sx={{
               mr: 3,
               display: { xs: "none", md: "flex" },
-              color: textColor,
+              color: isUsed ? '#fff' : textColor,
               textDecoration: "none",
               letterSpacing: ".8rem",
               fontWeight: 700,
@@ -102,7 +99,7 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ fontWeight: "bold", my: 1, margin: "0 15px" }}
-                style={{ color: hovered ? "black" : "white" && textColor }}
+                style={{ color: hovered ? "black" : "white" && isUsed ? '#fff' : textColor }}
               >
                 {page}
               </Button>
@@ -118,6 +115,7 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
             setCountProducts={newCantProducts}
             color={textColor}
             hover={hovered}
+            pageUsed={isUsed}
           />
           <Box
             sx={{
@@ -127,7 +125,7 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
               margin: "0 15px",
             }}
           >
-            <LoginDrawer hover={hovered} color={textColor} />
+            <LoginDrawer hover={hovered} color={textColor} pageUsed={isUsed}/>
           </Box>
         </Toolbar>
       </Container>

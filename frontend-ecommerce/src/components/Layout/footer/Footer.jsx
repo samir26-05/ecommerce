@@ -30,7 +30,7 @@ const Footer = () => {
               </Typography>
 
               <div  >
-                <Button onClick={handleOpenModal} style={{marginTop:"20px", color:"green"}}>
+                <Button onClick={handleOpenModal} className='whithoutOutline' style={{marginTop:"20px", color:"green"}}>
                   <WhatsApp />
                   Chatea con un asesor
                 </Button>

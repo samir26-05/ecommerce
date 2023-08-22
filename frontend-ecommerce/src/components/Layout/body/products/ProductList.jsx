@@ -1,12 +1,29 @@
 import { ThemeProvider, CssBaseline, Container, Grid, Card, CardMedia, CardContent, Typography} from '@mui/material'; // Importa los componentes de Material-UI que necesitas
 import { data } from '../../../../data';
+import { useState, useEffect } from 'react';
 import '../../../../car.css'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 // eslint-disable-next-line react/prop-types
 export const ProductList = ({ allProducts, setAllProducts, countProducts, setCountProducts, total, setTotal }) => {
+
+	const [shoppingCarProducts, setShoppingCarProducts] = useState(
+		window.localStorage.getItem("productList")
+	);
+
+	const setLocalStorage = (value) => {
+		try {
+			setShoppingCarProducts(...shoppingCarProducts, value)
+			window.localStorage.setItem("productList", value); 
+			console.log(window.localStorage.getItem("productList"));
+		} catch (error) {
+			console.error(error.message);
+		}
+	}
+	
 	const onAddProduct = (product) => {
 		// eslint-disable-next-line react/prop-types
+		setLocalStorage(product)
 		if (allProducts.find((item) => item.id === product.id)) {
 			// eslint-disable-next-line react/prop-types
 			const products = allProducts.map((item) =>
@@ -46,7 +63,7 @@ export const ProductList = ({ allProducts, setAllProducts, countProducts, setCou
 										<Typography sx={{ fontSize: 18, fontWeight: 'bold', marginTop: 2 }} >
 											${product.price}
 										</Typography>
-										<button className='btn-add-car' size="small" onClick={() => onAddProduct(product)}>
+										<button className='btn-add-car whithoutOutline' size="small" onClick={() => onAddProduct(product)}>
 											<AddShoppingCartIcon />
 										</button>
 										</div>

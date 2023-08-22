@@ -50,8 +50,8 @@ export default function NavHorizontal(props) {
       {type !== 'products' ? ( 
         <>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{paddingTop:20}}>
-          <Tab label="Online" {...a11yProps(0)} />
-          <Tab label="Tienda" {...a11yProps(1)} />
+          <Tab label="Online" className='whithoutOutline' {...a11yProps(0)} />
+          <Tab label="Tienda" className='whithoutOutline' {...a11yProps(1)} />
         </Tabs>
         </> ): (
           <>
@@ -67,7 +67,7 @@ export default function NavHorizontal(props) {
           <Img src={bgr} alt="" />
           <h4>Aun no tienes compras online</h4>
           <span>Si no encuentras tu compra tal vez es porque hiciste el pedido sin estar registrado.</span>
-          <Button variant="text" endIcon={<SendIcon />}>Encontrar pedido</Button>
+          <Button variant="text" endIcon={<SendIcon />} className='whithoutOutline'>Encontrar pedido</Button>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           <Img src={bgr} alt="" />

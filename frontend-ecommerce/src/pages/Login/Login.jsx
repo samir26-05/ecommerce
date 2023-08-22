@@ -13,7 +13,7 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import "../../components/Layout/header/styled.css";
 import { Link } from "react-router-dom";
 
-export default function LoginDrawer({ hover, color }) {
+export default function LoginDrawer({ hover, color, pageUsed }) {
   const [haveAccount, setHaveAccount] = useState(true);
 
   const [state, setState] = React.useState({
@@ -70,7 +70,7 @@ export default function LoginDrawer({ hover, color }) {
             <PersonOutlineOutlinedIcon
               style={{
                 fontSize: "2.5rem",
-                fill: hover ? "black" : "white" && color,
+                fill: hover ? "black" : "white" && pageUsed ? '#fff' : color,
               }}
               
             />
