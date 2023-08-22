@@ -12,13 +12,11 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const styles = {
   root: {
-    position: 'relative',
-    marginTop:'130px'
-    
+    position: 'relative',    
   },
   slide: {
     padding: 15,
-    minHeight: 530,
+    minHeight: 810,
     minWidth: 591,
     color: '#fff',
     

@@ -10,9 +10,14 @@ import TextField from "@mui/material/TextField";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function LoginDrawer() {
+
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import "../../components/Layout/header/styled.css";
+
+
+export default function LoginDrawer({ hover, color }) {
   const [haveAccount, setHaveAccount] = useState(true);
 
   const [state, setState] = React.useState({
@@ -65,7 +70,15 @@ export default function LoginDrawer() {
     <div>
       {["right"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <Button onClick={toggleDrawer(anchor, true)} className="whithoutOutline">
+            <PersonOutlineOutlinedIcon
+              style={{
+                fontSize: "2.5rem",
+                fill: hover ? "black" : "white" && color,
+              }}
+              
+            />
+          </Button>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
@@ -79,10 +92,9 @@ export default function LoginDrawer() {
   );
 }
 
-
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-function BasicTextFields({ Placeholder, onChange, value }) {
+function BasicTextFields({ Placeholder, onChange, value, type, name , required, className }) {
   return (
     <Box
       component="form"
@@ -96,7 +108,11 @@ function BasicTextFields({ Placeholder, onChange, value }) {
         id={Placeholder}
         label={Placeholder}
         onChange={onChange}
+        name= {name}
         value={value}
+        type= {type}
+        required = {required}
+        className= {className}
         variant="outlined"
       />
     </Box>
@@ -107,11 +123,11 @@ function BasicTextFields({ Placeholder, onChange, value }) {
 
 const Login = () => {
   
-  
 
   const [email,setemail] = useState("");
   const [contraseña,setcontraseña] = useState("");
-
+/*   const history = useHistory(); */
+  let navigate = useNavigate();
 
   const Add = async(event) => {
   event.preventDefault();
@@ -121,10 +137,14 @@ const Login = () => {
       email:email,
       contraseña:contraseña
     })
+
+    navigate('/user')
     alert(response.data.message);
+/*     history.push("/user"); */
+    
     } catch (error) {
-      console.error(error)
-      alert("Usuario no existe", error.response.data.error)
+      console.log(error.data.message)
+     
     }
   }
   
@@ -133,41 +153,37 @@ const Login = () => {
 
       <form onSubmit={Add}>
 
-      <input
+        
+
+        <BasicTextFields
           className="controls"
           type="email"
           name="email"
-          placeholder="Ingrese su email"
+          Placeholder="Ingrese su email"
           required
           onChange={(e) => setemail(e.target.value) }
         />
-        <input
+      <BasicTextFields
           className="controls"
           type="password"
           name="contraseña"
-          placeholder="Ingrese su contraseña"
+          Placeholder="Ingrese su contraseña"
           required
           onChange={(e) => setcontraseña(e.target.value)}
         />
-        <button type="submit" value="iniciar sesion"></button>
-      </form>
 
       
-      
-      <BasicTextFields Placeholder={"E-mail"} />
-      <BasicTextFields Placeholder={"Contraseña"} />
+      <Btn type="submit" value="iniciar sesion">Iniciar Sesión</Btn>
+      </form>
+
+
       <FlexRow style={{ justifyContent: "space-between" }}>
         <Span>
           <Checkbox {...label} style={{ color: "black" }} /> Recordar contraseña
         </Span>
         <Span>¿Olvidaste tu contraseña?</Span>
       </FlexRow>
-      <Btn type="submit" value="registrar">Iniciar Sesión</Btn>
-
       
-      <Link to={"/user"}>
-        <Btn>Iniciar Sesión</Btn>
-      </Link>
       <FlexDirCol style={{ gap: ".5rem" }}>
         <SignInBtn bgcolor="#003aaf">
           <FacebookIcon /> Continuar con Facebook
@@ -208,74 +224,86 @@ export const Register = () => {
 }
 
   return (
+    <FlexDirCol style={{ gap: ".5rem" }}>
     <form onSubmit={add} >
-        <input
+        <BasicTextFields
           className="controls"
           type="text"
           name="nombre"
-          placeholder="Ingrese su correo"
+          Placeholder="Ingrese su correo"
           required
           onChange={(event) => {
             handleInputChange("email",event.target.value);
           }}
         />
-        <input
+        <BasicTextFields
           className="controls"
           type="password"
           name="email"
           id="email"
-          placeholder="Ingrese su contraseña"
+          Placeholder="Ingrese su contraseña"
           required
           onChange={(event) => {
             handleInputChange("password_hash",event.target.value);
           }}
         />
-        <input
+        <BasicTextFields
           className="controls"
           type="text"
           name="contraseña"
           id="contraseña"
-          placeholder="Ingrese su nombre"
+          Placeholder="Ingrese su nombre"
           required
           onChange={(event) => {
             handleInputChange("first_name",event.target.value);
           }}
         />
-        <input
+        <BasicTextFields
           className="controls"
           type="text"
           name="contraseña"
           id="contraseña"
-          placeholder="ingrese su apellido"
+          Placeholder="ingrese su apellido"
           required
           onChange={(event) => {
             handleInputChange("last_name",event.target.value);
           }}
         />
-        <input
+        <BasicTextFields
           className="controls"
           type="text"
           name="contraseña"
           id="contraseña"
-          placeholder="Ingrese su dirrecion"
+          Placeholder="Ingrese su dirrecion"
           required
           onChange={(event) => {
             handleInputChange("address",event.target.value);
           }}
         />
-        <input
+        <BasicTextFields
           className="controls"
           type="text"
           name="contraseña"
           id="contraseña"
-          placeholder="Ingrse su numero de telefono"
+          Placeholder="Ingrse su numero de telefono"
           required
           onChange={(event) => {
             handleInputChange("phone_number",event.target.value);
           }}
         />
-        <button type="submit" value="registrar" />
+        <Btn type="submit" value="registrar">Registrar</Btn>
 
       </form>
+
+      <FlexDirCol style={{ gap: ".5rem" }}>
+        <SignInBtn bgcolor="#003aaf">
+          <FacebookIcon /> Continuar con Facebook
+        </SignInBtn>
+        <SignInBtn bgcolor="#fff">
+          <GoogleIcon /> Continuar con Google
+        </SignInBtn>
+      </FlexDirCol>
+      
+      </FlexDirCol>
   );
 };
