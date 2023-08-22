@@ -1,11 +1,14 @@
-import { ThemeProvider, CssBaseline, Container, Grid, Card, CardMedia, CardContent, Typography, CardActions, Button } from '@mui/material'; // Importa los componentes de Material-UI que necesitas
-import { data } from '../../../data';
-import '../../../car.css'
+import { ThemeProvider, CssBaseline, Container, Grid, Card, CardMedia, CardContent, Typography} from '@mui/material'; // Importa los componentes de Material-UI que necesitas
+import { data } from '../../../../data';
+import '../../../../car.css'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-export const ProductList = ({ allProducts, setAllProducts, countProducts, setCountProducts, total, setTotal, }) => {
+// eslint-disable-next-line react/prop-types
+export const ProductList = ({ allProducts, setAllProducts, countProducts, setCountProducts, total, setTotal }) => {
 	const onAddProduct = (product) => {
+		// eslint-disable-next-line react/prop-types
 		if (allProducts.find((item) => item.id === product.id)) {
+			// eslint-disable-next-line react/prop-types
 			const products = allProducts.map((item) =>
 				item.id === product.id
 					? { ...item, quantity: item.quantity + 1 }
@@ -39,15 +42,16 @@ export const ProductList = ({ allProducts, setAllProducts, countProducts, setCou
 										<Typography sx={{ fontSize: 14, color: 'grey' }} >
 											Ref 5403/171/800.
 										</Typography>
+										<div style={{display:'flex', flexDirection:'row'}}>
 										<Typography sx={{ fontSize: 18, fontWeight: 'bold', marginTop: 2 }} >
 											${product.price}
 										</Typography>
-									</CardContent>
-									<CardActions>
 										<button className='btn-add-car' size="small" onClick={() => onAddProduct(product)}>
 											<AddShoppingCartIcon />
 										</button>
-									</CardActions>
+										</div>
+									</CardContent>
+									
 								</Card>
 							</Grid>
 						))}

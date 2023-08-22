@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { FlexRow } from "../../StyledMain";
-import "../../../car.css";
-import cesta from "../../../assets/Img/cesta.png";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FlexRow } from '../../StyledMain';
+import '../../../car.css';
+import cesta from '../../../assets/Img/cesta.png';
 
 export const Carrito = ({
   allProducts,
@@ -55,23 +54,17 @@ export const Carrito = ({
           </div>
         </div>
 
-        <div
-          className={`container-cart-products ${active ? "" : "hidden-cart"}`}
-        >
-          {allProducts.length ? (
-            <>
-              <div className="row-product">
-                {allProducts.map((product) => (
-                  <div className="cart-product" key={product.id}>
-                    <div className="info-cart-product">
-                      <img
-                        src={product.img}
-                        alt=""
-                        style={{ width: 120, height: 120 }}
-                      />
-                      <span className="cantidad-producto-carrito">
-                        {product.quantity}
-                      </span>
+				<div
+					className={`container-cart-products ${active ? '' : 'hidden-cart'}`} >{allProducts.length ? (
+						<>
+							<div className='row-product' style={{position: 'fixed', zIndex: 3}}>
+								{allProducts.map(product => (
+									<div className='cart-product' key={product.id}>
+										<div className='info-cart-product' >
+											<img src={product.img} alt="" style={{ width: 120, height: 120 }} />
+											<span className='cantidad-producto-carrito'>
+												{product.quantity}
+											</span>
 
                       <div
                         style={{
