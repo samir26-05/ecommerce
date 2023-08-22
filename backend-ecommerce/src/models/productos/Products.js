@@ -47,7 +47,6 @@ const SchemeProduct = z.object({
   price: z.string(),
   section: z.string().toUpperCase(),
   categoria: z.string(),
-  img_url: z.string(),
   variantes: z.array(z.object({
     talla: z.string(),
     color: z.string(),
