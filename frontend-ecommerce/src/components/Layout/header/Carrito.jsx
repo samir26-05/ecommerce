@@ -57,7 +57,7 @@ export const Carrito = ({
 				<div
 					className={`container-cart-products ${active ? '' : 'hidden-cart'}`} >{allProducts.length ? (
 						<>
-							<div className='row-product' style={{position: 'fixed', zIndex: 3}}>
+							<div className='row-product'>
 								{allProducts.map(product => (
 									<div className='cart-product' key={product.id}>
 										<div className='info-cart-product' >
