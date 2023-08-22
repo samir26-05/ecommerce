@@ -1,15 +1,8 @@
 import {
-  Div,
-  BoxHeader,
+  MainDiv,
   BoxMain,
   Section1,
   Section2,
-  Footer,
-  BoxImg,
-  BoxTitle,
-  BoxSize,
-  BoxBuys,
-  Nav,
   Video,
   Title,
   Reference,
@@ -18,58 +11,61 @@ import {
   Sizes,
   ButtonBuys,
   Favorites,
-  Ul,
-  Size,
-  Li,
+  Size
 } from "../infoProducts/styleProducts";
-import Header from "../../components/Layout/header/Header";
+import Header from '../../components/Layout/header/Header'
+import { useState } from "react";
+import {data} from "../../data";
 
 const InfoProducts = () => {
+  const tallas = ['XS', 'S', 'M', 'L', 'XL'];
+  const Contenido = [ 
+    'https://static.bershka.net/4/photos2/2023/I/M/1/p/0000/000/058/0000000058_4_2_1.mp4?t=1690984204752'];
+  const TitleProduct = "Falda denim midi confort";
+  const ReferenceProduct = "Ref 1466/260/202";
+  const PriceProduct = "35,99 €";
+
+  const [selectedSize, setSelectedSize] = useState(null);
+
+  
+  const handleSizeClick = (index) => {
+    if (selectedSize === index) {
+      setSelectedSize(null);
+    } else {
+      setSelectedSize(index);
+    }
+  };
+
   return (
-    <Div>
-      <BoxHeader>
-        <Header />
-      </BoxHeader>
+    <MainDiv>
+      <Header /> 
       <BoxMain>
         <Section1>
-          <BoxImg>
-            <Video loop autoPlay src="https://static.bershka.net/4/photos2/2023/I/M/1/p/0000/000/058/0000000058_4_2_1.mp4?t=1690984204752"></Video>
-          </BoxImg>
-        </Section1>
+            <Video loop autoPlay src={Contenido}></Video>
+        </Section1 >
         <Section2>
-          <BoxTitle>
-            <Title>ZAPATILLAS COMBINADAS</Title>
-            <Reference>Ref 1466/260/202</Reference>
-            <Price>35,99 €</Price>
-          </BoxTitle>
-          <BoxSize>
-            <TitleSize>Selecciona talla</TitleSize>
-            <Sizes>
-              <Size>5</Size>
-              <Size>5</Size>
-              <Size>5</Size>
-              <Size>5</Size>
-              <Size>5</Size>
-              <Size>5</Size>
-            </Sizes>
-          </BoxSize>
-          <BoxBuys>
-            <ButtonBuys>Añadir A La Cesta</ButtonBuys>
-            <Favorites></Favorites>
-          </BoxBuys>
+          <Title>{TitleProduct}</Title>
+          <Reference>{ReferenceProduct}</Reference>
+          <Price>{PriceProduct}</Price>
+          <TitleSize>Selecciona talla</TitleSize>
+          <Sizes>
+          {tallas.map((talla, index) => (
+            <Size
+            style={{ backgroundColor: selectedSize === index ? 'black' : 'white',
+            color: selectedSize === index ? 'white' : 'black'
+            }}
+            onClick={() => handleSizeClick(index)}
+            key={index}
+          >
+            {talla}
+          </Size>
+            ))}
+          </Sizes>
+          <ButtonBuys>Añadir A La Cesta</ButtonBuys>
+          <Favorites/>
         </Section2>
       </BoxMain>
-      <Footer>
-        <Nav>
-          <Ul>
-            <Li></Li>
-            <Li></Li>
-            <Li></Li>
-            <Li></Li>
-          </Ul>
-        </Nav>
-      </Footer>
-    </Div>
+    </MainDiv>
   );
 };
 
