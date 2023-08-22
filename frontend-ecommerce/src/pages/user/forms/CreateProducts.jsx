@@ -2,8 +2,9 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { Button, TextField } from '@mui/material';
 import { PiUploadThin } from 'react-icons/pi'
+import NavHorizontal from '../navs/NavHorizontal';
 
-export default function Products() {
+export default function FormProducts() {
 
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -22,7 +23,11 @@ export default function Products() {
   };
 
   return (
+
+    
     <Box component="form" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch', top: '20px' } }} noValidate autoComplete="off" >
+
+    <NavHorizontal type="products" />
       <h3 style={{ paddingButton: "50px", left: 570 }}>AGREGAR NUEVO PRODUCTO AL COMERCIO</h3>
       <div>
         <TextField id="outlined-multiline-flexible" label="Nombre*" multiline maxRows={3} />

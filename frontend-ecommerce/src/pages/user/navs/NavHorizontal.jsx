@@ -32,7 +32,9 @@ function a11yProps(index) {
   };
 }
 
-export default function NavHorizontal() {
+export default function NavHorizontal(props) {
+
+  const {type} = props
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -44,12 +46,21 @@ export default function NavHorizontal() {
     <Box sx={{ width: '100%', position:'relative' }}>
 
       <Box>
-      <h3 style={{ position: "fixed", paddingButton: "50px", left: 570 }}>Mis compras</h3>
-
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{paddingTop:50}}>
+      <h3 style={{ paddingButton: "50px", left: 570 }}>Mis compras</h3>
+      {type !== 'products' ? ( 
+        <>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{paddingTop:20}}>
           <Tab label="Online" {...a11yProps(0)} />
           <Tab label="Tienda" {...a11yProps(1)} />
         </Tabs>
+        </> ): (
+          <>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{paddingTop:20}}>
+          <Tab label="Crear producto" {...a11yProps(0)} />
+          <Tab label="Inventario" {...a11yProps(1)} />
+        </Tabs>
+        </>
+        )}
       </Box>
       <Div>
         <CustomTabPanel value={value} index={0} >

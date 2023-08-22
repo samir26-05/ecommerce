@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FlexRow } from '../../StyledMain';
-import '../../../car.css';
-import cesta from '../../../assets/Img/cesta.png';
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { FlexRow } from "../../StyledMain";
+import "../../../car.css";
+import cesta from "../../../assets/Img/cesta.png";
 
 export const Carrito = ({
   allProducts,
@@ -15,6 +16,7 @@ export const Carrito = ({
   hover,
 }) => {
   const [active, setActive] = useState(false);
+  allProducts = ['1','kjfdsbhfbasd', 123, 'jhaljk']
 
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
@@ -54,10 +56,28 @@ export const Carrito = ({
           </div>
         </div>
 
+<<<<<<<<< Temporary merge branch 1
+        <div
+          className={`container-cart-products ${active ? "" : "hidden-cart"}`}
+        >
+          {allProducts.length ? (
+            <>
+              <div className="row-product">
+                {allProducts.map((product) => (
+                  <div className="cart-product" key={product.id}>
+                    <div className="info-cart-product">
+                      <img
+                        src={product.img}
+                        alt=""
+                        style={{ width: 120, height: 120 }}
+                      />
+                      <span className="cantidad-producto-carrito">
+                        {product.quantity}
+                      </span>
 				<div
 					className={`container-cart-products ${active ? '' : 'hidden-cart'}`} >{allProducts.length ? (
 						<>
-							<div className='row-product'>
+							<div className='row-product' style={{position: 'fixed', zIndex: 3}}>
 								{allProducts.map(product => (
 									<div className='cart-product' key={product.id}>
 										<div className='info-cart-product' >
@@ -65,6 +85,7 @@ export const Carrito = ({
 											<span className='cantidad-producto-carrito'>
 												{product.quantity}
 											</span>
+>>>>>>>>> Temporary merge branch 2
 
                       <div
                         style={{

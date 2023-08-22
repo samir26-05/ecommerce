@@ -11,7 +11,7 @@ export default function InfoCountUser() {
     return (
         <div>
             <h3 style={{ paddingButton: "50px", left: 570 }}>ACCEDE A TU CUENTA</h3>
-            <div>
+            <div style={{paddingTop:20}}>
                 <Accordion >
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}

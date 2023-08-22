@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import NavHorizontal from './NavHorizontal';
 import InfoCountUser from './InfoCount';
 import { Div } from '../styled';
-import Products from '../../infoProduct/Products';
+import FormProducts from '../forms/CreateProducts';
 
 
 function TabPanel(props) {
@@ -51,7 +51,7 @@ export default function NavVertical() {
 
   return (
     <Div >
-      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224}}>
+      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224, marginTop:"5%"}}>
         <Tabs onChange={handleChange} sx={{ width: 500, marginTop: 5, marginLeft: "50px", display: "flex", flexDirection: "column" }} >
             <h3 style={{ position: "fixed", marginTop: "0px", left: 70 }}>Hola</h3>
             <Tab label="Mis compras" {...a11yProps(1)} sx={{ position: "fixed", marginTop: "80px", outline:"none"}} />
@@ -72,7 +72,7 @@ export default function NavVertical() {
           <InfoCountUser />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <Products/>
+          <FormProducts/>
         </TabPanel>
       </Box>
     </Div>
