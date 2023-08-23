@@ -16,7 +16,7 @@ const Footer = () => {
   };
 
   return (
-    <div  style={{ display:"flex", width:"100vw", justifyContent:"center"}}>
+    <div  style={{ display:"flex", width:"99.1vw", justifyContent:"center"}}>
       <div style={{ display:"flex", flexDirection:"column", width:"80%", justifyContent:"space-around", marginTop: "40px", height: "400px" }}>
         <div>
           <div style={{paddingTop:"40px", borderTop: "1px solid #e9e9e9"}} />

@@ -11,7 +11,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
-
+import CircularProgress from '@mui/material/CircularProgress';
 
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import "../../components/Layout/header/styled.css";
@@ -121,7 +121,7 @@ function BasicTextFields({ Placeholder, onChange, value, type, name , required, 
 
 
 
-const Login = () => {
+export const Login = () => {
   
 
   const [email,setemail] = useState("");
@@ -139,8 +139,9 @@ const Login = () => {
     })
 
     navigate('/user')
-    alert(response.data.message);
-/*     history.push("/user"); */
+
+/*     alert(response.data.message ); */
+
     
     } catch (error) {
       console.log(error.data.message)
@@ -163,6 +164,7 @@ const Login = () => {
           required
           onChange={(e) => setemail(e.target.value) }
         />
+
       <BasicTextFields
           className="controls"
           type="password"

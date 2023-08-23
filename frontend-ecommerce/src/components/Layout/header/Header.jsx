@@ -11,8 +11,9 @@ import { Carrito } from "./Carrito";
 import { useState, useEffect } from "react";
 import "./styled.css";
 import "../../../car.css";
-
+import axios from "axios";
 const pages = ["Inicio", "Mujer", "Hombre"];
+
 
 const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCantProducts }) => {
   const handleCloseNavMenu = () => {};
@@ -47,12 +48,18 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
     }
   };
 
+  const [name, setName] = useState('')
+
   useEffect(() => {
+    
     window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+      
   }, []);
+  
 
   return (
     <AppBar position="sticky">
