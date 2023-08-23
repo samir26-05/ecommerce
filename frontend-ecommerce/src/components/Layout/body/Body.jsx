@@ -1,7 +1,7 @@
 import { Div } from "./styled";
 import Footer from "../footer/Footer";
 import DemoAutoPlay from "./carrusel/DemoAutoPlay";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import { ProductList } from "./products/ProductList";
 import "../header/styled.css";
@@ -13,6 +13,19 @@ export default function Body() {
   const [allProducts, setAllProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [countProducts, setCountProducts] = useState(0);
+  const [userEnter, setUserEnter] = useState(false);
+  const verifyEnter = () => {
+    return true
+  };
+
+  useEffect(() => {
+    const trueEnter = verifyEnter();
+    setUserEnter(trueEnter);
+    
+    return () => {
+      setUserEnter(false);
+    };
+  }, []);
   return (
     <>
       <AppBar position="sticky" style={{ backgroundColor: "#ffffff" }}>
@@ -23,6 +36,7 @@ export default function Body() {
           newTotal={setTotal}
           cantProducts={countProducts}
           newCantProducts={setCountProducts}
+          isUsedBody={userEnter}
         />
         <Div>
           <DemoAutoPlay />

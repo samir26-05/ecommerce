@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import LoginDrawer from "../../../pages/Login/Login";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,7 +15,17 @@ import "../../../car.css";
 
 const pages = ["Inicio", "Mujer", "Hombre"];
 
-const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCantProducts, isUsed }) => {
+const Header = ({
+  products,
+  newProducts,
+  inTotal,
+  newTotal,
+  cantProducts,
+  newCantProducts,
+  isUsedUser,
+  isUsedPayment,
+  isUsedBody,
+}) => {
   const handleCloseNavMenu = () => {};
 
   const [hovered, setHovered] = useState(false);
@@ -26,8 +37,8 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
     setHovered(false);
   };
 
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [headerColor, setHeaderColor] = useState("#00000000");
+  const [, setScrollPosition] = useState(0);
+  const [headerColor, setHeaderColor] = useState("transparent");
   const [textColor, setTextColor] = useState("#fff");
 
   const handleScroll = () => {
@@ -52,16 +63,26 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
   }, []);
 
   return (
-    <AppBar position="relative">
+    <AppBar position="relative" style={{ background: "none" }}>
       <Container
         maxWidth=""
         sx={{
-          position: isUsed ? '' : "fixed",
+          position: (isUsedUser ? "fixed" : "") || (isUsedBody ? "fixed" : ""),
           zIndex: 3,
+          boxShadow: isUsedBody
+            ? headerColor !== "transparent"
+              ? "0px 0px 3px 2px #0000003b"
+              : "0px 0px 0px 0px"
+            : "0px 0px 3px 2px #0000003b",
           transition: "all 0.2s ease-in-out",
         }}
         style={{
-          backgroundColor: (hovered ? "#fff" : "#00000000" && isUsed ? '#000' : headerColor),
+          backgroundColor:
+            isUsedUser || isUsedPayment
+              ? "#fff"
+              : hovered
+              ? "#fff"
+              : headerColor,
         }}
       >
         <Toolbar disableGutters>
@@ -76,7 +97,7 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
             sx={{
               mr: 3,
               display: { xs: "none", md: "flex" },
-              color: isUsed ? '#fff' : textColor,
+              color: isUsedUser || isUsedPayment ? "#000" : "#fff" && textColor,
               textDecoration: "none",
               letterSpacing: ".8rem",
               fontWeight: 700,
@@ -99,7 +120,14 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ fontWeight: "bold", my: 1, margin: "0 15px" }}
-                style={{ color: hovered ? "black" : "white" && isUsed ? '#fff' : textColor }}
+                style={{
+                  color:
+                    isUsedUser || isUsedPayment
+                      ? "#000"
+                      : hovered
+                      ? "#000"
+                      : textColor,
+                }}
               >
                 {page}
               </Button>
@@ -115,7 +143,8 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
             setCountProducts={newCantProducts}
             color={textColor}
             hover={hovered}
-            pageUsed={isUsed}
+            pageUsed={isUsedUser}
+            pagePayment={isUsedPayment}
           />
           <Box
             sx={{
@@ -125,7 +154,12 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
               margin: "0 15px",
             }}
           >
-            <LoginDrawer hover={hovered} color={textColor} pageUsed={isUsed}/>
+            <LoginDrawer
+              hover={hovered}
+              color={textColor}
+              pageUsed={isUsedUser}
+              pagePayment={isUsedPayment}
+            />
           </Box>
         </Toolbar>
       </Container>
