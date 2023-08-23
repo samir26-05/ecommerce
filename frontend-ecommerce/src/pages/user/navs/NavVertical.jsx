@@ -51,7 +51,7 @@ export default function NavVertical() {
 
   return (
     <Div >
-      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224 }}>
+      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224, marginTop:15 }}>
         <Tabs onChange={handleChange} sx={{ width: 450, marginTop: 5, marginLeft: "50px", display: "flex", flexDirection: "column" }} >
           <h3 style={{ position: "fixed", marginTop: "0px", left: 70 }}>Hola</h3>
           <Tab label="Mis compras" {...a11yProps(1)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "80px", outline: "none" }} />
