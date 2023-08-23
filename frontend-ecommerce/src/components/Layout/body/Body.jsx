@@ -1,9 +1,9 @@
 import { Div } from "./styled";
 import Footer from "../footer/Footer";
-import DemoAutoPlay from "../body/carrusel/DemoAutoPlay";
+import DemoAutoPlay from "./carrusel/DemoAutoPlay";
 import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
-import ProductList from '../body/products/ProductList'
+import { ProductList } from "./products/ProductList";
 import "../header/styled.css";
 import "../../../car.css";
 import SectionsBody from "./Sections/SectionsBody";

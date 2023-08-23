@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { Button, TextField } from '@mui/material';
 import { PiUploadThin } from 'react-icons/pi'
+import '../../../../components/Layout/header/styled.css'
 
 export default function FormProducts() {
 
@@ -83,7 +84,7 @@ export default function FormProducts() {
       <div style={{ display: "flex", flexDirection: "row" }}>
         <input accept="image/*" style={{ display: 'none' }} id="image-input" type="file" onChange={handleImageChange} />
         <label htmlFor="image-input" style={{ color: "black" }}>
-          <Button variant="outline" component="span" style={{ backgroundColor: "#ffffff", marginTop: "45px" }}>
+          <Button variant="outline" className='whithoutOutline' component="span" style={{ backgroundColor: "#ffffff", marginTop: "45px" }}>
             Cargar imagen <PiUploadThin />
           </Button>
         </label>
@@ -98,7 +99,7 @@ export default function FormProducts() {
         )}
       </div>
       <div>
-        <Button variant="contained" style={{ backgroundColor: "black", marginTop: 45 }}>CREAR PRODUCTO</Button>
+        <Button variant="contained" className='whithoutOutline' style={{ backgroundColor: "black", marginTop: 45 }}>CREAR PRODUCTO</Button>
       </div>
 
     </Box>

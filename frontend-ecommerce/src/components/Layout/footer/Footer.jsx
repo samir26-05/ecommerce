@@ -3,6 +3,7 @@ import { Grid, Typography, Button, Modal } from '@mui/material';
 import { Facebook, Twitter, Instagram, WhatsApp } from '@mui/icons-material';
 import { FooterLink, SocialIcon, ModalContent } from './styled';
 import QrWths from '../../../assets/Img/QrWhts.png';
+import '../header/styled.css'
 
 const Footer = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -25,7 +26,7 @@ const Footer = () => {
             <br />
             Sábados y Domingos: Cerrado
           </Typography>
-          <Button onClick={handleOpenModal} style={{ marginTop: '20px', color: 'green' }}>
+          <Button onClick={handleOpenModal} className='whithoutOutline' style={{ marginTop: '20px', color: 'green' }}>
             <WhatsApp />
             Chatea con un asesor
           </Button>

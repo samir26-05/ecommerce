@@ -6,6 +6,7 @@ import bgr from '../../../assets/Img/bgr.png'
 import { Link } from 'react-router-dom';
 import FormProducts from '../forms/products/CreateProducts';
 import StockProducts from '../forms/products/StockProducts';
+import '../../../components/Layout/header/styled.css'
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,15 +56,15 @@ export default function NavHorizontal(props) {
           )}
 
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ paddingTop: 20 }}>
-            <Tab label="Online" {...a11yProps(0)} />
-            <Tab label="Tienda" {...a11yProps(1)} />
+            <Tab label="Online" {...a11yProps(0)} className='whithoutOutline'/>
+            <Tab label="Tienda" {...a11yProps(1)} className='whithoutOutline'/>
           </Tabs>
         </Box>
       ) : (
         <Box>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ paddingTop: 20 }}>
-            <Tab label="Crear producto" {...a11yProps(0)} />
-            <Tab label="Inventario" {...a11yProps(1)} />
+            <Tab label="Crear producto" {...a11yProps(0)} className='whithoutOutline'/>
+            <Tab label="Inventario" {...a11yProps(1)} className='whithoutOutline'/>
           </Tabs>
         </Box>
       )}
@@ -75,14 +76,14 @@ export default function NavHorizontal(props) {
             <Img src={bgr} alt="" />
             <h4>Aun no tienes compras online</h4>
             <span>Si no encuentras tu compra tal vez es porque hiciste el pedido sin estar registrado.</span>
-            <Button variant="text" endIcon={<SendIcon />}>Encontrar pedido</Button>
+            <Button variant="text" className='whithoutOutline' endIcon={<SendIcon />}>Encontrar pedido</Button>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
             <Img src={bgr} alt="" />
             <h4>Aún no tienes compras en tienda</h4>
             <span>Pero puedes hacer tu pedido online ¡y te lo mandamos a casa!</span><br />
             <Link to={"/"}>
-              <Button variant="contained" style={{ backgroundColor: "black" }}>Compra online</Button>
+              <Button variant="contained" className='whithoutOutline' style={{ backgroundColor: "black" }}>Compra online</Button>
             </Link>
 
           </CustomTabPanel>
