@@ -5,7 +5,7 @@ import Footer from "../../components/Layout/footer/Footer";
 import NavVertical from "./navs/NavVertical";
 
 const UserPage = () => {
-  const [userEnter, setUserEnter] = useState(false);
+  const [userEnterUser, setUserEnterUser] = useState(false);
 
   const verifyEnter = () => {
     return true
@@ -13,16 +13,16 @@ const UserPage = () => {
 
   useEffect(() => {
     const trueEnter = verifyEnter();
-    setUserEnter(trueEnter);
+    setUserEnterUser(trueEnter);
     
     return () => {
-      setUserEnter(false);
+      setUserEnterUser(false);
     };
   }, []);
 
   return ( 
     <Div>
-        <Header isUsed={userEnter}/>
+        <Header isUsedUser={userEnterUser}/>
           <NavVertical/>
         <Footer/>
     </Div>

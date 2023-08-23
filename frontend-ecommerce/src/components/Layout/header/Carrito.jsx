@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FlexRow } from "../../StyledMain";
@@ -14,9 +15,9 @@ export const Carrito = ({
   color,
   hover,
   pageUsed,
+  pagePayment,
 }) => {
   const [active, setActive] = useState(false);
-  allProducts = [];
 
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
@@ -41,7 +42,15 @@ export const Carrito = ({
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
-            stroke={hover ? "#000" : "#fff" && pageUsed ? "#fff" : color}
+            stroke={
+              hover
+                ? "#000"
+                : "#fff" && pageUsed
+                ? "#000"
+                : color && pagePayment
+                ? "#000"
+                : color
+            }
             className="icon-cart"
           >
             <path
@@ -60,10 +69,7 @@ export const Carrito = ({
         >
           {allProducts.length ? (
             <>
-              <div
-                className="row-product"
-                style={{ position: "fixed", zIndex: 3 }}
-              >
+              <div className="row-product">
                 {allProducts.map((product) => (
                   <div className="cart-product" key={product.id}>
                     <div className="info-cart-product">

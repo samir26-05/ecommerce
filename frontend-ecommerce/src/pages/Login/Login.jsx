@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import { useState } from "react";
 import Drawer from "@mui/material/Drawer";
@@ -13,7 +14,7 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import "../../components/Layout/header/styled.css";
 import { Link } from "react-router-dom";
 
-export default function LoginDrawer({ hover, color, pageUsed }) {
+export default function LoginDrawer({ hover, color, pageUsed, pagePayment }) {
   const [haveAccount, setHaveAccount] = useState(true);
 
   const [state, setState] = React.useState({
@@ -66,11 +67,11 @@ export default function LoginDrawer({ hover, color, pageUsed }) {
     <div>
       {["right"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)} className="whithoutOutline">
+          <Button onClick={toggleDrawer(anchor, true)} className="whithoutOutline" style={{display: pageUsed ? 'none' : 'block' && pagePayment ? "none" : 'block'}}>
             <PersonOutlineOutlinedIcon
               style={{
                 fontSize: "2.5rem",
-                fill: hover ? "black" : "white" && pageUsed ? '#fff' : color,
+                fill: hover ? "black" : "white" && pageUsed ? '#000' : color,
               }}
               
             />
