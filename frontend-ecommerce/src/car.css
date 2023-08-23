@@ -17,7 +17,6 @@ body {
 .icon-cart {
 	width: 40px;
 	height: 40px;
-	stroke: #000;
 }
 
 .icon-cart:hover {
@@ -80,6 +79,10 @@ img {
 	display: flex;
 	justify-content: space-between;
 	flex: 0.8;
+}
+
+.info-cart-product > img {
+	object-fit: cover;
 }
 
 .titulo-producto-carrito {
@@ -207,7 +210,6 @@ img {
 	display: block;
 	width: 80%;
 	margin-left: 50px;
-	margin-top: 10px;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	font-family: inherit;

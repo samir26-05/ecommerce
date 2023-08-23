@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import { useState } from "react";
 import Drawer from "@mui/material/Drawer";
@@ -9,9 +10,11 @@ import { FlexDirCol, FlexRow } from "../../components/StyledMain";
 import TextField from "@mui/material/TextField";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
-import { Link } from 'react-router-dom';
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import "../../components/Layout/header/styled.css";
+import { Link } from "react-router-dom";
 
-export default function LoginDrawer() {
+export default function LoginDrawer({ hover, color, pageUsed, pagePayment }) {
   const [haveAccount, setHaveAccount] = useState(true);
 
   const [state, setState] = React.useState({
@@ -41,20 +44,20 @@ export default function LoginDrawer() {
       role="presentation"
     >
       <List style={{ paddingTop: "0" }}>
-          <FlexRow style={{ marginBottom: "1rem", fontSize:"1.2rem" }}>
-            <Login_Register
-              onClick={() => setHaveAccount(true)}
-              Page={haveAccount}
-            >
-              Iniciar Sesión
-            </Login_Register>
-            <Login_Register
-              onClick={() => setHaveAccount(false)}
-              Page={haveAccount}
-            >
-              Registarse
-            </Login_Register>
-          </FlexRow>
+        <FlexRow style={{ marginBottom: "1rem", fontSize: "1.2rem" }}>
+          <Login_Register
+            onClick={() => setHaveAccount(true)}
+            Page={haveAccount}
+          >
+            Iniciar Sesión
+          </Login_Register>
+          <Login_Register
+            onClick={() => setHaveAccount(false)}
+            Page={haveAccount}
+          >
+            Registarse
+          </Login_Register>
+        </FlexRow>
         {haveAccount ? <Login /> : <Register />}
       </List>
     </Box>
@@ -64,7 +67,15 @@ export default function LoginDrawer() {
     <div>
       {["right"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <Button onClick={toggleDrawer(anchor, true)} className="whithoutOutline" style={{display: pageUsed ? 'none' : 'block' && pagePayment ? "none" : 'block'}}>
+            <PersonOutlineOutlinedIcon
+              style={{
+                fontSize: "2.5rem",
+                fill: hover ? "black" : "white" && pageUsed ? '#000' : color,
+              }}
+              
+            />
+          </Button>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
@@ -78,16 +89,14 @@ export default function LoginDrawer() {
   );
 }
 
-
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
-
 
 function BasicTextFields({ Placeholder }) {
   return (
     <Box
       component="form"
       sx={{
-        "& > :not(style)": { m: 1, width: "35ch" }, 
+        "& > :not(style)": { m: 1, width: "35ch" },
       }}
       noValidate
       autoComplete="off"
@@ -104,12 +113,11 @@ const Login = () => {
       <BasicTextFields Placeholder={"Contraseña"} />
       <FlexRow style={{ justifyContent: "space-between" }}>
         <Span>
-          <Checkbox {...label} style={{color:"black"}}/> Recordar contraseña
+          <Checkbox {...label} style={{ color: "black" }} /> Recordar contraseña
         </Span>
         <Span>¿Olvidaste tu contraseña?</Span>
       </FlexRow>
 
-      
       <Link to={"/user"}>
         <Btn>Iniciar Sesión</Btn>
       </Link>

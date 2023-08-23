@@ -4,26 +4,27 @@ import Swiper from "swiper/bundle";
 import "./swiper-bundle.min.css";
 import { Div, NewsImg, Title } from "./Styled";
 // import * as SliderImg from '../../../../assets/Img/indexSlider'
-import Slider1_1 from "../../../../assets/Img/Slider1.1.jpg";
-import Slider1_2 from "../../../../assets/Img/Slider1.2.jpg";
-import Slider2_1 from "../../../../assets/Img/Slider2.1.jpg";
-import Slider2_2 from "../../../../assets/Img/Slider2.2.jpg";
-import Slider3_1 from "../../../../assets/Img/Slider3.1.jpg";
-import Slider3_2 from "../../../../assets/Img/Slider3.2.jpg";
-import Slider4_1 from "../../../../assets/Img/Slider4.1.jpg";
-import Slider4_2 from "../../../../assets/Img/Slider4.2.jpg";
-import Slider5_1 from "../../../../assets/Img/Slider5.1.jpeg";
-import Slider5_2 from "../../../../assets/Img/Slider5.2.jpeg";
-import Slider6_1 from "../../../../assets/Img/Slider6.1.jpg";
-import Slider6_2 from "../../../../assets/Img/Slider6.2.jpg";
-import Slider7_1 from "../../../../assets/Img/Slider7.1.jpg";
-import Slider7_2 from "../../../../assets/Img/Slider7.2.jpg";
-import Slider8_1 from "../../../../assets/Img/Slider8.1.jpg";
-import Slider8_2 from "../../../../assets/Img/Slider8.2.jpg";
-import Slider9_1 from "../../../../assets/Img/Slider9.1.jpg";
-import Slider9_2 from "../../../../assets/Img/Slider9.2.jpg";
-import Slider10_1 from "../../../../assets/Img/Slider10.1.jpg";
-import Slider10_2 from "../../../../assets/Img/Slider10.2.jpg";
+import Slider1_1 from "../../../../assets/Img/Slider1.1-min.jpg";
+import Slider1_2 from "../../../../assets/Img/Slider1.2-min.jpg";
+import Slider2_1 from "../../../../assets/Img/Slider2.1-min.jpg";
+import Slider2_2 from "../../../../assets/Img/Slider2.2-min.jpg";
+import Slider3_1 from "../../../../assets/Img/Slider3.1-min.jpg";
+import Slider3_2 from "../../../../assets/Img/Slider3.2-min.jpg";
+import Slider4_1 from "../../../../assets/Img/Slider4.1-min.jpg";
+import Slider4_2 from "../../../../assets/Img/Slider4.2-min.jpg";
+import Slider5_1 from "../../../../assets/Img/Slider5.1-min.jpeg";
+import Slider5_2 from "../../../../assets/Img/Slider5.2-min.jpeg";
+import Slider6_1 from "../../../../assets/Img/Slider6.1-min.jpg";
+import Slider6_2 from "../../../../assets/Img/Slider6.2-min.jpg";
+import Slider7_1 from "../../../../assets/Img/Slider7.1-min.jpg";
+import Slider7_2 from "../../../../assets/Img/Slider7.2-min.jpg";
+import Slider8_1 from "../../../../assets/Img/Slider8.1-min.jpg";
+import Slider8_2 from "../../../../assets/Img/Slider8.2-min.jpg";
+import Slider9_1 from "../../../../assets/Img/Slider9.1-min.jpg";
+import Slider9_2 from "../../../../assets/Img/Slider9.2-min.jpg";
+import Slider10_1 from "../../../../assets/Img/Slider10.1-min.jpg";
+import Slider10_2 from "../../../../assets/Img/Slider10.2-min.jpg";
+
 
 function Contacto() {
   useEffect(() => {
