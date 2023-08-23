@@ -10,7 +10,7 @@ width: 100vw;
 
 export const BoxMain = styled.div`
 width: 100%;
-height: 87%;
+height: 100%;
 box-sizing: border-box;
 display: flex;
 flex-direction: row;
@@ -33,6 +33,8 @@ object-fit: cover;
 `;
 
 export const Section2 = styled.div`
+position: fixed;
+left: 50%;
 width: 50%;
 height: 100%;
 box-sizing: border-box;
@@ -49,73 +51,95 @@ font-size: 2.5rem;
 position: relative;
 bottom: 25%;
 font-weight: 600;
-font-family: 'Times New Roman', Times, serif;
+letter-spacing: 1px;
 `;
 
 export const Reference = styled.div`
 width: 80%;
-font-size: 0.8rem;
+font-size: 0.7rem;
 position: relative;
 bottom: 25%;
-color: #747474;
-font-weight: 700;
+color: #636363;
+font-weight: 600;
 `;
 
 export const Price = styled.div`
 width: 80%;
-font-size: 1.5rem;
+font-size: 1.4rem;
 position: relative;
-bottom: 23%;
-font-weight: 500;
+bottom: 22%;
+font-weight: 800;
 `;
 
-export const TitleSize = styled.div`
+export const ColorProducts = styled.div`
 width: 80%;
-font-size: 1.3rem;
+height: 10%;
 position: relative;
-bottom: 15%;
-font-weight: 600;
+bottom: 20%;
+display: flex;
+flex-wrap: wrap;
 `;
 
-export const Sizes = styled.ul`
-width: 60%;
-font-size: 1.2rem;
-position: relative;
-bottom: 10%;
-font-weight: 600;
-display: flex;
-justify-content: space-between;
-`;
-
-export const Size = styled.button`
-background-color: #fff;
-border: 1.5px solid #8f8f8f;
-width: 40px;
-height: 40px;
-border-radius: 50px;
-text-align: center;
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: 300;
-cursor: pointer;
-font-size: 1rem ;
+export const Colores = styled.img`
+height: 100%;
+margin-right: 10px;
 :hover{
     border: 1.5px solid #000000;
     cursor: pointer;
 }
 `;
 
-export const ButtonBuys = styled.button`
-  display: inline-block;
+export const TitleSize = styled.div`
+width: 80%;
+font-size: 1.2rem;
+position: relative;
+bottom: 15%;
+font-weight: 800;
+`;
+
+export const Sizes = styled.ul`
+width: 80%;
+position: relative;
+bottom: 13%;
+font-weight: 600;
+display: flex;
+`;
+
+export const Size = styled.button`
+background-color: transparent;
+border: 1.5px solid #8f8f8f;
+width: 40px;
+height: 40px;
+border-radius: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 300;
+cursor: pointer;
+font-size: 1rem ;
+margin-right: 15px;
+:hover{
+    border: 1.5px solid #000000;
+    cursor: pointer;
+}
+`;
+export const ButtonBuys = styled.div`
+width: 80%;
+position: relative;
+bottom: 8%;
+font-weight: 600;
+display: flex;
+background-color: transparent;
+border: none;
+`
+export const Buys = styled.button`
   transition: all 0.2s ease-in;
+  display: inline-block;
   position: relative;
   overflow: hidden;
-  z-index: 1;
   color: #090909;
   padding: 0.7em 1.7em;
   font-size: 17px;
-  border-radius: 0.5em;
   background: transparent;
   border: 1px solid #000000;
 
@@ -132,7 +156,6 @@ export const ButtonBuys = styled.button`
   width: 140%;
   height: 180%;
   background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 50%;
   display: block;
   transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
   z-index: -1;
@@ -147,7 +170,6 @@ export const ButtonBuys = styled.button`
   width: 160%;
   height: 190%;
   background-color: #000000;
-  border-radius: 50%;
   display: block;
   transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
   z-index: -1;
