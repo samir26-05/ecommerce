@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FlexRow } from "../../StyledMain";
 import "../../../car.css";
 import cesta from "../../../assets/Img/cesta.png";
+import { useCart } from "../body/products/CardContext";
 
 export const Carrito = ({
   allProducts,
@@ -18,7 +19,12 @@ export const Carrito = ({
   pagePayment,
 }) => {
   const [active, setActive] = useState(false);
-  allProducts = [];
+
+  const { cart, updateCart } = useCart();
+
+  useEffect(() => {
+    console.log(cart, '❤️❤️❤️');
+  }, [cart]);
 
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
