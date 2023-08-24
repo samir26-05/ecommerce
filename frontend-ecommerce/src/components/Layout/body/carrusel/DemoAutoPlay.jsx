@@ -4,7 +4,7 @@ import { autoPlay } from 'react-swipeable-views-utils';
 import Pagination from './Pagination';
 
 //image
-import carritoNegro from '../../../../assets/Img/carritoNegro.jpg'
+import BlackSuit from '../../../../assets/Img/blacksuit.jpg'
 import damaNegro from '../../../../assets/Img/damaNegro.jpg'
 import ropaNegro from '../../../../assets/Img/ropaNegro.jpg'
 
@@ -16,13 +16,13 @@ const styles = {
   },
   slide: {
     padding: 15,
-    minHeight: 810,
+    minHeight: 850,
     minWidth: 591,
     color: '#fff',
     
   },
   slide1: {
-    backgroundImage: `url(${carritoNegro})`,
+    backgroundImage: `url(${BlackSuit})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
       

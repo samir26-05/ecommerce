@@ -20,7 +20,7 @@ const UserPage = () => {
   }, []);
   return ( 
     <Div>
-        <Header isUsed={userEnter}/>
+        <Header isUsedPayment={userEnter}/>
           <FormUserPayment/>
         <Footer/>
     </Div>
