@@ -55,5 +55,4 @@ export const data = [
 		price: 25.99,
 		quantity: 1,
 	},
-	
 ];

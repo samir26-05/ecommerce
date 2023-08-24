@@ -31,7 +31,7 @@ export const Card = styled.div`
   overflow: hidden;
   box-sizing: border-box;
   width: 100%;
-  box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.171);
   backdrop-filter: blur(6px);
   text-align: center;
   cursor: pointer;

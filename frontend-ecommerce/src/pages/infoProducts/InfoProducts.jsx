@@ -16,10 +16,25 @@ import {
   Buys,
 } from "../infoProducts/styleProducts";
 import Header from "../../components/Layout/header/Header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const InfoProducts = () => {
   const tallas = ["XS", "S", "M", "L", "XL"];
+
+  const [userEnterUser, setUserEnterUser] = useState(false);
+
+    const verifyEnter = () => {
+        return true
+    };
+
+    useEffect(() => {
+        const trueEnter = verifyEnter();
+        setUserEnterUser(trueEnter);
+
+        return () => {
+            setUserEnterUser(false);
+        };
+    }, []);
 
   const Contenido = [
     "https://static.bershka.net/4/photos2/2023/I/M/1/p/0000/000/058/0000000058_4_2_1.mp4",
@@ -53,8 +68,8 @@ const InfoProducts = () => {
 
   return (
     <MainDiv>
-      <Header />
-      <BoxMain>
+      <Header isUsedUser={userEnterUser}/>
+      <BoxMain >
         <Section1>
           <Video loop autoPlay src={Contenido}></Video>
         </Section1>
