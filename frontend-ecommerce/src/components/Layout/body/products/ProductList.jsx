@@ -15,13 +15,7 @@ import { GiShoppingBag } from "react-icons/gi";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-export const ProductList = ({
-  allProducts,
-  setAllProducts,
-  countProducts,
-  setCountProducts,
-  total,
-  setTotal,
+export const ProductList = ({allProducts,setAllProducts,countProducts,setCountProducts,total,setTotal
 }) => {
   const [shoppingCarProducts, setShoppingCarProducts] = useState(
     window.localStorage.getItem("productList")
