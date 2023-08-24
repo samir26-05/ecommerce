@@ -1,5 +1,5 @@
 import React from "react";
-import { ContainerFather, ContainerH, Card } from "./StyledCategory";
+import { ContainerFather, ContainerH, DivTitle, Card } from "./StyledCategory";
 import CardCategory from "./CardCategory";
 
 import Camisetas from "./ImgCategory/Camisetas.jpg";
@@ -12,15 +12,15 @@ const IndexCategory = () => {
   const card = [
     { name: "Camisetas", img: Camisetas },
     { name: "Camisas", img: Camisas },
-    { name: "Sudaderas", img: Jeans },
-    { name: "Jeans", img: Sudaderas },
+    { name: "Sudaderas", img: Sudaderas },
+    { name: "Jeans", img: Jeans },
     { name: "Zapatillas", img: Zapatillas },
   ];
   return (
     <ContainerFather>
-      <div>
+      <DivTitle>
         <h2>Categorias</h2>
-      </div>
+      </DivTitle>
       <ContainerH>
         <CardCategory array={card}/>
       </ContainerH>
