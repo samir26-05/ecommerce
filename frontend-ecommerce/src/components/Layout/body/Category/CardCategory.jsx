@@ -7,7 +7,10 @@ const CardCategory = ({ array }) => {
       {array.map((item, index) => (
         <DivCategory key={index}> 
           <Card key={index} backg={item.img}></Card>
-          <p>{item.name}</p>
+
+            <p>{item.name}</p>
+
+          
         </DivCategory>
       ))}
     </>

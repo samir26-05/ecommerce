@@ -14,13 +14,14 @@ export const Carrito = ({
   setTotal,
   color,
   hover,
+  pageUsed,
+  pagePayment,
 }) => {
   const [active, setActive] = useState(false);
-  allProducts = []
+  allProducts = [];
 
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
-		console.log(results, '❤️❤️❤️❤️');
 
     setTotal(total - product.price * product.quantity);
     setCountProducts(countProducts - product.quantity);
@@ -42,7 +43,15 @@ export const Carrito = ({
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
-            stroke={hover ? "#000" : "#fff" && color}
+            stroke={
+              hover
+                ? "#000"
+                : "#fff" && pageUsed
+                ? "#000"
+                : color && pagePayment
+                ? "#000"
+                : color
+            }
             className="icon-cart"
           >
             <path

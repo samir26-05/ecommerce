@@ -39,8 +39,9 @@ export const ContainerH = styled.div`
     justify-content: center;
     box-sizing: border-box;
     text-align: center;
+    flex-direction: column;
     flex-wrap: wrap;
-
+    align-items: center;
 ` 
 
 export const Card = styled.div`
@@ -52,6 +53,7 @@ export const Card = styled.div`
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
+    display: flex;
     flex-wrap: wrap;
     cursor: pointer;
     

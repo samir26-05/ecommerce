@@ -12,8 +12,8 @@ const IndexCategory = () => {
   const card = [
     { name: "Camisetas", img: Camisetas },
     { name: "Camisas", img: Camisas },
-    { name: "Sudaderas", img: Jeans },
-    { name: "Jeans", img: Sudaderas },
+    { name: "Sudaderas", img: Sudaderas },
+    { name: "Jeans", img: Jeans },
     { name: "Zapatillas", img: Zapatillas },
   ];
   return (

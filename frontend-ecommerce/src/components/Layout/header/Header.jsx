@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import LoginDrawer from "../../../pages/Login/Login";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,12 +15,18 @@ import "../../../car.css";
 import axios from "axios";
 const pages = ["Inicio", "Mujer", "Hombre"];
 
-
-const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCantProducts }) => {
+const Header = ({
+  products,
+  newProducts,
+  inTotal,
+  newTotal,
+  cantProducts,
+  newCantProducts,
+  isUsedUser,
+  isUsedPayment,
+  isUsedBody,
+}) => {
   const handleCloseNavMenu = () => {};
-  const [allProducts, setAllProducts] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [countProducts, setCountProducts] = useState(0);
 
   const [hovered, setHovered] = useState(false);
 
@@ -30,8 +37,8 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
     setHovered(false);
   };
 
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [headerColor, setHeaderColor] = useState("#00000000");
+  const [, setScrollPosition] = useState(0);
+  const [headerColor, setHeaderColor] = useState("transparent");
   const [textColor, setTextColor] = useState("#fff");
 
   const handleScroll = () => {
@@ -62,16 +69,26 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
   
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="relative" style={{ background: "none" }}>
       <Container
         maxWidth=""
         sx={{
-          position: "fixed",
+          position: (isUsedUser ? "fixed" : "") || (isUsedBody ? "fixed" : ""),
           zIndex: 3,
+          boxShadow: isUsedBody
+            ? headerColor !== "transparent"
+              ? "0px 0px 3px 2px #0000003b"
+              : "0px 0px 0px 0px"
+            : "0px 0px 3px 2px #0000003b",
           transition: "all 0.2s ease-in-out",
         }}
         style={{
-          backgroundColor: hovered ? "#fff" : "#00000000" && headerColor,
+          backgroundColor:
+            isUsedUser || isUsedPayment
+              ? "#fff"
+              : hovered
+              ? "#fff"
+              : headerColor,
         }}
       >
         <Toolbar disableGutters>
@@ -86,7 +103,7 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
             sx={{
               mr: 3,
               display: { xs: "none", md: "flex" },
-              color: textColor,
+              color: isUsedUser || isUsedPayment ? "#000" : "#fff" && textColor,
               textDecoration: "none",
               letterSpacing: ".8rem",
               fontWeight: 700,
@@ -109,7 +126,14 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ fontWeight: "bold", my: 1, margin: "0 15px" }}
-                style={{ color: hovered ? "black" : "white" && textColor }}
+                style={{
+                  color:
+                    isUsedUser || isUsedPayment
+                      ? "#000"
+                      : hovered
+                      ? "#000"
+                      : textColor,
+                }}
               >
                 {page}
               </Button>
@@ -125,6 +149,8 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
             setCountProducts={newCantProducts}
             color={textColor}
             hover={hovered}
+            pageUsed={isUsedUser}
+            pagePayment={isUsedPayment}
           />
           <Box
             sx={{
@@ -134,7 +160,12 @@ const Header = ({ products, newProducts, inTotal, newTotal, cantProducts, newCan
               margin: "0 15px",
             }}
           >
-            <LoginDrawer hover={hovered} color={textColor} />
+            <LoginDrawer
+              hover={hovered}
+              color={textColor}
+              pageUsed={isUsedUser}
+              pagePayment={isUsedPayment}
+            />
           </Box>
         </Toolbar>
       </Container>
