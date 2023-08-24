@@ -10,10 +10,16 @@ export const ContainerFather = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
     flex-wrap: wrap;
     background-color: #f5f5f5;
     
+`
+
+export const DivTitle = styled.div`
+    height: auto;
+    width: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
 `
 
 export const ContainerH = styled.div`
@@ -21,7 +27,7 @@ export const ContainerH = styled.div`
     width: 70%;
     height: 100%;
     display: flex;
-   
+    margin-bottom: 20px;
 `   
 
  export const DivCategory = styled.div`
