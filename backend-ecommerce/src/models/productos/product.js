@@ -1,15 +1,24 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../database.js";
 
-import { Size } from "./sizes.js";
-import { Brand } from "./brands.js";
-import { Category } from "./categories.js";
+import { Size } from "./size.js";
+import { Brand } from "./brand.js";
+import { Category } from "./category_product.js";
+import { Section } from "./section.js";
 
-export const Products = sequelize.define("products", {
+export const Products = sequelize.define("product", {
   product_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
+  },
+  section_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  category_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
   name: {
     type: DataTypes.STRING,
@@ -20,12 +29,12 @@ export const Products = sequelize.define("products", {
       },
     },
   },
-  sizes_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
   descripcion: {
     type: DataTypes.STRING,
+    allowNull: false,
+  },
+  sizes_id: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   id_brands: {
@@ -41,10 +50,7 @@ export const Products = sequelize.define("products", {
       },
     },
   },
-  category_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
+  
   image: {
     type: DataTypes.STRING(300),
     allowNull: false,
@@ -75,4 +81,11 @@ Products.belongsTo(Category, {
 });
 Category.hasMany(Products, {
   foreignKey: "category_id",
+});
+// Relacion de producto y seccion
+Products.belongsTo(Section, {
+  foreignKey: "section_id",
+});
+Section.hasMany(Products, {
+  foreignKey: "section_id",
 });

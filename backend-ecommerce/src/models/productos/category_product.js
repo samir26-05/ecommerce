@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../database.js";
 
-export const Category = sequelize.define("category_products", {
+export const Category = sequelize.define("category_product", {
   category_id: {
     type: DataTypes.INTEGER,
     PrimaryKey: true,
