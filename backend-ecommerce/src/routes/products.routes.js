@@ -6,9 +6,3 @@ router.post('/create',)
 router.get('/',)
 
 export default router
-
-
-
-
-
-
