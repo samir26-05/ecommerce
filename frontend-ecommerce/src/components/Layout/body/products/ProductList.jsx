@@ -1,31 +1,21 @@
+/* eslint-disable react/prop-types */
 import { ThemeProvider, CssBaseline, Container, Grid, Card, CardMedia, CardContent, Typography} from '@mui/material'; // Importa los componentes de Material-UI que necesitas
 import { data } from '../../../../data';
-import { useState, useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import '../../../../car.css'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { useCart } from './CardContext';
 
-// eslint-disable-next-line react/prop-types
 export const ProductList = ({ allProducts, setAllProducts, countProducts, setCountProducts, total, setTotal }) => {
 
-	const [shoppingCarProducts, setShoppingCarProducts] = useState(
-		window.localStorage.getItem("productList")
-	);
+	const { cart, updateCart } = useCart();
 
-	const setLocalStorage = (value) => {
-		try {
-			setShoppingCarProducts(...shoppingCarProducts, value)
-			window.localStorage.setItem("productList", value); 
-			console.log(window.localStorage.getItem("productList"));
-		} catch (error) {
-			console.error(error.message);
-		}
-	}
-	
+  useEffect(() => {}, [cart]);
+
+
 	const onAddProduct = (product) => {
-		// eslint-disable-next-line react/prop-types
-		setLocalStorage(product)
+		updateCart(product)
 		if (allProducts.find((item) => item.id === product.id)) {
-			// eslint-disable-next-line react/prop-types
 			const products = allProducts.map((item) =>
 				item.id === product.id
 					? { ...item, quantity: item.quantity + 1 }
@@ -35,7 +25,6 @@ export const ProductList = ({ allProducts, setAllProducts, countProducts, setCou
 			setCountProducts(countProducts + product.quantity);
 			return setAllProducts([...products]);
 		}
-
 		setTotal(total + product.price * product.quantity);
 		setCountProducts(countProducts + product.quantity);
 		setAllProducts([...allProducts, product]);
