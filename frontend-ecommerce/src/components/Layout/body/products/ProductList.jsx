@@ -3,11 +3,16 @@ import {
   ContainerPrincipal,
   ContainerCard,
   Card,
-  CardMedia
+  CardMedia,
+  Tiltle,
+  CardContent,
+  Price,
 } from "./StyledProductList";
 import { useState } from "react";
 import { data } from "../../../../data";
 import "../../../../car.css";
+import { GiShoppingBag } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 export const ProductList = ({
@@ -53,13 +58,21 @@ export const ProductList = ({
       <ContainerPrincipal>
         {data.map((product) => (
           <ContainerCard key={product.id}>
-            <Card onClick={() => onAddProduct(product)} >
-              <CardMedia src={product.img} alt={product.nameProduct} daata={product.nameProduct} />
-              {/* <CardContent>
+            <Card>
+            <Link to={"/infoProducts"}>
+
+              <CardMedia src={product.img} alt={product.nameProduct}/>
+            </Link>
+              <CardContent>
                 <Tiltle>{product.nameProduct}</Tiltle>
-                <Typography>Ref 5403/171/800.</Typography>
-                <Typography>${product.price}</Typography>
-              </CardContent> */}
+                <Price>
+                  ${product.price}
+                  <GiShoppingBag
+                    onClick={() => onAddProduct(product)}
+                    style={{}}
+                    />
+                </Price>
+              </CardContent>
             </Card>
           </ContainerCard>
         ))}
