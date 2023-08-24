@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Div, ContainerPrincipal, ContainerCard, Card, CardMedia, Tiltle, CardContent, Price, } from "./StyledProductList";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { data } from "../../../../data";
 import "../../../../car.css";
 import { GiShoppingBag } from "react-icons/gi";
@@ -9,7 +9,8 @@ import { useCart } from './CardContext';
 
 export const ProductList = ({ allProducts, setAllProducts, countProducts, setCountProducts, total, setTotal }) => {
 
-	const { cart, updateCart } = useCart();
+	const { cart, updateCart } = useCart([]);
+    
 
   useEffect(() => {}, [cart]);
 
