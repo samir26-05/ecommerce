@@ -1,24 +1,13 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../database.js";
-
-import { Size } from "./size.js";
-import { Brand } from "./brand.js";
-import { Category } from "./category_product.js";
-import { Section } from "./section.js";
-
-export const Products = sequelize.define("product", {
+import { talla } from "./talla.js";
+import { marca } from "./brands.js";
+import { categoria } from "./categoria.js";
+export const productos = sequelize.define("products", {
   product_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
-  },
-  section_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  category_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
   },
   name: {
     type: DataTypes.STRING,
@@ -29,12 +18,12 @@ export const Products = sequelize.define("product", {
       },
     },
   },
-  descripcion: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   sizes_id: {
     type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  descripcion: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
   id_brands: {
@@ -50,9 +39,8 @@ export const Products = sequelize.define("product", {
       },
     },
   },
-  
-  image: {
-    type: DataTypes.STRING(300),
+  Category_id: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
 });
@@ -60,32 +48,25 @@ export const Products = sequelize.define("product", {
 // -----relaciones------
 
 // realacion de talla y productos
-Products.belongsTo(Size, {
+productos.belongsTo(talla, {
   foreignKey: "sizes_id",
   allownull: false,
 });
-Size.hasMany(Products, {
+talla.hasMany(productos, {
   foreignKey: "sizes_id",
   allownull: false,
 });
 // relacion de marca y producto
-Products.belongsTo(Brand, {
+productos.belongsTo(marca, {
   foreignKey: "id_brands",
 });
-Brand.hasMany(Products, {
+marca.hasMany(productos, {
   foreignKey: "id_brands",
 });
 // Relacion de producto y categoria
-Products.belongsTo(Category, {
-  foreignKey: "category_id",
+productos.belongsTo(categoria, {
+  foreignKey: "Category_id",
 });
-Category.hasMany(Products, {
-  foreignKey: "category_id",
-});
-// Relacion de producto y seccion
-Products.belongsTo(Section, {
-  foreignKey: "section_id",
-});
-Section.hasMany(Products, {
-  foreignKey: "section_id",
+categoria.hasMany(productos, {
+  foreignKey: "Category_id",
 });
