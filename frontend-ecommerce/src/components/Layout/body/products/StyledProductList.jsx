@@ -22,7 +22,7 @@ export const ContainerPrincipal = styled.div`
 export const ContainerCard = styled.div`
   box-sizing: border-box;
   width: 20%;
-  margin: 3%;
+  margin: 1%;
 `;
 
 export const Card = styled.div`
