@@ -1,5 +1,6 @@
-import { Validusers,users } from "../../models/Login/users.js";
+import { users } from "../../models/Login/users.js";
 import { encryptPassword } from "../../libs/Bcryptjs.js";
+import { Validusers } from "../../schemas/login_register/UserRegister.js";
 
 export const getUsuarios = async (req, res) => {
   try {

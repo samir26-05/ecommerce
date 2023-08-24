@@ -2,8 +2,8 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../../database.js";
 import { talla } from "./talla.js";
 import { marca } from "./brands.js";
-import { categoria } from "./categoria.js";
-export const productos = sequelize.define("products", {
+import { category } from "./categoria.js";
+export const productos = sequelize.define("product", {
   product_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -12,11 +12,6 @@ export const productos = sequelize.define("products", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-    validate: {
-      notNull: {
-        msg: "por favor ingrese un nombre",
-      },
-    },
   },
   sizes_id: {
     type: DataTypes.INTEGER,
@@ -33,16 +28,13 @@ export const productos = sequelize.define("products", {
   price: {
     type: DataTypes.DOUBLE,
     allowNull: false,
-    validate: {
-      notNull: {
-        msg: "Debe ingresar un precio",
-      },
-    },
   },
-  Category_id: {
+  category_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+},{
+  tableName: 'product'
 });
 
 // -----relaciones------
@@ -64,9 +56,9 @@ marca.hasMany(productos, {
   foreignKey: "id_brands",
 });
 // Relacion de producto y categoria
-productos.belongsTo(categoria, {
-  foreignKey: "Category_id",
+productos.belongsTo(category, {
+  foreignKey: "category_id",
 });
-categoria.hasMany(productos, {
-  foreignKey: "Category_id",
+category.hasMany(productos, {
+  foreignKey: "category_id",
 });

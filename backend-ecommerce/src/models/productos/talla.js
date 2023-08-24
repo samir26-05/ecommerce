@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize} from "../../database.js";
 
-export const talla = sequelize.define("sizes",{
+export const talla = sequelize.define("size",{
     sizes_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -12,4 +12,6 @@ export const talla = sequelize.define("sizes",{
         type: DataTypes.STRING,
         allownull: false
     }
+},{
+    tableName: "size"
 })
