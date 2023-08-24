@@ -1,6 +1,6 @@
 import { DataTypes} from "sequelize";
 import { sequelize } from "../../database.js";
-export const marca = sequelize.define("brands",{
+export const marca = sequelize.define("brand",{
     id_brands: {
         type: DataTypes.INTEGER,
         primaryKey: true,
