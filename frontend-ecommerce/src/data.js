@@ -8,16 +8,16 @@ export const data = [
 	},
 	{
 		id: 2,
-		img: 'https://static.bershka.net/4/photos2/2023/I/0/1/p/3678/862/800/cbcd25a058450719226421932b824f89-3678862800_2_4_0.jpg',
-		nameProduct: 'Bolso de hombro tejido',
-		price: 12.99,
+		img: 'https://static.bershka.net/4/photos2/2023/I/0/2/p/2319/700/800/e4c736535285ee5f0f87f03b1d85b73b-2319700800_2_4_0.jpg',
+		nameProduct: 'Camiseta manga corta efecto lavado',
+		price: 17.99,
 		quantity: 1,
 	},
 	{
 		id: 3,
-		img: 'https://static.bershka.net/4/photos2/2023/I/1/1/p/1460/260/202/25e68aac18bd88b2ec24acb7f91d4d13-1460260202_2_4_0.jpg',
-		nameProduct: 'Zapatillas combinadas',
-		price: 25.99,
+		img: 'https://static.bershka.net/4/photos2/2023/I/0/2/p/9740/406/800/432efe2a2469a194690f101d5f417753-9740406800_1_1_0.jpg',
+		nameProduct: 'Riñonera técnica bolsillos',
+		price: 15.99,
 		quantity: 1,
 	},
 	{

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FlexRow } from "../../StyledMain";
 import "../../../car.css";
 import cesta from "../../../assets/Img/cesta.png";
 import { useCart } from "../body/products/CardContext";
@@ -23,7 +22,7 @@ export const Carrito = ({
   const { cart, updateCart } = useCart();
 
   useEffect(() => {
-    console.log(cart, '❤️❤️❤️');
+    console.log(cart, "❤️❤️❤️");
   }, [cart]);
 
   const onDeleteProduct = (product) => {
@@ -51,7 +50,7 @@ export const Carrito = ({
             strokeWidth="1.5"
             stroke={
               hover
-                ? "#000"
+                ? "#000000"
                 : "#fff" && pageUsed
                 ? "#000"
                 : color && pagePayment
@@ -89,53 +88,55 @@ export const Carrito = ({
                         {product.quantity}
                       </span>
 
-                      <div
-                        style={{
-                          display: FlexRow,
-                          justifyContent: "space-around",
-                          marginTop: 30,
-                          textAlign: "center",
-                        }}
+                      <div className="Infoon-product"
                       >
                         <p className="titulo-producto-carrito">
                           {product.nameProduct}
                         </p>
                         <span className="precio-producto-carrito">
-                          ${product.price}
+                          $ {product.price.toFixed(2)}
                         </span>
                       </div>
                     </div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="icon-close"
-                      onClick={() => onDeleteProduct(product)}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
+                    <button className="btndele">
+                      <svg
+                        viewBox="0 0 15 17.5"
+                        height="17.5"
+                        width="15"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon"
+                        onClick={() => onDeleteProduct(product)}
+                      >
+                        <path
+                          transform="translate(-2.5 -1.25)"
+                          d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
+                          id="Fill"
+                        ></path>
+                      </svg>
+                    </button>
                   </div>
                 ))}
               </div>
-
               <div className="cart-total">
                 <h3>Total:</h3>
-                <span className="total-pagar">${total}</span>
+                <span className="total-pagar">$ {total.toFixed(2)}</span>
               </div>
-              <Link to={"/payment"}>
-                <button className="btn-clear-all">Pagar</button>
-              </Link>
-
-              <button className="btn-clear-all" onClick={onCleanCart}>
-                Vaciar Carrito
-              </button>
-              <img src="" alt="" />
+              <div className="btns">
+                <Link to={"/payment"}>
+                  <button className="fancy pa" onClick={onCleanCart}>
+                    <span className="top-key"></span>
+                    <span className="text">Pagar</span>
+                    <span className="bottom-key-1"></span>
+                    <span className="bottom-key-2"></span>
+                  </button>
+                </Link>
+                <button className="fancy" onClick={onCleanCart}>
+                  <span className="top-key"></span>
+                  <span className="text">Vaciar Carrito</span>
+                  <span className="bottom-key-1"></span>
+                  <span className="bottom-key-2"></span>
+                </button>
+              </div>
             </>
           ) : (
             <>
@@ -150,9 +151,9 @@ export const Carrito = ({
               >
                 <img src={cesta} alt="" style={{ width: 200 }} />
                 <h3 className="cart-empty">El carrito está vacío</h3>
-                <h4>Aún no tienes compras en tienda</h4>
-                <span>
-                  Pero puedes hacer tu pedido online ¡y te lo mandamos a casa!
+                <h4 className="vacio">Aún no tienes compras en nuestra tienda</h4>
+                <span className="vacio">
+                  Pero puedes ver el catalogo ¡y te lo llevamos a casa!
                 </span>
                 <br />
               </div>
