@@ -22,7 +22,7 @@ export const Carrito = ({
   const { cart, updateCart } = useCart();
 
   useEffect(() => {
-    console.log(cart, "❤️❤️❤️");
+    console.log(cart, "❤️❤️❤️"); 
   }, [cart]);
 
   allProducts = {cart} 
