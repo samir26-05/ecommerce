@@ -19,13 +19,13 @@ export const Carrito = ({
 }) => {
   const [active, setActive] = useState(false);
 
-  //const { cart, updateCart } = useCart();
+  const { cart, updateCart } = useCart();
 
-  //useEffect(() => {
-  //  console.log(cart, "❤️❤️❤️");
-  //}, [cart]);
+  useEffect(() => {
+    console.log(cart, "❤️❤️❤️");
+  }, [cart]);
 
-  //allProducts = {cart} 
+  allProducts = {cart} 
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
 
