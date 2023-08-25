@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();
@@ -23,10 +24,8 @@ export const CartProvider = ({ children }) => {
   };
 
   const updateCart = (newCart) => {
-    if (!cart.some(item => item.id === newCart.id)) {
-      setCart(prevCart => [...prevCart, newCart]);
-      saveCartToLocalStorage([...cart, newCart]);
-    }
+    setCart(newCart);
+    saveCartToLocalStorage(newCart);
   };
 
   return (
