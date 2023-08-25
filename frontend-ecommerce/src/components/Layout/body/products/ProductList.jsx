@@ -53,8 +53,7 @@ export const ProductList = ({allProducts,setAllProducts,countProducts,setCountPr
         {data.map((product) => (
           <ContainerCard key={product.id}>
             <Card>
-            <Link to={"/infoProducts"}>
-
+            <Link to={"/InfoProducts"}>
               <CardMedia src={product.img} alt={product.nameProduct}/>
             </Link>
               <CardContent>

@@ -163,14 +163,6 @@ const Header = ({
           </Box>
         </Toolbar>
       </Container>
-
-      {/*  <ProductList
-        allProducts={allProducts}
-        setAllProducts={setAllProducts}
-        total={total}
-        setTotal={setTotal}
-        countProducts={countProducts}
-        setCountProducts={setCountProducts} /> */}
     </AppBar>
   );
 };
