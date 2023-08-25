@@ -20,7 +20,6 @@ export const Carrito = ({
   const countProducts = cart.reduce((count, product) => count + product.quantity, 0);
   const total = cart.reduce((total, product) => total + product.price * product.quantity, 0);
 
-  allProducts = {cart} 
   const onDeleteProduct = (product) => {
     const results = cart.filter((item) => item.id !== product.id);
     updateCart(results);
@@ -115,7 +114,7 @@ export const Carrito = ({
               </div>
               <div className="btns">
                 <Link to={"/payment"}>
-                  <button className="fancy pa" onClick={onCleanCart}>
+                  <button className="fancy pa">
                     <span className="top-key"></span>
                     <span className="text">Pagar</span>
                     <span className="bottom-key-1"></span>
