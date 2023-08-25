@@ -13,7 +13,7 @@ export const Span = styled.span`
 `;
 
 export const Btn = styled.button`
-  width: 85%;
+  width: 100%;
   font-size: 1.1rem;
   text-transform: uppercase;
   color: #fff;
@@ -46,6 +46,7 @@ export const SignInBtn = styled.div`
   :nth-child(2){
     color: #000
   }
+  
   `;
 
 export const Login_Register = styled.div`
@@ -59,4 +60,5 @@ export const Login_Register = styled.div`
     background-color: #000;
     color: #fff;
   }
+  
 `;

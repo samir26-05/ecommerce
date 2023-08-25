@@ -12,6 +12,8 @@ import { Carrito } from "./Carrito";
 import { useState, useEffect } from "react";
 import "./styled.css";
 import "../../../car.css";
+import axios from "axios";
+import { Link } from 'react-router-dom';
 
 const pages = ["Inicio", "Mujer", "Hombre"];
 
@@ -26,7 +28,7 @@ const Header = ({
   isUsedPayment,
   isUsedBody,
 }) => {
-  const handleCloseNavMenu = () => {};
+  const handleCloseNavMenu = () => { };
 
   const [hovered, setHovered] = useState(false);
 
@@ -55,12 +57,18 @@ const Header = ({
     }
   };
 
+  const [name, setName] = useState('')
+
   useEffect(() => {
+
     window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+
   }, []);
+
 
   return (
     <AppBar position="relative" style={{ background: "none" }}>
@@ -81,8 +89,8 @@ const Header = ({
             isUsedUser || isUsedPayment
               ? "#fff"
               : hovered
-              ? "#fff"
-              : headerColor,
+                ? "#fff"
+                : headerColor,
         }}
       >
         <Toolbar disableGutters>
@@ -114,23 +122,27 @@ const Header = ({
             sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
           >
             {pages.map((page) => (
-              <Button
-                className="ja whithoutOutline"
-                variant=""
+              <Link
+                to={page === "Inicio" ? "/" : page === "Hombre" ? "/section" : "/section" }
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ fontWeight: "bold", my: 1, margin: "0 15px" }}
                 style={{
-                  color:
-                    isUsedUser || isUsedPayment
-                      ? "#000"
-                      : hovered
+                  textDecoration: "none",
+                  color: isUsedUser || isUsedPayment
+                    ? "#000"
+                    : hovered
                       ? "#000"
                       : textColor,
                 }}
               >
-                {page}
-              </Button>
+                <Button
+                  className="ja whithoutOutline"
+                  variant=""
+                  sx={{ fontWeight: "bold", my: 1, margin: "0 15px" }}
+                >
+                  {page}
+                </Button>
+              </Link>
             ))}
           </Box>
 

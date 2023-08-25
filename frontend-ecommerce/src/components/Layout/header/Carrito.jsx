@@ -22,9 +22,10 @@ export const Carrito = ({
   const { cart, updateCart } = useCart();
 
   useEffect(() => {
-    console.log(cart, "❤️❤️❤️");
+    console.log(cart, "❤️❤️❤️"); 
   }, [cart]);
 
+  allProducts = {cart} 
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
 
