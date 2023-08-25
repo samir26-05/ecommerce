@@ -26,8 +26,8 @@ const Header = ({
   isUsedPayment,
   isUsedBody,
 }) => {
-  const handleCloseNavMenu = () => {};
 
+  const handleCloseNavMenu = () => {};
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {

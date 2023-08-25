@@ -19,12 +19,16 @@ export const Carrito = ({
   pagePayment,
 }) => {
   const [active, setActive] = useState(false);
-
+  
   const { cart, updateCart } = useCart();
-
+  
   useEffect(() => {
-    console.log(cart, '❤️❤️❤️');
+  // updateCart(0);
   }, [cart]);
+  allProducts = [cart];
+  countProducts = [cart.quantity]
+  total = [cart.price]
+
 
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
@@ -37,7 +41,7 @@ export const Carrito = ({
   const onCleanCart = () => {
     setAllProducts([]);
     setTotal(0);
-    setCountProducts(0);
+    updateCart(0);
   };
 
   return (
@@ -132,7 +136,7 @@ export const Carrito = ({
                 <button className="btn-clear-all">Pagar</button>
               </Link>
 
-              <button className="btn-clear-all" onClick={onCleanCart}>
+              <button className="btn-clear-all" onClick={onCleanCart} style={{marginTop:".8rem"}}>
                 Vaciar Carrito
               </button>
               <img src="" alt="" />

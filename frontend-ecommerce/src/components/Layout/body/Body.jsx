@@ -17,7 +17,7 @@ export default function Body() {
   const verifyEnter = () => {
     return true
   };
-
+  
   useEffect(() => {
     const trueEnter = verifyEnter();
     setUserEnter(trueEnter);
