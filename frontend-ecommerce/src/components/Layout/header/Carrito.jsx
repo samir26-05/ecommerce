@@ -26,6 +26,7 @@ export const Carrito = ({
     console.log(cart, '❤️❤️❤️');
   }, [cart]);
 
+  allProducts = {cart} 
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
 

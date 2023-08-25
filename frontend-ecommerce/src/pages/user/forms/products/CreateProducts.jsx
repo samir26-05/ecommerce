@@ -10,8 +10,10 @@ export default function FormProducts() {
 
   const section = ['Selecciona una opción', 'Damas', 'Caballero'];
   const categorie = ['Selecciona una opción', 'Camisas', 'Camisetas', 'Shorts', 'Pantalones', 'Zapatos', 'Zandalias', 'Accesorios'];
-  const size = ['Selecciona una opción', 'S', 'M', 'L', 'XL'];
-  const colors = ['Selecciona una opción', 'rojo', 'azul', 'verde', 'amarillo', 'naranja', 'morado', 'rosa', 'marrón', 'gris', 'negro', 'blanco',];
+  const size = ['Selecciona una opción', 'S', 'M', 'L', 'XL', '32', '34', '36', '38', '40', '42', '44', '46'];
+  const shoeSize = ['32', '34', '36', '38', '40', '42', '44', '46'];
+  const marcas = ['Selecciona una opción', "Nike", "Adidas", "Puma", "Converse", "Vans", "Reebok", "New Balance", "Under Armour", "Fila", "Balenciaga", "Gucci", "Prada", "Louis Vuitton", "Versace", "Chanel", "H&M", "Zara", "Forever 21", "Levi's", "Calvin Klein", "Tommy Hilfiger", "Ralph Lauren", "Guess", "Hugo Boss",];
+
 
   const handleImageChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -24,11 +26,8 @@ export default function FormProducts() {
 
   return (
     <Box component="form" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch', top: '20px' } }} noValidate autoComplete="off" >
-    
+
       <div>
-        <TextField id="outlined-multiline-flexible" label="Nombre*" multiline maxRows={3} />
-        <TextField id="outlined-multiline-flexible" label="Descripcion*" multiline maxRows={3} />
-        <TextField id="outlined-multiline-flexible" type="number" label="Precio*" multiline maxRows={3} />
         <TextField id="filled-select-currency-native" select label="Seccion" defaultValue="EUR" SelectProps={{ native: true, }} helperText="Please select your currency" variant="filled" >
           {
             section.map((seccion, index) => {
@@ -40,8 +39,6 @@ export default function FormProducts() {
             })
           }
         </TextField>
-      </div>
-      <div>
         <TextField id="filled-select-currency-native" select label="Categoria" defaultValue="EUR" SelectProps={{ native: true, }} helperText="Please select your currency" variant="filled" >
           {
             categorie.map((categoria, index) => {
@@ -53,25 +50,44 @@ export default function FormProducts() {
             })
           }
         </TextField>
+        <TextField id="outlined-multiline-flexible" label="Nombre*" multiline maxRows={3} />
+        <TextField id="outlined-multiline-flexible" label="Descripcion*" multiline maxRows={3} />
 
-        <TextField id="filled-select-currency-native" select label="Talla" defaultValue="EUR" SelectProps={{ native: true, }} helperText="Please select your currency" variant="filled" >
-          {
-            size.map((talla, index) => {
-              return (
-                <option key={index} value={talla}>
-                  {talla}
-                </option>
-              )
-            })
-          }
-        </TextField>
 
-        <TextField id="filled-select-currency-native" select label="Color" defaultValue="EUR" SelectProps={{ native: true, }} helperText="Please select your currency" variant="filled" >
+      </div>
+      <div>
+        <TextField id="outlined-multiline-flexible" type="number" label="Precio*" multiline maxRows={3} />
+
+        {categorie !== "Zapatos" ? (
+            <>
+              <TextField id="filled-select-currency-native" select label="Talla" defaultValue="EUR" SelectProps={{ native: true }} helperText="Please select your currency" variant="filled" >
+                {size.map((talla, index) => (
+                  <option key={index} value={talla}>
+                    {talla}
+                  </option>
+                ))}
+              </TextField>
+            </>
+          ) : (
+            <>
+              <TextField id="filled-select-currency-native" select label="Talla" defaultValue="EUR" SelectProps={{ native: true }} helperText="Please select your currency" variant="filled" >
+                {shoeSize.map((talla, index) => (
+                  <option key={index} value={talla}>
+                    {talla}
+                  </option>
+                ))}
+              </TextField>
+            </>
+          )
+        }
+
+
+        <TextField id="filled-select-currency-native" select label="Marca" defaultValue="EUR" SelectProps={{ native: true, }} helperText="Please select your currency" variant="filled" >
           {
-            colors.map((color, index) => {
+            marcas.map((marca, index) => {
               return (
-                <option key={index} value={color}>
-                  {color}
+                <option key={index} value={marca}>
+                  {marca}
                 </option>
               )
             })
