@@ -22,9 +22,13 @@ export const Carrito = ({
   
   const { cart, updateCart } = useCart();
   
-  useEffect(() => {}, [cart]);
+  useEffect(() => {
+  // updateCart(0);
+  }, [cart]);
   allProducts = [cart];
   countProducts = [cart.quantity]
+  total = [cart.price]
+
 
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
@@ -37,7 +41,7 @@ export const Carrito = ({
   const onCleanCart = () => {
     setAllProducts([]);
     setTotal(0);
-    updateCart([]);
+    updateCart(0);
   };
 
   return (

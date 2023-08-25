@@ -8,7 +8,6 @@ import "../header/styled.css";
 import "../../../car.css";
 import SectionsBody from "./Sections/SectionsBody";
 import Header from "../header/Header";
-import { useCart } from "./products/CardContext";
 
 export default function Body() {
   const [allProducts, setAllProducts] = useState([]);
