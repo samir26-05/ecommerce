@@ -53,16 +53,17 @@ export const ProductList = ({allProducts,setAllProducts,countProducts,setCountPr
         {data.map((product) => (
           <ContainerCard key={product.id}>
             <Card>
-            <Link to={"/InfoProducts"}>
+            <Link to={"/infoProducts"}>
+
               <CardMedia src={product.img} alt={product.nameProduct}/>
             </Link>
               <CardContent>
                 <Tiltle>{product.nameProduct}</Tiltle>
                 <Price>
-                  $ {product.price}
+                  ${product.price}
                   <GiShoppingBag
                     onClick={() => onAddProduct(product)}
-                    size={"10%"}
+                    style={{}}
                     />
                 </Price>
               </CardContent>

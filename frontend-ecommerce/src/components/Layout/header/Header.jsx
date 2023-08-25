@@ -28,8 +28,12 @@ const Header = ({
   isUsedPayment,
   isUsedBody,
 }) => {
+<<<<<<< HEAD
   const handleCloseNavMenu = () => { };
+=======
+>>>>>>> 35f9e801202bc358e140a6bbeb5d95b922f3e3a0
 
+  const handleCloseNavMenu = () => {};
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
