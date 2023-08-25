@@ -13,7 +13,7 @@ const Brand = ({ images }) => {
     slidesToShow: 4,
     slidesToScroll: 4,
     autoplay: true,
-    autoplaySpeed: 1000,
+    autoplaySpeed: 2000,
     cssEase: 'linear',
   };
 
