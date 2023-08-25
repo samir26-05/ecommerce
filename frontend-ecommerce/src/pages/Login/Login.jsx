@@ -95,7 +95,7 @@ export default function LoginDrawer({ hover, color, pageUsed, pagePayment }) {
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-function BasicTextFields({ Placeholder, onChange, value, type, name , required, className }) {
+function BasicTextFields({ Placeholder, onChange, value, type, name , required, className, error, helperText }) {
   return (
     <Box
       component="form"
@@ -114,6 +114,8 @@ function BasicTextFields({ Placeholder, onChange, value, type, name , required, 
         type= {type}
         required = {required}
         className= {className}
+        error = {error}
+        helperText = {helperText}
         variant="outlined"
       />
     </Box>
@@ -132,6 +134,7 @@ export const Login = () => {
 
   const Add = async(event) => {
   event.preventDefault();
+
     try {
 
     const response = await axios.post("http://localhost:3000/login",{
@@ -139,13 +142,17 @@ export const Login = () => {
       contraseña:contraseña
     })
 
-    navigate('/user')
+    if(response.status === 200){
+      alert(response.data.message );
+      navigate('/user')
 
-/*     alert(response.data.message ); */
+    } else {
+      setErrorMessage(response.data.message);
+    }
 
-    
     } catch (error) {
-      console.log(error.data.message)
+      console.log("Error en la solicitud: ",error);
+      setErrorMessage('Ocurrio un error en la solicitud. ');
      
     }
   }
@@ -201,51 +208,104 @@ export const Login = () => {
 
 export const Register = () => {
 
-  const [register,setRegister] = useState({
+  let navigate = useNavigate();
+
+  const [register, setRegister] = useState({
     email: "",
     password_hash: "",
     first_name: "",
     last_name: "",
     address: "",
     phone_number: ""
-  })
+  });
+
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+    phoneNumber: ""
+  });
+
   const handleInputChange = (campo, valor) => {
     setRegister((datosPrevios) => ({ ...datosPrevios, [campo]: valor }));
   };
-  console.log(register)
-  
-  const add = async (event) =>{
-    event.preventDefault();
-    try {
-        const response = await axios.post("http://localhost:3000/users/register",{
-            ...register
-        });
-        console.log(response);
-    } catch (error) {
-        console.log(error);
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!validateEmail(register.email)) {
+      newErrors.email = "Ingrese un correo electrónico válido.";
     }
-}
+    if (!validatePassword(register.password_hash)) {
+      newErrors.password = "La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula y un número.";
+    }
+    if (!validatePhoneNumber(register.phone_number)) {
+      newErrors.phoneNumber = "El número de teléfono debe tener exactamente 10 dígitos numéricos.";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const add = async (event) => {
+    event.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:3000/users/register", {
+        ...register
+      });
+      if (response.status === 200) {
+        navigate('/user');
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error('Error en el registro:', error);
+      alert("Ocurrió un error durante el registro. Por favor, inténtelo de nuevo más tarde.");
+    }
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return passwordRegex.test(password);
+  };
+
+  const validatePhoneNumber = (phoneNumber) => {
+    const phoneNumberRegex = /^\d{10}$/;
+    return phoneNumberRegex.test(phoneNumber);
+  };
+
 
   return (
     <FlexDirCol style={{ gap: ".5rem" }}>
     <form onSubmit={add} >
         <BasicTextFields
-          className="controls"
-          type="text"
-          name="nombre"
-          Placeholder="Ingrese su correo"
-          required
-          onChange={(event) => {
-            handleInputChange("email",event.target.value);
-          }}
+         className="controls"
+         type="text"
+         name="email"
+         label="Correo electrónico"
+         Placeholder="Ingrese su correo"
+         required
+         error={Boolean(errors.email)}
+         helperText={errors.email}
+         onChange={(event) => {
+           handleInputChange("email", event.target.value);
+         }}
         />
         <BasicTextFields
           className="controls"
           type="password"
-          name="email"
+          name="password_hash"
           id="email"
           Placeholder="Ingrese su contraseña"
           required
+          error={Boolean(errors.password)}
+         helperText={errors.password}
           onChange={(event) => {
             handleInputChange("password_hash",event.target.value);
           }}
@@ -253,7 +313,7 @@ export const Register = () => {
         <BasicTextFields
           className="controls"
           type="text"
-          name="contraseña"
+          name="first_name"
           id="contraseña"
           Placeholder="Ingrese su nombre"
           required
@@ -275,9 +335,9 @@ export const Register = () => {
         <BasicTextFields
           className="controls"
           type="text"
-          name="contraseña"
+          name="address"
           id="contraseña"
-          Placeholder="Ingrese su dirrecion"
+          Placeholder="Ingrese su direccion"
           required
           onChange={(event) => {
             handleInputChange("address",event.target.value);
@@ -286,10 +346,12 @@ export const Register = () => {
         <BasicTextFields
           className="controls"
           type="text"
-          name="contraseña"
+          name="phone_number"
           id="contraseña"
-          Placeholder="Ingrse su numero de telefono"
+          Placeholder="Ingrese su numero de telefono"
           required
+          error={Boolean(errors.phoneNumber)}
+          helperText={errors.phoneNumber}
           onChange={(event) => {
             handleInputChange("phone_number",event.target.value);
           }}
