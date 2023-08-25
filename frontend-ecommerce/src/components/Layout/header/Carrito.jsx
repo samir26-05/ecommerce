@@ -22,10 +22,10 @@ export const Carrito = ({
   const { cart, updateCart } = useCart();
 
   useEffect(() => {
-    console.log(cart, "❤️❤️❤️"); 
+    console.log(cart, "❤️❤️❤️");
   }, [cart]);
 
-  allProducts = {cart} 
+  allProducts = { cart };
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
 
@@ -89,8 +89,7 @@ export const Carrito = ({
                         {product.quantity}
                       </span>
 
-                      <div className="Infoon-product"
-                      >
+                      <div className="Infoon-product">
                         <p className="titulo-producto-carrito">
                           {product.nameProduct}
                         </p>
@@ -152,7 +151,9 @@ export const Carrito = ({
               >
                 <img src={cesta} alt="" style={{ width: 200 }} />
                 <h3 className="cart-empty">El carrito está vacío</h3>
-                <h4 className="vacio">Aún no tienes compras en nuestra tienda</h4>
+                <h4 className="vacio">
+                  Aún no tienes compras en nuestra tienda
+                </h4>
                 <span className="vacio">
                   Pero puedes ver el catalogo ¡y te lo llevamos a casa!
                 </span>

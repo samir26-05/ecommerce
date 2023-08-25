@@ -18,8 +18,9 @@ export const ContainerFather = styled.div`
 export const DivTitle = styled.div`
     height: auto;
     width: auto;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    letter-spacing: 2px;
 `
 
 export const ContainerH = styled.div`
@@ -27,11 +28,11 @@ export const ContainerH = styled.div`
     width: 70%;
     height: 100%;
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+    letter-spacing: 2px;
 `   
 
  export const DivCategory = styled.div`
-    
     width: 100%;
     height: 100%;
     font-size: 18px;
@@ -56,6 +57,12 @@ export const Card = styled.div`
     display: flex;
     flex-wrap: wrap;
     cursor: pointer;
-    
+    transition: all 0.5s;
+    :hover{
+        border: 1px  solid black;
+    }
+    :active {
+    transform: scale(0.95);
+  }
 
 `
