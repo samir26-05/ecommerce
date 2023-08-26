@@ -62,7 +62,7 @@ export const ProductList = ({allProducts,setAllProducts,countProducts,setCountPr
                   $ {product.price}
                   <GiShoppingBag
                     onClick={() => onAddProduct(product)}
-                    style={{}}
+                    size={"10%"}
                     />
                 </Price>
               </CardContent>
