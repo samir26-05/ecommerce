@@ -2,8 +2,7 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { Button, TextField } from '@mui/material';
 import { PiUploadThin } from 'react-icons/pi'
-import NavHorizontal from '../navs/NavHorizontal';
-import '../../../components/Layout/header/styled.css'
+import '../../../../components/Layout/header/styled.css'
 
 export default function FormProducts() {
 
@@ -11,8 +10,10 @@ export default function FormProducts() {
 
   const section = ['Selecciona una opción', 'Damas', 'Caballero'];
   const categorie = ['Selecciona una opción', 'Camisas', 'Camisetas', 'Shorts', 'Pantalones', 'Zapatos', 'Zandalias', 'Accesorios'];
-  const size = ['Selecciona una opción', 'S', 'M', 'L', 'XL'];
-  const colors = ['Selecciona una opción', 'rojo','azul','verde','amarillo','naranja','morado','rosa','marrón','gris','negro','blanco',];
+  const size = ['Selecciona una opción', 'S', 'M', 'L', 'XL', '32', '34', '36', '38', '40', '42', '44', '46'];
+  const shoeSize = ['32', '34', '36', '38', '40', '42', '44', '46'];
+  const marcas = ['Selecciona una opción', "Nike", "Adidas", "Puma", "Converse", "Vans", "Reebok", "New Balance", "Under Armour", "Fila", "Balenciaga", "Gucci", "Prada", "Louis Vuitton", "Versace", "Chanel", "H&M", "Zara", "Forever 21", "Levi's", "Calvin Klein", "Tommy Hilfiger", "Ralph Lauren", "Guess", "Hugo Boss",];
+
 
   const handleImageChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -24,60 +25,70 @@ export default function FormProducts() {
   };
 
   return (
-
-    
     <Box component="form" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch', top: '20px' } }} noValidate autoComplete="off" >
 
-    <NavHorizontal type="products" />
-      <h3 style={{ paddingButton: "50px", left: 570 }}>AGREGAR NUEVO PRODUCTO AL COMERCIO</h3>
       <div>
-        <TextField id="outlined-multiline-flexible" label="Nombre*" multiline maxRows={3} />
-        <TextField id="outlined-multiline-flexible" label="Descripcion*" multiline maxRows={3} />
-        <TextField id="outlined-multiline-flexible" type="number" label="Precio*" multiline maxRows={3} />
         <TextField id="filled-select-currency-native" select label="Seccion" defaultValue="EUR" SelectProps={{ native: true, }} helperText="Please select your currency" variant="filled" >
           {
             section.map((seccion, index) => {
               return (
-                  <option key={index} value={seccion}>
-                    {seccion}
-                  </option>
+                <option key={index} value={seccion}>
+                  {seccion}
+                </option>
               )
             })
           }
         </TextField>
-      </div>
-      <div>
         <TextField id="filled-select-currency-native" select label="Categoria" defaultValue="EUR" SelectProps={{ native: true, }} helperText="Please select your currency" variant="filled" >
-        {
+          {
             categorie.map((categoria, index) => {
               return (
-                  <option key={index} value={categoria}>
-                    {categoria}
-                  </option>
+                <option key={index} value={categoria}>
+                  {categoria}
+                </option>
               )
             })
           }
         </TextField>
+        <TextField id="outlined-multiline-flexible" label="Nombre*" multiline maxRows={3} />
+        <TextField id="outlined-multiline-flexible" label="Descripcion*" multiline maxRows={3} />
 
-        <TextField id="filled-select-currency-native" select label="Talla" defaultValue="EUR" SelectProps={{ native: true, }} helperText="Please select your currency" variant="filled" >
-        {
-            size.map((talla, index) => {
-              return (
+
+      </div>
+      <div>
+        <TextField id="outlined-multiline-flexible" type="number" label="Precio*" multiline maxRows={3} />
+
+        {categorie !== "Zapatos" ? (
+            <>
+              <TextField id="filled-select-currency-native" select label="Talla" defaultValue="EUR" SelectProps={{ native: true }} helperText="Please select your currency" variant="filled" >
+                {size.map((talla, index) => (
                   <option key={index} value={talla}>
                     {talla}
                   </option>
-              )
-            })
-          }
-        </TextField>
-
-        <TextField id="filled-select-currency-native" select label="Color" defaultValue="EUR" SelectProps={{ native: true, }} helperText="Please select your currency" variant="filled" >
-        {
-            colors.map((color, index) => {
-              return (
-                  <option key={index} value={color}>
-                    {color}
+                ))}
+              </TextField>
+            </>
+          ) : (
+            <>
+              <TextField id="filled-select-currency-native" select label="Talla" defaultValue="EUR" SelectProps={{ native: true }} helperText="Please select your currency" variant="filled" >
+                {shoeSize.map((talla, index) => (
+                  <option key={index} value={talla}>
+                    {talla}
                   </option>
+                ))}
+              </TextField>
+            </>
+          )
+        }
+
+
+        <TextField id="filled-select-currency-native" select label="Marca" defaultValue="EUR" SelectProps={{ native: true, }} helperText="Please select your currency" variant="filled" >
+          {
+            marcas.map((marca, index) => {
+              return (
+                <option key={index} value={marca}>
+                  {marca}
+                </option>
               )
             })
           }
@@ -89,7 +100,7 @@ export default function FormProducts() {
       <div style={{ display: "flex", flexDirection: "row" }}>
         <input accept="image/*" style={{ display: 'none' }} id="image-input" type="file" onChange={handleImageChange} />
         <label htmlFor="image-input" style={{ color: "black" }}>
-          <Button variant="outline" component="span" style={{ backgroundColor: "#ffffff", marginTop: "45px" }}>
+          <Button variant="outline" className='whithoutOutline' component="span" style={{ backgroundColor: "#ffffff", marginTop: "45px" }}>
             Cargar imagen <PiUploadThin />
           </Button>
         </label>

@@ -26,7 +26,7 @@ const UserPage = () => {
           <NavVertical/>
         <Footer/>
     </Div>
-   );
+  );
 }
- 
+
 export default UserPage;

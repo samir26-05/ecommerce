@@ -59,8 +59,9 @@ function DemoAutoPlay() {
         <div style={{ ...styles.slide, ...styles.slide2 }}>{/* Aqui va texto */}</div>
         <div style={{ ...styles.slide, ...styles.slide3 }}>{/* Aqui va texto */}</div>
       </AutoPlaySwipeableViews>
-      <Pagination dots={3} index={index} onChangeIndex={handleChangeIndex} />
-    </div>
+      {/* Botones Del scroll */}
+{/*       <Pagination dots={3} index={index} onChangeIndex={handleChangeIndex} />
+ */}    </div>
   );
 }
 

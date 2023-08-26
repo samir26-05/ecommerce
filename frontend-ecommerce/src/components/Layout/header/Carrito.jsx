@@ -1,42 +1,32 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../../car.css";
 import cesta from "../../../assets/Img/cesta.png";
 import { useCart } from "../body/products/CardContext";
 
 export const Carrito = ({
-  allProducts,
-  setAllProducts,
-  total,
-  countProducts,
-  setCountProducts,
-  setTotal,
-  color,
   hover,
   pageUsed,
   pagePayment,
+  color
 }) => {
+  
   const [active, setActive] = useState(false);
-
+  
   const { cart, updateCart } = useCart();
 
-  useEffect(() => {
-    console.log(cart, "❤️❤️❤️");
-  }, [cart]);
+  const allProducts = cart;
+  const countProducts = cart.reduce((count, product) => count + product.quantity, 0);
+  const total = cart.reduce((total, product) => total + product.price * product.quantity, 0);
 
   const onDeleteProduct = (product) => {
-    const results = allProducts.filter((item) => item.id !== product.id);
-
-    setTotal(total - product.price * product.quantity);
-    setCountProducts(countProducts - product.quantity);
-    setAllProducts(results);
+    const results = cart.filter((item) => item.id !== product.id);
+    updateCart(results);
   };
 
   const onCleanCart = () => {
-    setAllProducts([]);
-    setTotal(0);
-    setCountProducts(0);
+    updateCart([]);
   };
 
   return (
@@ -57,6 +47,7 @@ export const Carrito = ({
                 ? "#000"
                 : color
             }
+                
             className="icon-cart"
           >
             <path
@@ -123,7 +114,7 @@ export const Carrito = ({
               </div>
               <div className="btns">
                 <Link to={"/payment"}>
-                  <button className="fancy pa" onClick={onCleanCart}>
+                  <button className="fancy pa">
                     <span className="top-key"></span>
                     <span className="text">Pagar</span>
                     <span className="bottom-key-1"></span>

@@ -8,6 +8,8 @@ import "../header/styled.css";
 import "../../../car.css";
 import SectionsBody from "./Sections/SectionsBody";
 import Header from "../header/Header";
+import IndexCategory from "./Category/IndexCategory";
+import AppBrand from "./BrandBody/AppBrand";
 
 export default function Body() {
   const [allProducts, setAllProducts] = useState([]);
@@ -17,7 +19,7 @@ export default function Body() {
   const verifyEnter = () => {
     return true
   };
-
+  
   useEffect(() => {
     const trueEnter = verifyEnter();
     setUserEnter(trueEnter);
@@ -40,7 +42,7 @@ export default function Body() {
         />
         <Div>
           <DemoAutoPlay />
-
+          <IndexCategory></IndexCategory>
           <ProductList
             allProducts={allProducts}
             setAllProducts={setAllProducts}
@@ -50,6 +52,7 @@ export default function Body() {
             setCountProducts={setCountProducts}
           />
           <SectionsBody />
+          <AppBrand></AppBrand>
           <Footer />
         </Div>
       </AppBar>
