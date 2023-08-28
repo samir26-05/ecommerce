@@ -26,6 +26,7 @@ const InfoProducts = () => {
     return <p>Producto no encontrado</p>;
   }
   
+  
   const [userEnterUser, setUserEnterUser] = useState(false);
     const verifyEnter = () => {
         return true
