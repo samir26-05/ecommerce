@@ -4,6 +4,18 @@ import "../../../../car.css";
 import { GiShoppingBag } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { useCart } from './CardContext';
+export const onAddProduct = (product) => {
+  const updatedCart = [...cart];
+  const existingProduct = updatedCart.find(item => item.id === product.id);
+
+  if (existingProduct) {
+    existingProduct.quantity++;
+  } else {
+    updatedCart.push({ ...product, quantity: 1 });
+  }
+
+  updateCart(updatedCart);
+};
 
 export const ProductList = () => {
   const { cart, updateCart } = useCart();
@@ -27,7 +39,7 @@ export const ProductList = () => {
         {data.map((product) => (
           <ContainerCard key={product.id}>
             <Card>
-            <Link to={"/InfoProducts"}>
+            <Link to={`/InfoProducts/${product.id}`}>
               <CardMedia src={product.img} alt={product.nameProduct}/>
             </Link>
               <CardContent>
@@ -37,7 +49,6 @@ export const ProductList = () => {
                   <GiShoppingBag
                     onClick={() => onAddProduct(product)}
                     size={"10%"}
-                    
                     />
                 </Price>
               </CardContent>
