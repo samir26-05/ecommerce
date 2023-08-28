@@ -1,11 +1,14 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
+import { useCart } from '../../../components/Layout/body/products/CardContext';
 
-const products = [
+
+/* const products = [
   {
     name: 'Product 1',
     desc: 'A nice thing',
@@ -27,7 +30,7 @@ const products = [
     price: '$14.11',
   },
   { name: 'Shipping', desc: '', price: 'Free' },
-];
+]; */
 const addresses = ['Calle', '1 de 2 que hay en el barrio', 'Mesolandia', 'Malambo', 'ATLCO'];
 const payments = [
   { name: 'Tipo tarjeta', detail: 'Visa' },
@@ -37,6 +40,10 @@ const payments = [
 ];
 
 export default function Review() {
+  const { cart, updateCart } = useCart();
+
+  const products = [...cart]
+  console.log(products);
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -44,15 +51,15 @@ export default function Review() {
       </Typography>
       <List disablePadding>
         {products.map((product) => (
-          <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
+          <ListItem key={product.nameProduct} sx={{ py: 1, px: 0 }}>
+            <ListItemText primary={product.nameProduct} secondary={`x ${product.quantity}`} />
+            <Typography variant="body2">{product.price * product.quantity}</Typography>
           </ListItem>
         ))}
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
-          <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            $34.06
+          <Typography variant="subtitle1" sx={{ fontWeight: 700, flexDirection:"column", display:"flex" }}>
+          
           </Typography>
         </ListItem>
       </List>

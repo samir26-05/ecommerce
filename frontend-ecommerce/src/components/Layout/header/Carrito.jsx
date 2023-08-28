@@ -17,8 +17,8 @@ export const Carrito = ({
   const { cart, updateCart } = useCart();
 
   const allProducts = cart;
-  const countProducts = cart.reduce((count, product) => count + product.quantity, 0);
-  const total = cart.reduce((total, product) => total + product.price * product.quantity, 0);
+  const countProducts = Array.isArray(cart) ? cart.reduce((count, product) => count + product.quantity, 0) : 0;
+  const total = Array.isArray(cart) ? cart.reduce((total, product) => total + product.price * product.quantity, 0) : 0;
 
   const onDeleteProduct = (product) => {
     const results = cart.filter((item) => item.id !== product.id);
