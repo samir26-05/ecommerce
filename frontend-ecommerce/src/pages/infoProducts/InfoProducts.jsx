@@ -25,7 +25,6 @@ const InfoProducts = () => {
   if (!product) {
     return <p>Producto no encontrado</p>;
   }
-
   
   const [userEnterUser, setUserEnterUser] = useState(false);
     const verifyEnter = () => {
@@ -68,6 +67,8 @@ const InfoProducts = () => {
               </Colores>
             ))}
           </ColorProducts>
+
+
           <TitleSize>Selecciona talla</TitleSize>
           <Sizes>
             {product.talla.map((talla, index) => (
@@ -82,7 +83,7 @@ const InfoProducts = () => {
                 {talla}
               </Size>
             ))}
-          </Sizes>
+          </Sizes>   
           <ButtonBuys>
             <Buys >Añadir A La Cesta</Buys>
           </ButtonBuys>
