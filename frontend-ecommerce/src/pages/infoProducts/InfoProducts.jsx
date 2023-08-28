@@ -4,7 +4,7 @@ import {
   BoxMain,
   Section1,
   Section2,
-  Video,
+  Image,
   Title,
   Reference,
   Price,
@@ -14,15 +14,20 @@ import {
   Size,
   ColorProducts,
   Buys,
-} from "../infoProducts/styleProducts";
+} from "./styleProducts";
 import Header from "../../components/Layout/header/Header";
 import { useState, useEffect } from "react";
-
-const InfoProducts = () => {
-  const tallas = ["XS", "S", "M", "L", "XL"];
-
+import { data } from "../../data"
+import { useParams } from "react-router-dom";
+const InfoProducts = () => { 
+  const { id} = useParams();
+  const product = data.find((item) => item.id === parseInt(id, 10));
+  if (!product) {
+    return <p>Producto no encontrado</p>;
+  }
+  
+  
   const [userEnterUser, setUserEnterUser] = useState(false);
-
     const verifyEnter = () => {
         return true
     };
@@ -36,26 +41,6 @@ const InfoProducts = () => {
         };
     }, []);
 
-  const Contenido = [
-    "https://static.bershka.net/4/photos2/2023/I/M/1/p/0000/000/058/0000000058_4_2_1.mp4",
-  ];
-
-  const Img = [
-    {
-      name: "hola1",
-      img: "https://static.bershka.net/4/photos2/2023/I/0/1/p/5986/335/432/60d0026656e8bf9c4ec7ac2dfb278caf-5986335432_2_4_0.jpg?imwidth=124&impolicy=bershka-itxhigh&imformat=generic",
-    },
-    {
-      name: "hola2",
-      img: "https://static.bershka.net/4/photos2/2023/I/0/1/p/5986/335/800/ae27735a8d56b45b6b2d7bc66027dd99-5986335800_2_4_0.jpg?imwidth=124&impolicy=bershka-itxhigh&imformat=generic",
-    },
-  ];
-
-  const TitleProduct = "Falda denim midi confort";
-
-  const ReferenceProduct = "Ref 1466/260/202";
-
-  const PriceProduct = "35,99 €";
 
   const [selectedSize, setSelectedSize] = useState(null);
   const handleSizeClick = (index) => {
@@ -71,20 +56,23 @@ const InfoProducts = () => {
       <Header isUsedUser={userEnterUser}/>
       <BoxMain >
         <Section1>
-          <Video loop autoPlay src={Contenido}></Video>
+          <Image src={product.img} alt={product.nameProduct}></Image>
         </Section1>
         <Section2>
-          <Title>{TitleProduct}</Title>
-          <Reference>{ReferenceProduct}</Reference>
-          <Price>{PriceProduct}</Price>
+          <Title>{product.nameProduct}</Title>
+          <Reference>{product.id}</Reference>
+          <Price>{product.price}</Price>
           <ColorProducts>
-            {Img.map((img, index) => (
-              <Colores key={index} src={img.img} alt={img.name} />
+            {product.color.map((img, index) => (
+              <Colores key={index} src={img.imagen} alt={img.color}>
+              </Colores>
             ))}
           </ColorProducts>
+
+
           <TitleSize>Selecciona talla</TitleSize>
           <Sizes>
-            {tallas.map((talla, index) => (
+            {product.talla.map((talla, index) => (
               <Size
                 style={{
                   backgroundColor: selectedSize === index ? "black" : "white",
@@ -96,9 +84,9 @@ const InfoProducts = () => {
                 {talla}
               </Size>
             ))}
-          </Sizes>
+          </Sizes>   
           <ButtonBuys>
-            <Buys>Añadir A La Cesta</Buys>
+            <Buys >Añadir A La Cesta</Buys>
           </ButtonBuys>
         </Section2>
       </BoxMain>

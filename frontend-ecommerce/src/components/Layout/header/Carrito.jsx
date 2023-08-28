@@ -22,9 +22,9 @@ export const Carrito = ({
 
   const { cart, updateCart } = useCart();
 
-  useEffect(() => {
-    console.log(cart, '❤️❤️❤️');
-  }, [cart]);
+  const allProducts = cart;
+  const countProducts = Array.isArray(cart) ? cart.reduce((count, product) => count + product.quantity, 0) : 0;
+  const total = Array.isArray(cart) ? cart.reduce((total, product) => total + product.price * product.quantity, 0) : 0;
 
   const onDeleteProduct = (product) => {
     const results = allProducts.filter((item) => item.id !== product.id);
@@ -126,16 +126,24 @@ export const Carrito = ({
 
               <div className="cart-total">
                 <h3>Total:</h3>
-                <span className="total-pagar">${total}</span>
+                <span className="total-pagar">$ {total.toFixed(2)}</span>
               </div>
-              <Link to={"/payment"}>
-                <button className="btn-clear-all">Pagar</button>
-              </Link>
-
-              <button className="btn-clear-all" onClick={onCleanCart}>
-                Vaciar Carrito
-              </button>
-              <img src="" alt="" />
+              <div className="btns">
+                <Link to={"/payment"}>
+                  <button className="fancy pa">
+                    <span className="top-key"></span>
+                    <span className="text">Pagar</span>
+                    <span className="bottom-key-1"></span>
+                    <span className="bottom-key-2"></span>
+                  </button>
+                </Link>
+                <button className="fancy" onClick={onCleanCart}>
+                  <span className="top-key"></span>
+                  <span className="text">Vaciar Carrito</span>
+                  <span className="bottom-key-1"></span>
+                  <span className="bottom-key-2"></span>
+                </button>
+              </div>
             </>
           ) : (
             <>
