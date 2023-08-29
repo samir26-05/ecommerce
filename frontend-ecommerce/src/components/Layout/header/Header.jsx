@@ -10,7 +10,6 @@ import { Carrito } from "./Carrito";
 import { useState, useEffect } from "react";
 import "./header.css";
 import "./car.css";
-import axios from "axios";
 import { Link } from 'react-router-dom';
 
 const pages = ["Inicio", "Mujer", "Hombre"];
@@ -27,7 +26,7 @@ const Header = ({
   isUsedBody,
 }) => {
 
-  const handleCloseNavMenu = () => {};
+  const handleCloseNavMenu = () => { };
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -55,7 +54,6 @@ const Header = ({
     }
   };
 
-  const [name, setName] = useState('')
 
   useEffect(() => {
 
@@ -121,7 +119,7 @@ const Header = ({
           >
             {pages.map((page) => (
               <Link
-                to={page === "Inicio" ? "/" : page === "Hombre" ? "/section" : "/section" }
+                to={page === "Inicio" ? "/" : page === "Hombre" ? "/section" : "/section"}
                 key={page}
                 onClick={handleCloseNavMenu}
                 style={{
@@ -173,14 +171,6 @@ const Header = ({
           </Box>
         </Toolbar>
       </Container>
-
-      {/*  <ProductList
-        allProducts={allProducts}
-        setAllProducts={setAllProducts}
-        total={total}
-        setTotal={setTotal}
-        countProducts={countProducts}
-        setCountProducts={setCountProducts} /> */}
     </AppBar>
   );
 };
