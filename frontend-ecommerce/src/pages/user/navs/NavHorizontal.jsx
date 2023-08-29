@@ -6,7 +6,7 @@ import bgr from '../../../assets/Img/bgr.png'
 import { Link } from 'react-router-dom';
 import FormProducts from '../forms/products/CreateProducts';
 import StockProducts from '../forms/products/StockProducts';
-import '../../../components/Layout/header/styled.css'
+import '../../../components/Layout/header/header.css'
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;

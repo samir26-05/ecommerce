@@ -1,15 +1,22 @@
-import { Div } from "./styled";
-import Footer from "../footer/Footer";
-import DemoAutoPlay from "./carrusel/DemoAutoPlay";
 import { useState, useEffect } from "react";
+/* material ui */
 import AppBar from "@mui/material/AppBar";
+
+/* components */
+import DemoAutoPlay from "./carrusel/DemoAutoPlay";
 import { ProductList } from "./products/ProductList";
-import "../header/styled.css";
-import "../../../car.css";
 import SectionsBody from "./Sections/SectionsBody";
-import Header from "../header/Header";
 import IndexCategory from "./Category/IndexCategory";
 import AppBrand from "./BrandBody/AppBrand";
+
+import Header from "../header/Header";
+import Footer from "../footer/Footer";
+
+{/* styles */}
+import { Div } from "./styled";
+import "../header/header.css";
+import "../header/car.css";
+
 
 export default function Body() {
   const [allProducts, setAllProducts] = useState([]);

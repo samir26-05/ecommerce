@@ -7,11 +7,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { Carrito } from "./Carrito";
-/* import { ProductList } from "./ProductList"; 
- import { CardProduct } from "../body/card/CardProduct"; */
 import { useState, useEffect } from "react";
-import "./styled.css";
-import "../../../car.css";
+import "./header.css";
+import "./car.css";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 

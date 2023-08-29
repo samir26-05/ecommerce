@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FlexRow } from "../../StyledMain";
-import "../../../car.css";
+import "./car.css";
 import cesta from "../../../assets/Img/cesta.png";
 import { useCart } from "../body/products/CardContext";
 
@@ -16,9 +16,12 @@ export const Carrito = ({
   const [active, setActive] = useState(false);
   
   const { cart, updateCart } = useCart();
-  const allProducts = cart;
-  const countProducts = cart.reduce((count, product) => count + product.quantity, 0);
-  const total = cart.reduce((total, product) => total + product.price * product.quantity, 0);
+
+
+  const allProducts = [1,123,'asjfnajsfa'];
+  const countProducts = Array.isArray(cart) ? cart.reduce((count, product) => count + product.quantity, 0) : 0;
+  const total = Array.isArray(cart) ? cart.reduce((total, product) => total + product.price * product.quantity, 0) : 0;
+  
 
   const onDeleteProduct = (product) => {
     const results = cart.filter((item) => item.id !== product.id);
@@ -116,24 +119,16 @@ export const Carrito = ({
 
               <div className="cart-total">
                 <h3>Total:</h3>
-                <span className="total-pagar">$ {total.toFixed(2)}</span>
+                <span className="total-pagar">${total.toFixed(2)}</span>
               </div>
-              <div className="btns">
-                <Link to={"/payment"}>
-                  <button className="fancy pa">
-                    <span className="top-key"></span>
-                    <span className="text">Pagar</span>
-                    <span className="bottom-key-1"></span>
-                    <span className="bottom-key-2"></span>
-                  </button>
-                </Link>
-                <button className="fancy" onClick={onCleanCart}>
-                  <span className="top-key"></span>
-                  <span className="text">Vaciar Carrito</span>
-                  <span className="bottom-key-1"></span>
-                  <span className="bottom-key-2"></span>
-                </button>
-              </div>
+              <Link to={"/payment"}>
+                <button className="btn-clear-all">Pagar</button>
+              </Link>
+
+              <button className="btn-clear-all" onClick={onCleanCart} style={{marginTop:".8rem"}}>
+                Vaciar Carrito
+              </button>
+              <img src="" alt="" />
             </>
           ) : (
             <>

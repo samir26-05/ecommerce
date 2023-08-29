@@ -15,7 +15,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import "../../components/Layout/header/styled.css";
+import "../../components/Layout/header/header.css";
 
 
 export default function LoginDrawer({ hover, color, pageUsed, pagePayment }) {

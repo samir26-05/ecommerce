@@ -1,11 +1,12 @@
 import { Div, ContainerPrincipal, ContainerCard, Card, CardMedia, Tiltle, CardContent, Price } from "./StyledProductList";
 import { data } from "../../../../data";
-import "../../../../car.css";
 import { GiShoppingBag } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { useCart } from './CardContext';
+import "../../header/car.css";
 
 export const ProductList = () => {
+
   const { cart, updateCart } = useCart();
 
   const onAddProduct = (product) => {
@@ -48,5 +49,6 @@ export const ProductList = () => {
     </Div>
   );
 };
+
 
 export default ProductList;

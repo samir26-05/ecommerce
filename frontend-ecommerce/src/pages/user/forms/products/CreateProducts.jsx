@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { Button, TextField } from '@mui/material';
 import { PiUploadThin } from 'react-icons/pi'
-import '../../../../components/Layout/header/styled.css'
+import '../../../../components/Layout/header/header.css'
 
 export default function FormProducts() {
 
