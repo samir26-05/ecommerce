@@ -10,7 +10,7 @@ export const ProductList = () => {
   const { cart, updateCart } = useCart();
 
   const onAddProduct = (product) => {
-    const updatedCart = [...cart];
+    const updatedCart = Array.isArray(cart) ? [...cart] : [];
     const existingProduct = updatedCart.find(item => item.id === product.id);
 
     if (existingProduct) {
@@ -28,8 +28,7 @@ export const ProductList = () => {
         {data.map((product) => (
           <ContainerCard key={product.id}>
             <Card>
-            <Link to={"/infoProducts"}>
-
+            <Link to={`/InfoProducts/${product.id}`}>
               <CardMedia src={product.img} alt={product.nameProduct}/>
             </Link>
               <CardContent>
@@ -38,7 +37,7 @@ export const ProductList = () => {
                   ${product.price}
                   <GiShoppingBag
                     onClick={() => onAddProduct(product)}
-                    style={{}}
+                    size={"10%"}
                     />
                 </Price>
               </CardContent>

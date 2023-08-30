@@ -300,7 +300,7 @@ export const Register = () => {
         <BasicTextFields
           className="controls"
           type="password"
-          name="password_hash"
+          name="password_hash" 
           id="email"
           Placeholder="Ingrese su contraseña"
           required

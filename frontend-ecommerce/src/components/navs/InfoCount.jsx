@@ -1,11 +1,13 @@
+/* MATERIAL UI */
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import UpdatePass from '../forms/UpdatePass';
-import UpdateEmail from '../forms/UpdateEmail';
-import DataPersonal from '../forms/DataPersonal';
+/* COMPONENTS */
+import UpdatePass from '../forms/infoUser/UpdatePass';
+import UpdateEmail from '../forms/infoUser/UpdateEmail';
+import DataPersonal from '../forms/infoUser/DataPersonal'
 
 export default function InfoCountUser() {
     return (

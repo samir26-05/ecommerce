@@ -1,27 +1,26 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FlexRow } from "../../StyledMain";
 import "./car.css";
 import cesta from "../../../assets/Img/cesta.png";
 import { useCart } from "../body/products/CardContext";
 
-export const Carrito = ({
-  hover,
-  pageUsed,
-  pagePayment,
-  color
-}) => {
-  
+export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
   const [active, setActive] = useState(false);
-  
+
   const { cart, updateCart } = useCart();
 
-
-  const allProducts = [1,123,'asjfnajsfa'];
-  const countProducts = Array.isArray(cart) ? cart.reduce((count, product) => count + product.quantity, 0) : 0;
-  const total = Array.isArray(cart) ? cart.reduce((total, product) => total + product.price * product.quantity, 0) : 0;
-  
+  const allProducts = cart;
+  const countProducts = Array.isArray(cart)
+    ? cart.reduce((count, product) => count + product.quantity, 0)
+    : 0;
+  const total = Array.isArray(cart)
+    ? cart.reduce(
+        (total, product) => total + product.price * product.quantity,
+        0
+      )
+    : 0;
 
   const onDeleteProduct = (product) => {
     const results = cart.filter((item) => item.id !== product.id);
@@ -50,7 +49,6 @@ export const Carrito = ({
                 ? "#000"
                 : color
             }
-                
             className="icon-cart"
           >
             <path
@@ -72,47 +70,43 @@ export const Carrito = ({
               <div className="row-product">
                 {allProducts.map((product) => (
                   <div className="cart-product" key={product.id}>
-                    <div className="info-cart-product">
-                      <img
-                        src={product.img}
-                        alt=""
-                        style={{ width: 120, height: 120 }}
-                      />
-                      <span className="cantidad-producto-carrito">
-                        {product.quantity}
-                      </span>
-
-                      <div
-                        style={{
-                          display: FlexRow,
-                          justifyContent: "space-around",
-                          marginTop: 30,
-                          textAlign: "center",
-                        }}
-                      >
-                        <p className="titulo-producto-carrito">
-                          {product.nameProduct}
-                        </p>
-                        <span className="precio-producto-carrito">
-                          ${product.price}
+                    <Link to={`/InfoProducts/${product.id}`}>
+                      <div className="info-cart-product">
+                        <img
+                          src={product.img}
+                          alt=""
+                          style={{ width: 120, height: 120 }}
+                        />
+                        <span className="cantidad-producto-carrito">
+                          {product.quantity}
                         </span>
+
+                        <div className="Infoon-product">
+                          <p className="titulo-producto-carrito">
+                            {product.nameProduct}
+                          </p>
+                          <span className="precio-producto-carrito">
+                            $ {product.price.toFixed(2)}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="icon-close"
-                      onClick={() => onDeleteProduct(product)}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
+                    </Link>
+                    <button className="btndele">
+                      <svg
+                        viewBox="0 0 15 17.5"
+                        height="17.5"
+                        width="15"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon"
+                        onClick={() => onDeleteProduct(product)}
+                      >
+                        <path
+                          transform="translate(-2.5 -1.25)"
+                          d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
+                          id="Fill"
+                        ></path>
+                      </svg>
+                    </button>
                   </div>
                 ))}
               </div>
@@ -143,9 +137,11 @@ export const Carrito = ({
               >
                 <img src={cesta} alt="" style={{ width: 200 }} />
                 <h3 className="cart-empty">El carrito está vacío</h3>
-                <h4>Aún no tienes compras en tienda</h4>
-                <span>
-                  Pero puedes hacer tu pedido online ¡y te lo mandamos a casa!
+                <h4 className="vacio">
+                  Aún no tienes compras en nuestra tienda
+                </h4>
+                <span className="vacio">
+                  Pero puedes ver el catalogo ¡y te lo llevamos a casa!
                 </span>
                 <br />
               </div>

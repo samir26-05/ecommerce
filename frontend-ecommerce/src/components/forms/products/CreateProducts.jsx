@@ -1,8 +1,10 @@
 import { useState } from 'react';
+/* MATERIAL UI */
 import Box from '@mui/material/Box';
 import { Button, TextField } from '@mui/material';
 import { PiUploadThin } from 'react-icons/pi'
-import '../../../../components/Layout/header/header.css'
+/* STYLES */
+import '../../Layout/header/header.css'
 
 export default function FormProducts() {
 

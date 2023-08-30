@@ -1,33 +1,14 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
+/* MATERIAL UI */
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
+/* COMPONENTS */
+import { useCart } from '../../Layout/body/products/CardContext';
 
-const products = [
-  {
-    name: 'Product 1',
-    desc: 'A nice thing',
-    price: '$9.99',
-  },
-  {
-    name: 'Product 2',
-    desc: 'Another thing',
-    price: '$3.45',
-  },
-  {
-    name: 'Product 3',
-    desc: 'Something else',
-    price: '$6.51',
-  },
-  {
-    name: 'Product 4',
-    desc: 'Best thing of all',
-    price: '$14.11',
-  },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
 const addresses = ['Calle', '1 de 2 que hay en el barrio', 'Mesolandia', 'Malambo', 'ATLCO'];
 const payments = [
   { name: 'Tipo tarjeta', detail: 'Visa' },
@@ -37,6 +18,29 @@ const payments = [
 ];
 
 export default function Review() {
+  const { cart, updateCart } = useCart();
+  console.log(cart);
+  const products = Array.isArray(cart) ? [...cart] : [];
+  console.log(products);
+
+  // Paso 1: Calcular el total de todos los productos
+  const totalProductos = products.reduce((total, product) => total + product.price * product.quantity, 0);
+
+  // Paso 2: Verificar si el total de todos los productos es mayor de 6
+  const isTotalMayor6 = totalProductos > 6;
+
+  // Paso 3: Aplicar el descuento del 10% a toda la compra si el total es mayor de 6
+  const descuento = isTotalMayor6 ? totalProductos * 0.1 : 0;
+
+  // Paso 4: Calcular el subtotal de la factura
+  const subtotal = totalProductos - descuento;
+
+  // Paso 5: Calcular el valor del IVA del 19%
+  const iva = subtotal * 0.19;
+
+  // Paso 6: Calcular el total de la factura
+  const totalFactura = subtotal + iva;
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -44,22 +48,29 @@ export default function Review() {
       </Typography>
       <List disablePadding>
         {products.map((product) => (
-          <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
+          <ListItem key={product.nameProduct} sx={{ py: 1, px: 0 }}>
+            <ListItemText primary={product.nameProduct} secondary={`x ${product.quantity}`} />
+            <Typography variant="body2">{product.price * product.quantity}</Typography>
           </ListItem>
         ))}
-        <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary="Total" />
-          <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            $34.06
+        <ListItem sx={{ py: 1, px: 0, marginTop:"20px" }}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 700, flexDirection:"column", display:"flex" }}>
+            {isTotalMayor6 && (
+              <React.Fragment>
+                <Typography>Descuento (10%): -{descuento}</Typography>
+                <Typography>Subtotal: {subtotal}</Typography>
+              </React.Fragment>
+            )}
+            
+            <Typography>IVA (19%): {iva}</Typography>
+            <Typography style={{fontWeight:"bold"}}>Total factura: {subtotal}</Typography>
           </Typography>
         </ListItem>
       </List>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-          Envío
+            Envío
           </Typography>
           <Typography gutterBottom>Samir Orozco</Typography>
           <Typography gutterBottom>{addresses.join(', ')}</Typography>

@@ -1,16 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-/* material ui */
+/* MATERIAL UI */
 import {Tabs, Tab, Typography, Box} from '@mui/material';
-
-/* components */
+/* COMPONENTS */
 import NavHorizontal from './NavHorizontal';
 import InfoCountUser from './InfoCount';
-
-/* styles */
-import { Div } from '../styled';
-import '../../../components/Layout/header/header.css'
+/* STYLES */
+import { Div } from '../../pages/user/styled';
+import '../Layout/header/header.css'
 
 
 function TabPanel(props) {
