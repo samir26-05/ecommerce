@@ -7,7 +7,7 @@ import * as Product from "../controllers/Productos/Products.controllers.js";
 const router = Router()
 
 // Routas de productos
-router.post('/create',)
+router.post('/create',Product.CreateProduct)
 router.get('/',Product.GetProducts)
 
 // Routas de marcas 

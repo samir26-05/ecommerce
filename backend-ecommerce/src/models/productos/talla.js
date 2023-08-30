@@ -10,7 +10,7 @@ export const talla = sequelize.define("size",{
     },
     size: {
         type: DataTypes.STRING,
-        allownull: false
+        allowNull: false
     }
 },{
     tableName: "size",

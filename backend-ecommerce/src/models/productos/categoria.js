@@ -15,4 +15,3 @@ export const category = sequelize.define("category",{
   tableName: "category",
   timestamps: false
 })
-
