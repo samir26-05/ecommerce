@@ -115,13 +115,22 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                 <h3>Total:</h3>
                 <span className="total-pagar">${total.toFixed(2)}</span>
               </div>
-              <Link to={"/payment"}>
-                <button className="btn-clear-all">Pagar</button>
-              </Link>
-
-              <button className="btn-clear-all" onClick={onCleanCart} style={{marginTop:".8rem"}}>
-                Vaciar Carrito
-              </button>
+              <div className="btns">
+                <Link to={"/payment"}>
+                  <button className="fancy pa">
+                    <span className="top-key"></span>
+                    <span className="text">Pagar</span>
+                    <span className="bottom-key-1"></span>
+                    <span className="bottom-key-2"></span>
+                  </button>
+                </Link>
+                <button className="fancy" onClick={onCleanCart}>
+                  <span className="top-key"></span>
+                  <span className="text">Vaciar Carrito</span>
+                  <span className="bottom-key-1"></span>
+                  <span className="bottom-key-2"></span>
+                </button>
+              </div>
               <img src="" alt="" />
             </>
           ) : (
