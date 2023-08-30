@@ -6,6 +6,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
+import { useState } from 'react';
 /* COMPONENTS */
 import { useCart } from '../../Layout/body/products/CardContext';
 
@@ -19,33 +20,24 @@ const payments = [
 
 export default function Review() {
   const { cart, updateCart } = useCart();
-  console.log(cart);
   const products = Array.isArray(cart) ? [...cart] : [];
-  console.log(products);
-
-  // Paso 1: Calcular el total de todos los productos
-  const totalProductos = products.reduce((total, product) => total + product.price * product.quantity, 0);
-
-  // Paso 2: Verificar si el total de todos los productos es mayor de 6
-  const isTotalMayor6 = totalProductos > 6;
-
-  // Paso 3: Aplicar el descuento del 10% a toda la compra si el total es mayor de 6
-  const descuento = isTotalMayor6 ? totalProductos * 0.1 : 0;
-
-  // Paso 4: Calcular el subtotal de la factura
-  const subtotal = totalProductos - descuento;
-
-  // Paso 5: Calcular el valor del IVA del 19%
+  const totalCantidadProductos = products.reduce((total, product) => total + product.quantity, 0);
+  const isTotalMayor6 = totalCantidadProductos > 6;
+  const descuento = isTotalMayor6 ? products.reduce((total, product) => total + product.price * product.quantity, 0) * 0.1 : 0;
+  const subtotal = products.reduce((total, product) => total + product.price * product.quantity, 0) - descuento;
   const iva = subtotal * 0.19;
-
-  // Paso 6: Calcular el total de la factura
-  const totalFactura = subtotal + iva;
+  const totalFactura = subtotal;
 
   return (
+    
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
+      <div style={{ fontFamily:"-moz-initial", display: "flex", justifyContent:"space-between"}}>
+      <Typography variant="h5" gutterBottom sx={{ fontFamily:"-moz-initial"}}>
         Order summary
       </Typography>
+      <Typography  gutterBottom sx={{ fontFamily:"-moz-initial"}}> {totalCantidadProductos} Productos
+      </Typography>
+      </div>
       <List disablePadding>
         {products.map((product) => (
           <ListItem key={product.nameProduct} sx={{ py: 1, px: 0 }}>
@@ -57,13 +49,11 @@ export default function Review() {
           <Typography variant="subtitle1" sx={{ fontWeight: 700, flexDirection:"column", display:"flex" }}>
             {isTotalMayor6 && (
               <React.Fragment>
-                <Typography>Descuento (10%): -{descuento}</Typography>
-                <Typography>Subtotal: {subtotal}</Typography>
+                <Typography>Descuento (10%): $ {descuento.toFixed(3)}</Typography>
+                <Typography>Subtotal: $ {subtotal.toFixed(3)}</Typography>
               </React.Fragment>
             )}
-            
-            <Typography>IVA (19%): {iva}</Typography>
-            <Typography style={{fontWeight:"bold"}}>Total factura: {subtotal}</Typography>
+            <Typography style={{fontWeight:"bold"}}>Total a pagar: {subtotal.toFixed(3)}</Typography>
           </Typography>
         </ListItem>
       </List>

@@ -20,10 +20,11 @@ const UserPage = () => {
       setUserEnter(false);
     };
   }, []);
+  
   return ( 
     <Div>
         <Header isUsedPayment={userEnter}/>
-          <FormUserPayment/>
+        <FormUserPayment/>
         <Footer/>
     </Div>
    );
