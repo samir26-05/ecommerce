@@ -1,4 +1,3 @@
-import React from "react";
 import { ContainerP, Prueba } from "./StyledBrand";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

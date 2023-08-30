@@ -1,10 +1,9 @@
-import React from "react";
 import Brand from "./Brand";
-import Adidas from './ImgBrand/adidas.png';
-import Bershka from './ImgBrand/bershka.png';
-import Prada from './ImgBrand/prada.png';
-import Nike from './ImgBrand/nike.png'
-import Zara from './ImgBrand/zara.png'
+import Adidas from '../../../../assets/Img/brands/adidas.png';
+import Bershka from '../../../../assets/Img/brands/bershka.png';
+import Prada from '../../../../assets/Img/brands/prada.png';
+import Nike from '../../../../assets/Img/brands/nike.png'
+import Zara from '../../../../assets/Img/brands/zara.png'
 
 
 const App = () => {
