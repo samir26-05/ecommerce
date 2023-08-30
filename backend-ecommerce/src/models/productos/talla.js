@@ -5,13 +5,14 @@ export const talla = sequelize.define("size",{
     sizes_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true,
+        autoIncrement: true,
         allownull: false,
     },
     size: {
         type: DataTypes.STRING,
-        allownull: false
+        allowNull: false
     }
 },{
-    tableName: "size"
+    tableName: "size",
+    timestamps: false
 })
