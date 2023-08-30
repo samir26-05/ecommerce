@@ -7,12 +7,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { Carrito } from "./Carrito";
-/* import { ProductList } from "./ProductList"; 
- import { CardProduct } from "../body/card/CardProduct"; */
 import { useState, useEffect } from "react";
-import "./styled.css";
-import "../../../car.css";
-import axios from "axios";
+import "./header.css";
+import "./car.css";
 import { Link } from 'react-router-dom';
 
 const pages = ["Inicio", "Mujer", "Hombre"];
@@ -29,7 +26,7 @@ const Header = ({
   isUsedBody,
 }) => {
 
-  const handleCloseNavMenu = () => {};
+  const handleCloseNavMenu = () => { };
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -57,7 +54,6 @@ const Header = ({
     }
   };
 
-  const [name, setName] = useState('')
 
   useEffect(() => {
 
@@ -123,7 +119,7 @@ const Header = ({
           >
             {pages.map((page) => (
               <Link
-                to={page === "Inicio" ? "/" : page === "Hombre" ? "/section" : "/section" }
+                to={page === "Inicio" ? "/" : page === "Hombre" ? "/section" : "/section"}
                 key={page}
                 onClick={handleCloseNavMenu}
                 style={{

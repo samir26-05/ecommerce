@@ -1,8 +1,10 @@
-import { Div } from "./styled";
 import { useState, useEffect } from 'react';
+/* COMPONENTS */
 import Header from "../../components/Layout/header/Header";
 import Footer from "../../components/Layout/footer/Footer";
-import NavVertical from "./navs/NavVertical";
+import NavVertical from '../../components/navs/NavVertical'
+/* styles */
+import { Div } from "./styled";
 
 const UserPage = () => {
   const [userEnterUser, setUserEnterUser] = useState(false);

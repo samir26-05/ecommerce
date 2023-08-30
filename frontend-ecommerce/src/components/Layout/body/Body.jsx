@@ -4,12 +4,13 @@ import DemoAutoPlay from "./carrusel/DemoAutoPlay";
 import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import { ProductList } from "./products/ProductList";
-import "../header/styled.css";
-import "../../../car.css";
+import "../header/header.css";
 import SectionsBody from "./Sections/SectionsBody";
 import Header from "../header/Header";
 import IndexCategory from "./Category/IndexCategory";
 import AppBrand from "./BrandBody/AppBrand";
+import "../header/car.css";
+
 
 export default function Body() {
   const [allProducts, setAllProducts] = useState([]);

@@ -1,12 +1,17 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+/* MATERIAL UI */
 import { Button, Box, Typography, Tab, Tabs } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import { Img, Div } from './styled';
-import bgr from '../../../assets/Img/bgr.png'
-import { Link } from 'react-router-dom';
+/* COMPONENETS */
 import FormProducts from '../forms/products/CreateProducts';
 import StockProducts from '../forms/products/StockProducts';
-import '../../../components/Layout/header/styled.css'
+/* IMG */
+import bgr from '../../assets/Img/bgr.png'
+/* STYLES */
+import '../Layout/header/header.css'
+import { Img, Div } from './styled';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,7 +61,7 @@ export default function NavHorizontal(props) {
           )}
 
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ paddingTop: 20 }}>
-            <Tab label="Online" {...a11yProps(0)} className='whithoutOutline'/>
+            <Tab label="Pedidos" {...a11yProps(0)} className='whithoutOutline'/>
             <Tab label="Tienda" {...a11yProps(1)} className='whithoutOutline'/>
           </Tabs>
         </Box>

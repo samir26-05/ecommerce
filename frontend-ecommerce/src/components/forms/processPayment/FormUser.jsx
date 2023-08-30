@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+/* MATERIAL UI */
 import { CssBaseline, AppBar, Box, Container, Paper, Stepper, Step, StepLabel, Button, Typography } from '@mui/material';
-import { Link } from 'react-router-dom'; // Importa el componente Link de React Router o utiliza el método de navegación que prefieras
-
+/* COMPONENTS */
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';

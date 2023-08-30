@@ -1,8 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { useMemo } from "react";
 import { MaterialReactTable } from "material-react-table";
-import {data} from '../../../../data.js'
-
-//simple data example - Check out https://www.material-react-table.com/docs/examples/remote for a more complex example
+/* LOCAL STORAGE */
+import {data} from '../../../data.js'
 
 
 export default function StockProducts() {

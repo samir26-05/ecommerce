@@ -1,8 +1,10 @@
-import { Div } from "./styled";
 import { useState, useEffect } from "react";
+/* COMPONENTS */
 import Header from "../../components/Layout/header/Header";
 import Footer from "../../components/Layout/footer/Footer";
-import FormUserPayment from "./forms/FormUser";
+import FormUserPayment from '../../components/forms/processPayment/FormUser'
+/* STYLED */
+import { Div } from "./styled";
 
 const UserPage = () => {
   const [userEnter, setUserEnter] = useState(false);

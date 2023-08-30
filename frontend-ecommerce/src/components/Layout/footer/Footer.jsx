@@ -3,7 +3,7 @@ import { Grid, Typography, Button, Modal } from '@mui/material';
 import { Facebook, Twitter, Instagram, WhatsApp } from '@mui/icons-material';
 import { FooterLink, SocialIcon, ModalContent } from './styled';
 import QrWths from '../../../assets/Img/QrWhts.png';
-import '../header/styled.css'
+import '../header/header.css'
 
 const Footer = () => {
   const [modalOpen, setModalOpen] = useState(false);

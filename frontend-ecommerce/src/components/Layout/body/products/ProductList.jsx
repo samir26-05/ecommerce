@@ -1,15 +1,16 @@
 import { Div, ContainerPrincipal, ContainerCard, Card, CardMedia, Tiltle, CardContent, Price } from "./StyledProductList";
 import { data } from "../../../../data";
-import "../../../../car.css";
 import { GiShoppingBag } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { useCart } from './CardContext';
+import "../../header/car.css";
 
 export const ProductList = () => {
+
   const { cart, updateCart } = useCart();
 
   const onAddProduct = (product) => {
-    const updatedCart = [...cart];
+    const updatedCart = Array.isArray(cart) ? [...cart] : [];
     const existingProduct = updatedCart.find(item => item.id === product.id);
 
     if (existingProduct) {
@@ -47,5 +48,6 @@ export const ProductList = () => {
     </Div>
   );
 };
+
 
 export default ProductList;
