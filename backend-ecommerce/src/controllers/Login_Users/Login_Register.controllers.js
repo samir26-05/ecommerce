@@ -53,7 +53,7 @@ export const Login = async (req, res) => {
         .status(404)
         .json({ message: "Combinacion de email y constraseña incorrecta" });
     }
-    const accessToken = jwt.sign({ id: Existemail.user_id }, SECRET, {
+    const accessToken = jwt.sign({ id: Existemail.user_id,username: Existemail.user  }, SECRET, {
       expiresIn: "1h",
     });
     return res.status(200).json( accessToken );

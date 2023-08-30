@@ -1,15 +1,16 @@
-import { verify } from "jsonwebtoken";
-import { SECRET } from "../config";
+import jwt from "jsonwebtoken";
+import { SECRET } from "../config.js";
 import { User } from "../models/Usuarios/User.js";
-import { Roles } from "../models/Usuarios/Roles";
+import { Roles } from "../models/Usuarios/Roles.js";
 export const validatetoken = async (req,res,next) => {
     const accessToken = req.header("accessToken")
     if(!accessToken) return res.json({message: 'Usuario no logueado'})
 
     try {
-        const validtoken = verify(accessToken,SECRET)
-        req.UserId = validtoken.user_id; 
-        const user  = await User.findById(req.UserId,{password: 0}) 
+        const validtoken = jwt.verify(accessToken,SECRET)
+        console.log(validtoken)
+        req.UserId = validtoken.id; 
+        const user  = await User.findByPk(req.UserId,{attributes: ["user_id","user","email","role_id"]}) 
         if(!user) return res.json({message: 'Usuario no existe'})
         next()
     } catch (error) {
@@ -18,6 +19,11 @@ export const validatetoken = async (req,res,next) => {
 }
 
 export const isAdmin = async (req, res, next) => {
-    const user = await User.findById(req.UserId)
+    const user = await User.findByPk(req.UserId)
     const roles = await Roles.findOne({where: {role_id : user.role_id}})
+    if(roles.rol === 'Admin'){
+        next()
+    }else{
+        return res.status(403).json({message: 'se nesecitan permisos de administrador'})
+    }
 }
