@@ -3,6 +3,7 @@ import { sequelize } from "../../database.js";
 import { talla } from "./talla.js";
 import { marca } from "./brands.js";
 import { category } from "./categoria.js";
+import { section } from "./section.js";
 export const productos = sequelize.define("product", {
   product_id: {
     type: DataTypes.INTEGER,
@@ -33,32 +34,50 @@ export const productos = sequelize.define("product", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  id_section: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  stock: {
+    type: DataTypes.STRING(20),
+    allowNull: false,
+  },
+  img_video: {
+    type: DataTypes.STRING(500),
+    allowNull: false,
+  }
 },{
   tableName: 'product'
 });
 
 // -----relaciones------
 
-// realacion de talla y productos
+// relacion de talla y productos
 productos.belongsTo(talla, {
   foreignKey: "sizes_id",
-  allownull: false,
 });
 talla.hasMany(productos, {
   foreignKey: "sizes_id",
-  allownull: false,
 });
-// relacion de marca y producto
+// relacion de marca y productos
 productos.belongsTo(marca, {
   foreignKey: "id_brands",
-});
+})
 marca.hasMany(productos, {
   foreignKey: "id_brands",
-});
-// Relacion de producto y categoria
-productos.belongsTo(category, {
+
+})
+// relacion de categoria y productos
+productos.belongsTo(category,{
   foreignKey: "category_id",
-});
+})
 category.hasMany(productos, {
   foreignKey: "category_id",
-});
+})
+// Relacion de seccion y productos
+productos.belongsTo(section,{
+  foreignKey: "id_section",
+})
+section.hasMany(productos,{
+  foreignKey: "id_section",
+})

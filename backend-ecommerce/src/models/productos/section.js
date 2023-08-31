@@ -4,13 +4,14 @@ export const section = sequelize.define("section",{
     id_section: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        allowNull: false,
-        autoincrement: true
+        autoIncrement: true,
+        allowNull: false
     },
     section: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(30),
         allowNull: false,
     }
 },{
-    tableName: 'section'
+    tableName: 'section',
+    timestamps: false
 })
