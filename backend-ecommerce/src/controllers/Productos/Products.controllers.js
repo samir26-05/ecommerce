@@ -1,6 +1,10 @@
 import { productos } from "../../models/productos/productos.js";
 import { sequelize } from "../../database.js";
 import { ValidRegisterProduct } from "../../schemas/productos/CreateProduct.js";
+import { ipFileServer, urlArchivos } from "../../libs/constas.js";
+import fs from "fs";
+import path from "path";
+
 export const GetProducts = async (req, res) => {
   try {
     const result = await productos.findAll({
@@ -43,18 +47,30 @@ export const GetProducts = async (req, res) => {
 
 export const CreateProduct = async (req, res) => {
   try {
-    const {img_video} = req.body
-    const result = await ValidRegisterProduct(req.body);
-    if(result.error){
-      return res.status(400).json({error: JSON.parse(result.error.message)});
+    const { file } = req;
+    const ruta = path.join(urlArchivos, file.filename);
+    if (!file) {
+      res.status(404).json({ message: "no se ingreso ningun archivo" });
     }
-    const NewProduct = await productos.create({
-      ...result.data,
-      img_video, 
-    })
-    res.status(200).json({message: 'producto creado con exito',NewProduct})
+    const { data } = req.body;
+    const validationResult = await ValidRegisterProduct(JSON.parse(data));
+    if (validationResult.error) {
+      fs.unlinkSync(ruta);
+      return res
+        .status(400)
+        .json({ error: JSON.parse(validationResult.error.message) });
+    }
+    if (validationResult.success) {
+      const NewProduct = await productos.create({
+        ...validationResult.data,
+        img_video: `${ipFileServer}${file.filename}`,
+      });
+      res
+        .status(200)
+        .json({ message: "producto creado con exito", NewProduct });
+    }
   } catch (error) {
-    res.status(500).json({error: error.message})
+    res.status(500).json({ error: error.message });
     console.log(error);
   }
-}
+};
