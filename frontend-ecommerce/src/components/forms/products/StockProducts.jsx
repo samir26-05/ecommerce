@@ -1,11 +1,25 @@
 /* eslint-disable no-unused-vars */
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { MaterialReactTable } from "material-react-table";
 /* LOCAL STORAGE */
 import {data} from '../../../data.js'
 
 
+
+
 export default function StockProducts() {
+
+/*     useEffect(() => {
+        const getProduct = () => {
+            fetch('http://192.168.12.43:3000/product')
+                .then(res => res.json())
+                .then(res => console.log(res))
+        }
+        getProduct();
+    
+    }, []); */
+
+
     const columns = useMemo(
         () => [
             {
