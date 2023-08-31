@@ -1,3 +1,5 @@
 export const  TokenAccess = (req,res) =>{
-    res.json(req.Username)
+    const Username = req.Username
+    const rol = req.rol
+    res.json({Username,rol})
 }
