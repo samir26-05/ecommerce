@@ -8,7 +8,7 @@ export const validatetoken = async (req,res,next) => {
 
     try {
         const validtoken = jwt.verify(accessToken,SECRET)
-        console.log(validtoken)
+        req.Username = validtoken.username
         req.UserId = validtoken.id; 
         const user  = await User.findByPk(req.UserId,{attributes: ["user_id","user","email","role_id"]}) 
         if(!user) return res.json({message: 'Usuario no existe'})
