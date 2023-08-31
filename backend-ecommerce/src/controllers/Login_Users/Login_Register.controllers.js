@@ -1,4 +1,5 @@
 import { User } from "../../models/Usuarios/User.js";
+import { Roles } from "../../models/Usuarios/Roles.js";
 import { Personal_information } from "../../models/Usuarios/Personal_information.js";
 import { ValidRegister } from "../../schemas/login_register/RegisterUser.js";
 import { encryptPassword, compare } from "../../libs/Bcryptjs.js";
@@ -53,10 +54,17 @@ export const Login = async (req, res) => {
         .status(404)
         .json({ message: "Combinacion de email y constraseña incorrecta" });
     }
-    const accessToken = jwt.sign({ id: Existemail.user_id,username: Existemail.user  }, SECRET, {
-      expiresIn: "1h",
+    const rol = await Roles.findOne({
+      where: { role_id: Existemail.role_id },
     });
-    return res.status(200).json( accessToken );
+    const accessToken = jwt.sign(
+      { id: Existemail.user_id, username: Existemail.user,role: rol.rol },
+      SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
+    return res.status(200).json(accessToken);
   } catch (error) {
     res.status(500).json({ message: error.message });
     console.log(error);
