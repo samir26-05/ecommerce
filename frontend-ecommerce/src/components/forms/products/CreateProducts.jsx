@@ -162,7 +162,7 @@ export default function FormProducts() {
   
     try {
       const response = await axios.post(
-        'http://localhost:3000/product/create',
+        'http://localhost:3000/product/create', 
         newProduct,
         {
           headers: {
