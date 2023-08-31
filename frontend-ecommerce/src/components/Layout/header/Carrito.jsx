@@ -26,6 +26,18 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
     updateCart(results);
   };
 
+  const onAddProduct = (product) => {
+    const updatedCart = [...cart];
+    const existingProduct = updatedCart.find(item => item.id === product.id);
+
+    if (existingProduct) {
+      existingProduct.quantity++;
+    } else {
+      updatedCart.push({ ...product, quantity: 1 });
+    }
+
+    updateCart(updatedCart);
+  };
   const onCleanCart = () => {
     updateCart([]);
   };
@@ -93,6 +105,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                     <div className="Infoon-product containerButtons">
                     <button className="btnAdd">
                       <MdAdd className="iconAdd"
+                      onClick={() => onAddProduct(product)}
                       id="Fill"
                       size={"18px"}/>
                       </button>
