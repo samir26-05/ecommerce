@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { MaterialReactTable } from "material-react-table";
 
+
+
 export default function StockProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
