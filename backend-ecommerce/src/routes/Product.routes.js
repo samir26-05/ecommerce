@@ -11,6 +11,8 @@ const router = Router();
 // Routas de productos
 router.post("/create",[Jwt.validatetoken,Jwt.isAdmin],uploads,Product.CreateProduct,);
 router.get("/", Product.GetProducts);
+router.put('/update/:id',[Jwt.validatetoken,Jwt.isAdmin],uploads,Product.UpdateProduct)
+router.delete('/delete/:N1',[Jwt.validatetoken,Jwt.isAdmin],Product.DeleteProduct)
 
 // Routas de marcas
 router.get("/brand", Brand.Getbrands);

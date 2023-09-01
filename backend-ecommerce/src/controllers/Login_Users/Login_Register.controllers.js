@@ -61,7 +61,7 @@ export const Login = async (req, res) => {
       { id: Existemail.user_id, username: Existemail.user,role: rol.rol },
       SECRET,
       {
-        expiresIn: "1h",
+        expiresIn: "7h",
       }
     );
     return res.status(200).json(accessToken);
