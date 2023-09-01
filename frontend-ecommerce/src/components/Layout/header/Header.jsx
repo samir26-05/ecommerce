@@ -1,16 +1,15 @@
 /* eslint-disable react/prop-types */
-import Login from "../../../pages/Login/NLogin";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
+import { Cta, Span } from "./styledHeader";
 import { Carrito } from "./Carrito";
 import { useState, useEffect } from "react";
-import "./header.css";
 import "./car.css";
-import { Link } from 'react-router-dom';
+import "./header.css";
+import { Link } from "react-router-dom";
 
 const pages = ["Inicio", "Mujer", "Hombre"];
 
@@ -25,8 +24,7 @@ const Header = ({
   isUsedPayment,
   isUsedBody,
 }) => {
-
-  const handleCloseNavMenu = () => { };
+  const handleCloseNavMenu = () => {};
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -54,20 +52,16 @@ const Header = ({
     }
   };
 
-
   useEffect(() => {
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-
   }, []);
 
-
   return (
-    <AppBar position="relative" style={{ background: "none" }}>
+    <AppBar style={{ background: "none" }}>
       <Container
         maxWidth=""
         sx={{
@@ -85,8 +79,8 @@ const Header = ({
             isUsedUser || isUsedPayment
               ? "#fff"
               : hovered
-                ? "#fff"
-                : headerColor,
+              ? "#fff"
+              : headerColor,
         }}
       >
         <Toolbar disableGutters>
@@ -99,7 +93,7 @@ const Header = ({
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             sx={{
-              mr: 3,
+              mr: 1,
               display: { xs: "none", md: "flex" },
               color: isUsedUser || isUsedPayment ? "#000" : "#fff" && textColor,
               textDecoration: "none",
@@ -119,25 +113,38 @@ const Header = ({
           >
             {pages.map((page) => (
               <Link
-                to={page === "Inicio" ? "/" : page === "Hombre" ? "/section" : "/section"}
+                to={
+                  page === "Inicio"
+                    ? "/"
+                    : page === "Hombre"
+                    ? "/section"
+                    : "/section"
+                }
                 key={page}
                 onClick={handleCloseNavMenu}
                 style={{
                   textDecoration: "none",
-                  color: isUsedUser || isUsedPayment
-                    ? "#000"
-                    : hovered
+                  color:
+                    isUsedUser || isUsedPayment
+                      ? "#000"
+                      : hovered
                       ? "#000"
                       : textColor,
                 }}
               >
-                <Button
-                  className="ja whithoutOutline"
-                  variant=""
-                  sx={{ fontWeight: "bold", my: 1, margin: "0 15px" }}
-                >
-                  {page}
-                </Button>
+                <Cta className="cta">
+                  <Span className="span"
+                  textColor = {textColor}
+                  style={{
+                    textDecoration: "none",
+                    color:
+                      isUsedUser || isUsedPayment
+                        ? "#000"
+                        : hovered
+                        ? "#000"
+                        : textColor,
+                  }}> {page} </Span>
+                </Cta>
               </Link>
             ))}
           </Box>

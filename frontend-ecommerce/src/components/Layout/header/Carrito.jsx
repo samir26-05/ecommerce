@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import "./car.css";
 import cesta from "../../../assets/Img/cesta.png";
 import { useCart } from "../body/products/CardContext";
-
+import { MdAdd } from "react-icons/Md";
+import { AiOutlineMinus } from "react-icons/Ai";
 export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
   const [active, setActive] = useState(false);
 
@@ -26,6 +27,33 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
     updateCart(results);
   };
 
+  const onAddProduct = (product) => {
+    const updatedCart = [...cart];
+    const existingProduct = updatedCart.find((item) => item.id === product.id);
+
+    if (existingProduct) {
+      existingProduct.quantity++;
+    } else {
+      updatedCart.push({ ...product, quantity: 1 });
+    }
+
+    updateCart(updatedCart);
+  };
+
+  const onDellProduct = (product) => {
+    const updatedCart = [...cart];
+    const existingProduct = updatedCart.find((item) => item.id === product.id);
+    console.log("existingProduct:", existingProduct);
+    if (existingProduct) {
+      if (existingProduct.quantity > 0) {
+        existingProduct.quantity--;
+      }
+    } else {
+      updatedCart.push({ ...product, quantity: 1 });
+    }
+
+    updateCart(updatedCart);
+  };
   const onCleanCart = () => {
     updateCart([]);
   };
@@ -74,7 +102,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                         <img
                           src={product.img}
                           alt=""
-                          style={{ width: 120, height: 120 }}
+                          style={{ width: 100, height: 120 }}
                         />
                         <span className="cantidad-producto-carrito">
                           {product.quantity}
@@ -90,22 +118,46 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                         </div>
                       </div>
                     </Link>
-                    <button className="btndele">
-                      <svg
-                        viewBox="0 0 15 17.5"
-                        height="17.5"
-                        width="15"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon"
-                        onClick={() => onDeleteProduct(product)}
-                      >
-                        <path
-                          transform="translate(-2.5 -1.25)"
-                          d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
-                          id="Fill"
-                        ></path>
-                      </svg>
-                    </button>
+                    <div className="Infoon-product containerButtons">
+                      <div className="containeraddanddell">
+                        <button className="btnAdd">
+                          <MdAdd
+                            className="iconAdd"
+                            onClick={() => onAddProduct(product)}
+                            id="Fill"
+                            size={"14px"}
+                          />
+                        </button>
+                        <button className="btnDell">
+                          <AiOutlineMinus
+                            className="iconDell"
+                            onClick={() =>
+                              product.quantity === 1
+                                ? onDeleteProduct(product)
+                                : onDellProduct(product)
+                            }
+                            id="Fill"
+                            size={"14px"}
+                          />
+                        </button>
+                      </div>
+                      <button className="btndele">
+                        <svg
+                          viewBox="0 0 15 17.5"
+                          height="15"
+                          width="12.5"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon"
+                          onClick={() => onDeleteProduct(product)}
+                        >
+                          <path
+                            transform="translate(-2.5 -1.25)"
+                            d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
+                            id="Fill"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
