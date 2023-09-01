@@ -12,6 +12,7 @@ import {
   Stack,
   TextField,
   Tooltip,
+  Typography,
 } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { providerData } from './ProviderData';
@@ -134,6 +135,7 @@ const CrudProvider = () => {
           </Box>
         )}
         renderTopToolbarCustomActions={() => (
+          <>
           <Button
             color="primary"
             onClick={() => setCreateModalOpen(true)}
@@ -141,6 +143,8 @@ const CrudProvider = () => {
           >
             Agregar Proveedor
           </Button>
+          <Typography style={{fontSize:"1.2rem", fontWeight:"500"}}>Lista de proveedores</Typography>
+          </>
         )}
       />
       <CreateNewAccountModal

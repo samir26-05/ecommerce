@@ -27,33 +27,3 @@ export const Img = styled.img`
     width: 200px;
     height: 200px;    
 `
-
-import { AiOutlineEye } from "react-icons/ai";
-
-export const ActionBtn = styled.button`
-  padding: 0.6rem;
-  border: none;
-  text-align: center;
-  svg {
-    fill: #fff;
-  }
-`;
-
-export const ActionButtons = () => {
-  return (
-    <div style={{ display: "flex", gap: ".8rem" }}>
-      <ActionBtn>
-        <AiOutlineEye />
-      </ActionBtn>
-      <ActionBtn>
-        <AiOutlineEye />
-      </ActionBtn>
-      <ActionBtn>
-        <AiOutlineEye />
-      </ActionBtn>
-      <ActionBtn>
-        <AiOutlineEye />
-      </ActionBtn>
-    </div>
-  );
-};

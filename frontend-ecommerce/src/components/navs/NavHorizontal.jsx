@@ -14,11 +14,12 @@ import bgr from '../../assets/Img/bgr.png'
 import '../Layout/header/header.css'
 import { Img, Div } from './styled';
 import ShowOrders from './orders/ShowOrders';
-import ShowClients from './clients/ShowClients';
+import CrudOrders from './orders/ShowOrders';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CreateUser from '../forms/NewPerson/NewClient';
 import CrudProvider from './provider/ShowProvider';
 import { FlexDirCol } from '../StyledMain';
+import ShowClients from './clients/ShowClients';
 
 
 function CustomTabPanel(props) {
@@ -139,14 +140,7 @@ export default function NavHorizontal(props) {
 
       {type === "provider" ? (
         <div>
-        <Accordion >
-          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-              <Typography>Lista de proveedores</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
               <CrudProvider/>
-          </AccordionDetails>
-        </Accordion>
         </div>
         
       ) : '' }
