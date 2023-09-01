@@ -117,13 +117,16 @@ img {
 }
 
 .containerButtons {
-  height: 120px;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .btnAdd {
   background-color: transparent;
   border: none;
-  margin-bottom: 70%;
 }
 
 .iconAdd {
@@ -137,6 +140,26 @@ img {
 
 .btnAdd:hover > .iconAdd path {
   color: rgb(7, 168, 55);
+}
+
+.btnDell {
+  background-color: transparent;
+  border: none;
+  position: relative;
+  bottom: 40%;
+}
+
+.iconDell {
+  transform: scale(1.2);
+  transition: 0.2s linear;
+}
+
+.btnDell:hover > .iconDell {
+  transform: scale(1.70);
+}
+
+.btnDell:hover > .iconDell path {
+  color: rgb(168, 7, 7);
 }
 
 .btndele {

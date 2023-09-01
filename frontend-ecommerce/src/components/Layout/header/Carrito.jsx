@@ -5,6 +5,7 @@ import "./car.css";
 import cesta from "../../../assets/Img/cesta.png";
 import { useCart } from "../body/products/CardContext";
 import { MdAdd } from "react-icons/Md";
+import { AiOutlineMinus } from "react-icons/Ai";
 export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
   const [active, setActive] = useState(false);
 
@@ -28,10 +29,25 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
 
   const onAddProduct = (product) => {
     const updatedCart = [...cart];
-    const existingProduct = updatedCart.find(item => item.id === product.id);
+    const existingProduct = updatedCart.find((item) => item.id === product.id);
 
     if (existingProduct) {
       existingProduct.quantity++;
+    } else {
+      updatedCart.push({ ...product, quantity: 1 });
+    }
+
+    updateCart(updatedCart);
+  };
+
+  const onDellProduct = (product) => {
+    const updatedCart = [...cart];
+    const existingProduct = updatedCart.find((item) => item.id === product.id);
+    console.log("existingProduct:", existingProduct);
+    if (existingProduct) {
+      if (existingProduct.quantity > 0) {
+        existingProduct.quantity--;
+      }
     } else {
       updatedCart.push({ ...product, quantity: 1 });
     }
@@ -103,17 +119,33 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                       </div>
                     </Link>
                     <div className="Infoon-product containerButtons">
-                    <button className="btnAdd">
-                      <MdAdd className="iconAdd"
-                      onClick={() => onAddProduct(product)}
-                      id="Fill"
-                      size={"18px"}/>
-                      </button>
+                      <div className="containeraddanddell">
+                        <button className="btnAdd">
+                          <MdAdd
+                            className="iconAdd"
+                            onClick={() => onAddProduct(product)}
+                            id="Fill"
+                            size={"14px"}
+                          />
+                        </button>
+                        <button className="btnDell">
+                          <AiOutlineMinus
+                            className="iconDell"
+                            onClick={() =>
+                              product.quantity === 1
+                                ? onDeleteProduct(product)
+                                : onDellProduct(product)
+                            }
+                            id="Fill"
+                            size={"14px"}
+                          />
+                        </button>
+                      </div>
                       <button className="btndele">
                         <svg
                           viewBox="0 0 15 17.5"
-                          height="17.5"
-                          width="15"
+                          height="15"
+                          width="12.5"
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon"
                           onClick={() => onDeleteProduct(product)}
