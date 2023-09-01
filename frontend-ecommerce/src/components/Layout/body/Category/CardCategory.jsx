@@ -1,14 +1,16 @@
 import React from "react";
-import { Card, DivCategory } from "./StyledCategory";
+import { Card, DivCategory, Img, Text } from "./StyledCategory";
 
 const CardCategory = ({ array }) => {
   return (
     <>
       {array.map((item, index) => (
         <DivCategory key={index}> 
-          <Card key={index} backg={item.img}></Card>
-
-            <p>{item.name}</p>
+          <Card key={index}>
+          <Img src={item.img} alt=""  />
+          </Card>
+              
+            <Text>{item.name}</Text>
 
           
         </DivCategory>
