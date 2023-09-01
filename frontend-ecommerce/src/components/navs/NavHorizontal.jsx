@@ -120,7 +120,7 @@ export default function NavHorizontal(props) {
       ) : ''}
 
 
-      {type === "clients" ? (
+      {type === "clientes" ? (
         <div>
           <Accordion>
             <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">

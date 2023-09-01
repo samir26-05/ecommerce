@@ -35,10 +35,13 @@ function TabPanel(props) {
 }
 
 function a11yProps(index) {
+
   return {
     id: `vertical-tab-${index}`,
     'aria-controls': `vertical-tabpanel-${index}`,
+   
   };
+  
 }
 
 
@@ -47,8 +50,9 @@ export default function NavVertical() {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
-    if (newValue >= 0 && newValue <= 4) {
-      setValue(newValue);
+    if (newValue >= 0 && newValue <= 6) {
+      setValue(newValue);  
+      console.log(newValue + "estoy entrando aqui")
     }
   };
   return (
@@ -81,7 +85,7 @@ export default function NavVertical() {
           <NavHorizontal type="order" />
         </TabPanel>
         <TabPanel value={value} index={5}>
-          <NavHorizontal type="clients" />
+          <NavHorizontal type="clientes" />
         </TabPanel>
         <TabPanel value={value} index={6}>
           <NavHorizontal type="provider" />
