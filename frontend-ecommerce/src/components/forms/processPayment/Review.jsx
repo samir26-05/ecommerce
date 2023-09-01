@@ -11,10 +11,10 @@ import { useCart } from '../../Layout/body/products/CardContext';
 
 const addresses = ['Calle', '1 de 2 que hay en el barrio', 'Mesolandia', 'Malambo', 'ATLCO'];
 const payments = [
-  { name: 'Tipo tarjeta', detail: 'Visa' },
-  { name: 'Titular tarjeta', detail: 'Sr. Samir Orozco' },
-  { name: 'No. tarjeta', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Fecha expiracion', detail: '04/2024' },
+  { name: "Tipo tarjeta", detail: "Visa" },
+  { name: "Titular tarjeta", detail: "Sr. Samir Orozco" },
+  { name: "No. tarjeta", detail: "xxxx-xxxx-xxxx-1234" },
+  { name: "Fecha expiracion", detail: "04/2024" },
 ];
 
 export default function Review() {
@@ -49,8 +49,13 @@ export default function Review() {
       <List disablePadding>
         {products.map((product) => (
           <ListItem key={product.nameProduct} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.nameProduct} secondary={`x ${product.quantity}`} />
-            <Typography variant="body2">{product.price * product.quantity}</Typography>
+            <ListItemText
+              primary={product.nameProduct}
+              secondary={`x ${product.quantity}`}
+            />
+            <Typography variant="body2">
+              {product.price * product.quantity}
+            </Typography>
           </ListItem>
         ))}
         <ListItem sx={{ py: 1, px: 0, marginTop:"20px" }}>
@@ -73,7 +78,7 @@ export default function Review() {
             Envío
           </Typography>
           <Typography gutterBottom>Samir Orozco</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography gutterBottom>{addresses.join(", ")}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>

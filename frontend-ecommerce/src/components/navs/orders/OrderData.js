@@ -1,0 +1,42 @@
+export const orderData = [
+  {
+    id: 1,
+    ref: 123123,
+    date: '10-09-2022',
+    amount: 200000,
+    paymentMethod: 'PayU',
+    status: 'Completed',
+  },
+  {
+    id: 2,
+    ref: 1411250,
+    date: '08-10-2021',
+    amount: 250000,
+    paymentMethod: 'PayU',
+    status: 'Completed',
+  },
+  {
+    id: 3,
+    ref: 42541100,
+    date: '01-05-2023',
+    amount: 320000,
+    paymentMethod: 'PayU',
+    status: 'Pendiente',
+  },
+  {
+    id: 4,
+    ref: 1212110,
+    date: '10-09-2022',
+    amount: 200000,
+    paymentMethod: 'Paypal',
+    status: 'Completed',
+  },
+  {
+    id: 5,
+    ref: 458452,
+    date: '10-09-2022',
+    amount: 5000000,
+    paymentMethod: 'PayU',
+    status: 'Completed',
+  },
+]

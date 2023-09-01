@@ -183,7 +183,7 @@ export const FormProduct = () => {
 
       <Input className="controls" type="file" required onChange={(event) => { setFile(event.target.files[0]); }} />
 
-      <Button variant="contained" className="whithoutOutline" style={{ backgroundColor: "black", height:50, marginLeft:'34%' }} type="submit" value="registrar" >
+      <Button variant="contained" className="whithoutOutline" style={{ backgroundColor: "black", height:50, marginLeft:'32%' }} type="submit" value="registrar" >
         CREAR PRODUCTO
       </Button>
 

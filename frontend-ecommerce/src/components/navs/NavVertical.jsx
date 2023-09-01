@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 /* MATERIAL UI */
-import { Typography, Box} from '@mui/material';
+import { Box} from '@mui/material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 /* COMPONENTS */
@@ -10,6 +10,7 @@ import InfoCountUser from './InfoCount';
 /* STYLES */
 import { Div } from '../../pages/user/styled';
 import '../Layout/header/header.css'
+import { FlexDirCol } from '../StyledMain';
 
 
 function TabPanel(props) {
@@ -26,7 +27,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <FlexDirCol>{children}</FlexDirCol>
         </Box>
       )}
     </div>
@@ -58,20 +59,32 @@ export default function NavVertical() {
           <Tab label="Mis compras" {...a11yProps(1)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "80px", outline: "none" }} />
           <Tab label="Datos personales y direcciones" {...a11yProps(2)} className='whithoutOutline'  sx={{ position: "fixed", marginTop: "130px" }} />
           <Tab label="Productos" {...a11yProps(3)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "180px" }} />
+          <Tab label="Pedidos" {...a11yProps(4)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "230px" }} />
+          <Tab label="Clientes" {...a11yProps(5)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "280px" }} />
+          <Tab label="Proveedores" {...a11yProps(6)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "330px" }} />
 
           <Link to={"/"} style={{ textDecoration: "none" }}>
-            <Tab label="Cerrar sesión" className='whithoutOutline' {...a11yProps(4)} sx={{ position: "fixed", marginTop: "250px" }} />
+            <Tab label="Cerrar sesión" className='whithoutOutline' {...a11yProps(7)} sx={{ position: "fixed", marginTop: "400px" }} />
           </Link>
         </Tabs>
 
         <TabPanel value={value} index={1}>
-          <NavHorizontal />
+          <NavHorizontal type="buy"/>
         </TabPanel>
         <TabPanel value={value} index={2}>
           <InfoCountUser />
         </TabPanel>
         <TabPanel value={value} index={3}>
           <NavHorizontal type="products" />
+        </TabPanel>
+        <TabPanel value={value} index={4}>
+          <NavHorizontal type="order" />
+        </TabPanel>
+        <TabPanel value={value} index={5}>
+          <NavHorizontal type="clients" />
+        </TabPanel>
+        <TabPanel value={value} index={6}>
+          <NavHorizontal type="provider" />
         </TabPanel>
       </Box>
     </Div>
