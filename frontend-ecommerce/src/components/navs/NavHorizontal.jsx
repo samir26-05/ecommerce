@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 /* MATERIAL UI */
-import { Button, Box, Typography, Tab, Tabs } from '@mui/material';
+import { Button, Box, Typography, Tab, Tabs, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 /* COMPONENETS */
 import FormProducts from '../forms/products/CreateProducts';
@@ -12,6 +13,13 @@ import bgr from '../../assets/Img/bgr.png'
 /* STYLES */
 import '../Layout/header/header.css'
 import { Img, Div } from './styled';
+import ShowOrders from './orders/ShowOrders';
+import ShowClients from './clients/ShowClients';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CreateUser from '../forms/NewPerson/NewClient';
+import CrudProvider from './provider/ShowProvider';
+import { FlexDirCol } from '../StyledMain';
+
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -26,7 +34,7 @@ function CustomTabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <FlexDirCol>{children}</FlexDirCol>
         </Box>
       )}
     </div>
@@ -52,29 +60,15 @@ export default function NavHorizontal(props) {
   return (
 
     <Box sx={{ width: '100%', position: 'relative' }}>
-      {type !== 'products' ? (
+      {type === 'buy' ? (
+        <div>
         <Box>
-          {type !== 'products' ? (
-            <> <h3 style={{ paddingButton: "50px", left: 570 }}>Mis compras</h3> </>
-          ) : (
-            <> <h3 style={{ paddingButton: "50px", left: 570 }}>Gestion de productos</h3> </>
-          )}
-
+          <h3 style={{ paddingButton: "50px", left: 570 }}>Mis compras</h3>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ paddingTop: 20 }}>
             <Tab label="Pedidos" {...a11yProps(0)} className='whithoutOutline'/>
             <Tab label="Tienda" {...a11yProps(1)} className='whithoutOutline'/>
           </Tabs>
         </Box>
-      ) : (
-        <Box>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ paddingTop: 20 }}>
-            <Tab label="Crear producto" {...a11yProps(0)} className='whithoutOutline'/>
-            <Tab label="Inventario" {...a11yProps(1)} className='whithoutOutline'/>
-          </Tabs>
-        </Box>
-      )}
-
-      {type !== 'products' ? (
 
         <Div>
           <CustomTabPanel value={value} index={0} >
@@ -93,16 +87,71 @@ export default function NavHorizontal(props) {
 
           </CustomTabPanel>
         </Div>
-      ) : (
-        <>
-          <CustomTabPanel value={value} index={0}>
-            <FormProducts />
-          </CustomTabPanel>
-          <CustomTabPanel value={value} index={1}>
-            <StockProducts />
-          </CustomTabPanel>
-        </>
-      )}
+        </div>
+      ) : ''
+      }
+
+      {type === 'products' ? (
+        <div>
+        <Box>
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ paddingTop: 20 }}>
+            <Tab label="Crear producto" {...a11yProps(0)} className='whithoutOutline'/>
+            <Tab label="Inventario" {...a11yProps(1)} className='whithoutOutline'/>
+          </Tabs>
+        </Box>
+        <CustomTabPanel value={value} index={0}>
+          <FormProducts />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={1}>
+          <StockProducts />
+        </CustomTabPanel>
+      </div>
+      ) : ''
+      }
+
+      {type === "order" ? (
+        <div>
+        <ShowOrders />
+        </div>
+        
+      ) : '' }
+      {type === "clients" ? (
+        <div>
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+              <Typography>Lista de Clientes</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+              <ShowClients/>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion >
+          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+              <Typography>Crear Nuevo Usuario</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+              <CreateUser/>
+          </AccordionDetails>
+        </Accordion>
+        </div>
+        
+      ) : '' }
+
+      {type === "provider" ? (
+        <div>
+        <Accordion >
+          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+              <Typography>Lista de proveedores</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+              <CrudProvider/>
+          </AccordionDetails>
+        </Accordion>
+        </div>
+        
+      ) : '' }
+
+      
 
     </Box>
 
