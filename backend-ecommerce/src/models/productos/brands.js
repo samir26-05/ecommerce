@@ -4,11 +4,14 @@ export const marca = sequelize.define("brand",{
     id_brands: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true,
+        autoIncrement: true,
         allowNull: false,
     },
     brand:{
         type: DataTypes.STRING(30),
         allowNull: false,
     }
+},{
+    tableName: "brand",
+    timestamps: false
 })
