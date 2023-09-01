@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import Login from "../../../pages/Login/NLogin";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -62,7 +61,7 @@ const Header = ({
   }, []);
 
   return (
-    <AppBar position="relative" style={{ background: "none" }}>
+    <AppBar style={{ background: "none" }}>
       <Container
         maxWidth=""
         sx={{
@@ -94,7 +93,7 @@ const Header = ({
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             sx={{
-              mr: 3,
+              mr: 1,
               display: { xs: "none", md: "flex" },
               color: isUsedUser || isUsedPayment ? "#000" : "#fff" && textColor,
               textDecoration: "none",
