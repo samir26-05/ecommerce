@@ -4,7 +4,7 @@ export const category = sequelize.define("category",{
   category_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true,
+        autoIncrement: true,
         allowNull: false,
     },
     category:{
@@ -12,6 +12,6 @@ export const category = sequelize.define("category",{
         allowNull: false,
     }
 },{
-  tableName: "category"
+  tableName: "category",
+  timestamps: false
 })
-
