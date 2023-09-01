@@ -47,22 +47,33 @@ export const ContainerH = styled.div`
 
 export const Card = styled.div`
     box-sizing: border-box;
+    overflow: hidden;
     max-width: 1500px;
     width: 226px;
-    height: 290px;
-    background-image: url(${({ backg }) => backg});
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
     display: flex;
     flex-wrap: wrap;
     cursor: pointer;
-    transition: all 0.5s;
-    :hover{
-        border: 1px  solid black;
+    
+    :hover {
+        border: 1px solid;
+        
     }
-    :active {
-    transform: scale(0.95);
-  }
 
+`
+
+export const Img = styled.img`
+    transition: transform 900ms;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    :hover{
+        transform: scale(1.2);
+        
+    }
+
+`
+
+export const Text = styled.text`
+    letter-spacing: 2px;
 `
