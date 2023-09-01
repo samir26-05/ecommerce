@@ -2,11 +2,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 /* MATERIAL UI */
-import { Button, Box, Typography, Tab, Tabs } from '@mui/material';
+import { Button, Box, Typography } from '@mui/material';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import SendIcon from '@mui/icons-material/Send';
 /* COMPONENETS */
-import FormProducts from '../forms/products/CreateProducts';
 import StockProducts from '../forms/products/StockProducts';
+import { FormProduct } from '../forms/products/CreateProducts';
 /* IMG */
 import bgr from '../../assets/Img/bgr.png'
 /* STYLES */
@@ -96,7 +98,7 @@ export default function NavHorizontal(props) {
       ) : (
         <>
           <CustomTabPanel value={value} index={0}>
-            <FormProducts />
+            <FormProduct />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
             <StockProducts />

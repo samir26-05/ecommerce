@@ -1,29 +1,42 @@
 import { useState, useEffect } from "react";
-/* MATERIAL UI */
-import Box from "@mui/material/Box";
-import { Button, MenuItem, TextField } from "@mui/material";
-import { PiUploadThin } from "react-icons/pi";
-/* STYLES */
-import "../../Layout/header/header.css";
+import { FormContainer, Input } from "./style.jsx"
+import { Box, Button, MenuItem, TextField } from "@mui/material";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-export default function FormProducts() {
-  const [selectedImage, setSelectedImage] = useState(null);
+
+// import "./css/index.css"
+export const FormProduct = () => {
+
+/* ------ DECLARATION VARIABLES OF STATE (IMG, SELECTS AND OBJECT FOR CREATE PRODUCT) --------*/
+  const [imagePreview, setImagePreview] = useState(null);
+  const [File, setFile] = useState(); 
   const [sections, setSections] = useState([]);
   const [categories, setCategories] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [brands, setBrands] = useState([]);
+  const [newProduct, setNewProduct] = useState({
+    name: "",
+    sizes_id: 0,
+    descripcion: "",
+    id_brands: 0,
+    price: 0,
+    category_id: 0,
+    id_section: 0,
+    stock: 0,
+  });
 
-  const handleImageChange = (event) => {
-    const selectedFile = event.target.files[0];
+  const [errors, setErrors] = useState({
+    nombre: "",
+    talla: "",
+    descripcion: "",
+    marca: "",
+    precio: "",
+    categoria: "",
+    seccion: "",
+    cantidad: "",
+  });
 
-    if (selectedFile) {
-      const imageUrl = URL.createObjectURL(selectedFile);
-      setSelectedImage(imageUrl);
-    }
-  };
-
+/* --------- REQUEST HTTP - SELECTS ---------*/
   useEffect(() => {
     async function fetchSections() {
       try {
@@ -69,157 +82,57 @@ export default function FormProducts() {
     fetchCategories();
     fetchSizes();
     fetchBrands();
-  }, []);
 
-  /* ------------------------------------------------------------------------------------------------------------------- */
+    if (File) {
+      const imageUrl = URL.createObjectURL(File);
+      setImagePreview(imageUrl);
+    }
+  }, [File])
 
-  let navigate = useNavigate();
-
-  const [newProduct, setNewProduct] = useState({
-    name: "",
-    sizes_id: 0,
-    description: "",
-    id_brands: 0,
-    price: 0,
-    category_id: 0,
-    id_section: 0,
-    stock: 0,
-  });
-
-  const [errors, setErrors] = useState({
-    nombre: "",
-    talla: "",
-    descripcion: "",
-    marca: "",
-    precio: "",
-    categoria: "",
-    seccion: "",
-    cantidad: "",
-  });
+  /* --------------- VALIDATION AND CONVERTION TYPE NUMBER ------------------ */
 
   const handleInputChange = (campo, valor) => {
-    setNewProduct((datosPrevios) => ({
-      ...datosPrevios,
-      [campo]: valor,
-    }));
+    let nuevoValor = valor;
+    if (campo === 'sizes_id' || campo === 'id_brands' || campo === 'price' || campo === 'category_id' || campo === 'id_section' || campo === 'stock') {
+      nuevoValor = Number(valor); // Convertir a número
+    }
+    setNewProduct((datosPrevios) => ({ ...datosPrevios, [campo]: nuevoValor }));
   };
 
-  const validateName = (nombre) => {
-    return nombre.trim() !== "";
-  };
-  const validateSize = (talla) => {
-    return talla !== 0 && talla !== "Selecciona una opción";
-  };
-  const validateDescription = (descripcion) => {
-    return descripcion.trim() !== "";
-  };
-  const validateBrand = (marca) => {
-    return marca !== 0 && marca !== "Selecciona una opción";
-  };
-  const validatePrice = (precio) => {
-    return parseFloat(precio) > 0;
-  };
-  const validateCategory = (categoria) => {
-    return categoria !== 0 && categoria !== "Selecciona una opción";
-  };
-  const validateSection = (seccion) => {
-    return seccion !== 0 && seccion !== "Selecciona una opción";
-  };
-  const validateStock = (cantidad) => {
-    return parseInt(cantidad) >= 0;
-  };
-
-  const validateForm = () => {
-    const newErrors = {
-      nombre: !validateName(newProduct.name)
-        ? "Ingrese un nombre del producto."
-        : "",
-      talla: !validateSize(newProduct.sizes_id)
-        ? "Ingrese la talla del producto."
-        : "",
-      descripcion: !validateDescription(newProduct.description)
-        ? "Ingrese una descripción para el producto."
-        : "",
-      marca: !validateBrand(newProduct.id_brands)
-        ? "Ingrese la marca del producto."
-        : "",
-      precio: !validatePrice(newProduct.price)
-        ? "Ingrese el precio del producto."
-        : "",
-      categoria: !validateCategory(newProduct.category_id)
-        ? "Ingrese la categoría del producto."
-        : "",
-      seccion: !validateSection(newProduct.id_section)
-        ? "Ingrese la sección a la que pertenece el producto."
-        : "",
-      cantidad: !validateStock(newProduct.stock)
-        ? "Ingrese la cantidad de este producto."
-        : "",
-    };
-
-    setErrors(newErrors);
-    return Object.values(newErrors).every((error) => error === "");
-  };
-
+  
+  const proper = Object(newProduct)
   const formData = new FormData();
-  const [File, setFile] = useState();
   formData.append("data", JSON.stringify(newProduct));
   formData.append("file", File);
-  console.log(File);
-  console.log(888, formData);
+  console.log(newProduct)
+  console.log(proper)
 
-  const handleSubmit = async (event) => {
+
+  const CreateProduct = async (event) => {
     event.preventDefault();
+    axios.post('http://localhost:3000/product/create', formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        accessToken:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUiLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE2OTM1OTIyMTcsImV4cCI6MTY5MzU5NTgxN30.K5etqi5sGirGt-a2fP1Yer-QUY1It_MGgrHSS-u2HRE",
+      },
 
-    if (!validateForm()) {
-      return console.log("estoy entrando aqui");
-    }
-
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/product/create",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            accessToken:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUiLCJpYXQiOjE2OTM1MDM5ODksImV4cCI6MTY5MzUwNzU4OX0.c6XdjZawdn4_i5O_bevEtpOQzTwnx-bFYeLxJ--Zf6o",
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        navigate("/user");
-        alert(response.data.message);
-      }
-    } catch (error) {
-      console.error("Error en el registro:", error);
-      alert(
-        "Ocurrió un error durante el registro. Por favor, inténtelo de nuevo más tarde."
-      );
-    }
+    })
+      .then(response => {
+        alert("producto creado con exito")
+        console.log(response.data);
+      })
+      .catch(error => {
+        alert("error")
+        console.error(error);
+      });
   };
 
   return (
-    <Box
-      component="form"
-      sx={{ "& .MuiTextField-root": { m: 1, width: "25ch", top: "20px" } }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <TextField
-          id="outlined-select-currency"
-          label="Seccion"
-          select
-          value={newProduct.id_section}
-          onChange={(event) =>
-            handleInputChange("id_section", event.target.value)
-          }
-          required
-          error={Boolean(errors.seccion)}
-          helperText={errors.seccion}
-        >
+    <FormContainer onSubmit={CreateProduct} >
+      <Box component="form" sx={{ "& .MuiTextField-root": { m: 1, width: "30ch", top: "20px" } }} noValidate autoComplete="off" >
+
+        <TextField id="outlined-select-currency" label="Seccion" select value={newProduct.id_section} onChange={(event) => handleInputChange("id_section", event.target.value)} required error={Boolean(errors.seccion)} helperText={errors.seccion} >
           {sections.map((seccion) => (
             <MenuItem key={seccion.id_section} value={seccion.id_section}>
               {seccion.section}
@@ -227,75 +140,25 @@ export default function FormProducts() {
           ))}
         </TextField>
 
-        <TextField
-          id="outlined-select-currency"
-          label="Categoria"
-          select
-          value={newProduct.category_id}
-          onChange={(event) =>
-            handleInputChange("category_id", event.target.value)
-          }
-          required
-          error={Boolean(errors.categoria)}
-          helperText={errors.categoria}
-        >
+        <TextField id="outlined-select-currency" label="Categoria" select value={newProduct.category_id} onChange={(event) => handleInputChange("category_id", event.target.value)} required error={Boolean(errors.categoria)} helperText={errors.categoria} >
           {categories.map((categoria) => (
             <MenuItem key={categoria.category_id} value={categoria.category_id}>
               {categoria.category}
             </MenuItem>
           ))}
         </TextField>
-        <TextField
-          type="text"
-          label="Nombre"
-          value={newProduct.name}
-          onChange={(event) => handleInputChange("name", event.target.value)}
-          required
-          error={Boolean(errors.nombre)}
-          helperText={errors.nombre}
-        />
-        <TextField
-          type="text"
-          label="Descripción"
-          value={newProduct.description}
-          onChange={(event) =>
-            handleInputChange("description", event.target.value)
-          }
-          required
-          error={Boolean(errors.descripcion)}
-          helperText={errors.descripcion}
-        />
-      </div>
 
-      <div>
-        <TextField
-          className="controls"
-          type="number"
-          name="precio"
-          label="Precio"
-          required
-          error={Boolean(errors.precio)}
-          helperText={errors.precio}
-          onChange={(event) => {
-            handleInputChange("price", event.target.value);
-          }}
+        <TextField type="text" label="Nombre" value={newProduct.name} onChange={(event) => handleInputChange("name", event.target.value)} required error={Boolean(errors.nombre)} helperText={errors.nombre} />
+        <TextField type="text" label="Descripción" value={newProduct.description} onChange={(event) => handleInputChange("description", event.target.value)} required error={Boolean(errors.descripcion)} helperText={errors.descripcion} />
+      </Box>
+
+      <Box component="form" sx={{ "& .MuiTextField-root": { m: 1, width: "30ch", top: "20px" } }} noValidate autoComplete="off" >
+        <TextField className="controls" type="number" name="precio" label="Precio" required error={Boolean(errors.precio)} helperText={errors.precio} onChange={(event) => { handleInputChange("price", event.target.value); }}
           InputProps={{
             inputProps: { min: 0 }, // Evitar valores negativos
-          }}
-        />
+          }} />
 
-        <TextField
-          type="text"
-          label="Talla"
-          select
-          value={newProduct.sizes_id}
-          onChange={(event) =>
-            handleInputChange("sizes_id", event.target.value)
-          }
-          required
-          error={Boolean(errors.categoria)}
-          helperText={errors.categoria}
-        >
+        <TextField type="text" label="Talla" select value={newProduct.sizes_id} onChange={(event) => handleInputChange("sizes_id", event.target.value)} required error={Boolean(errors.categoria)} helperText={errors.categoria} >
           {sizes.map((talla) => (
             <MenuItem key={talla.sizes_id} value={talla.sizes_id}>
               {talla.size}
@@ -303,18 +166,7 @@ export default function FormProducts() {
           ))}
         </TextField>
 
-        <TextField
-          type="text"
-          label="Marca"
-          select
-          value={newProduct.id_brands}
-          onChange={(event) =>
-            handleInputChange("id_brands", event.target.value)
-          }
-          required
-          error={Boolean(errors.categoria)}
-          helperText={errors.categoria}
-        >
+        <TextField type="text" label="Marca" select value={newProduct.id_brands} onChange={(event) => handleInputChange("id_brands", event.target.value)} required error={Boolean(errors.categoria)} helperText={errors.categoria} >
           {brands.map((marca) => (
             <MenuItem key={marca.id_brands} value={marca.id_brands}>
               {marca.brand}
@@ -322,79 +174,31 @@ export default function FormProducts() {
           ))}
         </TextField>
 
-        <TextField
-          id="outlined-multiline-flexible"
-          type="number"
-          label="Cantidad*"
-          value={newProduct.stock}
-          onChange={(event) => handleInputChange("stock", event.target.value)}
-          required
-          error={Boolean(errors.cantidad)}
-          helperText={errors.cantidad}
+        <TextField id="outlined-multiline-flexible" type="number" label="Cantidad*" value={newProduct.stock} onChange={(event) => handleInputChange("stock", event.target.value)} required error={Boolean(errors.cantidad)} helperText={errors.cantidad}
           InputProps={{
             inputProps: { min: 0 }, // Evitar valores negativos
           }}
         />
-      </div>
+      </Box>
 
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <input
-          accept="image/*"
-          style={{ display: "none" }}
-          id="image-input"
-          type="file"
-          onChange={handleImageChange}
-        />
-        <input
-          className="controls"
-          type="file"
-          name="contraseña"
-          id="contraseña"
-          placeholder="Ingrese su imagen"
-          required
-          onChange={(event) => {
-            setFile(event.target.files[0]);
-          }}
-        />
-        <label htmlFor="image-input" style={{ color: "black" }}>
-          <Button
-            variant="outline"
-            className="whithoutOutline"
-            component="span"
-            style={{ backgroundColor: "#ffffff", marginTop: "45px" }}
-          >
-            Cargar imagen <PiUploadThin />
-          </Button>
-        </label>
-      </div>
+      <Input className="controls" type="file" required onChange={(event) => { setFile(event.target.files[0]); }} />
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          width: "100%",
-          border: "solid 1px black",
-        }}
-      >
-        {selectedImage && (
-          <div style={{ width: "25%", height: "25%", marginTop: 10 }}>
-            <img src={selectedImage} alt="Imagen seleccionada" />
-          </div>
-        )}
-      </div>
-      <div>
-        <Button
-          variant="contained"
-          className="whithoutOutline"
-          style={{ backgroundColor: "black", marginTop: 45 }}
-          type="submit"
-          value="crear"
-          onClick={handleSubmit}
-        >
-          CREAR PRODUCTO
-        </Button>
-      </div>
-    </Box>
+      <Button variant="contained" className="whithoutOutline" style={{ backgroundColor: "black", height:50, marginLeft:'34%' }} type="submit" value="registrar" >
+        CREAR PRODUCTO
+      </Button>
+
+      {/* Vista previa de la imagen */}
+      {imagePreview && (
+        <div>
+          <p>Imagen seleccionada:</p>
+          <img
+            src={imagePreview}
+            alt="Vista previa de la imagen"
+            style={{ Width: "100%", height: "auto",  border:"solid 1px #ccc"}}
+          />
+        </div>
+      )}
+
+    </FormContainer>
   );
-}
+};

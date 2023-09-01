@@ -5,6 +5,7 @@ import Payment from './pages/processPayment/Payment.jsx'
 import InfoProducts from './pages/infoProducts/InfoProducts.jsx';
 import Sections from './pages/section/Sections.jsx';
 
+
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route>
