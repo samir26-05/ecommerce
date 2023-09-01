@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import LoginDrawer from "../../../pages/Login/Login";
+import Login from "../../../pages/Login/NLogin";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -162,12 +162,6 @@ const Header = ({
               margin: "0 15px",
             }}
           >
-            <LoginDrawer
-              hover={hovered}
-              color={textColor}
-              pageUsed={isUsedUser}
-              pagePayment={isUsedPayment}
-            />
           </Box>
         </Toolbar>
       </Container>
