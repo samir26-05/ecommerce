@@ -1,17 +1,24 @@
 import { DataTypes} from "sequelize";
 import { sequelize } from "../../database.js";
-export const marca = sequelize.define("brand",{
-    id_brands: {
+export const Provedor = sequelize.define("supplier",{
+    id_supplier: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
     },
-    brand:{
+    name:{
         type: DataTypes.STRING(30),
+        allowNull: false,
+    },
+    PhoneNumber:{
+        type: DataTypes.STRING(20),
+        allowNull: false,
+    },
+    email:{
+        type: DataTypes.STRING(100),
         allowNull: false,
     }
 },{
-    tableName: "brand",
-    timestamps: false
+    tableName: "supplier"
 })

@@ -1,10 +1,10 @@
-import express ,{static as fileServer} from "express";
 import morgan from "morgan";
-import  RouteUsers  from "./routes/users.routes.js"
-import LoginUsers from "./routes/auth.routes.js";
-import ProductRoute from "./routes/products.routes.js";
 import cors from "cors";
-
+import express,{static as FileServer} from "express";
+import RouteUser from "./routes/User.routes.js";
+import RouterProduct from "./routes/Product.routes.js";
+import RouterSupllier from "./routes/Supplier.routes.js";
+import { urlArchivos } from "./libs/constas.js";
 const app = express();
 app.use(express.json())
 app.use(morgan('dev'));
@@ -14,8 +14,8 @@ app.get('/',(req,res ) => {
 })
 
 // Routas 
-app.use('/users',RouteUsers)
-app.use('/login',LoginUsers)
-app.use('/products',ProductRoute)
-// app.use('/api/file',fileServer(urlArchivos))
+app.use('/supllier',RouterSupllier)
+app.use('/product',RouterProduct)
+app.use('/user',RouteUser)
+app.use('/api/file',FileServer(urlArchivos))
 export default app
