@@ -34,7 +34,7 @@ const validationSchema = Yup.object().shape({
 
     <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
         <Form>
-            <Field placeholder="Ingrese su Usuario" name="user" />
+            <Field placeholder="Ingrese su Usuario" name="user"  className="form-style"/>
             <ErrorMessage name='user' component='div' />
             <Field placeholder="Ingrese su Nombre" name="nombre" />
             <ErrorMessage name='nombre' component='div' />
@@ -42,8 +42,8 @@ const validationSchema = Yup.object().shape({
             <ErrorMessage name='apellido' component='div' />
             <Field placeholder="Ingrese su email" name="email" />
             <ErrorMessage name='email' component='div' />
-            <Field placeholder="Ingrese su contraseña" name="password" required />
-            <ErrorMessage type="password" name='password' component='div' />
+            <Field placeholder="Ingrese su contraseña" name="password" type="password" />
+            <ErrorMessage name='password' component='div' />
             <button type="submit" style={{ color: '#fff' }}>Enviar Registro</button>
         </Form>
     </Formik>
