@@ -117,7 +117,7 @@ const Header = ({
                   page === "Inicio"
                     ? "/"
                     : page === "Hombre"
-                    ? "/section"
+                    ? "/sectionHombre"
                     : "/section"
                 }
                 key={page}
@@ -131,6 +131,7 @@ const Header = ({
                       ? "#000"
                       : textColor,
                 }}
+
               >
                 <Cta className="cta">
                   <Span className="span"

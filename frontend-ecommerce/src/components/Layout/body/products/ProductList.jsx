@@ -43,9 +43,9 @@ export const ProductList = () => {
     <Div>
       <ContainerPrincipal>
         {products.map((product) => (
-          <ContainerCard key={product.id}>
+          <ContainerCard key={product.product_id}>
             <Card>
-            <Link to={`/InfoProducts/${product.id}`}>
+            <Link to={`/InfoProducts/${product.product_id}`}>
               <CardMedia src={product.img_video} alt={product.name}/>
             </Link>
               <CardContent>
