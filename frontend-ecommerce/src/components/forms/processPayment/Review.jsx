@@ -40,9 +40,9 @@ export default function Review() {
       </div>
       <List disablePadding>
         {products.map((product) => (
-          <ListItem key={product.nameProduct} sx={{ py: 1, px: 0 }}>
+          <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
             <ListItemText
-              primary={product.nameProduct}
+              primary={product.name}
               secondary={`x ${product.quantity}`}
             />
             <Typography variant="body2">
