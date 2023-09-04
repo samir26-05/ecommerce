@@ -149,3 +149,15 @@ export const DeleteProduct = async (req, res) => {
     res.status(500).json({error: error.message})
   }
 }
+export const GetSectionProduct = async (req, res) => {
+  try {
+    const {id} = req.params
+    const result = await productos.findOne({where: {id_section : id}})
+    if(!result) {
+      return res.status(404).json({message: 'No se encontro ningun producto'})
+    }
+    res.status(200).json(result)
+  } catch (error) {
+    res.status(404).json({message: error.message})
+  }
+}
