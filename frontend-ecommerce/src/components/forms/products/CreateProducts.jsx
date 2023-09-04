@@ -114,7 +114,7 @@ export const FormProduct = () => {
       headers: {
         "Content-Type": "multipart/form-data",
         accessToken:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUiLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE2OTM4NDI1MjMsImV4cCI6MTY5Mzg0NjEyM30.0pnFh4ylS6N1HdQR0glMBqmNsSxGzT26hrOCWWyrw0g",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUiLCJyb2xlIjoiQWRtaW5pc3RyYWRvciIsImlhdCI6MTY5Mzg2Njk2MywiZXhwIjoxNjkzODkyMTYzfQ.CbIxRYRUcMDP3g-nHvgNBFf_RfVI7YNTIZ2PyqvT-Uc",
       },
 
     })
