@@ -3,6 +3,7 @@ import { Roles } from "../../models/Usuarios/Roles.js";
 import { Personal_information } from "../../models/Usuarios/Personal_information.js";
 import { ValidRegister } from "../../schemas/login_register/RegisterUser.js";
 import { encryptPassword, compare } from "../../libs/Bcryptjs.js";
+import { sequelize } from "../../database.js";
 import jwt from "jsonwebtoken";
 import { SECRET } from "../../config.js";
 export const CreateUser = async (req, res) => {
@@ -61,7 +62,7 @@ export const Login = async (req, res) => {
       { id: Existemail.user_id, username: Existemail.user,role: rol.rol },
       SECRET,
       {
-        expiresIn: "1h",
+        expiresIn: "7h",
       }
     );
     return res.status(200).json(accessToken);
@@ -70,3 +71,23 @@ export const Login = async (req, res) => {
     console.log(error);
   }
 };
+
+export const GetUsers = async (req, res) => {
+  try {
+    const result = await User.findAll({
+      attributes: ['user','email'],
+      include:[
+        {
+          model: sequelize.model("Personal_information"),
+          attributes: ["nombre","apellido","Phone_number","address","city"],
+        },
+      ]
+    })
+    if(!result){
+      return res.status(404).json({message:'No se encontro ningun usuario'})
+    }
+    res.status(200).json(result)
+  } catch (error) {
+    res.status(404).json({message: error.message})
+  }
+}
