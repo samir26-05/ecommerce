@@ -20,7 +20,8 @@ const router = createBrowserRouter(
       <Route path="/user" element={<UserPage />} />
       <Route path="/payment" element={<Payment />} />
       <Route path="/infoProducts/:id" element={<InfoProducts />} />
-      <Route path="/section" element={<Sections />} />
+      <Route path="/1" element={<Sections />} />
+      <Route path="/2" element={<Sections />} />
     </Route>
   )
 );

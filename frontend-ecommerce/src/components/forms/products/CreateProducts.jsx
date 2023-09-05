@@ -114,7 +114,7 @@ export const FormProduct = () => {
       headers: {
         "Content-Type": "multipart/form-data",
         accessToken:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUiLCJyb2xlIjoiQWRtaW5pc3RyYWRvciIsImlhdCI6MTY5Mzg2Njk2MywiZXhwIjoxNjkzODkyMTYzfQ.CbIxRYRUcMDP3g-nHvgNBFf_RfVI7YNTIZ2PyqvT-Uc",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUiLCJyb2xlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTY5MzkyMDMxOSwiZXhwIjoxNjkzOTQ1NTE5fQ.wdIJAgb2JqjMBC9cqn_oFPlDB4Z04l4skFIkEoAcCas",
       },
 
     })
@@ -149,7 +149,7 @@ export const FormProduct = () => {
         </TextField>
 
         <TextField type="text" label="Nombre" value={newProduct.name} onChange={(event) => handleInputChange("name", event.target.value)} required error={Boolean(errors.nombre)} helperText={errors.nombre} />
-        <TextField type="text" label="Descripción" value={newProduct.description} onChange={(event) => handleInputChange("description", event.target.value)} required error={Boolean(errors.descripcion)} helperText={errors.descripcion} />
+        <TextField type="text" label="Descripción" value={newProduct.descripcion } onChange={(event) => handleInputChange("descripcion", event.target.value)} required error={Boolean(errors.descripcion)} helperText={errors.descripcion} />
       </Box>
 
       <Box component="form" sx={{ "& .MuiTextField-root": { m: 1, width: "30ch", top: "20px" } }} noValidate autoComplete="off" >

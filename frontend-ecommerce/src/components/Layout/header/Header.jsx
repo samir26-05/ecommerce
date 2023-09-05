@@ -11,7 +11,7 @@ import "./car.css";
 import "./header.css";
 import { Link } from "react-router-dom";
 
-const pages = ["Inicio", "Mujer", "Hombre"];
+export const pages = ["Inicio", "Mujer", "Hombre"];
 
 const Header = ({
   products,
@@ -117,8 +117,8 @@ const Header = ({
                   page === "Inicio"
                     ? "/"
                     : page === "Hombre"
-                    ? "/sectionHombre"
-                    : "/section"
+                    ? "/1"
+                    : "/2"
                 }
                 key={page}
                 onClick={handleCloseNavMenu}
