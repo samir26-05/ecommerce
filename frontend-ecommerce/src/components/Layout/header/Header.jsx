@@ -5,6 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Cta, Span } from "./styledHeader";
+import {BiUser} from 'react-icons/bi'
 import { Carrito } from "./Carrito";
 import { useState, useEffect } from "react";
 import "./car.css";
@@ -149,8 +150,12 @@ const Header = ({
               </Link>
             ))}
           </Box>
-          <Link to='/user'>
-            <button>perfil</button>
+          <Link to='/user' style={{width:'50px'}}>
+
+          <a  className="icon-user">
+              <BiUser/>
+              </a>
+            
           </Link>
           <Carrito
             allProducts={products}

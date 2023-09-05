@@ -97,7 +97,7 @@ function FormUserPayment() {
               >
                 {activeStep === steps.length - 1 ? 
                 <div >
-                  <a href="https://biz.payulatam.com/B0f39fd116299FB" style={{color: "white"}}>PAGAR</a>
+                  <a href="https://biz.payulatam.com/B0f39fd66E753B3" style={{color: "white"}}>PAGAR</a>
                 </div> : 'Siguiente'}
               </Button>
 
