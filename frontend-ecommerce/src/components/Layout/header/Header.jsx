@@ -24,7 +24,7 @@ const Header = ({
   isUsedPayment,
   isUsedBody,
 }) => {
-  const handleCloseNavMenu = () => {};
+  const handleCloseNavMenu = () => { };
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -79,8 +79,8 @@ const Header = ({
             isUsedUser || isUsedPayment
               ? "#fff"
               : hovered
-              ? "#fff"
-              : headerColor,
+                ? "#fff"
+                : headerColor,
         }}
       >
         <Toolbar disableGutters>
@@ -89,7 +89,7 @@ const Header = ({
             variant="h1"
             noWrap
             component="a"
-            href="/"
+            href="/home"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             sx={{
@@ -115,10 +115,10 @@ const Header = ({
               <Link
                 to={
                   page === "Inicio"
-                    ? "/"
+                    ? "/home"
                     : page === "Hombre"
-                    ? "/1"
-                    : "/2"
+                      ? "/1"
+                      : "/2"
                 }
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -128,28 +128,30 @@ const Header = ({
                     isUsedUser || isUsedPayment
                       ? "#000"
                       : hovered
-                      ? "#000"
-                      : textColor,
+                        ? "#000"
+                        : textColor,
                 }}
 
               >
                 <Cta className="cta">
                   <Span className="span"
-                  textColor = {textColor}
-                  style={{
-                    textDecoration: "none",
-                    color:
-                      isUsedUser || isUsedPayment
-                        ? "#000"
-                        : hovered
-                        ? "#000"
-                        : textColor,
-                  }}> {page} </Span>
+                    textColor={textColor}
+                    style={{
+                      textDecoration: "none",
+                      color:
+                        isUsedUser || isUsedPayment
+                          ? "#000"
+                          : hovered
+                            ? "#000"
+                            : textColor,
+                    }}> {page} </Span>
                 </Cta>
               </Link>
             ))}
           </Box>
-
+          <Link to='/user'>
+            <button>perfil</button>
+          </Link>
           <Carrito
             allProducts={products}
             setAllProducts={newProducts}
