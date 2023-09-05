@@ -15,6 +15,7 @@ export const validatetoken = async (req,res,next) => {
         if(!user) return res.json({message: 'Usuario no existe'})
         next()
     } catch (error) {
+        console.log(error)
         return res.status(401).json({error: error.message})
     }
 }

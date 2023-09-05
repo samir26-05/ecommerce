@@ -22,7 +22,7 @@ export default function Sections() {
         };
     }, []);
 
-    const limitedData = data.slice(0, 2);
+    const limitedData = data.slice(0, 1);
 
     return (
         <Box sx={{ width: "100%", height: "100vh", overflowY: 'scroll'}}>
