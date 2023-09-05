@@ -106,19 +106,25 @@ const RegisterLogin = () => {
                 }}
               >
                 <button type="submit" className="button2">
-                  REGISTRAR
+                  <a>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Registrar
+                  </a>
                 </button>
               </div>
-              {/* <div className="kak">
-                <p>
-                  ¿No tienes cuenta?
-                  <Link to={"/register"}>
-                    <a className="a2">¡Iniciar Sesion!</a>
-                  </Link>
-                </p>
-              </div> */}
             </Form>
           </Formik>
+          <div className="kak">
+            <p>
+              ¿Ya tienes cuenta?
+              <Link to={"/login"}>
+                <a className="a2">¡Inicia Sesion!</a>
+              </Link>
+            </p>
+          </div>
           <div className="redes">
             <ul className="socail-media">
               <li>
