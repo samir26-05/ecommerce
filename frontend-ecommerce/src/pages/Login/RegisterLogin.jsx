@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { MainDiv, Section1, Section2, Error } from "./styleProducts";
 import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterLogin = () => {
   const initialValues = {
@@ -13,7 +13,7 @@ const RegisterLogin = () => {
     email: "",
     password: "",
   };
-  
+
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
@@ -26,22 +26,22 @@ const RegisterLogin = () => {
     user: Yup.string()
       .min(3)
       .max(15)
-      .required("Debes ingresar un nombre de usuario"),
+      .required("Debes ingresar un nombre de usuario *"),
     nombre: Yup.string()
       .min(3)
       .max(15)
-      .required("Debes ingresar un nombre valido"),
+      .required("Debes ingresar un nombre valido *"),
     apellido: Yup.string()
       .min(3)
       .max(15)
-      .required("Debes ingresar un apellido"),
+      .required("Debes ingresar un apellido *"),
     email: Yup.string()
-      .email("Debe ser un email válido")
-      .required("Debes ingresar un email"),
+      .email("Debe ser un email válido *")
+      .required("Debes ingresar un email *"),
     password: Yup.string()
       .min(4)
       .max(15)
-      .required("Debes ingresar una contraseña"),
+      .required("Debes ingresar una contraseña *"),
   });
 
   return (
@@ -98,11 +98,25 @@ const RegisterLogin = () => {
                 </Error>
                 <label>Contraseña</label>
               </div>
-              <div style={{display:"flex", alignContent:"center", justifyContent:"center"}}>
+              <div
+                style={{
+                  display: "flex",
+                  alignContent: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <button type="submit" className="button2">
                   REGISTRAR
                 </button>
               </div>
+              {/* <div className="kak">
+                <p>
+                  ¿No tienes cuenta?
+                  <Link to={"/register"}>
+                    <a className="a2">¡Iniciar Sesion!</a>
+                  </Link>
+                </p>
+              </div> */}
             </Form>
           </Formik>
           <div className="redes">
