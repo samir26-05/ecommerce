@@ -30,5 +30,9 @@ overflow: hidden;
 
 export const Error = styled.div`
 position: relative;
-bottom: 78px;
+bottom: 40px;
+font-size: 0.8rem;
+div {
+    color: #bd0d0d;
+}
 `;

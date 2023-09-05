@@ -153,7 +153,7 @@
   font-size: 20px;
   color: #000000;
   pointer-events: none;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 
 .login-box .user-box input:focus ~ label,
