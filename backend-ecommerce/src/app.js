@@ -5,7 +5,9 @@ import RouteUser from "./routes/User.routes.js";
 import RouterProduct from "./routes/Product.routes.js";
 import RouterSupllier from "./routes/Supplier.routes.js";
 import { urlArchivos } from "./libs/constas.js";
+import multer from "multer";
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(morgan('dev'));
 app.use(cors());
@@ -17,5 +19,5 @@ app.get('/',(req,res ) => {
 app.use('/supllier',RouterSupllier)
 app.use('/product',RouterProduct)
 app.use('/user',RouteUser)
-app.use('/api/file',FileServer(urlArchivos))
+app.use('/api/file',FileServer('//jesus-afanador/uploads/'));
 export default app
