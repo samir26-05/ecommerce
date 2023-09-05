@@ -7,7 +7,7 @@ import NavVertical from '../../components/navs/NavVertical'
 import { Div } from "./styled";
 
 const UserPage = () => {
-  const [userEnterUser, setUserEnterUser] = useState(false);
+  const [userEnterUser, setUserEnterUser] = useState(true);
 
   const verifyEnter = () => {
     return true

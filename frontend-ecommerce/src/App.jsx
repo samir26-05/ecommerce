@@ -11,6 +11,7 @@ import InfoProducts from "./pages/infoProducts/InfoProducts.jsx";
 import Sections from "./pages/section/Sections.jsx";
 import LoginBody from "./pages/Login/LoginBody.jsx";
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
