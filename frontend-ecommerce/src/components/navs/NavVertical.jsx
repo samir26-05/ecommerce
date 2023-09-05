@@ -54,15 +54,15 @@ export default function NavVertical() {
       console.log(newValue + "estoy entrando aqui")
 
   };
-  const isAdmin = true
-  const userName = 'Jean Carlos';
+  const isAdmin = false
+
   return (
     <Div >
       <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224, marginTop:15 }}>
         {isAdmin ? 
         <>
         <Tabs value={value} onChange={handleChange} sx={{ width: 450, marginTop: 5, marginLeft: "50px", display: "flex", flexDirection: "column" }} >
-          <h3 style={{ position: "fixed", marginTop: "0px", left: 70 }}>Bienvenido {userName}</h3>
+          <h3 style={{ position: "fixed", marginTop: "0px", left: 70 }}>Bienvenido</h3>
           <Tab label="Productos" {...a11yProps(1)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "80px" }} />
           <Tab label="Pedidos" {...a11yProps(2)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "130px" }} />
           <Tab label="Clientes" {...a11yProps(3)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "180px" }} />
@@ -93,7 +93,7 @@ export default function NavVertical() {
            <Tab label="Datos personales y direcciones" {...a11yProps(2)} className='whithoutOutline'  sx={{ position: "fixed", marginTop: "130px" }} />
  
            <Link to={"/"} style={{ textDecoration: "none" }}>
-             <Tab label="Cerrar sesión" className='whithoutOutline' {...a11yProps(7)} sx={{ position: "fixed", marginTop: "400px" }} />
+             <Tab label="Cerrar sesión" className='whithoutOutline' {...a11yProps(3)} sx={{ position: "fixed", marginTop: "200px" }} />
            </Link>
          </Tabs>
  
