@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import Pagination from './Pagination';
 
 //image
 import BlackSuit from '../../../../assets/Img/blacksuit.jpg'
@@ -16,7 +15,7 @@ const styles = {
   },
   slide: {
     padding: 15,
-    minHeight: 850,
+    minHeight: 950,
     minWidth: 591,
     color: '#fff',
     

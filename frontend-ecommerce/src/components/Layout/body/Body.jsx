@@ -30,7 +30,7 @@ export default function Body() {
   }, []);
   return (
     <>
-      <AppBar position="sticky" style={{ backgroundColor: "#ffffff" }}>
+      <AppBar position="relative" style={{ backgroundColor: "#ffffff" }}>
         <Header
           products={allProducts}
           newProducts={setAllProducts}
