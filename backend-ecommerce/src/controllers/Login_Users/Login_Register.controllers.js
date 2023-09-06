@@ -39,6 +39,21 @@ export const CreateUser = async (req, res) => {
   }
 };
 
+export const DeleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const UserFound = await User.findOne({ where: { user_id: id } });
+    if (!UserFound) {
+      return res.status(404).json({ message: "No se encontro ningun usuario" });
+    }
+    UserFound.destroy();
+    res.status(200).json({ message: "Usuario eliminado Exitosamente" });
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+    console.log(error);
+  }
+};
+
 export const Login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -59,7 +74,7 @@ export const Login = async (req, res) => {
       where: { role_id: Existemail.role_id },
     });
     const accessToken = jwt.sign(
-      { id: Existemail.user_id, username: Existemail.user,role: rol.rol },
+      { id: Existemail.user_id, username: Existemail.user, role: rol.rol },
       SECRET,
       {
         expiresIn: "7h",
@@ -74,20 +89,21 @@ export const Login = async (req, res) => {
 
 export const GetUsers = async (req, res) => {
   try {
-    const result = await User.findAll({
-      attributes: ['user','email'],
-      include:[
+    const result = await User.findOne({
+      where: {role_id: 2},
+      attributes: ["user", "email"],
+      include: [
         {
           model: sequelize.model("Personal_information"),
-          attributes: ["nombre","apellido","Phone_number","address","city"],
+          attributes: ["nombre", "apellido", "Phone_number", "address", "city"],
         },
-      ]
-    })
-    if(!result){
-      return res.status(404).json({message:'No se encontro ningun usuario'})
+      ],
+    });
+    if (!result) {
+      return res.status(404).json({ message: "No se encontro ningun usuario" });
     }
-    res.status(200).json(result)
+    res.status(200).json(result);
   } catch (error) {
-    res.status(404).json({message: error.message})
+    res.status(404).json({ message: error.message });
   }
-}
+};
