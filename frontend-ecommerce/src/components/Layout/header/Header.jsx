@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import "./car.css";
 import "./header.css";
 import { Link } from "react-router-dom";
+import AdminDashboard from "./AdminDashboard";
 
 export const pages = ["Inicio", "Mujer", "Hombre"];
 
@@ -59,6 +60,8 @@ const Header = ({
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const isAdmin = false
 
   return (
     <AppBar style={{ background: "none" }}>
@@ -117,8 +120,8 @@ const Header = ({
                   page === "Inicio"
                     ? "/"
                     : page === "Hombre"
-                    ? "/1"
-                    : "/2"
+                    ? "/hombres"
+                    : "/mujer"
                 }
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -150,6 +153,9 @@ const Header = ({
             ))}
           </Box>
 
+          {isAdmin ? 
+          <AdminDashboard textColor={textColor}/>
+          : 
           <Carrito
             allProducts={products}
             setAllProducts={newProducts}
@@ -161,7 +167,8 @@ const Header = ({
             hover={hovered}
             pageUsed={isUsedUser}
             pagePayment={isUsedPayment}
-          />
+          />}
+          
           <Box
             sx={{
               fontWeight: "bold",

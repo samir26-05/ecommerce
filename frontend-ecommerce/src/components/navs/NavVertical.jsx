@@ -54,7 +54,7 @@ export default function NavVertical() {
       console.log(newValue + "estoy entrando aqui")
 
   };
-  const isAdmin = false
+  const isAdmin = true
 
   return (
     <Div >
