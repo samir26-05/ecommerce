@@ -4,19 +4,20 @@ import { Link } from 'react-router-dom';
 import { CssBaseline, AppBar, Box, Container, Paper, Stepper, Step, StepLabel, Button, Typography } from '@mui/material';
 /* COMPONENTS */
 import AddressForm from './AddressForm';
-import PaymentForm from './PaymentForm';
+/* import PaymentForm from './PaymentForm'; */
 import Review from './Review';
 
-const steps = ['Dirección de envío', 'Detalle de pago', 'Revise su orden'];
+
+const steps = ['Dirección de envío', 'Revise su orden'];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
       return <AddressForm />;
     case 1:
-      return <PaymentForm />;
-    case 2:
+      /* return <PaymentForm />; */
       return <Review />;
+   
     default:
       throw new Error('Paso desconocido');
   }
