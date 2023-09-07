@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { MainDiv, Section1, Section2 } from "./styleProducts";
 import axios from "axios";
-import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
 import jwt_decode from "jwt-decode";
+import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
+import { LoginBox, MainDiv, Section1, Section2, LoginBoxInput, BoxButton } from "./LoginStyled";
+import { BoxLink, Redes } from "./RegisterStyled";
 
-const NLogin = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,10 +34,10 @@ const NLogin = () => {
         <DemoAutoPlay />
       </Section1>
       <Section2>
-        <div className="login-box">
-          <p>LOGIN</p>
+        <LoginBox>
+          <p className="LoginBoxTiltle">LOGIN</p>
           <form>
-            <div className="user-box">
+            <LoginBoxInput>
               <input
                 type="text"
                 name="email"
@@ -46,8 +47,8 @@ const NLogin = () => {
                 }}
               />
               <label>Email</label>
-            </div>
-            <div className="user-box">
+            </LoginBoxInput>
+            <LoginBoxInput>
               <input
                 type="password"
                 name="password"
@@ -57,9 +58,8 @@ const NLogin = () => {
                 }}
               />
               <label>Password</label>
-            </div>
-            <div className="joja">
-
+            </LoginBoxInput>
+            <BoxButton>
               <a onClick={loginn}>
                 <span></span>
                 <span></span>
@@ -67,20 +67,17 @@ const NLogin = () => {
                 <span></span>
                 entrar
               </a>
-            </div>
+            </BoxButton>
           </form>
-          <div className="kak">
-
-            <p>
+          <BoxLink>
+            <p className="a1">
               ¿No tienes cuenta?
               <Link to={"/register"}>
-                <a className="a2">
-                  ¡Regístrate!
-                </a>
+                <a className="a2">¡Regístrate!</a>
               </Link>
             </p>
-          </div>
-          <div className="redes">
+          </BoxLink>
+          <Redes>
             <ul className="socail-media">
               <li>
                 <a href="#">
@@ -191,11 +188,11 @@ const NLogin = () => {
                 </a>
               </li>
             </ul>
-          </div>
-        </div>
+          </Redes>
+        </LoginBox>
       </Section2>
     </MainDiv>
   );
 };
 
-export default NLogin;
+export default Login;

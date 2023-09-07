@@ -1,9 +1,9 @@
-import * as Yup from "yup";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
-import { MainDiv, Section1, Section2, Error } from "./styleProducts";
+import * as Yup from "yup";
 import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
-import { useNavigate } from "react-router-dom";
+import { MainDiv, Section1, Section2, LoginBox, LoginBoxInput, BoxButton, BoxLink, Redes, Error } from "./RegisterStyled";
 
 const RegisterLogin = () => {
   const initialValues = {
@@ -13,7 +13,7 @@ const RegisterLogin = () => {
     email: "",
     password: "",
   };
-  
+
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
@@ -26,68 +26,64 @@ const RegisterLogin = () => {
     user: Yup.string()
       .min(3)
       .max(15)
-      .required("Debes ingresar un nombre de usuario"),
+      .required("Debes ingresar un nombre de usuario *"),
     nombre: Yup.string()
       .min(3)
       .max(15)
-      .required("Debes ingresar un nombre valido"),
+      .required("Debes ingresar un nombre valido *"),
     apellido: Yup.string()
       .min(3)
       .max(15)
-      .required("Debes ingresar un apellido"),
+      .required("Debes ingresar un apellido *"),
     email: Yup.string()
-      .email("Debe ser un email válido")
-      .required("Debes ingresar un email"),
+      .email("Debe ser un email válido *")
+      .required("Debes ingresar un email *"),
     password: Yup.string()
       .min(4)
       .max(15)
-      .required("Debes ingresar una contraseña"),
+      .required("Debes ingresar una contraseña *"),
   });
 
   return (
     <MainDiv>
       <Section1>
-        <div className="login-box">
-          <p>REGISTER</p>
+        <LoginBox>
+          <p className="LoginBoxTiltle">REGISTER</p>
           <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
             validationSchema={validationSchema}
           >
             <Form>
-              <div className="user-box">
+              <LoginBoxInput>
                 <Field name="nombre" required />
                 <Error>
                   <ErrorMessage name="nombre" component="div" />
                 </Error>
                 <label>Nombre</label>
-              </div>
-
-              <div className="user-box">
+              </LoginBoxInput>
+              <LoginBoxInput>
                 <Field name="apellido" required />
                 <Error>
                   <ErrorMessage name="apellido" component="div" />
                 </Error>
                 <label>Apellido</label>
-              </div>
-
-              <div className="user-box">
+              </LoginBoxInput>
+              <LoginBoxInput>
                 <Field name="user" className="form-style" required />
                 <Error>
                   <ErrorMessage name="user" component="div" />
                 </Error>
                 <label>Usuario</label>
-              </div>
-
-              <div className="user-box">
+              </LoginBoxInput>
+              <LoginBoxInput>
                 <Field name="email" required />
                 <Error>
                   <ErrorMessage name="email" component="div" />
                 </Error>
                 <label>Email</label>
-              </div>
-
-              <div className="user-box">
+              </LoginBoxInput>
+              <LoginBoxInput>
                 <Field name="password" type="password" required />
                 <Error>
                   <ErrorMessage
@@ -97,15 +93,29 @@ const RegisterLogin = () => {
                   />
                 </Error>
                 <label>Contraseña</label>
-              </div>
-              <div style={{display:"flex", alignContent:"center", justifyContent:"center"}}>
-                <button type="submit" className="button2">
-                  REGISTRAR
+              </LoginBoxInput>
+              <BoxButton>
+                <button type="submit" className="ButtonRegistrar">
+                  <a>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Registrar
+                  </a>
                 </button>
-              </div>
+              </BoxButton>
             </Form>
           </Formik>
-          <div className="redes">
+          <BoxLink>
+            <p className="a1">
+              ¿Ya tienes cuenta?
+              <Link to={"/"}>
+                <a className="a2">¡Inicia Sesion!</a>
+              </Link>
+            </p>
+          </BoxLink>
+          <Redes>
             <ul className="socail-media">
               <li>
                 <a href="#">
@@ -216,8 +226,8 @@ const RegisterLogin = () => {
                 </a>
               </li>
             </ul>
-          </div>
-        </div>
+          </Redes>
+        </LoginBox>
       </Section1>
       <Section2>
         <DemoAutoPlay />
