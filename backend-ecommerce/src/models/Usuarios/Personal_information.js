@@ -23,6 +23,15 @@ export const Personal_information = sequelize.define("Personal_information", {
   city: {
     type: DataTypes.STRING(60),
   },
+  country :{
+    type: DataTypes.STRING(60),
+  },
+  postalcode:{
+    type: DataTypes.STRING()
+  },
+  state: {
+    type: DataTypes.STRING()
+  },
   user_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -31,6 +40,7 @@ export const Personal_information = sequelize.define("Personal_information", {
 // relacion de usuarios y datos personales
 Personal_information.belongsTo(User, {
   foreignKey: "user_id",
+  onDelete: "CASCADE",
 });
 User.hasOne(Personal_information, {
   foreignKey: "user_id",

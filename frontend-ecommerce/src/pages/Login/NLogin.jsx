@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MainDiv, Section1, Section2 } from "./styleProducts";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
+import jwt_decode from "jwt-decode";
 
 const NLogin = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +18,8 @@ const NLogin = () => {
         password: password,
       });
       console.log(response);
-      sessionStorage.setItem("accessToken", response.data);
+      localStorage.setItem("accessToken", response.data);
+      localStorage.setItem("username", jwt_decode(localStorage.getItem("accessToken")).username)
       navigate("/home");
     } catch (error) {
       console.error(error);
@@ -28,58 +29,58 @@ const NLogin = () => {
 
   return (
     <MainDiv>
-        <Section1>
-          <DemoAutoPlay/>
-        </Section1>
-        <Section2>
-            <div className="login-box">
-              <p>LOGIN</p>
-              <form>
-                <div className="user-box">
-                  <input
-                    type="text"
-                    name="email"
-                    required
-                    onChange={(event) => {
-                      setEmail(event.target.value);
-                    }}
-                  />
-                  <label>Email</label>
-                </div>
-                <div className="user-box">
-                  <input
-                    type="password"
-                    name="password"
-                    required
-                    onChange={(event) => {
-                      setPassword(event.target.value);
-                    }}
-                  />
-                  <label>Password</label>
-                </div>
-                <div className="joja">
+      <Section1>
+        <DemoAutoPlay />
+      </Section1>
+      <Section2>
+        <div className="login-box">
+          <p>LOGIN</p>
+          <form>
+            <div className="user-box">
+              <input
+                type="text"
+                name="email"
+                required
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
+              />
+              <label>Email</label>
+            </div>
+            <div className="user-box">
+              <input
+                type="password"
+                name="password"
+                required
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+              />
+              <label>Password</label>
+            </div>
+            <div className="joja">
 
-                <a onClick={loginn}>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  entrar
-                </a>
-                </div>
-              </form>
-              <div className="kak">
+              <a onClick={loginn}>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                entrar
+              </a>
+            </div>
+          </form>
+          <div className="kak">
 
-              <p>
-                ¿No tienes cuenta?
-               <Link to={"/register"}>
-               <a className="a2">
+            <p>
+              ¿No tienes cuenta?
+              <Link to={"/register"}>
+                <a className="a2">
                   ¡Regístrate!
                 </a>
-               </Link>
-              </p>
-              </div>
-              <div className="redes">
+              </Link>
+            </p>
+          </div>
+          <div className="redes">
             <ul className="socail-media">
               <li>
                 <a href="#">
@@ -191,8 +192,8 @@ const NLogin = () => {
               </li>
             </ul>
           </div>
-            </div>
-        </Section2>
+        </div>
+      </Section2>
     </MainDiv>
   );
 };
