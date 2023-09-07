@@ -91,7 +91,7 @@ export const GetUsers = async (req, res) => {
   try {
     const result = await User.findOne({
       where: {role_id: 2},
-      attributes: ["user", "email"],
+      attributes: ["user_id","user", "email"],
       include: [
         {
           model: sequelize.model("Personal_information"),
