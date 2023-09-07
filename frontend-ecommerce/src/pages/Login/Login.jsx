@@ -1,131 +1,88 @@
-import * as Yup from "yup";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import axios from "axios";
-import { MainDiv, Section1, Section2, Error } from "./styleProducts";
-import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
+import {
+  LoginBox,
+  MainDiv,
+  Section1,
+  Section2,
+  LoginBoxInput,
+  BoxButton
+} from "./LoginStyled";
+import { BoxLink, Redes } from "./RegisterStyled";
 
-const RegisterLogin = () => {
-  const initialValues = {
-    user: "",
-    nombre: "",
-    apellido: "",
-    email: "",
-    password: "",
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  let navigate = useNavigate();
+  const loginn = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3000/user/login", {
+        email: email,
+        password: password,
+      });
+      console.log(response);
+      sessionStorage.setItem("accessToken", response.data);
+      navigate("/home");
+    } catch (error) {
+      console.error(error);
+      alert(error.response.data.message);
+    }
   };
-
-  const navigate = useNavigate();
-
-  const onSubmit = (data) => {
-    axios.post("http://localhost:3000/user", data).then(() => {
-      navigate("/");
-    });
-  };
-
-  const validationSchema = Yup.object().shape({
-    user: Yup.string()
-      .min(3)
-      .max(15)
-      .required("Debes ingresar un nombre de usuario *"),
-    nombre: Yup.string()
-      .min(3)
-      .max(15)
-      .required("Debes ingresar un nombre valido *"),
-    apellido: Yup.string()
-      .min(3)
-      .max(15)
-      .required("Debes ingresar un apellido *"),
-    email: Yup.string()
-      .email("Debe ser un email válido *")
-      .required("Debes ingresar un email *"),
-    password: Yup.string()
-      .min(4)
-      .max(15)
-      .required("Debes ingresar una contraseña *"),
-  });
 
   return (
     <MainDiv>
       <Section1>
-        <div className="login-box">
-          <p>REGISTER</p>
-          <Formik
-            initialValues={initialValues}
-            onSubmit={onSubmit}
-            validationSchema={validationSchema}
-          >
-            <Form>
-              <div className="user-box">
-                <Field name="nombre" required />
-                <Error>
-                  <ErrorMessage name="nombre" component="div" />
-                </Error>
-                <label>Nombre</label>
-              </div>
-
-              <div className="user-box">
-                <Field name="apellido" required />
-                <Error>
-                  <ErrorMessage name="apellido" component="div" />
-                </Error>
-                <label>Apellido</label>
-              </div>
-
-              <div className="user-box">
-                <Field name="user" className="form-style" required />
-                <Error>
-                  <ErrorMessage name="user" component="div" />
-                </Error>
-                <label>Usuario</label>
-              </div>
-
-              <div className="user-box">
-                <Field name="email" required />
-                <Error>
-                  <ErrorMessage name="email" component="div" />
-                </Error>
-                <label>Email</label>
-              </div>
-
-              <div className="user-box">
-                <Field name="password" type="password" required />
-                <Error>
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="err"
-                  />
-                </Error>
-                <label>Contraseña</label>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignContent: "center",
-                  justifyContent: "center",
+        <DemoAutoPlay />
+      </Section1>
+      <Section2>
+        <LoginBox>
+          <p className="LoginBoxTiltle">LOGIN</p>
+          <form>
+            <LoginBoxInput>
+              <input
+                type="text"
+                name="email"
+                required
+                onChange={(event) => {
+                  setEmail(event.target.value);
                 }}
-              >
-                <button type="submit" className="button2">
-                  <a>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    Registrar
-                  </a>
-                </button>
-              </div>
-            </Form>
-          </Formik>
-          <div className="kak">
-            <p>
-              ¿Ya tienes cuenta?
-              <Link to={"/login"}>
-                <a className="a2">¡Inicia Sesion!</a>
+              />
+              <label>Email</label>
+            </LoginBoxInput>
+            <LoginBoxInput>
+              <input
+                type="password"
+                name="password"
+                required
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+              />
+              <label>Password</label>
+            </LoginBoxInput>
+            <BoxButton>
+              <a onClick={loginn}>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                entrar
+              </a>
+            </BoxButton>
+          </form>
+          <BoxLink>
+            <p className="a1">
+              ¿No tienes cuenta?
+              <Link to={"/register"}>
+                <a className="a2">¡Regístrate!</a>
               </Link>
             </p>
-          </div>
-          <div className="redes">
+          </BoxLink>
+          <Redes>
             <ul className="socail-media">
               <li>
                 <a href="#">
@@ -236,14 +193,11 @@ const RegisterLogin = () => {
                 </a>
               </li>
             </ul>
-          </div>
-        </div>
-      </Section1>
-      <Section2>
-        <DemoAutoPlay />
+          </Redes>
+        </LoginBox>
       </Section2>
     </MainDiv>
   );
 };
 
-export default RegisterLogin;
+export default Login;
