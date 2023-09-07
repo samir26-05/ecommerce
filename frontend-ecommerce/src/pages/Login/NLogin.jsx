@@ -19,7 +19,7 @@ const NLogin = () => {
       });
       console.log(response);
       sessionStorage.setItem("accessToken", response.data);
-      navigate("/user");
+      navigate("/home");
     } catch (error) {
       console.error(error);
       alert(error.response.data.message);

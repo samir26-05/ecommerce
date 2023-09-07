@@ -1,44 +1,64 @@
-/* eslint-disable no-unused-vars */
-import { useMemo } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { MaterialReactTable } from "material-react-table";
-/* LOCAL STORAGE */
-import { clientData } from "./ClientsData";
-
 
 export default function ShowClients() {
-    const columns = useMemo(
-        () => [
-            {
-                accessorKey: "id", // Nombre de propiedad en el array de productos
-                header: "Id",
-            },
-            {
-                accessorKey: "name", // Nombre de propiedad en el array de productos
-                header: "Nombre",
-            },
-            {
-                accessorKey: "phoneNumber", // Nombre de propiedad en el array de productos
-                header: "Teléfono",
-            },
-            {
-                accessorKey: "role", // Nombre de propiedad en el array de productos
-                header: "Rol",
-            },
-            {
-                accessorKey: "address", // Nombre de propiedad en el array de productos
-                header: "Dirección",
-            },
-            {
-                accessorKey: "city", // Nombre de propiedad en el array de productos
-                header: "Ciudad",
-            },
-            {
-                accessorKey: "orderCount", // Nombre de propiedad en el array de productos
-                header: "Cant Pedidos",
-            },
-        ],
-        []
-    );
+    const [clients, setClients] = useState([]);
+    const [error, setError] = useState(null); // Cambia 'null' por 'null' (sin comillas)
 
-    return <MaterialReactTable columns={columns} data={clientData} />;
+    const columns = [
+        {
+            accessorKey: "personal_id",
+            header: "Id",
+        },
+        {
+            accessorKey: "nombre",
+            header: "Nombre",
+        },
+        {
+            accessorKey: "apellido",
+            header: "Apellido",
+        },
+        {
+            accessorKey: "phone_number",
+            header: "# Contacto",
+        },
+        {
+            accessorKey: "address",
+            header: "Dirección",
+        },
+        {
+            accessorKey: "city",
+            header: "Ciudad",
+        },
+    ];
+
+    useEffect(() => {
+        async function fetchClients() {
+            try {
+                const response = await axios.get("http://localhost:3000/user/GetUser", {
+                    headers: {
+                        accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUwMiIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY5NDAzNzk4MiwiZXhwIjoxNjk0MDYzMTgyfQ.9L38MlvuLWNjU986DU8Mx1NFNPr6GwfHEVrhPI_AzqA"
+                    },
+                });
+                setClients(response.data.result);
+                console.log(response)
+            } catch (error) {
+                setError(error);
+                console.log("Error al obtener los clientes:", error);
+            }
+        }
+
+        fetchClients();
+    }, []);
+
+    return (
+        <div>
+            {error ? (
+                <div>Error al obtener los clientes: {error.message}</div>
+            ) : (
+                <MaterialReactTable columns={columns} data={clients} />
+            )}
+        </div>
+    );
 }

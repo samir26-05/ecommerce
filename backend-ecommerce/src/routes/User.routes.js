@@ -5,7 +5,7 @@ import * as Jwt from "../middlewares/AuthJwt.js";
 const router = Router()
 router.post('/',User.CreateUser)
 router.post('/login',User.Login)
-router.get('/User',[Jwt.validatetoken,Jwt.isAdmin],User.GetUsers)
+router.get('/GetUser',[Jwt.validatetoken,Jwt.isAdmin],User.GetUsers)
 
 // routas de autiticacion 
 router.get('/auth',Jwt.validatetoken,Auth.TokenAccess)

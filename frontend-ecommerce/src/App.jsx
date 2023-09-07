@@ -15,8 +15,9 @@ import RegisterLogin from "./pages/Login/RegisterLogin.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<NLogin />} />
+      <Route path="/" element={<NLogin />} />
+      <Route path="/register" element={<RegisterLogin/>} />
+      <Route path="/home" element={<HomePage />} />
       <Route path="/user" element={<UserPage />} />
       <Route path="/payment" element={<Payment />} />
       <Route path="/infoProducts/:id" element={<InfoProducts />} />
