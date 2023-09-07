@@ -121,8 +121,8 @@ const Header = ({
                   page === "Inicio"
                     ? "/home"
                     : page === "Hombre"
-                      ? "/1"
-                      : "/2"
+                      ? "/hombre"
+                      : "/mujer"
                 }
                 key={page}
                 onClick={handleCloseNavMenu}

@@ -90,7 +90,7 @@ export const Login = async (req, res) => {
 
 export const GetUsers = async (req, res) => {
   try {
-    const result = await User.findOne({
+    const result = await User.findAll({
       where: {role_id: 2},
       attributes: ["user_id","user", "email"],
       include: [
