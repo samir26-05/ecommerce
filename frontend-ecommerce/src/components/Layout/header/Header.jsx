@@ -5,13 +5,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Cta, Span } from "./styledHeader";
+import {BiUser} from 'react-icons/bi'
 import { Carrito } from "./Carrito";
 import { useState, useEffect } from "react";
 import "./car.css";
 import "./header.css";
 import { Link } from "react-router-dom";
 
-const pages = ["Inicio", "Mujer", "Hombre"];
+export const pages = ["Inicio", "Mujer", "Hombre"];
 
 const Header = ({
   products,
@@ -24,7 +25,7 @@ const Header = ({
   isUsedPayment,
   isUsedBody,
 }) => {
-  const handleCloseNavMenu = () => {};
+  const handleCloseNavMenu = () => { };
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -79,8 +80,8 @@ const Header = ({
             isUsedUser || isUsedPayment
               ? "#fff"
               : hovered
-              ? "#fff"
-              : headerColor,
+                ? "#fff"
+                : headerColor,
         }}
       >
         <Toolbar disableGutters>
@@ -89,7 +90,7 @@ const Header = ({
             variant="h1"
             noWrap
             component="a"
-            href="/"
+            href="/home"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             sx={{
@@ -115,10 +116,10 @@ const Header = ({
               <Link
                 to={
                   page === "Inicio"
-                    ? "/"
+                    ? "/home"
                     : page === "Hombre"
-                    ? "/section"
-                    : "/section"
+                      ? "/1"
+                      : "/2"
                 }
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -128,27 +129,34 @@ const Header = ({
                     isUsedUser || isUsedPayment
                       ? "#000"
                       : hovered
-                      ? "#000"
-                      : textColor,
+                        ? "#000"
+                        : textColor,
                 }}
+
               >
                 <Cta className="cta">
                   <Span className="span"
-                  textColor = {textColor}
-                  style={{
-                    textDecoration: "none",
-                    color:
-                      isUsedUser || isUsedPayment
-                        ? "#000"
-                        : hovered
-                        ? "#000"
-                        : textColor,
-                  }}> {page} </Span>
+                    textColor={textColor}
+                    style={{
+                      textDecoration: "none",
+                      color:
+                        isUsedUser || isUsedPayment
+                          ? "#000"
+                          : hovered
+                            ? "#000"
+                            : textColor,
+                    }}> {page} </Span>
                 </Cta>
               </Link>
             ))}
           </Box>
+          <Link to='/user' style={{width:'50px'}}>
 
+          <a  className="icon-user">
+              <BiUser/>
+              </a>
+            
+          </Link>
           <Carrito
             allProducts={products}
             setAllProducts={newProducts}

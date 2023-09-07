@@ -11,7 +11,7 @@ export const GetProducts = async (req, res) => {
     const result = await productos.findAll({
       attributes: [
         "product_id",
-        "name",
+        "name", 
         "descripcion",
         "price",
         "stock",
@@ -50,6 +50,7 @@ export const CreateProduct = async (req, res) => {
   try {
     const { file } = req;
     const ruta = path.join(urlArchivos, file.filename);
+    console.log(ruta);
     if (!file) {
       res.status(404).json({ message: "no se ingreso ningun archivo" });
     }
@@ -72,6 +73,7 @@ export const CreateProduct = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
+    console.log(error);
   }
 };
 
@@ -149,15 +151,21 @@ export const DeleteProduct = async (req, res) => {
     res.status(500).json({error: error.message})
   }
 }
+
+
 export const GetSectionProduct = async (req, res) => {
   try {
-    const {id} = req.params
-    const result = await productos.findOne({where: {id_section : id}})
-    if(!result) {
-      return res.status(404).json({message: 'No se encontro ningun producto'})
+    const { id } = req.params;
+    let result;
+
+    if (id) {
+      result = await productos.findOne({ where: { id_section: id } });
+    } else {
+      result = await productos.findAll();
     }
-    res.status(200).json(result)
+
+    res.status(200).json(result);
   } catch (error) {
-    res.status(404).json({message: error.message})
+    res.status(404).json({ message: error.message });
   }
-}
+};

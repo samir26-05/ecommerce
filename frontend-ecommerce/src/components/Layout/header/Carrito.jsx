@@ -6,9 +6,10 @@ import cesta from "../../../assets/Img/cesta.png";
 import { useCart } from "../body/products/CardContext";
 import { MdAdd } from "react-icons/Md";
 import { AiOutlineMinus } from "react-icons/Ai";
-export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
-  const [active, setActive] = useState(false);
 
+export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
+
+  const [active, setActive] = useState(false);
   const { cart, updateCart } = useCart();
 
   const allProducts = cart;
@@ -23,13 +24,13 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
     : 0;
 
   const onDeleteProduct = (product) => {
-    const results = cart.filter((item) => item.id !== product.id);
+    const results = cart.filter((item) => item.product_id !== product.product_id);
     updateCart(results);
   };
 
   const onAddProduct = (product) => {
     const updatedCart = [...cart];
-    const existingProduct = updatedCart.find((item) => item.id === product.id);
+    const existingProduct = updatedCart.find((item) => item.product_id === product.product_id);
 
     if (existingProduct) {
       existingProduct.quantity++;
@@ -42,7 +43,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
 
   const onDellProduct = (product) => {
     const updatedCart = [...cart];
-    const existingProduct = updatedCart.find((item) => item.id === product.id);
+    const existingProduct = updatedCart.find((item) => item.product_id === product.product_id);
     console.log("existingProduct:", existingProduct);
     if (existingProduct) {
       if (existingProduct.quantity > 0) {
@@ -100,7 +101,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                     <Link to={`/InfoProducts/${product.id}`}>
                       <div className="info-cart-product">
                         <img
-                          src={product.img}
+                          src={product.img_video}
                           alt=""
                           style={{ width: 100, height: 120 }}
                         />
@@ -110,10 +111,10 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
 
                         <div className="Infoon-product">
                           <p className="titulo-producto-carrito">
-                            {product.nameProduct}
+                            {product.name}
                           </p>
                           <span className="precio-producto-carrito">
-                            $ {product.price.toFixed(2)}
+                            $ {product.price.toFixed()}
                           </span>
                         </div>
                       </div>
@@ -164,7 +165,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
 
               <div className="cart-total">
                 <h3>Total:</h3>
-                <span className="total-pagar">${total.toFixed(2)}</span>
+                <span className="total-pagar">${total.toFixed()}</span>
               </div>
               <div className="btns">
                 <Link to={"/payment"}>

@@ -6,6 +6,7 @@ import { encryptPassword, compare } from "../../libs/Bcryptjs.js";
 import { sequelize } from "../../database.js";
 import jwt from "jsonwebtoken";
 import { SECRET } from "../../config.js";
+
 export const CreateUser = async (req, res) => {
   try {
     const result = await ValidRegister(req.body);
@@ -74,20 +75,22 @@ export const Login = async (req, res) => {
 
 export const GetUsers = async (req, res) => {
   try {
-    const result = await User.findAll({
-      attributes: ['user','email'],
-      include:[
+    const results = await User.findAll({
+      attributes: ['user', 'email'],
+      include: [
         {
-          model: sequelize.model("Personal_information"),
-          attributes: ["nombre","apellido","Phone_number","address","city"],
+          model: sequelize.model('Personal_information'),
+          attributes: ['nombre', 'apellido', 'Phone_number', 'address', 'city'],
         },
-      ]
-    })
-    if(!result){
-      return res.status(404).json({message:'No se encontro ningun usuario'})
+      ],
+    });
+
+    if (!results || results.length === 0) {
+      return res.status(404).json({ message: 'No se encontraron usuarios' });
     }
-    res.status(200).json(result)
+
+    res.status(200).json(results);
   } catch (error) {
-    res.status(404).json({message: error.message})
+    res.status(500).json({ message: error.message });
   }
-}
+};
