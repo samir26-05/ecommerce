@@ -23,6 +23,15 @@ export const Personal_information = sequelize.define("Personal_information", {
   city: {
     type: DataTypes.STRING(60),
   },
+  country :{
+    type: DataTypes.STRING(60),
+  },
+  postalcode:{
+    type: DataTypes.STRING()
+  },
+  state: {
+    type: DataTypes.STRING()
+  },
   user_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
