@@ -12,23 +12,23 @@ export default function ShowClients() {
             header: "Id",
         },
         {
-            accessorKey: "nombre",
+            accessorKey: "Personal_information.nombre",
             header: "Nombre",
         },
         {
-            accessorKey: "apellido",
+            accessorKey: "Personal_information.apellido",
             header: "Apellido",
         },
         {
-            accessorKey: "phone_number",
+            accessorKey: "Personal_information.phone_number",
             header: "# Contacto",
         },
         {
-            accessorKey: "address",
+            accessorKey: "Personal_information.address",
             header: "Dirección",
         },
         {
-            accessorKey: "city",
+            accessorKey: "Personal_information.city",
             header: "Ciudad",
         },
     ];
@@ -38,11 +38,12 @@ export default function ShowClients() {
             try {
                 const response = await axios.get("http://localhost:3000/user/GetUser", {
                     headers: {
-                        accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUwMiIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY5NDAzNzk4MiwiZXhwIjoxNjk0MDYzMTgyfQ.9L38MlvuLWNjU986DU8Mx1NFNPr6GwfHEVrhPI_AzqA"
+                        accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUwMiIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY5NDA5NDY3NCwiZXhwIjoxNjk0MTE5ODc0fQ.qexd4Wo3EyUvwKIGj5cub61VssCoXkHZstpFhREL1yg"
                     },
+                    data: {}
                 });
-                setClients(response.data.result);
-                console.log(response)
+                setClients(response.data);
+                console.log(response.data, '❤️❤️❤️❤️')
             } catch (error) {
                 setError(error);
                 console.log("Error al obtener los clientes:", error);

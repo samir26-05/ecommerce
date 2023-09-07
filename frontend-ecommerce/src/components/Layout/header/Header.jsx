@@ -12,7 +12,6 @@ import "./car.css";
 import "./header.css";
 import { Link } from "react-router-dom";
 import AdminDashboard from "./AdminDashboard";
-import { Alert } from "@mui/material";
 
 export const pages = ["Inicio", "Mujer", "Hombre"];
 
@@ -154,7 +153,6 @@ const Header = ({
               </Link>
             ))}
           </Box>
-          <Alert severity="error">This is an error alert — check it out!</Alert>
 
           {isAdmin ? 
           <AdminDashboard textColor={textColor}/>
