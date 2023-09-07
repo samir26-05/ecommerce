@@ -40,6 +40,21 @@ export const CreateUser = async (req, res) => {
   }
 };
 
+export const DeleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const UserFound = await User.findOne({ where: { user_id: id } });
+    if (!UserFound) {
+      return res.status(404).json({ message: "No se encontro ningun usuario" });
+    }
+    UserFound.destroy();
+    res.status(200).json({ message: "Usuario eliminado Exitosamente" });
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+    console.log(error);
+  }
+};
+
 export const Login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -60,7 +75,7 @@ export const Login = async (req, res) => {
       where: { role_id: Existemail.role_id },
     });
     const accessToken = jwt.sign(
-      { id: Existemail.user_id, username: Existemail.user,role: rol.rol },
+      { id: Existemail.user_id, username: Existemail.user, role: rol.rol },
       SECRET,
       {
         expiresIn: "7h",
@@ -75,22 +90,21 @@ export const Login = async (req, res) => {
 
 export const GetUsers = async (req, res) => {
   try {
-    const results = await User.findAll({
-      attributes: ['user', 'email'],
+    const result = await User.findOne({
+      where: {role_id: 2},
+      attributes: ["user_id","user", "email"],
       include: [
         {
-          model: sequelize.model('Personal_information'),
-          attributes: ['nombre', 'apellido', 'Phone_number', 'address', 'city'],
+          model: sequelize.model("Personal_information"),
+          attributes: ["nombre", "apellido", "Phone_number", "address", "city"],
         },
       ],
     });
-
-    if (!results || results.length === 0) {
-      return res.status(404).json({ message: 'No se encontraron usuarios' });
+    if (!result) {
+      return res.status(404).json({ message: "No se encontro ningun usuario" });
     }
-
-    res.status(200).json(results);
+    res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
