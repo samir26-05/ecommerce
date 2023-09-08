@@ -1,5 +1,5 @@
 import Body from "../../components/Layout/body/Body";
-import { Div } from "./styled";
+import { Div } from "./HomeStyled";
 
 const HomePage = () => {
   return (
