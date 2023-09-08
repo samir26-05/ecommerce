@@ -17,7 +17,10 @@ const ShemaUpdatePersonal = z.object({
     return true
     },{message: 'Numero Invalido'}).optional(),
     address: z.string().optional(),
-    city: z.string().optional()
+    city: z.string().optional(),
+    country: z.string().optional(),
+    postalcode: z.string().optional(),
+    state: z.string().optional(),
 })
 
 export function ValidUpdatePersonal(object) {
