@@ -10,7 +10,7 @@ import InfoCountUser from './InfoCount';
 import { Div } from '../../pages/user/styled';
 import '../Layout/header/header.css'
 import { FlexDirCol } from '../StyledMain';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function TabPanel(props) {
@@ -52,7 +52,7 @@ export default function NavVertical() {
       console.log(newValue + "estoy entrando aqui")
 
   };
-  const isAdmin = true
+
 
   const navegate = useNavigate()
 
@@ -65,10 +65,10 @@ export default function NavVertical() {
   return (
     <Div >
       <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224, marginTop:15 }}>
-        {isAdmin ? 
+        {localStorage.getItem("role") === "Admin" ? 
         <>
         <Tabs value={value} onChange={handleChange} sx={{ width: 450, marginTop: 5, marginLeft: "50px", display: "flex", flexDirection: "column" }} >
-        <h3 style={{ position: "fixed", marginTop: "0px", left: 70 }}>Hola {localStorage.getItem("username")}</h3>
+        <h3 style={{ position: "fixed", marginTop: "0px", left: 70 }}>Bienvenido {localStorage.getItem("username")}</h3>
           <Tab label="Productos" {...a11yProps(1)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "80px" }} />
           <Tab label="Pedidos" {...a11yProps(2)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "130px" }} />
           <Tab label="Clientes" {...a11yProps(3)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "180px" }} />
@@ -92,7 +92,7 @@ export default function NavVertical() {
          : 
          <>
          <Tabs value={value} onChange={handleChange} sx={{ width: 450, marginTop: 5, marginLeft: "50px", display: "flex", flexDirection: "column" }} >
-         <h3 style={{ position: "fixed", marginTop: "0px", left: 70 }}>Hola {localStorage.getItem("username")}</h3>
+         <h3 style={{ position: "fixed", marginTop: "0px", left: 70 }}>Bienvenido {localStorage.getItem("username")}</h3>
            <Tab label="Mis compras" {...a11yProps(1)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "80px", outline: "none" }} />
            <Tab label="Datos personales y direcciones" {...a11yProps(2)} className='whithoutOutline'  sx={{ position: "fixed", marginTop: "130px" }} />
  

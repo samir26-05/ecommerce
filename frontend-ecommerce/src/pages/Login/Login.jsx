@@ -11,6 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   let navigate = useNavigate();
+
   const loginn = async (event) => {
     event.preventDefault();
     try {
@@ -21,6 +22,7 @@ const Login = () => {
       console.log(response);
       localStorage.setItem("accessToken", response.data);
       localStorage.setItem("username", jwt_decode(localStorage.getItem("accessToken")).username)
+      localStorage.setItem("role", jwt_decode(localStorage.getItem("accessToken")).role)
       navigate("/home");
     } catch (error) {
       console.error(error);

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { data } from "../../data";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../../components/Layout/body/products/CardContext";
+import jwt_decode from "jwt-decode"
 
 const InfoProducts = () => {
   const { id } = useParams();
@@ -14,22 +15,24 @@ const InfoProducts = () => {
   }
 
   const [userEnterUser, setUserEnterUser] = useState(false);
-  const [loading, setLoading] = useState(true)
+
   const verifyEnter = () => {
     return true;
   };
 
 
+  const [loading, setLoading] = useState(true)
 
   let navigate = useNavigate();
 
   useEffect(() => {
-
     if (localStorage.getItem("accessToken")) {
+      console.log(jwt_decode(localStorage.getItem("accessToken")), "❤❤❤❤")
       setLoading(false)
     } else {
       navigate('/')
     }
+
 
     const trueEnter = verifyEnter();
     setUserEnterUser(trueEnter);
@@ -66,6 +69,11 @@ const InfoProducts = () => {
 
   return (
     <MainDiv>
+            {loading ? (
+        <>
+          <h1>Cargando......</h1>
+        </>
+      ) : ( <>
       <Header isUsedUser={userEnterUser} />
       <BoxMain>
         <Section1>
@@ -101,6 +109,7 @@ const InfoProducts = () => {
           </ButtonBuys>
         </Section2>
       </BoxMain>
+      </> )}
     </MainDiv>
   );
 };
