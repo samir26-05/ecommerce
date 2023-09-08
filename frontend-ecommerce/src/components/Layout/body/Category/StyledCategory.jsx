@@ -74,6 +74,6 @@ export const Img = styled.img`
 
 `
 
-export const Text = styled.text`
+export const Text = styled.p`
     letter-spacing: 2px;
 `

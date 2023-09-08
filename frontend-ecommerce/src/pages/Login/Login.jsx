@@ -1,15 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import DemoAutoPlay from "../../components/Layout/body/Carrusel/DemoAutoPlay";
-import {
-  LoginBox,
-  MainDiv,
-  Section1,
-  Section2,
-  LoginBoxInput,
-  BoxButton
-} from "./LoginStyled";
+import jwt_decode from "jwt-decode";
+import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
+import { LoginBox, MainDiv, Section1, Section2, LoginBoxInput, BoxButton } from "./LoginStyled";
 import { BoxLink, Redes } from "./RegisterStyled";
 
 const Login = () => {
@@ -25,7 +19,8 @@ const Login = () => {
         password: password,
       });
       console.log(response);
-      sessionStorage.setItem("accessToken", response.data);
+      localStorage.setItem("accessToken", response.data);
+      localStorage.setItem("username", jwt_decode(localStorage.getItem("accessToken")).username)
       navigate("/home");
     } catch (error) {
       console.error(error);

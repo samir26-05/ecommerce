@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FormContainer, Input } from "./style.jsx"
 import { Box, Button, MenuItem, TextField } from "@mui/material";
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 
 // import "./css/index.css"
@@ -114,20 +115,29 @@ export const FormProduct = () => {
       headers: {
         "Content-Type": "multipart/form-data",
         accessToken:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUiLCJyb2xlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTY5MzkyMDMxOSwiZXhwIjoxNjkzOTQ1NTE5fQ.wdIJAgb2JqjMBC9cqn_oFPlDB4Z04l4skFIkEoAcCas",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUwMiIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY5NDA5MzA0OCwiZXhwIjoxNjk0MTE4MjQ4fQ.JgOqEcBJk5Vnur5ybull2cswI5nSAA6Yl6Sn9gp1iXo",
       },
 
     })
       .then(response => {
-        alert("producto creado con exito")
+        Swal.fire(
+          'BIEN HECHO!',
+          'Producto creado con exito!',
+          'success'
+        )
         console.log(response.data);
       })
       .catch(error => {
-        alert("error")
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Ocurrió un error al intentar crear el producto!'
+        })
         console.error(error);
       });
   };
 
+  
   return (
     <FormContainer onSubmit={CreateProduct} >
       <Box component="form" sx={{ "& .MuiTextField-root": { m: 1, width: "30ch", top: "20px" } }} noValidate autoComplete="off" >

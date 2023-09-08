@@ -3,8 +3,9 @@ import { MainDiv, Colores, BoxMain, Section1, Section2, Image, Title, Reference,
 import Header from "../../components/Layout/header/Header";
 import { useState, useEffect } from "react";
 import { data } from "../../data";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../../components/Layout/body/products/CardContext";
+
 const InfoProducts = () => {
   const { id } = useParams();
   const product = data.find((item) => item.id === parseInt(id, 10));
@@ -13,18 +14,31 @@ const InfoProducts = () => {
   }
 
   const [userEnterUser, setUserEnterUser] = useState(false);
+  const [loading, setLoading] = useState(true)
   const verifyEnter = () => {
     return true;
   };
 
+
+
+  let navigate = useNavigate();
+
   useEffect(() => {
+
+    if (localStorage.getItem("accessToken")) {
+      setLoading(false)
+    } else {
+      navigate('/')
+    }
+
     const trueEnter = verifyEnter();
     setUserEnterUser(trueEnter);
-
     return () => {
       setUserEnterUser(false);
     };
   }, []);
+
+
 
   const [selectedSize, setSelectedSize] = useState(null);
   const handleSizeClick = (index) => {

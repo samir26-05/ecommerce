@@ -1,64 +1,173 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { MaterialReactTable } from "material-react-table";
+import { useCallback, useMemo } from "react";
+import { Box, IconButton, Tooltip, Typography } from "@mui/material";
+import { Delete, Edit } from "@mui/icons-material";
 
 export default function ShowClients() {
-    const [clients, setClients] = useState([]);
-    const [error, setError] = useState(null); // Cambia 'null' por 'null' (sin comillas)
+  const [clients, setClients] = useState([]);
+  const [error, setError] = useState(null); // Cambia 'null' por 'null' (sin comillas)
 
-    const columns = [
-        {
-            accessorKey: "personal_id",
-            header: "Id",
-        },
-        {
-            accessorKey: "nombre",
-            header: "Nombre",
-        },
-        {
-            accessorKey: "apellido",
-            header: "Apellido",
-        },
-        {
-            accessorKey: "phone_number",
-            header: "# Contacto",
-        },
-        {
-            accessorKey: "address",
-            header: "Dirección",
-        },
-        {
-            accessorKey: "city",
-            header: "Ciudad",
-        },
-    ];
+  const [tableData, setTableData] = useState(() => clients);
+  const [validationErrors, setValidationErrors] = useState({});
 
-    useEffect(() => {
-        async function fetchClients() {
-            try {
-                const response = await axios.get("http://localhost:3000/user/GetUser", {
-                    headers: {
-                        accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUwMiIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY5NDAzNzk4MiwiZXhwIjoxNjk0MDYzMTgyfQ.9L38MlvuLWNjU986DU8Mx1NFNPr6GwfHEVrhPI_AzqA"
-                    },
-                });
-                setClients(response.data.result);
-                console.log(response)
-            } catch (error) {
-                setError(error);
-                console.log("Error al obtener los clientes:", error);
-            }
-        }
+  const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
+    if (!Object.keys(validationErrors).length) {
+      tableData[row.index] = values;
+      //send/receive api updates here, then refetch or update local table data for re-render
+      setTableData([...tableData]);
+      exitEditingMode(); //required to exit editing mode and close modal
+    }
+  };
 
-        fetchClients();
-    }, []);
+  const handleCancelRowEdits = () => {
+    setValidationErrors({});
+  };
 
-    return (
-        <div>
-            {error ? (
-                <div>Error al obtener los clientes: {error.message}</div>
-            ) : (
-                <MaterialReactTable columns={columns} data={clients} />
+  const handleDeleteRow = useCallback(
+    (row) => {
+      if (!confirm(`Are you sure you want to delete ${row.getValue("name")}`)) {
+        return;
+      }
+      //send api delete request here, then refetch or update local table data for re-render
+      tableData.splice(row.index, 1);
+      setTableData([...tableData]);
+    },
+    [tableData]
+  );
+
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "user_id",
+        header: "ID",
+        enableColumnOrdering: false,
+        enableEditing: false, //disable editing on this column
+        enableSorting: false,
+        size: 80,
+      },
+      {
+        accessorKey: "Personal_information.nombre",
+        header: "Nombre",
+        size: 140,
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...cell,
+        }),
+      },
+      {
+        accessorKey: "Personal_information.apellido",
+        header: "Apellido",
+        size: 140,
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...cell,
+        }),
+      },
+      {
+        accessorKey: "Personal_information.phone_number",
+        header: "# Contacto",
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...cell,
+          type: "number",
+        }),
+      },
+      {
+        accessorKey: "Personal_information.address",
+        header: "Dirección",
+        size: 80,
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...cell,
+        }),
+      },
+      {
+        accessorKey: "Personal_information.city",
+        header: "Ciudad",
+        size: 80,
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...cell,
+        }),
+      },
+    ],
+    []
+  );
+
+  useEffect(() => {
+    async function fetchClients() {
+      try {
+        const response = await axios.get("http://localhost:3000/user/User", {
+          headers: {
+            accessToken:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJKZWFuY2FybG9zX0NGIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNjk0MTAyNTk3LCJleHAiOjE2OTQxMjc3OTd9.Oa5Q4GJIG53NU6-uKQZuXqKJhgI0fjnE5eyj17Q3UVg",
+          },
+          data: {},
+        });
+        setClients(response.data);
+        console.log(response.data, "❤️❤️❤️❤️");
+      } catch (error) {
+        setError(error);
+        console.log("Error al obtener los clientes:", error);
+      }
+    }
+
+    fetchClients();
+  }, []);
+
+  return (
+    <div>
+      {error ? (
+        <div>Error al obtener los clientes: {error.message}</div>
+      ) : (
+        <>
+          <MaterialReactTable
+            displayColumnDefOptions={{
+              "mrt-row-actions": {
+                muiTableHeadCellProps: {
+                  align: "center",
+                },
+                size: 120,
+              },
+            }}
+            columns={columns}
+            data={clients}
+            editingMode="modal" //default
+            enableColumnOrdering
+            enableEditing
+            onEditingRowSave={handleSaveRowEdits}
+            onEditingRowCancel={handleCancelRowEdits}
+            renderRowActions={({ row, table }) => (
+              <Box sx={{ display: "flex", gap: "1rem" }}>
+                <Tooltip arrow placement="left" title="Edit">
+                  <IconButton onClick={() => table.setEditingRow(row)}>
+                    <Edit />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip arrow placement="right" title="Delete">
+                  <IconButton onClick={() => handleDeleteRow(row)}>
+                    <Delete style={{ fill: "red" }} />
+                  </IconButton>
+                </Tooltip>
+              </Box>
             )}
-        </div>
-    );
+            renderTopToolbarCustomActions={() => (
+              <>
+                <div></div>
+                <Typography
+                  style={{
+                    fontSize: "1.2rem",
+                    fontWeight: "500",
+                    width: "20rem",
+                    textAlign: "end",
+                  }}
+                >
+                  Lista de Clientes
+                </Typography>
+              </>
+            )}
+          />
+        </>
+      )}
+    </div>
+  );
 }
+
+/* eslint-disable react/prop-types */

@@ -44,7 +44,6 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
   const onDellProduct = (product) => {
     const updatedCart = [...cart];
     const existingProduct = updatedCart.find((item) => item.product_id === product.product_id);
-    console.log("existingProduct:", existingProduct);
     if (existingProduct) {
       if (existingProduct.quantity > 0) {
         existingProduct.quantity--;
