@@ -110,13 +110,13 @@ export const GetUsers = async (req, res) => {
 
 export const GetUsersId = async (req, res) => {
   try {
-  const {id} = req.params
-  const result = await User.findOne({where: {user_id: id},
-    attributes: ["role_id"],
+  const {name} = req.params
+  const result = await User.findOne({where: {user: name},
+    attributes: ["user"],
     include: [
       {
-        model: sequelize.model("rol"),
-        attributes: ["rol"],
+        model: sequelize.model("Personal_information"),
+        attributes: ["nombre", "apellido", "Phone_number", "address", "city"],
       },
     ],
   })
