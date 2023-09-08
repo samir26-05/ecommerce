@@ -18,7 +18,7 @@ const NLogin = () => {
         password: password,
       });
       console.log(response);
-      sessionStorage.setItem("accessToken", response.data);
+      localStorage.setItem("accessToken", response.data);
       navigate("/home");
     } catch (error) {
       console.error(error);

@@ -97,7 +97,7 @@ export default function ShowClients() {
         const response = await axios.get("http://localhost:3000/user/User", {
           headers: {
             accessToken:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJKZWFuY2FybG9zX0NGIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNjk0MTAyNTk3LCJleHAiOjE2OTQxMjc3OTd9.Oa5Q4GJIG53NU6-uKQZuXqKJhgI0fjnE5eyj17Q3UVg",
+              localStorage.getItem("accessToken"),
           },
           data: {},
         });
