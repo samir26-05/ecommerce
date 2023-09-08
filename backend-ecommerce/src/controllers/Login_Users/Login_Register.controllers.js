@@ -107,3 +107,24 @@ export const GetUsers = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const GetUsersId = async (req, res) => {
+  try {
+  const {id} = req.params
+  const result = await User.findOne({where: {user_id: id},
+    attributes: ["role_id"],
+    include: [
+      {
+        model: sequelize.model("rol"),
+        attributes: ["rol"],
+      },
+    ],
+  })
+  if(!result){
+    return res.status(404).json({message: 'Este usuario no se encuentra registrado'})
+  }
+  res.status(200).json(result)
+  } catch (error) {
+  res.status(500).json({error: error.message})
+  }
+}
