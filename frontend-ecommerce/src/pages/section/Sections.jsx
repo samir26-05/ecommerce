@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import ImageList from '@mui/material/ImageList';
 import Header from '../../components/Layout/header/Header.jsx';
 import { useCart } from '../../components/Layout/body/products/CardContext.jsx';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { ContainerCard, Tiltle } from '../../components/Layout/body/products/StyledProductList.jsx';
-import { Card, CardContent, CardMedia } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 import { Price } from '../infoProducts/styleProducts.jsx';
 import { GiShoppingBag } from 'react-icons/gi';
 

@@ -25,15 +25,28 @@ export default function ShowClients() {
     setValidationErrors({});
   };
 
-  const handleDeleteRow = useCallback(
-    (row) => {
-      if (!confirm(`Are you sure you want to delete ${row.getValue("name")}`)) {
+  const handleDeleteRow = useCallback((row) => {
+      if (
+        !confirm(`¿Está seguro de eliminar al usuario ${row.getValue("Personal_information.nombre")}?`)
+      ) {
         return;
       }
       //send api delete request here, then refetch or update local table data for re-render
-      tableData.splice(row.index, 1);
-      setTableData([...tableData]);
+      try {
+        axios.delete(`http://localhost:3000/user/delete/${row.getValue("user_id")}`, {
+            headers: {
+              accessToken: localStorage.getItem("accessToken"),
+            },
+            data: {},
+          });
+        tableData.splice(row.index, 1);
+        setTableData([...tableData]);
+      } catch (error) {
+        setError(error);
+        console.log("Error al obtener los clientes:", error);
+      }
     },
+
     [tableData]
   );
 
@@ -64,7 +77,7 @@ export default function ShowClients() {
         }),
       },
       {
-        accessorKey: "Personal_information.phone_number",
+        accessorKey: "Personal_information.Phone_number",
         header: "# Contacto",
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...cell,
@@ -96,8 +109,7 @@ export default function ShowClients() {
       try {
         const response = await axios.get("http://localhost:3000/user/User", {
           headers: {
-            accessToken:
-              localStorage.getItem("accessToken"),
+            accessToken: localStorage.getItem("accessToken"),
           },
           data: {},
         });
@@ -142,7 +154,9 @@ export default function ShowClients() {
                   </IconButton>
                 </Tooltip>
                 <Tooltip arrow placement="right" title="Delete">
-                  <IconButton onClick={() => handleDeleteRow(row)}>
+                  <IconButton onClick={() => {
+                      handleDeleteRow(row);
+                    }}>
                     <Delete style={{ fill: "red" }} />
                   </IconButton>
                 </Tooltip>
