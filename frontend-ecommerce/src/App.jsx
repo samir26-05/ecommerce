@@ -10,7 +10,7 @@ const router = createBrowserRouter(
 			<Route path="/user" element={<UserPage />} />
 			<Route path="/payment" element={<Payment />} />
 		</Route>
-	)
+	) 
 );
 
 function App() {
