@@ -4,13 +4,13 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import Login from "./pages/login/Login.jsx";
+import RegisterLogin from "./pages/Login/Register.jsx";
 import HomePage from "./pages/home/Home.jsx";
 import UserPage from "./pages/user/UserPage.jsx";
 import Payment from "./pages/processPayment/Payment.jsx";
 import InfoProducts from "./pages/infoProducts/InfoProducts.jsx";
 import Sections from "./pages/section/Sections.jsx";
-import Login from "./pages/Login/Login.jsx";
-import RegisterLogin from "./pages/Login/Register.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
