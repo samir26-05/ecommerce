@@ -8,7 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 import axios from 'axios'
 
 export default function AddressForm() {
-  const [clients, setClients] = useState([
+  const [oneClients, setOneClients] = useState([
     {
       nombre: "",
       apellido: "",
@@ -23,23 +23,27 @@ export default function AddressForm() {
 
   const [error, setError] = useState();
 
+const userName = localStorage.getItem("username")
+console.log(userName, '❤️❤️❤️')
+
   useEffect(() => {
-    async function fetchClients() {
+    async function fetchOneClients() {
       try {
-        const response = await axios.get("http://localhost:3000/user/User", {
+        const response = await axios.get(`http://localhost:3000/user/name/${userName}`, {
           headers: {
-            accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUwMiIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY5NDIwNTg1MSwiZXhwIjoxNjk0MjMxMDUxfQ.-QgLpSOaUxTEQrN5MZSSr1_5_xEUMarhCXpD907mbGg"
+            accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUwMiIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY5NDI4MDc2NCwiZXhwIjoxNjk0MzA1OTY0fQ.IPmSEF2tL-6Pt7m08chNHAwZt0nZCxYP2vLD2LctEMw"
           },
         });
-        setClients(response.data);
+        setOneClients(response.data);
         console.log(response.data)
       } catch (error) {
         setError(error);
         console.log("Error al obtener los clientes:", error);
       }
     }
+    
 
-    fetchClients();
+    fetchOneClients(); 
   }, []);
 
   const handleInputChange = (campo, valor) => {
@@ -47,7 +51,7 @@ export default function AddressForm() {
     if ( campo === 'nombre' || campo === 'apellido' || campo === 'Phone_number' || campo === 'address' || campo === 'city'|| campo === 'country' || campo === 'postalcode' || campo === 'state') {
       nuevoValor = Number(valor); // Convertir a número
     }
-    setClients((datosPrevios) => ({ ...datosPrevios, [campo]: nuevoValor }));
+    setOneClients((datosPrevios) => ({ ...datosPrevios, [campo]: nuevoValor }));
   };
 
   return (
@@ -55,17 +59,17 @@ export default function AddressForm() {
       {error ? (
         <div>Error al obtener los clientes: {error.message}</div>
       ) : (<>
-      {console.log(clients, '😘😘😘')}
+      {console.log(oneClients, '😘😘😘')}
         <Typography variant="h6" gutterBottom>
           Direccion de envio.
         </Typography>
         <Grid container spacing={3}>
 
           <Grid item xs={12} sm={6}>
-            <TextField required id="firstName" name="firstName" label="Nombre" value={clients.nombre} onChange={(event) => handleInputChange("nombre", event.target.value)} fullWidth autoComplete="given-name" variant="standard" >{clients.nombre}</TextField>
+            <TextField required id="firstName" name="firstName" label="Nombre" value={oneClients.nombre} onChange={(event) => handleInputChange("nombre", event.target.value)} fullWidth autoComplete="given-name" variant="standard" >{oneClients.nombre}</TextField>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField required id="lastName" name="lastName" label="Apellido" value={clients.personal} fullWidth autoComplete="family-name" variant="standard" />
+            <TextField required id="lastName" name="lastName" label="Apellido" value={oneClients.personal} fullWidth autoComplete="family-name" variant="standard" />
           </Grid>
 
           <Grid item xs={12}>
