@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode"
 /* COMPONENTS */
 import Body from "../../components/Layout/body/Body";
-/* STYLES */
-import { Div } from "./styled";
+import { Div } from "./HomeStyled";
 
 
 

@@ -96,7 +96,7 @@ export const GetUsers = async (req, res) => {
       include: [
         {
           model: sequelize.model("Personal_information"),
-          attributes: ["nombre", "apellido", "Phone_number", "address", "city"],
+          attributes: ["nombre", "apellido", "Phone_number", "address", "city","country","postalcode","state"],
         },
       ],
     });
@@ -117,7 +117,7 @@ export const GetUsersId = async (req, res) => {
     include: [
       {
         model: sequelize.model("Personal_information"),
-        attributes: ["nombre", "apellido", "Phone_number", "address", "city"],
+        attributes: ["nombre", "apellido", "Phone_number", "address", "city","country","postalcode","state"],
       },
     ],
   })

@@ -20,8 +20,8 @@ export default function Sections() {
   const verifyEnter = () => {
     return true
   };
-  
-  let navigate = useNavigate(); 
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {

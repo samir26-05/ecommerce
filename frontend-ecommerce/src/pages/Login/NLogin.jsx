@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MainDiv, Section1, Section2 } from "./styleProducts";
@@ -200,4 +198,3 @@ const NLogin = () => {
 };
 
 export default NLogin;
->>>>>>> ae6817714c0a5aa4a234a6896da5f45c48900c81

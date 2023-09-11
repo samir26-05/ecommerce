@@ -8,6 +8,9 @@ export const MainDiv = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 export const Section1 = styled.div`
@@ -16,12 +19,18 @@ export const Section1 = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const Section2 = styled.div`
   box-sizing: border-box;
   width: 50%;
   overflow: hidden;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 //********************************
@@ -33,6 +42,9 @@ export const LoginBox = styled.div`
   padding: 5%;
   background: #fff;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 
   .LoginBoxTiltle {
     margin-bottom: 70px;
@@ -159,7 +171,8 @@ export const BoxButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  .ButtonRegistrar{
+
+  .ButtonRegistrar {
     background-color: #fff;
     border: none;
   }
@@ -215,7 +228,8 @@ export const BoxLink = styled.div`
   text-align: center;
   position: relative;
   bottom: 12px;
-  .a1,.a2 {
+  .a1,
+  .a2 {
     font-size: 0.9rem;
     font-weight: 400;
   }
@@ -232,6 +246,9 @@ export const Redes = styled.div`
     justify-content: center;
     gap: 20px;
     list-style: none;
+    @media (max-width: 768px) {
+      margin-bottom: 50px;
+  }
   }
 
   .socail-media li a {
