@@ -1,79 +1,65 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const ContainerFather = styled.div`
-    width: 100%;
-    height: j;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    background-color: #f5f5f5;
-    
-`
+  margin-top: 4%;
+  padding: 1% 0 2% 0;
+  width: 100%;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+`;
 
 export const DivTitle = styled.div`
-    height: auto;
-    width: auto;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    letter-spacing: 2px;
-`
+  text-align: center;
+  width: 100%;
+  margin: 1% 0;
+  letter-spacing: 3px;
+`;
 
 export const ContainerH = styled.div`
-    box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .BoxH {
     width: 70%;
-    height: 100%;
+    gap: 2%;
     display: flex;
-    margin-bottom: 50px;
-    letter-spacing: 2px;
-`   
-
- export const DivCategory = styled.div`
+    @media (max-width: 768px) {
     width: 100%;
-    height: 100%;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
-    text-align: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-` 
+  }
+  }
+`;
+
+export const DivCategory = styled.div`
+  height: 100%;
+`;
 
 export const Card = styled.div`
-    box-sizing: border-box;
+  letter-spacing: 2px;
+  text-align: center;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  p {
+    margin: 2%;
+  }
+  cursor: pointer;
+  :hover {
+    border: 1px solid;
+  }
+  .img {
     overflow: hidden;
-    max-width: 1500px;
-    width: 226px;
-    display: flex;
-    flex-wrap: wrap;
-    cursor: pointer;
-    
-    :hover {
-        border: 1px solid;
-        
-    }
-
-`
-
-export const Img = styled.img`
-    transition: transform 900ms;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+  }
+`;
 
-    :hover{
-        transform: scale(1.2);
-        
-    }
-
-`
-
-export const Text = styled.p`
-    letter-spacing: 2px;
-`
+export const Img = styled.img`
+  transition: transform 900ms;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  :hover {
+    transform: scale(1.2);
+  }
+`;

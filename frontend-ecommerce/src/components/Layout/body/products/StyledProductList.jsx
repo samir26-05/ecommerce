@@ -1,62 +1,48 @@
 import styled from "styled-components";
 
-export const Div = styled.div`
-  margin: 5% 0 5% 0;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-`;
-
 export const ContainerPrincipal = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 80%;
-  margin: 0 10% 0 10%;
+  margin: 0 0 2% 0;
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(4, minmax(25%, 1fr));
 `;
 
 export const ContainerCard = styled.div`
   box-sizing: border-box;
-  margin: 1%;
+  margin: 10% auto;
+  width: 80%;
 `;
 
 export const Card = styled.div`
+  cursor: pointer;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   box-sizing: border-box;
-  width: 100%;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.171);
-  backdrop-filter: blur(6px);
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.6s;
-  display: flex;
-  justify-content: center;
   user-select: none;
   font-weight: bolder;
+  font-size: 1rem;
   color: black;
-
   :hover {
     border: 1px solid black;
   }
 
-  :active {
-    transform: scale(0.95);
+  .BoxImg {
+    height: 100%;
+    text-align: center;
   }
 `;
 
-export const CardMedia = styled.img``;
+export const CardMedia = styled.img`
+  height: 100%;
+  object-fit: cover;
+`;
 
 export const CardContent = styled.div`
-text-align: start;
-margin: 0 3%;
-padding-bottom: 2%;
-
+  text-align: start;
+  margin: 0 3%;
+  padding-bottom: 2%;
 `;
 
 export const Tiltle = styled.h1`
@@ -65,7 +51,7 @@ export const Tiltle = styled.h1`
 `;
 
 export const Price = styled.div`
-display: flex;
-align-items: center;
-justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
