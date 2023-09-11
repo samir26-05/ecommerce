@@ -14,10 +14,27 @@ export default function ShowClients() {
 
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     if (!Object.keys(validationErrors).length) {
-      tableData[row.index] = values;
-      //send/receive api updates here, then refetch or update local table data for re-render
-      setTableData([...tableData]);
-      exitEditingMode(); //required to exit editing mode and close modal
+      console.log(values);
+      console.log(values['Personal_information.nombre']);
+      try {
+        axios.put(`http://localhost:3000/user/personal_information/${row.getValue("user_id")}`, {
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+          nombre: values['Personal_information.nombre'],
+          apellido: values['Personal_information.apellido'],
+          Phone_number: values['Personal_information.Phone_number'],
+          address: values['Personal_information.address'],
+          city: values['Personal_information.city']
+          });
+          tableData[row.index] = values;
+          //send/receive api updates here, then refetch or update local table data for re-render
+          setTableData([...tableData]);
+          exitEditingMode(); //required to exit editing mode and close modal
+      } catch (error) {
+        setError(error);
+        console.log("Error al obtener los clientes:", error);
+      }
     }
   };
 
@@ -95,6 +112,30 @@ export default function ShowClients() {
       {
         accessorKey: "Personal_information.city",
         header: "Ciudad",
+        size: 80,
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...cell,
+        }),
+      },
+      {
+        accessorKey: "Personal_information.country",
+        header: "País",
+        size: 80,
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...cell,
+        }),
+      },
+      {
+        accessorKey: "Personal_information.postalcode",
+        header: "Código Postal",
+        size: 80,
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...cell,
+        }),
+      },
+      {
+        accessorKey: "Personal_information.state",
+        header: "Estado",
         size: 80,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...cell,
