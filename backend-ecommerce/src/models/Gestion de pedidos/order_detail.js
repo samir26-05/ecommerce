@@ -36,8 +36,8 @@ detalle_compra.belongsTo(Orden_compra, {
 
 // relacion de detalle de compra con productos
 detalle_compra.belongsTo(productos, {
-    foreignKey: "product_id",
+    foreignKey: "id_order",
   });
-  productos.hasMany(detalle_compra, {
-    foreignKey: "product_id",
+  Orden_compra.hasMany(detalle_compra, {
+    foreignKey: "id_order",
   });

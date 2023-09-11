@@ -29,6 +29,8 @@ export const Orden_compra = sequelize.define("order",{
         type: DataTypes.DOUBLE,
         allowNull: false,
     }
+},{
+  tableName: 'order'
 })
 // relacion de ordenes a usuarios
 Orden_compra.belongsTo(User, {
