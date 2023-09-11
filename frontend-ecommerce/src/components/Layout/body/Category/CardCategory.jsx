@@ -8,9 +8,13 @@ const CardCategory = ({ array }) => {
       {array.map((item, index) => (
         <DivCategory key={index}>
           <Card key={index}>
-            <Img src={item.img} alt="" />
+            <div className="img">
+              <Img src={item.img} alt={item.name} />
+            </div>
+            <div>
+              <p>{item.name}</p>
+            </div>
           </Card>
-          <p>{item.name}</p>
         </DivCategory>
       ))}
     </>
