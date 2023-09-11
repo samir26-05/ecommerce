@@ -15,7 +15,7 @@ const styles = {
     padding: 15,
     minHeight: 950,
     minWidth: 591,
-    color: "#fff",
+    color: "#000000",
   },
   slide1: {
     backgroundImage: `url(${BlackSuit})`,

@@ -1,6 +1,6 @@
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
-import DemoAutoPlay from "./Carrusel/DemoAutoPlay";
+import DemoAutoPlay from "./carrusel/DemoAutoPlay";
 import { useState, useEffect } from "react";
 import { ProductList } from "./products/ProductList";
 import SectionsBody from "./Sections/SectionsBody";

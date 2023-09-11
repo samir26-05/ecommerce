@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
-import DemoAutoPlay from "../../components/Layout/body/Carrusel/DemoAutoPlay";
+import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
 import { MainDiv, Section1, Section2, LoginBox, LoginBoxInput, BoxButton, BoxLink, Redes, Error } from "./RegisterStyled";
 
 const RegisterLogin = () => {
