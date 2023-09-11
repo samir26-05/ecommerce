@@ -16,4 +16,5 @@ router.get("/auths",Jwt.validatetoken, Auth.TokenAccess);
 export default router;
 
 // routas de datos personales
-router.put("/personal_information/:name",[Jwt.validatetoken],Personal.UpdatePersonalInformation);
+router.patch("/personal_information/:name",[Jwt.validatetoken],Personal.UpdatePersonalInformation);
+

@@ -2,6 +2,7 @@ import { Personal_information } from "../../models/Usuarios/Personal_information
 import { ValidUpdatePersonal } from "../../schemas/login_register/UpdatePersonal_Information.js";
 import { User } from "../../models/Usuarios/User.js";
 
+
 export const UpdatePersonalInformation = async (req, res) => {
   try {
     const { name } = req.params;
