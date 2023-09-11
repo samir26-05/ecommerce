@@ -46,7 +46,8 @@ export default function Review() {
   const hash = CryptoJS.MD5(textToHash).toString();
   console.log(hash);
 
-
+  const token = localStorage.getItem("accessToken") 
+  
   return (
 
     <React.Fragment>
