@@ -1,7 +1,5 @@
-import React from "react";
-import { ContainerFather, ContainerH, DivTitle, Card } from "./StyledCategory";
+import { ContainerFather, ContainerH, DivTitle } from "./StyledCategory";
 import CardCategory from "./CardCategory";
-
 import Camisetas from "./ImgCategory/Camisetas.jpg";
 import Camisas from "./ImgCategory/Camisas.jpg";
 import Jeans from "./ImgCategory/Jeans.jpg";

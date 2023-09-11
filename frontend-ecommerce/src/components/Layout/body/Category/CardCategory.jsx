@@ -1,17 +1,16 @@
-import { Card, DivCategory, Img, Text } from "./StyledCategory";
+import { Card, DivCategory, Img } from "./StyledCategory";
 
+// eslint-disable-next-line react/prop-types
 const CardCategory = ({ array }) => {
   return (
     <>
+      {/* eslint-disable-next-line react/prop-types */}
       {array.map((item, index) => (
-        <DivCategory key={index}> 
+        <DivCategory key={index}>
           <Card key={index}>
-          <Img src={item.img} alt=""  />
+            <Img src={item.img} alt="" />
           </Card>
-              
-            <Text>{item.name}</Text>
-
-          
+          <p>{item.name}</p>
         </DivCategory>
       ))}
     </>
