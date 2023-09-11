@@ -3,6 +3,7 @@ import { sequelize } from "../../database.js";
 import { ValidRegisterProduct } from "../../schemas/productos/CreateProduct.js";
 import { ValidRegisterUpdate } from "../../schemas/productos/UpdateProduct.js";
 import { ipFileServer, urlArchivos } from "../../libs/constas.js";
+import { category } from "../../models/productos/categoria.js";
 import fs from "fs";
 import path from "path";
 
@@ -168,4 +169,18 @@ export const GetSectionProduct = async (req, res) => {
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
-};
+}
+
+export const GetCategoryProduct = async(req, res) => {
+  try {
+  const {name} = req.params
+  const CategoryFound = await category.findOne({where: {category: name}})
+  if(!CategoryFound) {
+    return res.status(404).json({message:'Categoria no encontrada'})
+  }
+  const result = await productos.findAll({where: {category_id: CategoryFound.category_id}})
+  res.status(200).json(result)
+  } catch (error) {
+  res.status(500).json({message: error.message})    
+  }
+}
