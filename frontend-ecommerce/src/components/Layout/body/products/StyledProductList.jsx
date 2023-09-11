@@ -21,7 +21,6 @@ export const ContainerPrincipal = styled.div`
 
 export const ContainerCard = styled.div`
   box-sizing: border-box;
-  width: 100%;
   margin: 1%;
 `;
 
