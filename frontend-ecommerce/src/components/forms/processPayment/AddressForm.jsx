@@ -24,14 +24,13 @@ export default function AddressForm() {
   const [error, setError] = useState();
 
 const userName = localStorage.getItem("username")
-console.log(userName, '❤️❤️❤️')
 
   useEffect(() => {
     async function fetchOneClients() {
       try {
         const response = await axios.get(`http://localhost:3000/user/name/${userName}`, {
           headers: {
-            accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUwMiIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY5NDI4MDc2NCwiZXhwIjoxNjk0MzA1OTY0fQ.IPmSEF2tL-6Pt7m08chNHAwZt0nZCxYP2vLD2LctEMw"
+            accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUwMiIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY5NDQzODg4OCwiZXhwIjoxNjk0NDY0MDg4fQ.mw3QxEIwqegnhFf2gSKFBhmhmE5A4E1Okh8H8rY2sKA"
           },
         });
         setOneClients(response.data);
@@ -41,6 +40,7 @@ console.log(userName, '❤️❤️❤️')
         console.log("Error al obtener los clientes:", error);
       }
     }
+    
     
 
     fetchOneClients(); 
@@ -59,17 +59,17 @@ console.log(userName, '❤️❤️❤️')
       {error ? (
         <div>Error al obtener los clientes: {error.message}</div>
       ) : (<>
-      {console.log(oneClients, '😘😘😘')}
+    
         <Typography variant="h6" gutterBottom>
           Direccion de envio.
         </Typography>
         <Grid container spacing={3}>
 
           <Grid item xs={12} sm={6}>
-            <TextField required id="firstName" name="firstName" label="Nombre" value={oneClients.nombre} onChange={(event) => handleInputChange("nombre", event.target.value)} fullWidth autoComplete="given-name" variant="standard" >{oneClients.nombre}</TextField>
+            <TextField required id="firstName" name="firstName" label="Nombre" value={oneClients?.Personal_information?.nombre || ''}  onChange={(event) => handleInputChange("nombre", event.target.value)} fullWidth autoComplete="given-name" variant="standard" >{oneClients.nombre}</TextField>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField required id="lastName" name="lastName" label="Apellido" value={oneClients.personal} fullWidth autoComplete="family-name" variant="standard" />
+            <TextField required id="lastName" name="lastName" label="Apellido" value={oneClients?.Personal_information?.apellido || ''} fullWidth autoComplete="family-name" variant="standard" />
           </Grid>
 
           <Grid item xs={12}>
