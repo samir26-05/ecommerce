@@ -1,5 +1,5 @@
 import React from "react";
-import { ContainerP, ContainerH, Img } from "./StylePageNotFound";
+import { ContainerP, ContainerH, ImgDiv, TxtH3, TxtH1, ImgSvg, DivTxt } from "./StylePageNotFound";
 /* import ImgPageNotFound from "../../assets/Img/Page Not Found/Warning.png"; */
 
 
@@ -9,11 +9,14 @@ const PageNotFound = () => {
       <ContainerH>
         {ImagenSvg()}
         {/* <Img src={ImgPageNotFound} alt="img" /> */}
-        <h1>Page Not Found</h1>
-        <h3>
-          {" "}
-          <a href="/home">Back to home</a>{" "}
-        </h3>
+        <DivTxt>
+            <TxtH1>Page Not Found</TxtH1>
+            <TxtH3>
+            {" "}
+            <a href="/home">Back to home</a>{" "}
+            </TxtH3>
+        </DivTxt>
+        
         
       </ContainerH>
     </ContainerP>
@@ -25,15 +28,18 @@ export default PageNotFound;
 //componente img svg
 const ImagenSvg = () => {
   return (
-    <div>
-      <svg
+    <ImgDiv>
+      <ImgSvg
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
         data-name="Layer 1"
-        width="860.13137"
+        /* width="860.13137" */
+        width="220.13137"
         height="571.14799"
         viewBox="0 0 860.13137 571.14799"
+        
       >
+        
         <path
           d="M605.66974,324.95306c-7.66934-12.68446-16.7572-26.22768-30.98954-30.36953-16.482-4.7965-33.4132,4.73193-47.77473,14.13453a1392.15692,1392.15692,0,0,0-123.89338,91.28311l.04331.49238q46.22556-3.1878,92.451-6.37554c22.26532-1.53546,45.29557-3.2827,64.97195-13.8156,7.46652-3.99683,14.74475-9.33579,23.20555-9.70782,10.51175-.46217,19.67733,6.87923,26.8802,14.54931,42.60731,45.371,54.937,114.75409,102.73817,154.61591A1516.99453,1516.99453,0,0,0,605.66974,324.95306Z"
           transform="translate(-169.93432 -164.42601)"
@@ -178,7 +184,7 @@ const ImagenSvg = () => {
           transform="translate(-169.93432 -164.42601)"
           fill="#cacaca"
         />
-      </svg>
-    </div>
+      </ImgSvg>
+    </ImgDiv>
   );
 };
