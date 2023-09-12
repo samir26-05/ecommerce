@@ -167,7 +167,7 @@ export const DeleteProduct = async (req, res) => {
 export const GetSectionProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const result = await productos.findOne({ where: { id_section: id } });
+    const result = await productos.findAll({ where: { id_section: id } });
     if (!result) {
       return res
         .status(404)
