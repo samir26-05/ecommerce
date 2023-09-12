@@ -49,8 +49,6 @@ export default function NavVertical() {
 
   const handleChange = (event, newValue) => {
       setValue(newValue);  
-      console.log(newValue + "estoy entrando aqui")
-
   };
 
 
