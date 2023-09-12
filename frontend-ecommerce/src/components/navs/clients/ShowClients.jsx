@@ -14,8 +14,7 @@ export default function ShowClients() {
 
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     if (!Object.keys(validationErrors).length) {
-      console.log(values);
-      console.log(values['Personal_information.nombre']);
+
       try {
         axios.put(`http://localhost:3000/user/personal_information/${row.getValue("user_id")}`, {
           headers: {
@@ -25,7 +24,10 @@ export default function ShowClients() {
           apellido: values['Personal_information.apellido'],
           Phone_number: values['Personal_information.Phone_number'],
           address: values['Personal_information.address'],
-          city: values['Personal_information.city']
+          city: values['Personal_information.city'],
+          country: values['Personal_information.country'],
+          postalcode: values['Personal_information.postalcode'],
+          state: values['Personal_information.state']
           });
           tableData[row.index] = values;
           //send/receive api updates here, then refetch or update local table data for re-render
@@ -145,24 +147,31 @@ export default function ShowClients() {
     []
   );
 
-  useEffect(() => {
-    async function fetchClients() {
-      try {
-        const response = await axios.get("http://localhost:3000/user/User", {
-          headers: {
-            accessToken: localStorage.getItem("accessToken"),
-          },
-          data: {},
-        });
-        setClients(response.data);
-        console.log(response.data, "❤️❤️❤️❤️");
-      } catch (error) {
-        setError(error);
-        console.log("Error al obtener los clientes:", error);
-      }
-    }
 
+  async function fetchClients() {
+    try {
+      const response = await axios.get("http://localhost:3000/user/User", {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+        data: {},
+      });
+      setClients(response.data);
+    } catch (error) {
+      setError(error);
+      console.log("Error al obtener los clientes:", error);
+    }
+  }
+
+  useEffect(() => {
     fetchClients();
+
+    const interval = setInterval(() => {
+      fetchClients();
+    }, 1000)
+
+    return () => clearInterval(interval)
+
   }, []);
 
   return (
