@@ -88,7 +88,8 @@ function FormUserPayment() {
                   <Button onClick={handleBack} sx={{ ml: 1 }} style={{ backgroundColor: "black", color: "white", marginBottom:-40 }}>
                     Atrás
                   </Button>
-                )} </Box>
+                )}
+              </Box>
 
               <Button
                 variant=""
@@ -101,8 +102,6 @@ function FormUserPayment() {
                   <a href="https://biz.payulatam.com/B0f39fd66E753B3" style={{color: "white"}}>PAGAR</a>
                 </div> : 'Siguiente'}
               </Button>
-
-
             </React.Fragment>
           )}
         </Paper>
