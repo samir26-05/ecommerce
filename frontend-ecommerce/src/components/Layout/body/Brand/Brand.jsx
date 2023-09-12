@@ -22,7 +22,7 @@ const Brand = ({images}) => {
       <Slider {...settings}>
         {/* eslint-disable-next-line react/prop-types */}
         {images.map((image, index) => (
-          <div key={index}>
+          <div className="ima"key={index}>
             <img
               src={image}
               alt={`Brand ${index}`}

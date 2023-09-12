@@ -25,7 +25,7 @@ export default function Body() {
     };
   }, []);
   return (
-    <>
+    <div>
       <Header
         products={allProducts}
         newProducts={setAllProducts}
@@ -48,6 +48,6 @@ export default function Body() {
       <SectionsBody />
       <AppBrand />
       <Footer />
-    </>
+    </div>
   );
 }
