@@ -5,12 +5,23 @@ export const ContainerPrincipal = styled.div`
   display: grid;
   text-align: center;
   grid-template-columns: repeat(4, minmax(25%, 1fr));
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const ContainerCard = styled.div`
   box-sizing: border-box;
   margin: 10% auto;
   width: 80%;
+  background-color: #fff;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const Card = styled.div`
@@ -31,6 +42,9 @@ export const Card = styled.div`
   .BoxImg {
     height: 100%;
     text-align: center;
+  }
+  @media (max-width: 768px) {
+    width: 90%;
   }
 `;
 

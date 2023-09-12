@@ -13,6 +13,7 @@ import "./header.css";
 import { Link } from "react-router-dom";
 import AdminDashboard from "./AdminDashboard";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const pages = ["Inicio", "Mujer", "Hombre"];
 
 const Header = ({
@@ -67,7 +68,7 @@ const Header = ({
   return (
     <AppBar style={{ background: "none" }}>
       <Container
-        maxWidth=""
+        maxWidth="100%"
         sx={{
           position: (isUsedUser ? "fixed" : "") || (isUsedBody ? "fixed" : ""),
           zIndex: 3,
