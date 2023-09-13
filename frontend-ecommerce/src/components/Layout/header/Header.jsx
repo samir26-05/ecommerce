@@ -74,7 +74,7 @@ const Header = ({
           boxShadow: isUsedBody
             ? headerColor !== "transparent"
               ? "0px 0px 3px 2px #0000003b"
-              : "0px 0px 0px 0px"
+              : ""
             : "0px 0px 3px 2px #0000003b",
           transition: "all 0.2s ease-in-out",
         }}
@@ -152,13 +152,14 @@ const Header = ({
             ))}
           </Box>
 
-          {isAdmin ? 
-          <AdminDashboard textColor={textColor}/>
-          : 
-          <>
-            <Link to='/user' style={{width:'50px'}}>
-          <a  className="icon-user">
-              <BiUser/>
+          <div style={{display:"flex", justifyContent:"space-between", alignItems:"center",width:"5%"}}>
+            <Link to='/user' style={{fontSize:'30px'}}>
+              <a  className="icon-user">
+                <BiUser style={{ fill: isUsedUser || isUsedPayment
+                ? "#000"
+                : hovered
+                ? "#000"
+                : textColor,}}/>
               </a>
             
           </Link>
@@ -174,7 +175,7 @@ const Header = ({
             pageUsed={isUsedUser}
             pagePayment={isUsedPayment}
           />
-          </>}
+          </div>
           
           <Box
             sx={{

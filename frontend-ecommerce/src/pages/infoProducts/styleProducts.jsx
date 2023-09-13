@@ -6,6 +6,7 @@ display: flex;
 flex-wrap: wrap;
 height: 100vh;
 width: 100vw;
+background-color: #000;
 `;
 
 export const BoxMain = styled.div`
@@ -14,6 +15,9 @@ height: 100%;
 box-sizing: border-box;
 display: flex;
 flex-direction: row;
+*{
+  color: #fff
+}
 `;
 
 export const Section1 = styled.div`
@@ -43,7 +47,6 @@ box-sizing: border-box;
 margin: 0;
 display: flex;
 justify-content: center;
-align-items: center;
 flex-direction: column;
 `;
 
@@ -138,14 +141,14 @@ export const Buys = styled.button`
   display: inline-block;
   position: relative;
   overflow: hidden;
-  color: #090909;
+  color: #fff;
   padding: 0.7em 1.7em;
   font-size: 17px;
   background: transparent;
-  border: 1px solid #000000;
+  border: 1px solid #fff;
 
 :active {
-  color: #000000;
+  color: #fff;
 }
 
 :before {
@@ -156,7 +159,7 @@ export const Buys = styled.button`
   top: 100%;
   width: 140%;
   height: 180%;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.05);
   display: block;
   transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
   z-index: -1;
@@ -170,7 +173,7 @@ export const Buys = styled.button`
   top: 180%;
   width: 160%;
   height: 190%;
-  background-color: #000000;
+  background-color: #fff;
   display: block;
   transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
   z-index: -1;
@@ -178,21 +181,22 @@ export const Buys = styled.button`
 
 :hover {
     border: none;
-  color: #ffffff;
-  border: 1px solid #000000;
+  color: #000;
+  border: 1px solid #fff;
+  background-color: #fff;
 }
 
 :hover:before {
     border: none;
   top: -35%;
-  background-color: #000000;
+  background-color: #fff;
   transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
 
 :hover:after {
     border: none;
   top: -45%;
-  background-color: #000000;
+  background-color: #fff;
   transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
 `;
