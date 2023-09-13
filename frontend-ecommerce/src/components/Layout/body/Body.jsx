@@ -6,7 +6,6 @@ import { ProductList } from "./products/ProductList";
 import SectionsBody from "./Sections/SectionsBody";
 import IndexCategory from "./Category/IndexCategory";
 import AppBrand from "./Brand/AppBrand";
-import FooterUser from "../footer/FooterUser";
 
 export default function Body() {
   const [allProducts, setAllProducts] = useState([]);
