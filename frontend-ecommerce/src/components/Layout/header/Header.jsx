@@ -137,12 +137,9 @@ const Header = ({
         </Box>
 
         
-          <>
+          <div style={{display:"flex", alignItems:"center", gap:"25px"}}>
             <Link
-              to="/user"
-              style={{ width: "50px", margin: ".2% .1% 0 0",
-              }}
-            >
+              to="/user">
               <a className="icon-user">
                 <BiUser
                   style={{
@@ -169,7 +166,7 @@ const Header = ({
               pageUsed={isUsedUser}
               pagePayment={isUsedPayment}
             />
-          </>
+          </div>
       </Toolbar>
     </Container>
   );
