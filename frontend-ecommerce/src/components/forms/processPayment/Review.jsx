@@ -108,7 +108,7 @@ export default function Review() {
         <Typography variant="h5" gutterBottom sx={{ fontFamily: "-moz-initial" }}>
           Detalle orden de compra
         </Typography>
-      </div>
+      </div> 
       <Grid container spacing={0} sx={{ padding: "0px 0px 15px 0px" }}>
         <Grid item xs={3} sm={4}>
           <ListItem sx={{ py: 1, px: 0 }}>
