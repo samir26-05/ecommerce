@@ -6,7 +6,6 @@ import { Container, Cta, Span } from "./HeaderStyled";
 import { BiUser } from "react-icons/bi";
 import { Carrito } from "./Car";
 import { useState, useEffect } from "react";
-import "./car.css";
 import { Link } from "react-router-dom";
 import AdminDashboard from "./AdminDashboard";
 
@@ -123,6 +122,7 @@ const Header = ({
                   textColor={textColor}
                   style={{
                     textDecoration: "none",
+
                     color:
                       isUsedUser || isUsedPayment
                         ? "#000"

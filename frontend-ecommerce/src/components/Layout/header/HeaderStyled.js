@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+
+.BoxCar{
+  @media (max-width:768px) {
+        left: 1200%;
+    }
+}
   width: 100%;
   z-index: 3;
   transition: all 0.2s ease-in-out;
@@ -22,6 +28,9 @@ export const Cta = styled.button`
   :hover .span:after {
     transform: scaleX(1);
     transform-origin: bottom left;
+  }
+  :active {
+    border: none;
   }
 `;
 

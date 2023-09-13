@@ -11,6 +11,7 @@ import UserPage from "./pages/user/UserPage.jsx";
 import Payment from "./pages/processPayment/Payment.jsx";
 import InfoProducts from "./pages/infoProducts/InfoProducts.jsx";
 import Sections from "./pages/section/Sections.jsx";
+import "./App.css"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
