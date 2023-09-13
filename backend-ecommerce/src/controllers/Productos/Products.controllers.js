@@ -212,20 +212,19 @@ export const GetProductId = async(req, res) => {
 export const GetProductSectionCategory = async(req, res) => {
   try {
     const { id, name } = req.params;
-    const Section = await section.findAll({ where: { id_section: id } });
+    // const Section = await section.findAll({ where: { id_section: id } });
     const categoria = await category.findOne({ where: { category: name } });
     const result = await productos.findAll({
       where: {
-        id_section: {
-          equalTo: id
-        },
-        category_id: {
-          equalTo: categoria.categoria_id
-        }
-      }
-    });
-    console.log(result);
+        id_section: id,
+        category_id: categoria.category_id,
+    }})
+    if(!result){
+      return res.status(404).json({message: 'Producto no encontrado'})
+    }
+    res.status(200).json(result)
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: error.message });
   }
 };
