@@ -6,6 +6,9 @@ export const ContainerFather = styled.div`
   width: 100%;
   background-color: #f5f5f5;
   box-sizing: border-box;
+  @media (max-width: 768px) {
+    height: 60vh;
+  }
 `;
 
 export const DivTitle = styled.div`
@@ -26,6 +29,10 @@ export const ContainerH = styled.div`
     @media (max-width: 768px) {
     width: 100%;
   }
+  }
+  @media (max-width: 768px) {
+    height: 85%;
+    margin-top: 5%;
   }
 `;
 

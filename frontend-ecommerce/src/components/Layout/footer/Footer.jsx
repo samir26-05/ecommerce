@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import { Grid, Typography, Button, Modal } from '@mui/material';
-import { Facebook, Twitter, Instagram, WhatsApp } from '@mui/icons-material';
-import { FooterLink, SocialIcon, ModalContent } from './styled';
-import QrWths from '../../../assets/Img/QrWhts.png';
-import '../header/header.css'
+import { useState } from "react";
+import { Typography, Modal } from "@mui/material";
+import { Facebook, Twitter, Instagram } from "@mui/icons-material";
+import { Div, SocialIcon, ModalContent } from "./FooterStyled";
+import QrWths from "../../../assets/Img/QrWhts.png";
 
 const Footer = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -17,87 +16,111 @@ const Footer = () => {
   };
 
   return (
-    <div style={{ padding: '20px', backgroundColor: '#fff'}}>
-      <Grid container spacing={3} sx={{display:"flex", justifyContent:"space-around", marginLeft:"3%"}}>
-        <Grid item xs={12} md={3}>
-          <Typography variant="h6">Horarios de Atención</Typography>
-          <Typography>
+    <Div>
+      <div className="Content">
+        <div className="Information">
+          <h4>Horarios de Atención</h4>
+          <p className="Text">
             Lunes a Viernes: 9:00 AM - 6:00 PM
             <br />
             Sábados y Domingos: Cerrado
-          </Typography>
-          <Button onClick={handleOpenModal} className='whithoutOutline' style={{ marginTop: '20px', color: 'green' }}>
-            <WhatsApp />
-            Chatea con un asesor
-          </Button>
+          </p>
+          <div className="Bwh">
+            <button className="Wh" onClick={handleOpenModal}>
+              <p>Chatea con un asesor</p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"></path>
+              </svg>
+            </button>
+          </div>
           <Modal open={modalOpen} onClose={handleCloseModal}>
             <ModalContent>
-              <Typography variant="h6" style={{ marginTop: '20px', color: 'green', textAlign: 'center' }}>
+              <Typography
+                variant="h6"
+                style={{
+                  marginTop: "20px",
+                  color: "green",
+                  textAlign: "center",
+                }}
+              >
                 Escanee el código QR
               </Typography>
-              <img src={QrWths} alt="QR Code" style={{ width: '100%', marginTop: '1rem' }} />
+              <img
+                src={QrWths}
+                alt="QR Code"
+                style={{ width: "100%", marginTop: "1rem" }}
+              />
             </ModalContent>
           </Modal>
-        </Grid>
-
-        <Grid item xs={12} md={3}>
-          <Typography variant="h6">Todo sobre la empresa</Typography>
-          <Typography>
-            <FooterLink href="#">Pagos</FooterLink>
+        </div>
+        <div className="Information">
+          <h4>Todo sobre la empresa</h4>
+          <p className="Text">
+            <a href="">Pagos</a>
             <br />
-            <FooterLink href="#">Envios</FooterLink>
+            <a href="">Envios</a>
             <br />
-            <FooterLink href="#">Devoluciones</FooterLink>
+            <a href="">Devoluciones</a>
             <br />
-            <FooterLink href="#">Solicitar factura</FooterLink>
+            <a href="">Solicitar factura</a>
             <br />
-            <FooterLink href="#">Compra Online</FooterLink>
-          </Typography>
-        </Grid>
-
-        <Grid item xs={12} md={3}>
-          <Typography variant="h6">Ayuda</Typography>
-          <Typography>
-            <FooterLink href="#">Preguntas frecuentes</FooterLink>
+            <a href="">Compra Online</a>
             <br />
-            <FooterLink href="#">Política de devoluciones</FooterLink>
+          </p>
+        </div>
+        <div className="Information">
+          <h4>Ayuda</h4>
+          <p className="Text">
+            <a href="">Preguntas frecuentes</a>
             <br />
-            <FooterLink href="#">Términos y condiciones</FooterLink>
-          </Typography>
-        </Grid>
-
-        <Grid item xs={12} md={3}>
-          <Typography variant="h6">Información Adicional</Typography>
-          <Typography>
-            <FooterLink href="#">Categorías</FooterLink>
+            <a href="">Política de devoluciones</a>
             <br />
-            <FooterLink href="#">Tallas</FooterLink>
+            <a href="">Términos y condiciones</a>
+          </p>
+        </div>
+        <div className="Information">
+          <h4>Información Adicional</h4>
+          <p className="Text">
+            <a href="">Información Adicional</a>
             <br />
-            <FooterLink href="#">Puntos de Venta</FooterLink>
+            <a href="">Categorías</a>
             <br />
-            <FooterLink href="#">Prensa</FooterLink>
+            <a href="">Tallas</a>
             <br />
-            <FooterLink href="#">Trabaja con nosotros</FooterLink>
-          </Typography>
-        </Grid>
-      </Grid>
-
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-        <SocialIcon>
-          <Facebook />
-        </SocialIcon>
-        <SocialIcon>
-          <Twitter />
-        </SocialIcon>
-        <SocialIcon>
-          <Instagram />
-        </SocialIcon>
+            <a href="">Puntos de Venta</a>
+            <br />
+            <a href="">Prensa</a>
+            <br />
+            <a href="">Trabaja con nosotros</a>
+          </p>
+        </div>
       </div>
-
-      <Typography align="center" variant="body2" style={{ marginTop: '20px' }}>
-        © {new Date().getFullYear()} Tu Empresa. Todos los derechos reservados.
-      </Typography>
-    </div>
+      <div className="Networks">
+        <div>
+          <SocialIcon>
+            <Facebook />
+          </SocialIcon>
+          <SocialIcon>
+            <Twitter />
+          </SocialIcon>
+          <SocialIcon>
+            <Instagram />
+          </SocialIcon>
+        </div>
+      </div>
+      <div className="Copyright">
+        <Typography variant="body2">
+          © {new Date().getFullYear()} Tu Empresa. Todos los derechos
+          reservados.
+        </Typography>
+      </div>
+    </Div>
   );
 };
 

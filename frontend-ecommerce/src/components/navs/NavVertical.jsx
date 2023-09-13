@@ -8,9 +8,8 @@ import NavHorizontal from './NavHorizontal';
 import InfoCountUser from './InfoCount';
 /* STYLES */
 import { Div } from '../../pages/user/styled';
-import '../Layout/header/header.css'
 import { FlexDirCol } from '../StyledMain';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 function TabPanel(props) {

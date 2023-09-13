@@ -1,26 +1,24 @@
 import styled from "styled-components";
 
-export const BasicImg = styled.img`
-  width: 45rem;
-  :nth-child(1) {
-    width: 30rem;
-  }
+export const Title = styled.div`
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-top: 2%;
 `;
 
 export const NewsImg = styled.div`
   transition: all 0.2s ease-in-out;
   background-image: url(${({ img1 }) => img1});
-  &:hover {
+  background-size: cover;
+  height: 30rem;
+  width: 100%;
+  border-radius: 25px 25px 0 0;
+  :hover {
     background-image: url(${({ img2 }) => img2});
   }
-  background-size: cover;
-`;
-
-export const Title = styled.div`
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  margin-top: 4rem;
 `;
 
 export const Div = styled.div`
@@ -32,7 +30,6 @@ export const Div = styled.div`
   }
 
   .slide-container {
-    max-width: 1860px;
     width: 100%;
     padding: 40px 0;
   }
@@ -85,18 +82,6 @@ export const Div = styled.div`
   .overlay::after {
     border-radius: 0 25px 0 0;
     background-color: #fff;
-  }
-  .card-image {
-    position: relative;
-    z-index: -1;
-    height: 30rem;
-    width: 100%;
-    border-radius: 25px 25px 0 0;
-  }
-  .card-image .card-img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
   }
   .name {
     font-size: 18px;
