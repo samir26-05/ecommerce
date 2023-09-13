@@ -13,7 +13,6 @@ import { FormProduct } from '../forms/products/CreateProducts';
 /* IMG */
 import bgr from '../../assets/Img/bgr.png'
 /* STYLES */
-import '../Layout/header/header.css'
 import { Img, Div } from './styled';
 import ShowOrders from './orders/ShowOrders';
 import CrudOrders from './orders/ShowOrders';
