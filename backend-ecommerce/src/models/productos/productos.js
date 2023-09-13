@@ -27,7 +27,7 @@ export const productos = sequelize.define("product", {
     allowNull: false,
   },
   price: {
-    type: DataTypes.DOUBLE,
+    type: DataTypes.FLOAT,
     allowNull: false,
   },
   category_id: {
@@ -39,7 +39,7 @@ export const productos = sequelize.define("product", {
     allowNull: false,
   },
   stock: {
-    type: DataTypes.STRING(20),
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   img_video: {

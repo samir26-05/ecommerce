@@ -43,7 +43,6 @@ box-sizing: border-box;
 margin: 0;
 display: flex;
 justify-content: center;
-align-items: center;
 flex-direction: column;
 `;
 
@@ -66,7 +65,6 @@ font-weight: 600;
 `;
 
 export const Price = styled.div`
-width: 80%;
 font-size: 1.4rem;
 position: relative;
 bottom: 22%;

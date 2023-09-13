@@ -7,7 +7,6 @@ import { BiUser } from "react-icons/bi";
 import { Carrito } from "./Car";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AdminDashboard from "./AdminDashboard";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const pages = ["Inicio", "Mujer", "Hombre", "Todxs"];
@@ -58,8 +57,6 @@ const Header = ({
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const isAdmin = false;
 
   return (
     <Container
@@ -139,21 +136,14 @@ const Header = ({
           ))}
         </Box>
 
-        {isAdmin ? (
-          <AdminDashboard textColor={textColor} />
-        ) : (
-          <>
+        
+          <div style={{display:"flex", alignItems:"center", gap:"25px"}}>
             <Link
-              to="/user"
-              style={{
-                width: "50px",
-                margin: ".2% .1% 0 0",
-              }}
-            >
+              to="/user">
               <a className="icon-user">
                 <BiUser
-                  size={"70%"}
                   style={{
+                    fontSize:"35px",
                     fill:
                       isUsedUser || isUsedPayment
                         ? "#000"
@@ -176,8 +166,7 @@ const Header = ({
               pageUsed={isUsedUser}
               pagePayment={isUsedPayment}
             />
-          </>
-        )}
+          </div>
       </Toolbar>
     </Container>
   );

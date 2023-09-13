@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { MainDiv, Section1, Section2 } from "./styleProducts";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
-import { LoginBox, MainDiv, Section1, Section2, LoginBoxInput, BoxButton } from "./LoginStyled";
-import { BoxLink, Redes } from "./RegisterStyled";
 
-const Login = () => {
+const NLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   let navigate = useNavigate();
-
   const loginn = async (event) => {
     event.preventDefault();
     try {
@@ -21,8 +19,6 @@ const Login = () => {
       });
       console.log(response);
       localStorage.setItem("accessToken", response.data);
-      localStorage.setItem("username", jwt_decode(localStorage.getItem("accessToken")).username)
-      localStorage.setItem("role", jwt_decode(localStorage.getItem("accessToken")).role)
       navigate("/home");
     } catch (error) {
       console.error(error);
@@ -32,54 +28,58 @@ const Login = () => {
 
   return (
     <MainDiv>
-      <Section1>
-        <DemoAutoPlay />
-      </Section1>
-      <Section2>
-        <LoginBox>
-          <p className="LoginBoxTiltle">LOGIN</p>
-          <form>
-            <LoginBoxInput>
-              <input
-                type="text"
-                name="email"
-                required
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                }}
-              />
-              <label>Email</label>
-            </LoginBoxInput>
-            <LoginBoxInput>
-              <input
-                type="password"
-                name="password"
-                required
-                onChange={(event) => {
-                  setPassword(event.target.value);
-                }}
-              />
-              <label>Password</label>
-            </LoginBoxInput>
-            <BoxButton>
-              <a onClick={loginn}>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                entrar
-              </a>
-            </BoxButton>
-          </form>
-          <BoxLink>
-            <p className="a1">
-              ¿No tienes cuenta?
-              <Link to={"/register"}>
-                <a className="a2">¡Regístrate!</a>
-              </Link>
-            </p>
-          </BoxLink>
-          <Redes>
+        <Section1>
+          <DemoAutoPlay/>
+        </Section1>
+        <Section2>
+            <div className="login-box">
+              <p>LOGIN</p>
+              <form>
+                <div className="user-box">
+                  <input
+                    type="text"
+                    name="email"
+                    required
+                    onChange={(event) => {
+                      setEmail(event.target.value);
+                    }}
+                  />
+                  <label>Email</label>
+                </div>
+                <div className="user-box">
+                  <input
+                    type="password"
+                    name="password"
+                    required
+                    onChange={(event) => {
+                      setPassword(event.target.value);
+                    }}
+                  />
+                  <label>Password</label>
+                </div>
+                <div className="joja">
+
+                <a onClick={loginn}>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  entrar
+                </a>
+                </div>
+              </form>
+              <div className="kak">
+
+              <p>
+                ¿No tienes cuenta?
+               <Link to={"/register"}>
+               <a className="a2">
+                  ¡Regístrate!
+                </a>
+               </Link>
+              </p>
+              </div>
+              <div className="redes">
             <ul className="socail-media">
               <li>
                 <a href="#">
@@ -190,11 +190,11 @@ const Login = () => {
                 </a>
               </li>
             </ul>
-          </Redes>
-        </LoginBox>
-      </Section2>
+          </div>
+            </div>
+        </Section2>
     </MainDiv>
   );
 };
 
-export default Login;
+export default NLogin;

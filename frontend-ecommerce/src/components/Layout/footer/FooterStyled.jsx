@@ -118,6 +118,8 @@ export const Div = styled.div`
   }
 `;
 
+
+
 export const FooterLink = styled.a`
   color: #000;
   text-transform: uppercase;
