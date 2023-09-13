@@ -1,7 +1,7 @@
 import { sequelize } from "../../database.js";
 import { DataTypes } from "sequelize";
-import { Orden_compra } from "./orders.js";
 import { productos } from "../productos/productos.js";
+import { User } from "../Usuarios/User.js";
 export const detalle_compra = sequelize.define("order_detail",{
     detail_id: {
         type: DataTypes.INTEGER,
@@ -9,7 +9,7 @@ export const detalle_compra = sequelize.define("order_detail",{
         allowNull: false,
         primaryKey: true,
     },
-    id_order: {
+    user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
@@ -22,22 +22,22 @@ export const detalle_compra = sequelize.define("order_detail",{
         allowNull: false,
     },
     total_value: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.FLOAT,
         allowNull: false,
     }
 })
 // realcion de detalle de compra con pedidos
-detalle_compra.belongsTo(Orden_compra, {
-    foreignKey: "id_order",
+detalle_compra.belongsTo(User, {
+    foreignKey: "user_id",
   });
-  Orden_compra.hasMany(detalle_compra, {
-    foreignKey: "id_order",
+  User.hasMany(detalle_compra, {
+    foreignKey: "user_id",
   });
 
 // relacion de detalle de compra con productos
 detalle_compra.belongsTo(productos, {
-    foreignKey: "id_order",
+    foreignKey: "product_id",
   });
-  Orden_compra.hasMany(detalle_compra, {
-    foreignKey: "id_order",
+  productos.hasMany(detalle_compra, {
+    foreignKey: "product_id",
   });

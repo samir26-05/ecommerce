@@ -20,6 +20,7 @@ export const Orden_compra = sequelize.define("order",{
     id_state: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 1,
     },
     subtotal:{
         type: DataTypes.DOUBLE,

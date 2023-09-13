@@ -70,7 +70,7 @@ export default function Review() {
 
   const apiKey = '4Vj8eK4rloUd272L48hsrarnUA';// defecto
   const merchantId = '508029';// defecto
-  const referenceCode = '000123456789012345';
+  const referenceCode = '0001234567890123445';
   const amount = subtotal;
   const currency = 'COP';// defecto
 
@@ -172,7 +172,7 @@ export default function Review() {
           <input name="merchantId" type="hidden" value="508029" />
           <input name="accountId" type="hidden" value="512321" />
           <input name="description" type="hidden" value="PAGOS ECOMMERCE KALARY" />
-          <input name="referenceCode" type="hidden" value="000123456789012345" />
+          <input name="referenceCode" type="hidden" value="0001234567890123445" />
           <input name="amount" type="hidden" value={subtotal} />
           <input name="tax" type="hidden" value="0" />
           <input name="taxReturnBase" type="hidden" value="0" />
