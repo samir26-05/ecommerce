@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode"
 /* COMPONENTS */
 import Header from "../../components/Layout/header/Header";
-import Footer from "../../components/Layout/footer/Footer";
 import NavVertical from '../../components/navs/NavVertical'
 /* styles */
 import { Div } from "./styled";
@@ -44,7 +43,6 @@ const UserPage = () => {
       ) : (<>
         <Header isUsedUser={userEnterUser} />
         <NavVertical />
-        <Footer />
       </>
       )}
     </Div>

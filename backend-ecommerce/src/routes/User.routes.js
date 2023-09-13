@@ -12,9 +12,11 @@ router.post("/login", User.Login);
 router.get("/User", [Jwt.validatetoken, Jwt.isAdmin], User.GetUsers);
 router.delete("/delete/:id", [Jwt.validatetoken, Jwt.isAdmin], User.DeleteUser);
 
+
 // routas de autiticacion
 router.get("/auths",Jwt.validatetoken, Auth.TokenAccess);
 export default router;
 
 // routas de datos personales
-router.put("/personal_information/:name",[Jwt.validatetoken],Personal.UpdatePersonalInformation);
+router.patch("/personal_information/:name",[Jwt.validatetoken],Personal.UpdatePersonalInformation);
+

@@ -116,7 +116,7 @@ const Footer = () => {
       </div>
       <div className="Copyright">
         <Typography variant="body2">
-          © {new Date().getFullYear()} Tu Empresa. Todos los derechos
+          © {new Date().getFullYear()} KALARY. Todos los derechos
           reservados.
         </Typography>
       </div>
