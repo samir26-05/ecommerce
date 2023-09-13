@@ -11,8 +11,8 @@ const IndexCategory = () => {
     { name: "Camisetas", img: Camisetas },
     { name: "Camisas", img: Camisas },
     { name: "Sudaderas", img: Sudaderas },
-    { name: "Jeans", img: Jeans },
-    { name: "Zapatillas", img: Zapatillas },
+    { name: "Pantalones", img: Jeans },
+    { name: "Zapatos", img: Zapatillas },
   ];
   return (
     <ContainerFather>
