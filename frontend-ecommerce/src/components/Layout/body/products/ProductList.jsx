@@ -56,7 +56,7 @@ export const ProductList = () => {
           <ContainerCard key={product.id}>
             <Card>
               <div className="BoxImg">
-                <Link to={`/InfoProducts/${product.id}`}>
+                <Link to={`/InfoProducts/${product.name}`}>
                   <CardMedia src={product.img_video} alt={product.name} />
                 </Link>
               </div>
