@@ -4,6 +4,7 @@ import { ValidRegisterProduct } from "../../schemas/productos/CreateProduct.js";
 import { ValidRegisterUpdate } from "../../schemas/productos/UpdateProduct.js";
 import { ipFileServer, urlArchivos } from "../../libs/constas.js";
 import { category } from "../../models/productos/categoria.js";
+import { section } from "../../models/productos/section.js";
 import fs from "fs";
 import path from "path";
 
@@ -205,5 +206,26 @@ export const GetProductId = async(req, res) => {
   res.status(200).json(Result)
   } catch (error) {
   res.status(500).json({error: error.message})
+  }
+};
+
+export const GetProductSectionCategory = async(req, res) => {
+  try {
+    const { id, name } = req.params;
+    const Section = await section.findAll({ where: { id_section: id } });
+    const categoria = await category.findOne({ where: { category: name } });
+    const result = await productos.findAll({
+      where: {
+        id_section: {
+          equalTo: id
+        },
+        category_id: {
+          equalTo: categoria.categoria_id
+        }
+      }
+    });
+    console.log(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };

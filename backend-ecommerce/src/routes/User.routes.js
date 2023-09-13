@@ -6,7 +6,6 @@ import * as Jwt from "../middlewares/AuthJwt.js";
 
 const router = Router();
 router.get('/name/:name',[Jwt.validatetoken],User.GetUsersName)
-router.get('/id/:id',[Jwt.validatetoken],User.GetUsersId)
 router.post("/", User.CreateUser);
 router.post("/login", User.Login);
 router.get("/User", [Jwt.validatetoken, Jwt.isAdmin], User.GetUsers);
@@ -18,3 +17,4 @@ export default router;
 
 // routas de datos personales
 router.put("/personal_information/:name",[Jwt.validatetoken],Personal.UpdatePersonalInformation);
+router.put("/personal_information/id/:id",[Jwt.validatetoken],Personal.UpdatePersonalInformationId)
