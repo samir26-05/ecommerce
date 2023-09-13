@@ -29,8 +29,8 @@ export const Cta = styled.button`
     transform: scaleX(1);
     transform-origin: bottom left;
   }
-  :active {
-    border: none;
+  :focus {
+    outline: none;
   }
 `;
 
