@@ -19,7 +19,7 @@ export default function Sections() {
   const { page } = useParams();
   const [userEnterUser, setUserEnterUser] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  let sectionProducts;
   const verifyEnter = () => {
     return true;
   };
@@ -45,10 +45,11 @@ export default function Sections() {
   const { cart, updateCart } = useCart();
   const [products, setProducts] = useState([]);
 
-  const sectionProducts = products.filter(
-    (product) => product.section.section === page
-  );
-  console.log(sectionProducts, "products");
+  if (page === 'Hombre' || page === 'Mujer') {
+    sectionProducts = products.filter((product) => product.section.section === page);
+  } else {
+    sectionProducts = products.filter((product) => product.category.category === page);
+  }
 
   const onAddProduct = (product) => {
     const updatedCart = Array.isArray(cart) ? [...cart] : [];
@@ -70,6 +71,7 @@ export default function Sections() {
       try {
         const response = await axios.get("http://localhost:3000/product/");
         setProducts(response.data.result);
+        console.log(response.data.result);
       } catch (error) {
         console.error("Error al obtener los productos:", error);
       }
