@@ -40,6 +40,7 @@ const InfoProducts = () => {
     try {
       const response = await axios.get("http://localhost:3000/product/");
       setProducts(response.data.result);
+      console.log(response.data.result);
     } catch (error) {
       console.error("Error al obtener los productos:", error);
     }
@@ -81,7 +82,7 @@ const InfoProducts = () => {
           <h1>Cargando......</h1>
         </>
       ) : ( <>
-      <Header />
+      <Header isUsedUser={userEnterUser}/>
       <BoxMain>
         <Section1>
           <Image src={product.img_video} alt={product.name}></Image>

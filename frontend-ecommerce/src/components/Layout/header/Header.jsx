@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 import "./car.css";
 import "./header.css";
 import { Link } from "react-router-dom";
-import AdminDashboard from "./AdminDashboard";
 
 export const pages = ["Inicio", "Mujer", "Hombre"];
 
@@ -62,7 +61,6 @@ const Header = ({
     };
   }, []);
 
-  const isAdmin = false
 
   return (
     <AppBar style={{ background: "none" }}>
