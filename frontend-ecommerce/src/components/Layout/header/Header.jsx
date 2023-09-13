@@ -151,7 +151,7 @@ const Header = ({
           </Box>
 
           <div style={{display:"flex", justifyContent:"space-between", alignItems:"center",width:"5%"}}>
-            <Link to='/user' style={{fontSize:'30px'}}>
+            <Link to='/user' style={{fontSize:'35px'}}>
               <a  className="icon-user">
                 <BiUser style={{ fill: isUsedUser || isUsedPayment
                 ? "#000"
