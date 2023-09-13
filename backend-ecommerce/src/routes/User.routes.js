@@ -5,7 +5,8 @@ import * as Personal from "../controllers/Login_Users/Personal_information.contr
 import * as Jwt from "../middlewares/AuthJwt.js";
 
 const router = Router();
-router.get('/name/:name',[Jwt.validatetoken],User.GetUsersId)
+router.get('/name/:name',[Jwt.validatetoken],User.GetUsersName)
+router.get('/id/:id',[Jwt.validatetoken],User.GetUsersId)
 router.post("/", User.CreateUser);
 router.post("/login", User.Login);
 router.get("/User", [Jwt.validatetoken, Jwt.isAdmin], User.GetUsers);

@@ -2,45 +2,49 @@
 import { MainDiv, Colores, BoxMain, Section1, Section2, Image, Title, Reference, Price, TitleSize, Sizes, ButtonBuys, Size, ColorProducts, Buys, } from "./styleProducts";
 import Header from "../../components/Layout/header/Header";
 import { useState, useEffect } from "react";
-import { data } from "../../data";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../../components/Layout/body/products/CardContext";
-import jwt_decode from "jwt-decode"
+import axios from "axios";
 
 const InfoProducts = () => {
-  const { id } = useParams();
-  const product = data.find((item) => item.id === parseInt(id, 10));
-  if (!product) {
-    return <p>Producto no encontrado</p>;
-  }
-
+  const { name } = useParams();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true)
   const [userEnterUser, setUserEnterUser] = useState(false);
+  const { cart, updateCart } = useCart();
+  let navigate = useNavigate();
 
   const verifyEnter = () => {
     return true;
   };
 
-
-  const [loading, setLoading] = useState(true)
-
-  let navigate = useNavigate();
-
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
-      console.log(jwt_decode(localStorage.getItem("accessToken")), "❤❤❤❤")
       setLoading(false)
     } else {
       navigate('/')
     }
 
+    // Llama a la función fetchProducts dentro del efecto
+    fetchProducts();
 
     const trueEnter = verifyEnter();
     setUserEnterUser(trueEnter);
     return () => {
       setUserEnterUser(false);
     };
-  }, []);
-
+  }, []);   
+  
+  
+  async function fetchProducts() {
+    try {
+      const response = await axios.get("http://localhost:3000/product/");
+      setProducts(response.data.result);
+      console.log(response.data.result);
+    } catch (error) {
+      console.error("Error al obtener los productos:", error);
+    }
+  }
 
 
   const [selectedSize, setSelectedSize] = useState(null);
@@ -52,7 +56,6 @@ const InfoProducts = () => {
     }
   };
 
-  const { cart, updateCart } = useCart();
 
   const onAddProduct = (product) => {
     const updatedCart = [...cart];
@@ -63,9 +66,14 @@ const InfoProducts = () => {
     } else {
       updatedCart.push({ ...product, quantity: 1 });
     }
-
+    
     updateCart(updatedCart);
   };
+
+  const product = products.find(element => element.name === name);
+  if (!product) {
+    return <p>Producto no encontrado</p>;
+  }
 
   return (
     <MainDiv>
@@ -74,24 +82,25 @@ const InfoProducts = () => {
           <h1>Cargando......</h1>
         </>
       ) : ( <>
-      <Header isUsedUser={userEnterUser} />
+      <Header isUsedUser={userEnterUser}/>
       <BoxMain>
         <Section1>
-          <Image src={product.img} alt={product.nameProduct}></Image>
+          <Image src={product.img_video} alt={product.name}></Image>
         </Section1>
         <Section2>
-          <Title>{product.nameProduct}</Title>
-          <Reference>{product.id}</Reference>
+          <Title>{product.name}</Title>
+          <Reference>Ref: {product.product_id}</Reference>
           <Price>{product.price}</Price>
           <ColorProducts>
-            {product.color.map((img, index) => (
-              <Colores key={index} src={img.imagen} alt={img.color}></Colores>
-            ))}
+           {/*  {product.color.map((img, index) => (
+              <Colores key={index} src={img.img_video} alt={img.name}></Colores>
+            ))} */}
+            [Colores]
           </ColorProducts>
 
           <TitleSize>Selecciona talla</TitleSize>
           <Sizes>
-            {product.talla.map((talla, index) => (
+            {/* {product.size.map((talla, index) => (
               <Size
                 style={{
                   backgroundColor: selectedSize === index ? "black" : "white",
@@ -102,7 +111,8 @@ const InfoProducts = () => {
               >
                 {talla}
               </Size>
-            ))}
+            ))} */}
+            [Tallas]
           </Sizes>
           <ButtonBuys onClick={() => onAddProduct(product)}>
             <Buys>Añadir A La Cesta</Buys>

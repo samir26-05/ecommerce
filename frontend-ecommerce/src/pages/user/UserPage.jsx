@@ -6,7 +6,6 @@ import Header from "../../components/Layout/header/Header";
 import NavVertical from '../../components/navs/NavVertical'
 /* styles */
 import { Div } from "./styled";
-import FooterUser from '../../components/Layout/footer/FooterUser';
 
 const UserPage = () => {
   const [userEnterUser, setUserEnterUser] = useState(true);
@@ -44,7 +43,6 @@ const UserPage = () => {
       ) : (<>
         <Header isUsedUser={userEnterUser} />
         <NavVertical />
-        <FooterUser />
       </>
       )}
     </Div>
