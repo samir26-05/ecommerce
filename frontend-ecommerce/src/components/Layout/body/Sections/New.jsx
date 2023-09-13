@@ -1,8 +1,8 @@
 // Importa el paquete swiper/bundle ## npm install swiper npm install react react-dom
-import { useEffect, /* useState */ } from "react";
+import { useEffect /* useState */ } from "react";
 import Swiper from "swiper/bundle";
-import "./swiper-bundle.min.css";
-import { Div, NewsImg, Title } from "./Styled";
+import "./NewStyled.css";
+import { Div, NewsImg, Title } from "./NewStyled";
 // import * as SliderImg from '../../../../assets/Img/indexSlider'
 import Slider1_1 from "../../../../assets/Img/Slider1.1-min.jpg";
 import Slider1_2 from "../../../../assets/Img/Slider1.2-min.jpg";
@@ -24,7 +24,6 @@ import Slider9_1 from "../../../../assets/Img/Slider9.1-min.jpg";
 import Slider9_2 from "../../../../assets/Img/Slider9.2-min.jpg";
 import Slider10_1 from "../../../../assets/Img/Slider10.1-min.jpg";
 import Slider10_2 from "../../../../assets/Img/Slider10.2-min.jpg";
-
 
 function Contacto() {
   useEffect(() => {
@@ -69,7 +68,7 @@ function Contacto() {
       swiper.destroy(); // Destruye el Swiper cuando el componente se desmonta
     };
   }, []);
-/* 
+  /* 
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -82,20 +81,24 @@ function Contacto() {
   return (
     <>
       <Title>Novedades que no te puedes perder</Title>
-
       <Div>
         <div className="slide-container swiper">
           <div className="slide-content">
             <div className="card-wrapper swiper-wrapper">
+              <div className="card swiper-slide"> 
+                <div className="image-content">
+                  <span className="overlay"></span>
+                  <NewsImg img1={Slider1_1} img2={Slider1_2}></NewsImg>
+                </div>
+                <div className="card-content">
+                  <h2 className="name">David Dell</h2>
+                  <p className="description">The lorem text the section that</p>
+                </div>
+              </div>
               <div className="card swiper-slide">
                 <div className="image-content">
                   <span className="overlay"></span>
-
-                  <NewsImg
-                    className="card-image"
-                    img1={Slider1_1}
-                    img2={Slider1_2}
-                  ></NewsImg>
+                  <NewsImg img1={Slider3_1} img2={Slider3_2}></NewsImg>
                 </div>
 
                 <div className="card-content">
@@ -106,14 +109,8 @@ function Contacto() {
               <div className="card swiper-slide">
                 <div className="image-content">
                   <span className="overlay"></span>
-
-                  <NewsImg
-                    className="card-image"
-                    img1={Slider3_1}
-                    img2={Slider3_2}
-                  ></NewsImg>
+                  <NewsImg img1={Slider4_1} img2={Slider4_2}></NewsImg>
                 </div>
-
                 <div className="card-content">
                   <h2 className="name">David Dell</h2>
                   <p className="description">The lorem text the section that</p>
@@ -122,14 +119,8 @@ function Contacto() {
               <div className="card swiper-slide">
                 <div className="image-content">
                   <span className="overlay"></span>
-
-                  <NewsImg
-                    className="card-image"
-                    img1={Slider4_1}
-                    img2={Slider4_2}
-                  ></NewsImg>
+                  <NewsImg img1={Slider5_1} img2={Slider5_2}></NewsImg>
                 </div>
-
                 <div className="card-content">
                   <h2 className="name">David Dell</h2>
                   <p className="description">The lorem text the section that</p>
@@ -138,14 +129,8 @@ function Contacto() {
               <div className="card swiper-slide">
                 <div className="image-content">
                   <span className="overlay"></span>
-
-                  <NewsImg
-                    className="card-image"
-                    img1={Slider5_1}
-                    img2={Slider5_2}
-                  ></NewsImg>
+                  <NewsImg img1={Slider6_1} img2={Slider6_2}></NewsImg>
                 </div>
-
                 <div className="card-content">
                   <h2 className="name">David Dell</h2>
                   <p className="description">The lorem text the section that</p>
@@ -154,14 +139,8 @@ function Contacto() {
               <div className="card swiper-slide">
                 <div className="image-content">
                   <span className="overlay"></span>
-
-                  <NewsImg
-                    className="card-image"
-                    img1={Slider6_1}
-                    img2={Slider6_2}
-                  ></NewsImg>
+                  <NewsImg img1={Slider7_1} img2={Slider7_2}></NewsImg>
                 </div>
-
                 <div className="card-content">
                   <h2 className="name">David Dell</h2>
                   <p className="description">The lorem text the section that</p>
@@ -170,14 +149,8 @@ function Contacto() {
               <div className="card swiper-slide">
                 <div className="image-content">
                   <span className="overlay"></span>
-
-                  <NewsImg
-                    className="card-image"
-                    img1={Slider7_1}
-                    img2={Slider7_2}
-                  ></NewsImg>
+                  <NewsImg img1={Slider8_1} img2={Slider8_2}></NewsImg>
                 </div>
-
                 <div className="card-content">
                   <h2 className="name">David Dell</h2>
                   <p className="description">The lorem text the section that</p>
@@ -186,14 +159,8 @@ function Contacto() {
               <div className="card swiper-slide">
                 <div className="image-content">
                   <span className="overlay"></span>
-
-                  <NewsImg
-                    className="card-image"
-                    img1={Slider8_1}
-                    img2={Slider8_2}
-                  ></NewsImg>
+                  <NewsImg img1={Slider9_1} img2={Slider9_2}></NewsImg>
                 </div>
-
                 <div className="card-content">
                   <h2 className="name">David Dell</h2>
                   <p className="description">The lorem text the section that</p>
@@ -202,14 +169,8 @@ function Contacto() {
               <div className="card swiper-slide">
                 <div className="image-content">
                   <span className="overlay"></span>
-
-                  <NewsImg
-                    className="card-image"
-                    img1={Slider9_1}
-                    img2={Slider9_2}
-                  ></NewsImg>
+                  <NewsImg img1={Slider10_1} img2={Slider10_2}></NewsImg>
                 </div>
-
                 <div className="card-content">
                   <h2 className="name">David Dell</h2>
                   <p className="description">The lorem text the section that</p>
@@ -218,30 +179,8 @@ function Contacto() {
               <div className="card swiper-slide">
                 <div className="image-content">
                   <span className="overlay"></span>
-
-                  <NewsImg
-                    className="card-image"
-                    img1={Slider10_1}
-                    img2={Slider10_2}
-                  ></NewsImg>
+                  <NewsImg img1={Slider2_1} img2={Slider2_2}></NewsImg>
                 </div>
-
-                <div className="card-content">
-                  <h2 className="name">David Dell</h2>
-                  <p className="description">The lorem text the section that</p>
-                </div>
-              </div>
-              <div className="card swiper-slide">
-                <div className="image-content">
-                  <span className="overlay"></span>
-
-                  <NewsImg
-                    className="card-image"
-                    img1={Slider2_1}
-                    img2={Slider2_2}
-                  ></NewsImg>
-                </div>
-
                 <div className="card-content">
                   <h2 className="name">David Dell</h2>
                   <p className="description">The lorem text the section that</p>
@@ -249,7 +188,6 @@ function Contacto() {
               </div>
             </div>
           </div>
-
           <div className="swiper-button-next swiper-navBtn"></div>
           <div className="swiper-button-prev swiper-navBtn"></div>
           <div className="swiper-pagination"></div>

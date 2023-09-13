@@ -1,97 +1,215 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 /* MATERIAL UI */
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import axios from 'axios'
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import axios from "axios";
+import Swal from 'sweetalert2'
+import { Button } from "@mui/material";
 
 export default function AddressForm() {
-  const [clients, setClients] = useState([
-    {
-      nombre: "",
-      apellido: "",
-      Phone_number: "",
-      address: "",
-      city: "",
-      country: "",
-      postalcode: "",
-      state: "",
-    }
-  ]);
+  const [oneClients, setOneClients] = useState({
+    nombre: "",
+    apellido: "",
+    Phone_number: "",
+    address: "",
+    city: "",
+    country: "",
+    postalcode: "",
+    state: "",
+  });
 
-  const [error, setError] = useState();
+  const [ setError] = useState();
 
-  useEffect(() => {
-    async function fetchClients() {
-      try {
-        const response = await axios.get("http://localhost:3000/user/User", {
-          headers: {
-            accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUwMiIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY5NDEwMjY3NiwiZXhwIjoxNjk0MTI3ODc2fQ.AfXf_0O2AAvsHRQtoAoVGR_SCY7Dl2uatItJJWzeGa8"
-          },
-        });
-        setClients(response.data);
-        console.log(response.data)
-      } catch (error) {
-        setError(error);
-        console.log("Error al obtener los clientes:", error);
-      }
-    }
+  const userName = localStorage.getItem("username");
+  const token = localStorage.getItem("accessToken");
 
-    fetchClients();
-  }, []);
 
-  const handleInputChange = (campo, valor) => {
-    let nuevoValor = valor;
-    if ( campo === 'nombre' || campo === 'apellido' || campo === 'Phone_number' || campo === 'address' || campo === 'city'|| campo === 'country' || campo === 'postalcode' || campo === 'state') {
-      nuevoValor = Number(valor); // Convertir a número
-    }
-    setClients((datosPrevios) => ({ ...datosPrevios, [campo]: nuevoValor }));
+  const handleInputChange = (e) => {
+    const { name, value } = e.target; // Desestructuramos el nombre y el valor del objeto evento
+    setOneClients((datosPrevios) => ({
+      ...datosPrevios,
+      [name]: value,
+    }));
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    updateInfoPersonal(oneClients);
+  };
+
+
+  const updateInfoPersonal = async () => {
+    try {
+      await axios.patch(
+        `http://localhost:3000/user/personal_information/${userName}`,
+        oneClients,
+        {
+          headers: {
+            accessToken: token,
+          },
+        }
+      )
+      Swal.fire(
+        'BIEN HECHO!',
+        'Informacion almacenada con exito!',
+        'success'
+      )
+    } catch (error) {
+      setError(error);
+      console.log("Error al actualizar los datos:", error);
+    }
+  };
+
+
+  useEffect(() => {
+    async function fetchOneClients() {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/user/name/${userName}`,
+          {
+            headers: {
+              accessToken: token,
+            },
+          }
+        );
+        setOneClients(response.data);
+      } catch (error) {
+        setError(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Ocurrió un error al intentar almacenar la información!'
+        })
+      }
+    } 
+
+    Swal.fire(
+      'Diligencie el formulario completo',
+      '',
+      'info'
+    );
+
+    fetchOneClients();
+  }, [userName]);
+
+ 
   return (
     <React.Fragment>
-      {error ? (
-        <div>Error al obtener los clientes: {error.message}</div>
-      ) : (<>
-      {console.log(clients, '😘😘😘')}
-        <Typography variant="h6" gutterBottom>
-          Direccion de envio.
-        </Typography>
+      
+      <Typography variant="h6" gutterBottom>
+        Direccion de envio.
+      </Typography>
+      <form onSubmit={handleSubmit}>
         <Grid container spacing={3}>
-
           <Grid item xs={12} sm={6}>
-            <TextField required id="firstName" name="firstName" label="Nombre" value={clients.nombre} onChange={(event) => handleInputChange("nombre", event.target.value)} fullWidth autoComplete="given-name" variant="standard" >{clients.nombre}</TextField>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField required id="lastName" name="lastName" label="Apellido" value={clients.personal} fullWidth autoComplete="family-name" variant="standard" />
-          </Grid>
-
-          <Grid item xs={12}>
-            <TextField required id="contact" name="contact" label="# Contacto" fullWidth autoComplete="shipping address-line2" variant="standard" />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField required id="country" name="country" label="Pais" fullWidth autoComplete="shipping country" variant="standard" />
+            <TextField
+              id="firstName"
+              name="nombre"
+              value={oneClients?.Personal_information?.nombre}
+              onChange={handleInputChange}
+              fullWidth
+              autoComplete="given-name"
+              variant="standard"
+              disabled
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField required id="city" name="city" label="Ciudad" fullWidth autoComplete="shipping address-level2" variant="standard" />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField required id="state" name="state" label="Estado/Departamento/Region" fullWidth variant="standard" />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField required id="zip" name="zip" label="Zip / Codigo postal" fullWidth autoComplete="shipping postal-code" variant="standard" />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField required id="address1" name="address1" label="Direccion" fullWidth autoComplete="shipping address-line1" variant="standard" />
+            <TextField
+              id="lastName"
+              name="apellido"
+              value={oneClients?.Personal_information?.apellido}
+              fullWidth
+              autoComplete="family-name"
+              variant="standard"
+              onChange={handleInputChange}
+              disabled
+            />
           </Grid>
 
           <Grid item xs={12}>
-            <FormControlLabel control={<Checkbox color="secondary" name="saveAddress" value="yes" />} label="Use esta dirección para detalles de pago" />
+            <TextField
+              required
+              id="contact"
+              name="Phone_number"
+              label="# Contacto"
+              onChange={handleInputChange}
+              fullWidth
+              autoComplete="shipping address-line2"
+              variant="standard"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="country"
+              name="country"
+              label="Pais"
+              onChange={handleInputChange}
+              fullWidth
+              autoComplete="shipping country"
+              variant="standard"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="city"
+              name="city"
+              label="Ciudad"
+              onChange={handleInputChange}
+              fullWidth
+              autoComplete="shipping address-level2"
+              variant="standard"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="state"
+              name="state"
+              label="Estado/Departamento/Region"
+              onChange={handleInputChange}
+              fullWidth
+              variant="standard"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="zip"
+              name="postalcode"
+              label="Zip / Codigo postal"
+              onChange={handleInputChange}
+              fullWidth
+              autoComplete="shipping postal-code"
+              variant="standard"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="address1"
+              name="address"
+              label="Direccion"
+              onChange={handleInputChange}
+              fullWidth
+              autoComplete="shipping address-line1"
+              variant="standard"
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+             <Button
+                variant=""
+                type="submit"
+                sx={{ ml: 1 }}
+                style={{ backgroundColor: "black", color: "white" }}
+              >Guardar Cambios</Button>
+
           </Grid>
         </Grid>
-      </>)}
+      </form>
     </React.Fragment>
   );
 }

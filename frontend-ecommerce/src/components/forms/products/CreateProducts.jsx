@@ -100,7 +100,8 @@ export const FormProduct = () => {
     setNewProduct((datosPrevios) => ({ ...datosPrevios, [campo]: nuevoValor }));
   };
 
-  
+  const token = localStorage.getItem("accessToken") 
+
   const proper = Object(newProduct)
   const formData = new FormData();
   formData.append("data", JSON.stringify(newProduct));
@@ -114,8 +115,7 @@ export const FormProduct = () => {
     axios.post('http://localhost:3000/product/create', formData, {
       headers: {
         "Content-Type": "multipart/form-data",
-        accessToken:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXNlcm5hbWUiOiJzYW9yb3pjbzI2MDUwMiIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY5NDA5MzA0OCwiZXhwIjoxNjk0MTE4MjQ4fQ.JgOqEcBJk5Vnur5ybull2cswI5nSAA6Yl6Sn9gp1iXo",
+        accessToken: token
       },
 
     })

@@ -14,10 +14,29 @@ export default function ShowClients() {
 
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     if (!Object.keys(validationErrors).length) {
-      tableData[row.index] = values;
-      //send/receive api updates here, then refetch or update local table data for re-render
-      setTableData([...tableData]);
-      exitEditingMode(); //required to exit editing mode and close modal
+
+      try {
+        axios.put(`http://localhost:3000/user/personal_information/${row.getValue("user_id")}`, {
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+          nombre: values['Personal_information.nombre'],
+          apellido: values['Personal_information.apellido'],
+          Phone_number: values['Personal_information.Phone_number'],
+          address: values['Personal_information.address'],
+          city: values['Personal_information.city'],
+          country: values['Personal_information.country'],
+          postalcode: values['Personal_information.postalcode'],
+          state: values['Personal_information.state']
+          });
+          tableData[row.index] = values;
+          //send/receive api updates here, then refetch or update local table data for re-render
+          setTableData([...tableData]);
+          exitEditingMode(); //required to exit editing mode and close modal
+      } catch (error) {
+        setError(error);
+        console.log("Error al obtener los clientes:", error);
+      }
     }
   };
 
@@ -25,15 +44,28 @@ export default function ShowClients() {
     setValidationErrors({});
   };
 
-  const handleDeleteRow = useCallback(
-    (row) => {
-      if (!confirm(`Are you sure you want to delete ${row.getValue("name")}`)) {
+  const handleDeleteRow = useCallback((row) => {
+      if (
+        !confirm(`¿Está seguro de eliminar al usuario ${row.getValue("Personal_information.nombre")}?`)
+      ) {
         return;
       }
       //send api delete request here, then refetch or update local table data for re-render
-      tableData.splice(row.index, 1);
-      setTableData([...tableData]);
+      try {
+        axios.delete(`http://localhost:3000/user/delete/${row.getValue("user_id")}`, {
+            headers: {
+              accessToken: localStorage.getItem("accessToken"),
+            },
+            data: {},
+          });
+        tableData.splice(row.index, 1);
+        setTableData([...tableData]);
+      } catch (error) {
+        setError(error);
+        console.log("Error al obtener los clientes:", error);
+      }
     },
+
     [tableData]
   );
 
@@ -64,7 +96,7 @@ export default function ShowClients() {
         }),
       },
       {
-        accessorKey: "Personal_information.phone_number",
+        accessorKey: "Personal_information.Phone_number",
         header: "# Contacto",
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...cell,
@@ -87,29 +119,59 @@ export default function ShowClients() {
           ...cell,
         }),
       },
+      {
+        accessorKey: "Personal_information.country",
+        header: "País",
+        size: 80,
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...cell,
+        }),
+      },
+      {
+        accessorKey: "Personal_information.postalcode",
+        header: "Código Postal",
+        size: 80,
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...cell,
+        }),
+      },
+      {
+        accessorKey: "Personal_information.state",
+        header: "Estado",
+        size: 80,
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...cell,
+        }),
+      },
     ],
     []
   );
 
-  useEffect(() => {
-    async function fetchClients() {
-      try {
-        const response = await axios.get("http://localhost:3000/user/User", {
-          headers: {
-            accessToken:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJKZWFuY2FybG9zX0NGIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNjk0MTAyNTk3LCJleHAiOjE2OTQxMjc3OTd9.Oa5Q4GJIG53NU6-uKQZuXqKJhgI0fjnE5eyj17Q3UVg",
-          },
-          data: {},
-        });
-        setClients(response.data);
-        console.log(response.data, "❤️❤️❤️❤️");
-      } catch (error) {
-        setError(error);
-        console.log("Error al obtener los clientes:", error);
-      }
-    }
 
+  async function fetchClients() {
+    try {
+      const response = await axios.get("http://localhost:3000/user/User", {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+        data: {},
+      });
+      setClients(response.data);
+    } catch (error) {
+      setError(error);
+      console.log("Error al obtener los clientes:", error);
+    }
+  }
+
+  useEffect(() => {
     fetchClients();
+
+    const interval = setInterval(() => {
+      fetchClients();
+    }, 1000)
+
+    return () => clearInterval(interval)
+
   }, []);
 
   return (
@@ -142,7 +204,9 @@ export default function ShowClients() {
                   </IconButton>
                 </Tooltip>
                 <Tooltip arrow placement="right" title="Delete">
-                  <IconButton onClick={() => handleDeleteRow(row)}>
+                  <IconButton onClick={() => {
+                      handleDeleteRow(row);
+                    }}>
                     <Delete style={{ fill: "red" }} />
                   </IconButton>
                 </Tooltip>

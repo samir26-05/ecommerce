@@ -8,12 +8,18 @@ export const MainDiv = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const Section1 = styled.div`
   box-sizing: border-box;
   width: 50%;
   overflow: hidden;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const Section2 = styled.div`
@@ -22,6 +28,9 @@ export const Section2 = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 //********************************
@@ -33,6 +42,9 @@ export const LoginBox = styled.div`
   padding: 5%;
   background: #fff;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 
   .LoginBoxTiltle {
     margin-bottom: 70px;
@@ -159,6 +171,7 @@ export const BoxButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   @keyframes btn-anim1 {
     0% {
       left: -100%;
