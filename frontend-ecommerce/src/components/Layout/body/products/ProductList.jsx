@@ -32,16 +32,15 @@ export const ProductList = () => {
     updateCart(updatedCart);
   };
 
-   async function fetchProducts() {
-    try {
-      const response = await axios.get("http://localhost:3000/product/");
-      setProducts(response.data.result);
-    } catch (error) {
-      console.error("Error al obtener los productos:", error);
-    }
-  }
-
   useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await axios.get("http://localhost:3000/product/");
+        setProducts(response.data.result);
+      } catch (error) {
+        console.error("Error al obtener los productos:", error);
+      }
+    }
 
     // Llama a la función fetchProducts dentro del efecto
     fetchProducts();
@@ -57,7 +56,7 @@ export const ProductList = () => {
           <ContainerCard key={product.id}>
             <Card>
               <div className="BoxImg">
-                <Link to={`/InfoProducts/${product.name}`}>
+                <Link to={`/InfoProducts/${product.id}`}>
                   <CardMedia src={product.img_video} alt={product.name} />
                 </Link>
               </div>
