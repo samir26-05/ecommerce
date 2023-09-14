@@ -94,7 +94,7 @@ export default function NavVertical() {
           :
           <>
             <Tabs value={value} onChange={handleChange} sx={{ width: 450, marginTop: 5, marginLeft: "50px", display: "flex", flexDirection: "column" }} >
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6} sx={{ position: "fixed"}}>
                 <ListItem sx={{ py: 1, px: 0 }}>
                   <Avatar alt={localStorage.getItem("username")} src="/static/images/avatar/1.jpg" />
                   <ListItemText primary="Bienvenido" secondary={localStorage.getItem("username")} sx={{ px: 1 }} />
