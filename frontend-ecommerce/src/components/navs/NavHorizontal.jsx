@@ -17,10 +17,10 @@ import { Img, Div } from './styled';
 import ShowOrders from './orders/ShowOrders';
 import CrudOrders from './orders/ShowOrders';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import CreateUser from '../forms/NewPerson/NewClient';
+import CreateUser from '../forms/clients/FormClient'
 import CrudProvider from './provider/ShowProvider';
 import { FlexDirCol } from '../StyledMain';
-import ShowClients from './clients/ShowClients';
+import ShowClients from '../forms/clients/ShowClients';
 
 
 function CustomTabPanel(props) {

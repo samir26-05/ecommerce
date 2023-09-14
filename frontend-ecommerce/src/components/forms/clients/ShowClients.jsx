@@ -7,35 +7,42 @@ import { Delete, Edit } from "@mui/icons-material";
 
 export default function ShowClients() {
   const [clients, setClients] = useState([]);
-  const [error, setError] = useState(null); // Cambia 'null' por 'null' (sin comillas)
+  const [error, setError] = useState(null);
 
   const [tableData, setTableData] = useState(() => clients);
   const [validationErrors, setValidationErrors] = useState({});
 
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     if (!Object.keys(validationErrors).length) {
-
       try {
-        axios.put(`http://localhost:3000/user/personal_information/${row.getValue("user_id")}`, {
-          headers: {
-            accessToken: localStorage.getItem("accessToken"),
+        const response = await axios.put(
+          `http://localhost:3000/user/personal_information/id/${row.getValue("user_id")}`,
+          {
+            nombre: values["Personal_information.nombre"],
+            apellido: values["Personal_information.apellido"],
+            Phone_number: values["Personal_information.Phone_number"],
+            address: values["Personal_information.address"],
+            city: values["Personal_information.city"],
+            country: values["Personal_information.country"],
+            postalcode: values["Personal_information.postalcode"],
+            state: values["Personal_information.state"],
           },
-          nombre: values['Personal_information.nombre'],
-          apellido: values['Personal_information.apellido'],
-          Phone_number: values['Personal_information.Phone_number'],
-          address: values['Personal_information.address'],
-          city: values['Personal_information.city'],
-          country: values['Personal_information.country'],
-          postalcode: values['Personal_information.postalcode'],
-          state: values['Personal_information.state']
-          });
+          {
+            headers: {
+              accessToken: localStorage.getItem("accessToken"),
+            },
+          }
+        );
+
+        if (response.status === 200) {
           tableData[row.index] = values;
-          //send/receive api updates here, then refetch or update local table data for re-render
           setTableData([...tableData]);
-          exitEditingMode(); //required to exit editing mode and close modal
+          exitEditingMode();
+        }
+        console.log(response.data, '❤️❤️❤️')
       } catch (error) {
         setError(error);
-        console.log("Error al obtener los clientes:", error);
+        console.log("Error al actualizar el cliente:", error.data);
       }
     }
   };
@@ -45,26 +52,26 @@ export default function ShowClients() {
   };
 
   const handleDeleteRow = useCallback((row) => {
-      if (
-        !confirm(`¿Está seguro de eliminar al usuario ${row.getValue("Personal_information.nombre")}?`)
-      ) {
-        return;
-      }
-      //send api delete request here, then refetch or update local table data for re-render
-      try {
-        axios.delete(`http://localhost:3000/user/delete/${row.getValue("user_id")}`, {
-            headers: {
-              accessToken: localStorage.getItem("accessToken"),
-            },
-            data: {},
-          });
-        tableData.splice(row.index, 1);
-        setTableData([...tableData]);
-      } catch (error) {
-        setError(error);
-        console.log("Error al obtener los clientes:", error);
-      }
-    },
+    if (
+      !confirm(`¿Está seguro de eliminar al usuario ${row.getValue("Personal_information.nombre")}?`)
+    ) {
+      return;
+    }
+    //send api delete request here, then refetch or update local table data for re-render
+    try {
+      axios.delete(`http://localhost:3000/user/delete/${row.getValue("user_id")}`, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+        data: {},
+      });
+      tableData.splice(row.index, 1);
+      setTableData([...tableData]);
+    } catch (error) {
+      setError(error);
+      console.log("Error al obtener los clientes:", error);
+    }
+  },
 
     [tableData]
   );
@@ -157,6 +164,7 @@ export default function ShowClients() {
         data: {},
       });
       setClients(response.data);
+      console.log(response.data, '❤️❤️❤️')
     } catch (error) {
       setError(error);
       console.log("Error al obtener los clientes:", error);
@@ -205,8 +213,8 @@ export default function ShowClients() {
                 </Tooltip>
                 <Tooltip arrow placement="right" title="Delete">
                   <IconButton onClick={() => {
-                      handleDeleteRow(row);
-                    }}>
+                    handleDeleteRow(row);
+                  }}>
                     <Delete style={{ fill: "red" }} />
                   </IconButton>
                 </Tooltip>
