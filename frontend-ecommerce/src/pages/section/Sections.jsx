@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
@@ -11,15 +12,8 @@ import { ContainerCard, Tiltle } from "../../components/Layout/body/products/Sty
 import { Card, CardContent, Pagination, Tab, Tabs } from "@mui/material";
 import { Price } from "../infoProducts/styleProducts.jsx";
 import { GiShoppingBag } from "react-icons/gi";
+import { Categories } from "../../components/Layout/body/Category/IndexCategory.jsx";
 import axios from "axios";
-
-const card = [
-  { name: "Camisetas" },
-  { name: "Camisas" },
-  { name: "Sudaderas" },
-  { name: "Pantalones" },
-  { name: "Zapatos" },
-];
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -39,14 +33,6 @@ function CustomTabPanel(props) {
     </div>
   );
 }
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
 
 
 export default function Sections() {
@@ -76,8 +62,10 @@ export default function Sections() {
   };
 
   let sectionProducts;
+  let filterCategories;
   if (page === 'Hombre' || page === 'Mujer') {
     sectionProducts = products.filter((product) => product.section.section === page);
+    filterCategories = sectionProducts.filter((products) => products.category.category === 'Camisetas');
   } else {
     sectionProducts = products.filter((product) => product.category.category === page);
   }
@@ -119,24 +107,6 @@ export default function Sections() {
     };
   }, []);
 
-  useEffect(() => {
-    async function fetchProductsSectionCategory() {
-      try {
-        const response = await axios.get(`http://localhost:3000/product/section/${page}/category/${card.name}`,
-          {
-            headers: {
-              accessToken: token,
-            },
-          }
-        );
-        setProducts(response.data.result);
-        console.log(response.data.result);
-      } catch (error) {
-        console.error("Error al obtener los productos:", error);
-      }
-    }
-    fetchProductsSectionCategory();
-  }, [page, token]);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -155,22 +125,26 @@ export default function Sections() {
     <Box sx={{ width: "100%", height: "100vh", overflowY: "scroll" }}>
       <Header isUsedUser={userEnterUser} />
       <h1 style={{ marginTop: "120px", textAlign: "center" }}>{page}</h1>
-      <Box sx={{ width: '100%', bgcolor: 'background.paper', display: "flex", justifyContent: "center" }}>
-        <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto" aria-label="scrollable auto tabs example" >
-          {card.map((item, index) => (
-            <Link to={`/section/${page}/category/${item.name}`} key={index}>
-              <Tab label={item.name} />
-            </Link>
-          ))}
-        </Tabs>
-      </Box>
+      {page === 'Mujer' || page === 'Hombre' ?
+
+        <Box sx={{ width: '100%', bgcolor: 'background.paper', display: "flex", justifyContent: "center" }}>
+          <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto" aria-label="scrollable auto tabs example" >
+          <Tab label='productos' index={0}/>
+            {Categories.map((item, index) => (
+              <Tab label={item.name} key={index} />
+            ))}
+          </Tabs>
+        </Box>
+
+        : ""}
       <Div>
-        <CustomTabPanel value={value} index={0} >
-          <FlexRow style={{ flexWrap: "wrap" }}>
+      <CustomTabPanel value={value} index={0}>
+        <FlexRow style={{ flexWrap: "wrap" }}>
+          <>
             {sectionProducts.map((item) => (
               <ContainerCard key={item.id} style={{ width: "18%" }}>
                 <Card>
-                  <Link to={`/InfoProducts/${item.id}`}>
+                  <Link to={`/InfoProducts/${item.name}`}>
                     <Imagen src={item.img_video} alt={item.name} style={{ width: "100%", objectFit: "cover" }} />
                   </Link>
                   <CardContent>
@@ -185,25 +159,35 @@ export default function Sections() {
                   </CardContent>
                 </Card>
               </ContainerCard>
-
             ))}
-          </FlexRow>
-        </CustomTabPanel>
+          </>
+        </FlexRow>
+      </CustomTabPanel>
 
-        <CustomTabPanel value={value} index={1}>
-
-        </CustomTabPanel>
+        {Categories.map((item, index) => (
+          <CustomTabPanel value={value} index={index + 1} key={index}>
+            <FlexRow style={{ flexWrap: "wrap" }}>
+              {page === 'Mujer' || page === 'Hombre' ?
+                <>
+                  <FilterSections category={item.name} sectionProducts={sectionProducts} />
+                </>
+                :
+                <></>
+                }
+            </FlexRow>
+          </CustomTabPanel>
+        ))}
       </Div>
 
 
       <Pagination
-          count={Math.ceil(sectionProducts.length / itemsPerPage)}
-          page={pages} // Usar la página actual
-          onChange={handlePageChange}
-          sx={{display:"flex",justifyContent:"center", marginBottom:"50px"}}
-        />
+        count={Math.ceil(sectionProducts.length / itemsPerPage)}
+        page={pages} // Usar la página actual
+        onChange={handlePageChange}
+        sx={{ display: "flex", justifyContent: "center", marginBottom: "50px" }}
+      />
 
-        <Footer/>
+      <Footer />
     </Box>
   );
 }
@@ -211,6 +195,7 @@ export default function Sections() {
 import styled from "styled-components";
 import { FlexDirCol, FlexRow } from "../../components/StyledMain.jsx";
 import { Div } from "../user/styled.jsx";
+import FilterSections from "./FilterSections.jsx";
 
 export const Imagen = styled.img`
   width: 300px;
