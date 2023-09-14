@@ -89,7 +89,7 @@ export default function Sections() {
         {sectionProducts.map((item) => (
           <ContainerCard key={item.id} style={{width:"18%"}}>
             <Card>
-              <Link to={`/InfoProducts/${item.id}`}>
+              <Link to={`/InfoProducts/${item.name}`}>
                 <Imagen src={item.img_video} alt={item.name} style={{width:"100%", objectFit:"cover"}}/>
               </Link>
               <CardContent>
