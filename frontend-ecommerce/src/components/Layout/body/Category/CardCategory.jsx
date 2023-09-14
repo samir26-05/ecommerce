@@ -14,7 +14,7 @@ const CardCategory = ({ array }) => {
                 <Img src={item.img} alt={item.name} />
               </div>
               <div>
-                <p>{item.name}</p>
+                <p className="CateText">{item.name}</p>
               </div>
             </Card>
           </DivCategory>

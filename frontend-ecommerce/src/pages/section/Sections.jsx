@@ -194,7 +194,6 @@ export default function Sections() {
 
 import styled from "styled-components";
 import { FlexDirCol, FlexRow } from "../../components/StyledMain.jsx";
-import { Div } from "../user/styled.jsx";
 import FilterSections from "./FilterSections.jsx";
 
 export const Imagen = styled.img`

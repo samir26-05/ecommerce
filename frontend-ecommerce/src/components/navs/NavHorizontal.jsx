@@ -20,6 +20,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CreateUser from '../forms/clients/FormClient'
 import CrudProvider from './provider/ShowProvider';
 import { FlexDirCol } from '../StyledMain';
+import "./NavVerticalStyled.css";
 import ShowClients from '../forms/clients/ShowClients';
 
 
@@ -94,9 +95,9 @@ export default function NavHorizontal(props) {
       }
 
       {type === 'products' ? (
-        <div>
+        <div className='BoxProducts'>
           <Box>
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ paddingTop: 20 }}>
+            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
               <Tab label="Crear producto" {...a11yProps(0)} className='whithoutOutline' />
               <Tab label="Inventario" {...a11yProps(1)} className='whithoutOutline' />
             </Tabs>
