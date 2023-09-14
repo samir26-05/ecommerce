@@ -1,19 +1,15 @@
 /* eslint-disable react/prop-types */
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { Cta, Span } from "./styledHeader";
-import {BiUser} from 'react-icons/bi'
-import { Carrito } from "./Carrito";
+import { Container, Cta, Span } from "./HeaderStyled";
+import { BiUser } from "react-icons/bi";
+import { Carrito } from "./Car";
 import { useState, useEffect } from "react";
-import "./car.css";
-import "./header.css";
 import { Link } from "react-router-dom";
-import AdminDashboard from "./AdminDashboard";
 
-export const pages = ["Inicio", "Mujer", "Hombre"];
+// eslint-disable-next-line react-refresh/only-export-components
+export const pages = ["Inicio", "Mujer", "Hombre", "Todxs"];
 
 const Header = ({
   products,
@@ -26,7 +22,7 @@ const Header = ({
   isUsedPayment,
   isUsedBody,
 }) => {
-  const handleCloseNavMenu = () => { };
+  const handleCloseNavMenu = () => {};
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -62,132 +58,117 @@ const Header = ({
     };
   }, []);
 
-  const isAdmin = false
-
   return (
-    <AppBar style={{ background: "none" }}>
-      <Container
-        maxWidth=""
-        sx={{
-          position: (isUsedUser ? "fixed" : "") || (isUsedBody ? "fixed" : ""),
-          zIndex: 3,
-          boxShadow: isUsedBody
-            ? headerColor !== "transparent"
-              ? "0px 0px 3px 2px #0000003b"
-              : "0px 0px 0px 0px"
-            : "0px 0px 3px 2px #0000003b",
-          transition: "all 0.2s ease-in-out",
-        }}
-        style={{
-          backgroundColor:
-            isUsedUser || isUsedPayment
-              ? "#fff"
-              : hovered
-                ? "#fff"
-                : headerColor,
-        }}
-      >
-        <Toolbar disableGutters>
-          <Typography
-            className="Typography"
-            variant="h1"
-            noWrap
-            component="a"
-            href="/home"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            sx={{
-              mr: 1,
-              display: { xs: "none", md: "flex" },
-              color: isUsedUser || isUsedPayment ? "#000" : "#fff" && textColor,
+    <Container
+      isUsedUser={isUsedUser}
+      isUsedBody={isUsedBody}
+      isUsedPayment={isUsedPayment}
+      headerColor={headerColor}
+      hovered={hovered}
+    >
+      <Toolbar>
+        <Typography
+          className="Typography"
+          variant="h1"
+          noWrap
+          component="a"
+          href="/home"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          sx={{
+            mr: 1,
+            display: { xs: "none", md: "flex" },
+            color: isUsedUser || isUsedPayment ? "#000" : "#fff" && textColor,
+            letterSpacing: ".8rem",
+            fontWeight: 700,
+            "&:hover": {
+              color: "#000",
               textDecoration: "none",
-              letterSpacing: ".8rem",
-              fontWeight: 700,
-              "&:hover": {
-                color: "#000",
-              },
-            }}
-          >
-            KALARY
-          </Typography>
+            },
+          }}
+        >
+          KALARY
+        </Typography>
 
-          <Box
-            className="box-primary"
-            sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
-          >
-            {pages.map((page) => (
-              <Link
-                to={
-                  page === "Inicio"
-                    ? "/home"
-                    : `/section/${page}`
-                }
-                key={page}
-                onClick={handleCloseNavMenu}
-                style={{
-                  textDecoration: "none",
-                  color:
-                    isUsedUser || isUsedPayment
-                      ? "#000"
-                      : hovered
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: { xs: "none", md: "flex" },
+            margin: "0 1%",
+          }}
+        >
+          {pages.map((page) => (
+            <Link
+              to={page === "Inicio" ? "/home" : `/section/${page}`}
+              key={page}
+              onClick={handleCloseNavMenu}
+              style={{
+                margin: "0 1%",
+                textDecoration: "none",
+                color:
+                  isUsedUser || isUsedPayment
+                    ? "#000"
+                    : hovered
+                    ? "#000"
+                    : textColor,
+              }}
+            >
+              <Cta>
+                <Span
+                  className="span"
+                  textColor={textColor}
+                  style={{
+                    textDecoration: "none",
+
+                    color:
+                      isUsedUser || isUsedPayment
+                        ? "#000"
+                        : hovered
                         ? "#000"
                         : textColor,
-                }}
+                  }}
+                >
+                  {" "}
+                  {page}{" "}
+                </Span>
+              </Cta>
+            </Link>
+          ))}
+        </Box>
 
-              >
-                <Cta className="cta">
-                  <Span className="span"
-                    textColor={textColor}
-                    style={{
-                      textDecoration: "none",
-                      color:
-                        isUsedUser || isUsedPayment
-                          ? "#000"
-                          : hovered
-                            ? "#000"
-                            : textColor,
-                    }}> {page} </Span>
-                </Cta>
-              </Link>
-            ))}
-          </Box>
-
-          {isAdmin ? 
-          <AdminDashboard textColor={textColor}/>
-          : 
-          <>
-            <Link to='/user' style={{width:'50px'}}>
-          <a  className="icon-user">
-              <BiUser/>
+        
+          <div style={{display:"flex", alignItems:"center", gap:"25px"}}>
+            <Link
+              to="/user">
+              <a className="icon-user">
+                <BiUser
+                  style={{
+                    fontSize:"35px",
+                    fill:
+                      isUsedUser || isUsedPayment
+                        ? "#000"
+                        : hovered
+                        ? "#000"
+                        : textColor,
+                  }}
+                />
               </a>
-            
-          </Link>
-          <Carrito
-            allProducts={products}
-            setAllProducts={newProducts}
-            total={inTotal}
-            setTotal={newTotal}
-            countProducts={cantProducts}
-            setCountProducts={newCantProducts}
-            color={textColor}
-            hover={hovered}
-            pageUsed={isUsedUser}
-            pagePayment={isUsedPayment}
-          />
-          </>}
-          
-          <Box
-            sx={{
-              fontWeight: "bold",
-              my: 1,
-              color: "black",
-              margin: "0 15px",
-            }}
-          >
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+            </Link>
+            <Carrito
+              allProducts={products}
+              setAllProducts={newProducts}
+              total={inTotal}
+              setTotal={newTotal}
+              countProducts={cantProducts}
+              setCountProducts={newCantProducts}
+              color={textColor}
+              hover={hovered}
+              pageUsed={isUsedUser}
+              pagePayment={isUsedPayment}
+            />
+          </div>
+      </Toolbar>
+    </Container>
   );
 };
 

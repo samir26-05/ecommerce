@@ -1,27 +1,23 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode"
+import jwt_decode from "jwt-decode";
 /* COMPONENTS */
 import Body from "../../components/Layout/body/Body";
-/* STYLES */
-import { Div } from "./styled";
-
-
+import { Div } from "./HomeStyled";
 
 const HomePage = () => {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   let navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
-      console.log(jwt_decode(localStorage.getItem("accessToken")), "❤❤❤❤")
-      setLoading(false)
+      console.log(jwt_decode(localStorage.getItem("accessToken")), "❤❤❤❤");
+      setLoading(false);
     } else {
-      navigate('/')
+      navigate("/");
     }
-  }, [])
-
+  }, []);
 
   return (
     <Div>
@@ -31,8 +27,7 @@ const HomePage = () => {
         </>
       ) : (
         <Body />
-        )}
-
+      )}
     </Div>
   );
 };

@@ -2,6 +2,18 @@ import styled from "styled-components";
 
 export const FormContainer = styled.form`
   width: 100%;
+  .BoxxImag {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    img {
+      object-fit: contain;
+      width: 50vw;
+      height: 60vh;
+    }
+  }
 `;
 
 export const Title = styled.h4`
@@ -25,10 +37,7 @@ export const Input = styled.input`
     border-color: #000000;
     box-shadow: 0 0 5px rgba(60, 60, 61, 0.5);
   }
-
 `;
-
-
 
 export const SubmitButton = styled.input`
   width: 100%;
@@ -47,7 +56,7 @@ export const SubmitButton = styled.input`
   &:focus {
     transform: scale(1.1);
     transition: transform 0.6s ease;
-    text-decoration: none;  
+    text-decoration: none;
   }
 `;
 

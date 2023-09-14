@@ -1,15 +1,11 @@
-import AppBar from "@mui/material/AppBar";
 import Header from "../header/Header";
-import { Div } from "./styled";
 import Footer from "../footer/Footer";
 import DemoAutoPlay from "./carrusel/DemoAutoPlay";
 import { useState, useEffect } from "react";
 import { ProductList } from "./products/ProductList";
-import "../header/header.css";
 import SectionsBody from "./Sections/SectionsBody";
 import IndexCategory from "./Category/IndexCategory";
-import AppBrand from "./BrandBody/AppBrand";
-import "../header/car.css";
+import AppBrand from "./Brand/AppBrand";
 
 export default function Body() {
   const [allProducts, setAllProducts] = useState([]);
@@ -29,33 +25,29 @@ export default function Body() {
     };
   }, []);
   return (
-    <>
-      <AppBar position="relative" style={{ backgroundColor: "#ffffff" }}>
-        <Header
-          products={allProducts}
-          newProducts={setAllProducts}
-          inTotal={total}
-          newTotal={setTotal}
-          cantProducts={countProducts}
-          newCantProducts={setCountProducts}
-          isUsedBody={userEnter}
-        />
-        <Div>
-          <DemoAutoPlay />
-          <IndexCategory />
-          <ProductList
-            allProducts={allProducts}
-            setAllProducts={setAllProducts}
-            total={total}
-            setTotal={setTotal}
-            countProducts={countProducts}
-            setCountProducts={setCountProducts}
-          />
-          <SectionsBody />
-          <AppBrand />
-        </Div>
-        <Footer />
-      </AppBar>
-    </>
+    <div>
+      <Header
+        products={allProducts}
+        newProducts={setAllProducts}
+        inTotal={total}
+        newTotal={setTotal}
+        cantProducts={countProducts}
+        newCantProducts={setCountProducts}
+        isUsedBody={userEnter}
+      />
+      <DemoAutoPlay />
+      <IndexCategory />
+      <ProductList
+        allProducts={allProducts}
+        setAllProducts={setAllProducts}
+        total={total}
+        setTotal={setTotal}
+        countProducts={countProducts}
+        setCountProducts={setCountProducts}
+      />
+      <SectionsBody />
+      <AppBrand />
+      <Footer />
+    </div>
   );
 }
