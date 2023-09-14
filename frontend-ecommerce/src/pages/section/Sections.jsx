@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -11,14 +11,22 @@ import {
   ContainerCard,
   Tiltle,
 } from "../../components/Layout/body/products/StyledProductList.jsx";
-import { Card, CardContent } from "@mui/material";
+import { Card, CardContent, Pagination, Tab, Tabs } from "@mui/material";
 import { Price } from "../infoProducts/styleProducts.jsx";
 import { GiShoppingBag } from "react-icons/gi";
 
 export default function Sections() {
   const { page } = useParams();
+  const { cart, updateCart } = useCart();
+  const [products, setProducts] = useState([]);
   const [userEnterUser, setUserEnterUser] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   let sectionProducts;
   const verifyEnter = () => {
     return true;
@@ -36,14 +44,12 @@ export default function Sections() {
 
     const trueEnter = verifyEnter();
     setUserEnterUser(trueEnter);
-
     return () => {
       setUserEnterUser(false);
     };
   }, []);
 
-  const { cart, updateCart } = useCart();
-  const [products, setProducts] = useState([]);
+
 
   if (page === 'Hombre' || page === 'Mujer') {
     sectionProducts = products.filter((product) => product.section.section === page);
@@ -58,7 +64,7 @@ export default function Sections() {
     );
 
     if (existingProduct) {
-      existingProduct.quantity++;
+      existingProduct.quantity++; 
     } else {
       updatedCart.push({ ...product, quantity: 1 });
     }
@@ -85,6 +91,23 @@ export default function Sections() {
     <Box sx={{ width: "100%", height: "100vh", overflowY: "scroll"}}>
       <Header isUsedUser={userEnterUser} />
       <h1 style={{ marginTop: "120px", textAlign:"center" }}>{page}</h1>
+      <Box sx={{ width:'100%', bgcolor: 'background.paper', display:"flex", justifyContent:"center", border: "solid 1px red"}}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        variant="scrollable"
+        scrollButtons="auto"
+        aria-label="scrollable auto tabs example"
+      >
+        <Tab label="Item One" />
+        <Tab label="Item Two" />
+        <Tab label="Item Three" />
+        <Tab label="Item Four" />
+        <Tab label="Item Five" />
+        <Tab label="Item Six" />
+        <Tab label="Item Seven" />
+      </Tabs>
+    </Box>
       <FlexRow style={{ flexWrap: "wrap"}}>
         {sectionProducts.map((item) => (
           <ContainerCard key={item.id} style={{width:"18%"}}>
@@ -103,15 +126,18 @@ export default function Sections() {
                 </Price>
               </CardContent>
             </Card>
+            
           </ContainerCard>
+          
         ))}
-      </FlexRow>
+      </FlexRow><Pagination count={10} variant="outlined" />
     </Box>
   );
 }
 
 import styled from "styled-components";
 import { FlexRow } from "../../components/StyledMain.jsx";
+import { ClassNames } from "@emotion/react";
 
 export const Imagen = styled.img`
   width: 300px;

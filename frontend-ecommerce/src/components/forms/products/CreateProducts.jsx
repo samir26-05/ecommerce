@@ -123,6 +123,7 @@ export const FormProduct = () => {
           accessToken: token,
         },
       })
+     
       .then((response) => {
         Swal.fire("BIEN HECHO!", "Producto creado con exito!", "success");
         console.log(response.data);
