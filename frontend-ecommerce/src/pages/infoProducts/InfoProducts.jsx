@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { MainDiv, Colores, BoxMain, Section1, Section2, Image, Title, Reference, Price, TitleSize, Sizes, ButtonBuys, Size, ColorProducts, Buys, } from "./styleProducts";
 import Header from "../../components/Layout/header/Header";
