@@ -13,33 +13,56 @@ export default function StockProducts() {
   const [tableData, setTableData] = useState(() => products);
   const [validationErrors, setValidationErrors] = useState({});
 
+
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
-    if (!Object.keys(validationErrors).length) {
-      try {
-        axios.put(`http://localhost:3000/product/update/${row.getValue("product_id")}`,
-          {
-            headers: {
-              accessToken: localStorage.getItem("accessToken"),
-            },
-            name: values["name"],
-            descripcion: values["descripcion"],
-            price: values["price"],
-            stock: values["stock"],
-            section: values["section.section"],
-            size: values["size.size"],
-            img_video: values["img_video"],
-          }
-        );
-        tableData[row.index] = values;
-        //send/receive api updates here, then refetch or update local table data for re-render
-        setTableData([...tableData]);
-        exitEditingMode(); //required to exit editing mode and close modal
-      } catch (error) {
-        setError(error);
-        console.log("Error al obtener los clientes:", error);
-      }
+    
+
+    const updatedData = {
+      name: values["name"],
+      descripcion: values["descripcion"],
+      price: parseFloat(values["price"]),
+      stock: parseFloat(values["stock"]),
+      section: parseInt(values["section"]),
+      size: parseInt(values["size"]),
+    };
+    
+    console.log(updatedData);
+    try {
+      
+      const formData = new FormData();
+      formData.append("data", JSON.stringify(updatedData));
+      
+      formData.append("name", updatedData.name);
+      formData.append("descripcion", updatedData.descripcion);
+      formData.append("price", updatedData.price);
+      formData.append("stock", updatedData.stock);
+      formData.append("section", updatedData.section);
+      formData.append("size", updatedData.size);
+      
+      const productId = row.getValue("product_id"); //capture the id of the product
+
+      const response = await axios.put(
+        `http://localhost:3000/product/update/${productId}`,
+        formData,
+        {
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        }
+      );
+  
+
+      //cerrar modal
+      exitEditingMode()
+      
+    } catch (error) {
+      setError(error);
+      console.error("Error al actualizar el producto:", error);
+      console.log("Error en la actualización:", response.data.error);
     }
   };
+  
+  
 
   const handleCancelRowEdits = () => {
     setValidationErrors({});
@@ -119,6 +142,7 @@ export default function StockProducts() {
       {
         accessorKey: "section.section",
         header: "Sección",
+        enableEditing: false, //disable editing on this column
         size: 80,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...cell,
