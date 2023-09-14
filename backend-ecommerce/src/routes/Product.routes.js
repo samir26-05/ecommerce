@@ -16,6 +16,7 @@ router.delete('/delete/:N1',[Jwt.validatetoken,Jwt.isAdmin],Product.DeleteProduc
 router.get('/:id/section',Jwt.validatetoken,Product.GetSectionProduct)
 router.get('/:name/category',Jwt.validatetoken,Product.GetCategoryProduct)
 router.get('/id/:id',Jwt.validatetoken,Product.GetProductId)
+router.get('/section/:id/category/:name',Jwt.validatetoken,Product.GetProductSectionCategory)
 // Routas de marcas
 router.get("/brand", Brand.Getbrands);
 
