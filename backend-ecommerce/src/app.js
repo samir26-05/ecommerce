@@ -1,12 +1,23 @@
-import express from "express";
 import morgan from "morgan";
-import  RouteUsers  from "./routes/users.routes.js";
+import cors from "cors";
+import express,{static as FileServer} from "express";
+import RouteUser from "./routes/User.routes.js";
+import RouterProduct from "./routes/Product.routes.js";
+import RouterSupllier from "./routes/Supplier.routes.js";
+import { urlArchivos } from "./libs/constas.js";
+import multer from "multer";
 const app = express();
-
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
 app.use(morgan('dev'));
+app.use(cors());
 app.get('/',(req,res ) => {
-    res.json({message : 'hola como estas'})
+    res.json({message : 'route not found'})
 })
 
-app.use('/users',RouteUsers)
+// Routas 
+app.use('/supllier',RouterSupllier)
+app.use('/product',RouterProduct)
+app.use('/user',RouteUser)
+app.use('/api/file',FileServer('//jesus-afanador/uploads/'));
 export default app

@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import Pagination from './Pagination';
 
 //image
-import carritoNegro from '../../../../assets/Img/carritoNegro.jpg'
+import BlackSuit from '../../../../assets/Img/blacksuit.jpg'
 import damaNegro from '../../../../assets/Img/damaNegro.jpg'
 import ropaNegro from '../../../../assets/Img/ropaNegro.jpg'
 
@@ -12,19 +11,17 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const styles = {
   root: {
-    position: 'relative',
-    marginTop:'130px'
-    
+    position: 'relative',    
   },
   slide: {
     padding: 15,
-    minHeight: 530,
+    minHeight: 950,
     minWidth: 591,
     color: '#fff',
     
   },
   slide1: {
-    backgroundImage: `url(${carritoNegro})`,
+    backgroundImage: `url(${BlackSuit})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
       
@@ -61,8 +58,9 @@ function DemoAutoPlay() {
         <div style={{ ...styles.slide, ...styles.slide2 }}>{/* Aqui va texto */}</div>
         <div style={{ ...styles.slide, ...styles.slide3 }}>{/* Aqui va texto */}</div>
       </AutoPlaySwipeableViews>
-      <Pagination dots={3} index={index} onChangeIndex={handleChangeIndex} />
-    </div>
+      {/* Botones Del scroll */}
+{/*       <Pagination dots={3} index={index} onChangeIndex={handleChangeIndex} />
+ */}    </div>
   );
 }
 
