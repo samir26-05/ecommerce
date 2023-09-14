@@ -129,7 +129,7 @@ export default function Sections() {
 
         <Box sx={{ width: '100%', bgcolor: 'background.paper', display: "flex", justifyContent: "center" }}>
           <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto" aria-label="scrollable auto tabs example" >
-          <Tab label='productos' index={0}/>
+            <Tab label='productos' index={0} />
             {Categories.map((item, index) => (
               <Tab label={item.name} key={index} />
             ))}
@@ -138,31 +138,31 @@ export default function Sections() {
 
         : ""}
       <Div>
-      <CustomTabPanel value={value} index={0}>
-        <FlexRow style={{ flexWrap: "wrap" }}>
-          <>
-            {sectionProducts.map((item) => (
-              <ContainerCard key={item.id} style={{ width: "18%" }}>
-                <Card>
-                  <Link to={`/InfoProducts/${item.name}`}>
-                    <Imagen src={item.img_video} alt={item.name} style={{ width: "100%", objectFit: "cover" }} />
-                  </Link>
-                  <CardContent>
-                    <Tiltle>{item.name}</Tiltle>
-                    <Price style={{ justifyContent: "space-between", display: "flex" }}>
-                      ${item.price}
-                      <GiShoppingBag
-                        onClick={() => onAddProduct(item)}
-                        size={"10%"}
-                      />
-                    </Price>
-                  </CardContent>
-                </Card>
-              </ContainerCard>
-            ))}
-          </>
-        </FlexRow>
-      </CustomTabPanel>
+        <CustomTabPanel value={value} index={0}>
+          <FlexRow style={{ flexWrap: "wrap" }}>
+            <>
+              {sectionProducts.map((item) => (
+                <ContainerCard key={item.id} style={{ width: "18%" }}>
+                  <Card>
+                    <Link to={`/InfoProducts/${item.name}`}>
+                      <Imagen src={item.img_video} alt={item.name} style={{ width: "100%", objectFit: "cover" }} />
+                    </Link>
+                    <CardContent>
+                      <Tiltle>{item.name}</Tiltle>
+                      <Price style={{ justifyContent: "space-between", display: "flex" }}>
+                        ${item.price}
+                        <GiShoppingBag
+                          onClick={() => onAddProduct(item)}
+                          size={"10%"}
+                        />
+                      </Price>
+                    </CardContent>
+                  </Card>
+                </ContainerCard>
+              ))}
+            </>
+          </FlexRow>
+        </CustomTabPanel>
 
         {Categories.map((item, index) => (
           <CustomTabPanel value={value} index={index + 1} key={index}>
@@ -173,7 +173,7 @@ export default function Sections() {
                 </>
                 :
                 <></>
-                }
+              }
             </FlexRow>
           </CustomTabPanel>
         ))}
@@ -194,6 +194,7 @@ export default function Sections() {
 
 import styled from "styled-components";
 import { FlexDirCol, FlexRow } from "../../components/StyledMain.jsx";
+import { Div } from "../user/styled.jsx";
 import FilterSections from "./FilterSections.jsx";
 
 export const Imagen = styled.img`
