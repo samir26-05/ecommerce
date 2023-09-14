@@ -1,17 +1,15 @@
-import { useState } from 'react';
+import { useState } from "react";
 /* MATERIAL UI */
-import { Avatar, Box, Grid, ListItem, ListItemText } from '@mui/material';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import { Avatar, Box, Grid, ListItem, ListItemText } from "@mui/material";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 /* COMPONENTS */
-import NavHorizontal from './NavHorizontal';
-import InfoCountUser from './InfoCount';
+import NavHorizontal from "./NavHorizontal";
+import InfoCountUser from "./InfoCount";
 /* STYLES */
-import { Div } from '../../pages/user/styled';
-import { FlexDirCol } from '../StyledMain';
-import { useNavigate } from 'react-router-dom';
-import FooterUser from '../Layout/footer/FooterUser';
-
+import "./NavVerticalStyled.css";
+import { FlexDirCol } from "../StyledMain";
+import { useNavigate } from "react-router-dom";
 
 function TabPanel(props) {
   // eslint-disable-next-line react/prop-types
@@ -35,13 +33,10 @@ function TabPanel(props) {
 }
 
 function a11yProps(index) {
-
   return {
     id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-
+    "aria-controls": `vertical-tabpanel-${index}`,
   };
-
 }
 
 export default function NavVertical() {
@@ -51,34 +46,61 @@ export default function NavVertical() {
     setValue(newValue);
   };
 
-
-  const navegate = useNavigate()
+  const navegate = useNavigate();
 
   const salirSession = () => {
     localStorage.removeItem("accessToken");
-    navegate('/')
-  }
-
+    navegate("/");
+  };
 
   return (
-    <Div >
-      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '100hv', marginTop: 15 }}>
-        {localStorage.getItem("role") === "Admin" ?
-          <>
-            <Tabs value={value} onChange={handleChange} sx={{ width: 450, marginTop: 5, marginLeft: "50px", display: "flex", flexDirection: "column" }} >
-              <Grid item xs={12} sm={6} sx={{ position: "fixed"}}>
-                <ListItem sx={{ py: 1, px: 0 }}>
-                  <Avatar alt={localStorage.getItem("username")} src="/static/images/avatar/1.jpg" />
-                  <ListItemText primary="Bienvenido" secondary={localStorage.getItem("username")} sx={{ px: 1 }} />
-                </ListItem>
-              </Grid>
-              <Tab label="Productos" {...a11yProps(1)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "80px" }} />
-              <Tab label="Pedidos" {...a11yProps(2)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "130px" }} />
-              <Tab label="Clientes" {...a11yProps(3)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "180px" }} />
-              <Tab label="Proveedores" {...a11yProps(4)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "230px" }} />
+    <Box className="BoxOne">
+      {localStorage.getItem("role") === "Admin" ? (
+        <>
+          <Tabs value={value} onChange={handleChange} className="Tabs">
+            <Grid item xs={12} sm={6} sx={{ position: "relative" }}>
+              <ListItem sx={{ py: 0, px: 0 }}>
+                <Avatar
+                  alt={localStorage.getItem("username")}
+                  src="/static/images/avatar/1.jpg"
+                />
+                <ListItemText
+                  primary="Bienvenido"
+                  secondary={localStorage.getItem("username")}
+                  sx={{ px: 1 }}
+                />
+              </ListItem>
+            </Grid>
+            <Tab
+              label="Productos"
+              {...a11yProps(1)}
+              className="whithoutOutline"
+            />
+            <Tab
+              label="Pedidos"
+              {...a11yProps(2)}
+              className="whithoutOutline"
+            />
+            <Tab
+              label="Clientes"
+              {...a11yProps(3)}
+              className="whithoutOutline"
+            />
+            <Tab
+              label="Proveedores"
+              {...a11yProps(4)}
+              className="whithoutOutline"
+            />
 
-              <Tab label="Cerrar sesión" className='whithoutOutline' onClick={salirSession} {...a11yProps(7)} sx={{ position: "fixed", marginTop: "300px" }} />
-            </Tabs>
+            <Tab
+              label="Cerrar sesión"
+              className="whithoutOutline"
+              onClick={salirSession}
+              {...a11yProps(7)}
+              sx={{ position: "relative" }}
+            />
+          </Tabs>
+          <div className="Productos">
             <TabPanel value={value} index={1}>
               <NavHorizontal type="products" />
             </TabPanel>
@@ -91,33 +113,64 @@ export default function NavVertical() {
             <TabPanel value={value} index={4}>
               <NavHorizontal type="provider" />
             </TabPanel>
-          </>
-          :
-          <>
-            <Tabs value={value} onChange={handleChange} sx={{ width: 450, marginTop: 5, marginLeft: "50px", display: "flex", flexDirection: "column" }} >
-              <Grid item xs={12} sm={6}>
-                <ListItem sx={{ py: 1, px: 0 }}>
-                  <Avatar alt={localStorage.getItem("username")} src="/static/images/avatar/1.jpg" />
-                  <ListItemText primary="Bienvenido" secondary={localStorage.getItem("username")} sx={{ px: 1 }} />
-                </ListItem>
-              </Grid>
-              <Tab label="Mis compras" {...a11yProps(1)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "80px", outline: "none" }} />
-              <Tab label="Datos personales y direcciones" {...a11yProps(2)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "130px" }} />
+          </div>
+        </>
+      ) : (
+        <>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            sx={{
+              width: 450,
+              marginTop: 5,
+              marginLeft: "50px",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Grid item xs={12} sm={6}>
+              <ListItem sx={{ py: 1, px: 0 }}>
+                <Avatar
+                  alt={localStorage.getItem("username")}
+                  src="/static/images/avatar/1.jpg"
+                />
+                <ListItemText
+                  primary="Bienvenido"
+                  secondary={localStorage.getItem("username")}
+                  sx={{ px: 1 }}
+                />
+              </ListItem>
+            </Grid>
+            <Tab
+              label="Mis compras"
+              {...a11yProps(1)}
+              className="whithoutOutline"
+              sx={{ position: "fixed", marginTop: "80px", outline: "none" }}
+            />
+            <Tab
+              label="Datos personales y direcciones"
+              {...a11yProps(2)}
+              className="whithoutOutline"
+              sx={{ position: "fixed", marginTop: "130px" }}
+            />
 
-              <Tab label="Cerrar sesión" className='whithoutOutline' onClick={salirSession} {...a11yProps(7)} sx={{ position: "fixed", marginTop: "210px" }} />
-            </Tabs>
+            <Tab
+              label="Cerrar sesión"
+              className="whithoutOutline"
+              onClick={salirSession}
+              {...a11yProps(7)}
+              sx={{ position: "fixed", marginTop: "210px" }}
+            />
+          </Tabs>
 
-            <TabPanel value={value} index={1}>
-              <NavHorizontal type="buy" />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-              <InfoCountUser />
-            </TabPanel>
-          </>
-        }
-
-      </Box>
-      <FooterUser />
-    </Div>
+          <TabPanel value={value} index={1}>
+            <NavHorizontal type="buy" />
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            <InfoCountUser />
+          </TabPanel>
+        </>
+      )}
+    </Box>
   );
 }

@@ -21,6 +21,7 @@ import CreateUser from '../forms/NewPerson/NewClient';
 import CrudProvider from './provider/ShowProvider';
 import { FlexDirCol } from '../StyledMain';
 import ShowClients from './clients/ShowClients';
+import "./NavVerticalStyled.css";
 
 
 function CustomTabPanel(props) {
@@ -94,9 +95,9 @@ export default function NavHorizontal(props) {
       }
 
       {type === 'products' ? (
-        <div>
+        <div className='BoxProducts'>
           <Box>
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ paddingTop: 20 }}>
+            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
               <Tab label="Crear producto" {...a11yProps(0)} className='whithoutOutline' />
               <Tab label="Inventario" {...a11yProps(1)} className='whithoutOutline' />
             </Tabs>

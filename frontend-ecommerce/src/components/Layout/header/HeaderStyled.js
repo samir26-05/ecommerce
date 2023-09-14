@@ -19,7 +19,7 @@ export const Container = styled.div`
         : "0px 0px 0px 0px"
       : "0px 0px 3px 2px #0000003b"};
   position: ${({ isUsedUser, isUsedBody }) =>
-    isUsedUser || isUsedBody ? "fixed" : "static"};
+    isUsedUser || isUsedBody ? "fixed" : "relative"};
 `;
 
 export const Cta = styled.button`

@@ -25,12 +25,15 @@ export const Div = styled.div`
   /* Google Fonts - Poppins */
   @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
+  width: 100%;
+  display: flex;
+  justify-content: center;
   * {
     margin: 0;
   }
 
   .slide-container {
-    width: 100%;
+    width: 95%;
     padding: 40px 0;
   }
   .slide-content {
