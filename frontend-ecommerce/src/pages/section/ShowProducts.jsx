@@ -8,13 +8,14 @@ import { GiShoppingBag } from "react-icons/gi";
 import { Imagen } from "./StyledSections";
 
 const ShowProducts = ({ products, currentPage, productsPerPage }) => {
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  // Calcular el índice de inicio y fin en función de la página actual
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const visibleProducts = products.slice(startIndex, endIndex);
 
   return (
     <>
-      {currentProducts.map((item) => (
+      {visibleProducts.map((item) => (
         <ContainerCard key={item.id} style={{ width: "19.5%" }}>
           <Card>
             <Link to={`/InfoProducts/${item.name}`}>
@@ -34,6 +35,6 @@ const ShowProducts = ({ products, currentPage, productsPerPage }) => {
       ))}
     </>
   );
-}
+};
 
 export default ShowProducts;
