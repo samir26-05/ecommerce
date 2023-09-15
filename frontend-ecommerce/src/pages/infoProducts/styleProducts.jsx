@@ -65,10 +65,13 @@ font-weight: 600;
 `;
 
 export const Price = styled.div`
-font-size: 1.4rem;
 position: relative;
 bottom: 22%;
+font-size: 1.4rem;
 font-weight: 800;
+div{
+  font-size: 1.8rem;
+}
 `;
 
 export const ColorProducts = styled.div`

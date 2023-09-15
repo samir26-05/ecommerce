@@ -10,27 +10,11 @@ import {
 } from "./StyledProductList";
 import { GiShoppingBag } from "react-icons/gi";
 import { Link } from "react-router-dom";
-import { useCart } from "./CardContext";
 import axios from "axios";
+import AddProduct from "../../../../utils";
 
 export const ProductList = () => {
-  const { cart, updateCart } = useCart();
   const [products, setProducts] = useState([]);
-
-  const onAddProduct = (product) => {
-    const updatedCart = Array.isArray(cart) ? [...cart] : [];
-    const existingProduct = updatedCart.find(
-      (item) => item.product_id === product.product_id
-    );
-
-    if (existingProduct) {
-      existingProduct.quantity++;
-    } else {
-      updatedCart.push({ ...product, quantity: 1 });
-    }
-
-    updateCart(updatedCart);
-  };
 
   useEffect(() => {
     async function fetchProducts() {
@@ -64,10 +48,9 @@ export const ProductList = () => {
                 <Tiltle>{product.name}</Tiltle>
                 <Price>
                   ${product.price}
-                  <GiShoppingBag
-                    onClick={() => onAddProduct(product)}
-                    size={"10%"}
-                  />
+                  <AddProduct product={product}>
+                    <GiShoppingBag/>
+                  </AddProduct>
                 </Price>
               </CardContent>
             </Card>

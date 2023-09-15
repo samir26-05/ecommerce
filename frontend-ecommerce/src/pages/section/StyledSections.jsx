@@ -27,3 +27,7 @@ export const Img = styled.img`
     width: 200px;
     height: 200px;    
 `
+export const Imagen = styled.img`
+  width: 300px;
+  height: 450px;
+`;
