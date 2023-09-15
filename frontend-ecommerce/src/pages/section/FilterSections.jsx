@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { Card, CardContent } from "@mui/material";
-import { ContainerCard, Tiltle } from "../../components/Layout/body/products/StyledProductList";
+import { ContainerCard, Tiltle } from "./SectionsStyled";
 import { Link } from "react-router-dom";
 import { Imagen } from "./Sections";
 import { Price } from "../infoProducts/styleProducts";

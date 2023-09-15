@@ -13,14 +13,13 @@ import { FormProduct } from '../forms/products/CreateProducts';
 /* IMG */
 import bgr from '../../assets/Img/bgr.png'
 /* STYLES */
-import { Img, Div } from './styled';
+import { Img, Div, BoxProducts } from './NavHorizontalStyled';
 import ShowOrders from './orders/ShowOrders';
 import CrudOrders from './orders/ShowOrders';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CreateUser from '../forms/clients/FormClient'
 import CrudProvider from './provider/ShowProvider';
 import { FlexDirCol } from '../StyledMain';
-import "./NavVerticalStyled.css";
 import ShowClients from '../forms/clients/ShowClients';
 
 
@@ -95,10 +94,10 @@ export default function NavHorizontal(props) {
       }
 
       {type === 'products' ? (
-        <div className='BoxProducts'>
-          <Box>
+        <BoxProducts>
+          <Box  >
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-              <Tab label="Crear producto" {...a11yProps(0)} className='whithoutOutline' />
+              <Tab label="Creavr sdproducto" {...a11yProps(0)} className='whithoutOutline' />
               <Tab label="Inventario" {...a11yProps(1)} className='whithoutOutline' />
             </Tabs>
           </Box>
@@ -108,7 +107,7 @@ export default function NavHorizontal(props) {
           <CustomTabPanel value={value} index={1}>
             <StockProducts />
           </CustomTabPanel>
-        </div>
+        </BoxProducts>
       ) : ''}
 
 

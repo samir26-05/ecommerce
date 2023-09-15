@@ -11,7 +11,7 @@ import UserPage from "./pages/user/UserPage.jsx";
 import Payment from "./pages/processPayment/Payment.jsx";
 import InfoProducts from "./pages/infoProducts/InfoProducts.jsx";
 import Sections from "./pages/section/Sections.jsx";
-import PageNotFound from "./pages/PageNotFound/PageNotFound.jsx";
+import PageNotFound from "./pages/pageNotFound/PageNotFound.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

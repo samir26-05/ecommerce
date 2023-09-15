@@ -6,9 +6,12 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import Header, { pages } from "../../components/Layout/header/Header.jsx";
 import { useCart } from "../../components/Layout/body/products/CardContext.jsx";
-import Footer from '../../components/Layout/footer/Footer.jsx'
+import Footer from "../../components/Layout/footer/Footer.jsx";
 import { Link, useParams } from "react-router-dom";
-import { ContainerCard, Tiltle } from "../../components/Layout/body/products/StyledProductList.jsx";
+import {
+  ContainerCard,
+  Tiltle,
+} from "../../components/Layout/body/products/StyledProductList.jsx";
 import { Card, CardContent, Pagination, Tab, Tabs } from "@mui/material";
 import { Price } from "../infoProducts/styleProducts.jsx";
 import { GiShoppingBag } from "react-icons/gi";
@@ -33,7 +36,6 @@ function CustomTabPanel(props) {
     </div>
   );
 }
-
 
 export default function Sections() {
   const { page } = useParams();
@@ -63,11 +65,17 @@ export default function Sections() {
 
   let sectionProducts;
   let filterCategories;
-  if (page === 'Hombre' || page === 'Mujer') {
-    sectionProducts = products.filter((product) => product.section.section === page);
-    filterCategories = sectionProducts.filter((products) => products.category.category === 'Camisetas');
+  if (page === "Hombre" || page === "Mujer") {
+    sectionProducts = products.filter(
+      (product) => product.section.section === page
+    );
+    filterCategories = sectionProducts.filter(
+      (products) => products.category.category === "Camisetas"
+    );
   } else {
-    sectionProducts = products.filter((product) => product.category.category === page);
+    sectionProducts = products.filter(
+      (product) => product.category.category === page
+    );
   }
 
   // Calcular el índice de inicio y fin en función de la página actual
@@ -107,7 +115,6 @@ export default function Sections() {
     };
   }, []);
 
-
   useEffect(() => {
     async function fetchProducts() {
       try {
@@ -122,21 +129,34 @@ export default function Sections() {
   }, []);
 
   return (
-    <Box sx={{ width: "100%", height: "100vh", overflowY: "scroll" }}>
+    <Box sx={{ borde: "1px solid red", width: "100%", height: "100vh", overflowY: "scroll" }}>
       <Header isUsedUser={userEnterUser} />
-      <h1 style={{ marginTop: "120px", textAlign: "center" }}>{page}</h1>
-      {page === 'Mujer' || page === 'Hombre' ?
-
-        <Box sx={{ width: '100%', bgcolor: 'background.paper', display: "flex", justifyContent: "center" }}>
-          <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto" aria-label="scrollable auto tabs example" >
-            <Tab label='productos' index={0} />
+      <h1 style={{ textAlign: "center" }}>{page}</h1>
+      {page === "Mujer" || page === "Hombre" ? (
+        <Box
+          sx={{
+            width: "100%",
+            bgcolor: "background.paper",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="scrollable auto tabs example"
+          >
+            <Tab label="productos" index={0} />
             {Categories.map((item, index) => (
               <Tab label={item.name} key={index} />
             ))}
           </Tabs>
         </Box>
-
-        : ""}
+      ) : (
+        ""
+      )}
       <Div>
         <CustomTabPanel value={value} index={0}>
           <FlexRow style={{ flexWrap: "wrap" }}>
@@ -145,11 +165,20 @@ export default function Sections() {
                 <ContainerCard key={item.id} style={{ width: "18%" }}>
                   <Card>
                     <Link to={`/InfoProducts/${item.name}`}>
-                      <Imagen src={item.img_video} alt={item.name} style={{ width: "100%", objectFit: "cover" }} />
+                      <Imagen
+                        src={item.img_video}
+                        alt={item.name}
+                        style={{ width: "100%", objectFit: "cover" }}
+                      />
                     </Link>
                     <CardContent>
                       <Tiltle>{item.name}</Tiltle>
-                      <Price style={{ justifyContent: "space-between", display: "flex" }}>
+                      <Price
+                        style={{
+                          justifyContent: "space-between",
+                          display: "flex",
+                        }}
+                      >
                         ${item.price}
                         <GiShoppingBag
                           onClick={() => onAddProduct(item)}
@@ -167,18 +196,20 @@ export default function Sections() {
         {Categories.map((item, index) => (
           <CustomTabPanel value={value} index={index + 1} key={index}>
             <FlexRow style={{ flexWrap: "wrap" }}>
-              {page === 'Mujer' || page === 'Hombre' ?
+              {page === "Mujer" || page === "Hombre" ? (
                 <>
-                  <FilterSections category={item.name} sectionProducts={sectionProducts} />
+                  <FilterSections
+                    category={item.name}
+                    sectionProducts={sectionProducts}
+                  />
                 </>
-                :
+              ) : (
                 <></>
-              }
+              )}
             </FlexRow>
           </CustomTabPanel>
         ))}
       </Div>
-
 
       <Pagination
         count={Math.ceil(sectionProducts.length / itemsPerPage)}

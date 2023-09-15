@@ -4,9 +4,10 @@ import jwt_decode from "jwt-decode";
 /* COMPONENTS */
 import Header from "../../components/Layout/header/Header";
 import NavVertical from "../../components/navs/NavVertical";
+import FooterUser from "../../components/Layout/footer/FooterUser";
 /* styles */
-import Footer from "../../components/Layout/footer/Footer";
-import { Div, BoxLoading, BoxUser } from "./UserPageStyled";
+import { Div, BoxUser } from "./UserPageStyled";
+import Loading from "../loading/Loading";
 
 const UserPage = () => {
   const [userEnterUser, setUserEnterUser] = useState(true);
@@ -31,44 +32,18 @@ const UserPage = () => {
     return () => {
       setUserEnterUser(false);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Div>
       {loading ? (
-        <BoxLoading>
-          <div className="loader" />
-          <div className="LoadingTitle">
-            <h1>Cargando...</h1>
-            <div className="spinner center">
-              <div className="spinner-blade"></div>
-              <div className="spinner-blade"></div>
-              <div className="spinner-blade"></div>
-              <div className="spinner-blade"></div>
-              <div className="spinner-blade"></div>
-              <div className="spinner-blade"></div>
-              <div className="spinner-blade"></div>
-              <div className="spinner-blade"></div>
-              <div className="spinner-blade"></div>
-              <div className="spinner-blade"></div>
-              <div className="spinner-blade"></div>
-              <div className="spinner-blade"></div>
-            </div>
-          </div>
-        </BoxLoading>
+        <Loading />
       ) : (
         <BoxUser>
-          <div className="Header">
-            <Header isUsedUser={userEnterUser} />
-          </div>
-          <div className="Nav">
-            <div className="Main">
-              <NavVertical />
-            </div>
-            <div className="Footer">
-              <Footer />
-            </div>
-          </div>
+          <Header isUsedUser={userEnterUser} />
+          <NavVertical />
+          <FooterUser />
         </BoxUser>
       )}
     </Div>

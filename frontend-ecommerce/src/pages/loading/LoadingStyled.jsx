@@ -6,29 +6,6 @@ export const Div = styled.div`
   height: 100vh;
 `;
 
-export const BoxUser = styled.div`
-  width: 100%;
-  height: 100%;
-
-  .Header {
-    height: 12.5%;
-  }
-
-  .Nav {
-    height: 87.5%;
-    overflow: auto;
-  }
-
-
-  .Main {
-    width: 100%;
-  }
-
-  .Footer {
-    margin-top: 6%;
-  }
-`;
-
 export const BoxLoading = styled.div`
   width: 100%;
   height: 100vh;

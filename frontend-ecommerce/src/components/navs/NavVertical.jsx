@@ -1,14 +1,13 @@
 import { useState } from "react";
 /* MATERIAL UI */
-import { Avatar, Box, Grid, ListItem, ListItemText } from "@mui/material";
+import { Avatar, Grid, ListItem, ListItemText } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 /* COMPONENTS */
 import NavHorizontal from "./NavHorizontal";
 import InfoCountUser from "./InfoCount";
 /* STYLES */
-import "./NavVerticalStyled.css";
-import { FlexDirCol } from "../StyledMain";
+import { FlexDirCol, Div, Box } from "./NavVerticalStyled";
 import { useNavigate } from "react-router-dom";
 
 function TabPanel(props) {
@@ -54,122 +53,80 @@ export default function NavVertical() {
   };
 
   return (
-    <Box className="BoxOne">
+    <Box>
       {localStorage.getItem("role") === "Admin" ? (
-        <>
-          <Tabs value={value} onChange={handleChange} className="Tabs">
-            <Grid item xs={12} sm={6} sx={{ position: "relative" }}>
-              <ListItem sx={{ py: 0, px: 0 }}>
+        <Div>
+          <Tabs className="Tabs" value={value} onChange={handleChange}>
+            <Grid className="Grid" item xs={12} sm={6}>
+              <ListItem className="ListItem">
                 <Avatar
+                  className="Avatar"
                   alt={localStorage.getItem("username")}
                   src="/static/images/avatar/1.jpg"
                 />
                 <ListItemText
+                  className="ListItemText"
                   primary="Bienvenido"
                   secondary={localStorage.getItem("username")}
-                  sx={{ px: 1 }}
                 />
               </ListItem>
             </Grid>
-            <Tab
-              label="Productos"
-              {...a11yProps(1)}
-              className="whithoutOutline"
-            />
-            <Tab
-              label="Pedidos"
-              {...a11yProps(2)}
-              className="whithoutOutline"
-            />
-            <Tab
-              label="Clientes"
-              {...a11yProps(3)}
-              className="whithoutOutline"
-            />
-            <Tab
-              label="Proveedores"
-              {...a11yProps(4)}
-              className="whithoutOutline"
-            />
-
-            <Tab
-              label="Cerrar sesión"
-              className="whithoutOutline"
-              onClick={salirSession}
-              {...a11yProps(7)}
-              sx={{ position: "relative" }}
-            />
+            <Tab className="Tab" label="Productos" {...a11yProps(1)} />
+            <Tab className="Tab" label="Pedidos" {...a11yProps(2)} />
+            <Tab className="Tab" label="Clientes" {...a11yProps(3)} />
+            <Tab className="Tab" label="Proveedores" {...a11yProps(4)} />
+            <Tab className="Tab" label="Cerrar sesión" onClick={salirSession} />
           </Tabs>
-          <div className="Productos">
-            <TabPanel value={value} index={1}>
-              <NavHorizontal type="products" />
+          <div className="TabPanels">
+            <TabPanel className="TabPanel" value={value} index={1}>
+              <NavHorizontal className="NavHorizontal" type="products" />
             </TabPanel>
-            <TabPanel value={value} index={2}>
-              <NavHorizontal type="order" />
+            <TabPanel className="TabPanel" value={value} index={2}>
+              <NavHorizontal className="NavHorizontal" type="order" />
             </TabPanel>
-            <TabPanel value={value} index={3}>
-              <NavHorizontal type="clientes" />
+            <TabPanel className="TabPanel" value={value} index={3}>
+              <NavHorizontal className="NavHorizontal" type="clientes" />
             </TabPanel>
-            <TabPanel value={value} index={4}>
-              <NavHorizontal type="provider" />
+            <TabPanel className="TabPanel" value={value} index={4}>
+              <NavHorizontal className="NavHorizontal" type="provider" />
             </TabPanel>
           </div>
-        </>
+        </Div>
       ) : (
-        <>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            sx={{
-              width: 450,
-              marginTop: 5,
-              marginLeft: "50px",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Grid item xs={12} sm={6}>
-              <ListItem sx={{ py: 1, px: 0 }}>
+        <Div>
+          <Tabs className="Tabs" value={value} onChange={handleChange}>
+            <Grid className="Grid" item xs={12} sm={6}>
+              <ListItem className="ListItem">
                 <Avatar
+                  className="Avatar"
                   alt={localStorage.getItem("username")}
                   src="/static/images/avatar/1.jpg"
                 />
                 <ListItemText
+                  className="ListItemText"
                   primary="Bienvenido"
                   secondary={localStorage.getItem("username")}
-                  sx={{ px: 1 }}
                 />
               </ListItem>
             </Grid>
+            <Tab className="Tab" label="Mis compras" {...a11yProps(1)} />
             <Tab
-              label="Mis compras"
-              {...a11yProps(1)}
-              className="whithoutOutline"
-              sx={{ position: "fixed", marginTop: "80px", outline: "none" }}
-            />
-            <Tab
+              className="Tab"
               label="Datos personales y direcciones"
               {...a11yProps(2)}
-              className="whithoutOutline"
-              sx={{ position: "fixed", marginTop: "130px" }}
             />
 
-            <Tab
-              label="Cerrar sesión"
-              className="whithoutOutline"
-              onClick={salirSession}
-              {...a11yProps(7)}
-              sx={{ position: "fixed", marginTop: "210px" }}
-            />
+            <Tab className="Tab" label="Cerrar sesión" onClick={salirSession} />
           </Tabs>
-
-          <TabPanel value={value} index={1}>
-            <NavHorizontal type="buy" />
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            <InfoCountUser />
-          </TabPanel>
-        </>
+          <div className="TabPanels">
+            <TabPanel className="TabPanel" value={value} index={1}>
+              <NavHorizontal className="NavHorizontal" type="buy" />
+            </TabPanel>
+            <TabPanel className="TabPanel" value={value} index={2}>
+              <InfoCountUser />
+            </TabPanel>
+          </div>
+        </Div>
       )}
     </Box>
   );
