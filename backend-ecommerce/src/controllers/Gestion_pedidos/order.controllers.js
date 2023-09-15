@@ -1,5 +1,5 @@
 import { Orden_compra } from "../../models/Gestion de pedidos/orders.js";
-
+import { productos } from "../../models/productos/productos.js";
 export const GetOrder = async (req, res) => {
   try {
     const result = await Orden_compra.findAll({});
@@ -73,13 +73,27 @@ export const GetOrderId = async (req, res) => {
 export const CheckoutPago = async (req, res) => {
   try {
     const { UserId } = req;
-    const Order = await Orden_compra.findOne({where: {user_id: UserId}});
-    if(Order.id_state === 2){
-    Order.destroy();
-    return res.status(200).json({message: 'Pedido borrado por rechazo del servidor'})
+    const Order = await Orden_compra.findOne({ where: { user_id: UserId } });
+    if (Order.id_state === 2) {
+      Order.destroy();
+      return res
+        .status(200)
+        .json({ message: "Pedido borrado por rechazo del servidor" });
     }
-    const Productos = JSON.parse(Order._previousDataValues.products)
+    const Found = JSON.parse(Order.products);
+    if (Order.id_state === 3) {
+    const result = Found.map(async (value) => {
+          const FoundProduct = await productos.findByPk(value.product_id);
+          console.log(value.stock)
+          await productos.update({
+            stock: FoundProduct.stock - value.stock
+          }, { where: { product_id: value.product_id } });
+          console.log(FoundProduct);
+      })
+      res.status(200).json({message: 'Producto Pagado con exito'})
+    }
   } catch (error) {
-    res.status(500).json({ error: error.message})
+    console.log(error);
+    res.status(500).json({ error: error.message });
   }
 };
