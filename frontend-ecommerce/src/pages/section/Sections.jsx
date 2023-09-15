@@ -7,7 +7,7 @@ import Header, { pages } from "../../components/Layout/header/Header.jsx";
 import { useCart } from "../../components/Layout/body/products/CardContext.jsx";
 import { Price } from "../infoProducts/styleProducts.jsx";
 import { Categories } from "../../components/Layout/body/Category/IndexCategory.jsx";
-import Footer from '../../components/Layout/footer/Footer.jsx'
+import FooterUser from '../../components/Layout/footer/FooterUser.jsx';
 /* Modules */
 import jwt_decode from "jwt-decode";
 import axios from "axios";
@@ -129,10 +129,10 @@ export default function Sections() {
         : ""}
       <Div>
         <CustomTabPanel value={value} index={0}>
-          <FlexRow style={{ flexWrap: "wrap" }}>
+          <FlexRow style={{ flexWrap: "wrap", marginTop:"0px" }}>
             <>
               {sectionProducts.map((item) => (
-                <ContainerCard key={item.id} style={{ width: "19.5%" }}>
+                <ContainerCard key={item.id} style={{ width: "19.5%",  marginTop: "0px"  }}>
                   <Card>
                     <Link to={`/InfoProducts/${item.name}`}>
                       <Imagen src={item.img_video} alt={item.name} style={{ width: "100%", objectFit: "cover" }} />
@@ -168,7 +168,7 @@ export default function Sections() {
           </CustomTabPanel>
         ))}
       </Div>
-      <Footer />
+      <FooterUser />
     </Box>
   );
 }
