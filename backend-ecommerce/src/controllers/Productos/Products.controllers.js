@@ -212,7 +212,6 @@ export const GetProductId = async(req, res) => {
 export const GetProductSectionCategory = async(req, res) => {
   try {
     const { id, name } = req.params;
-    // const Section = await section.findAll({ where: { id_section: id } });
     const categoria = await category.findOne({ where: { category: name } });
     const result = await productos.findAll({
       where: {
