@@ -13,33 +13,46 @@ export default function StockProducts() {
   const [tableData, setTableData] = useState(() => products);
   const [validationErrors, setValidationErrors] = useState({});
 
-
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
-    
-
+    //objeto para reconocer los values
     const updatedData = {
       name: values["name"],
       descripcion: values["descripcion"],
       price: parseFloat(values["price"]),
       stock: parseFloat(values["stock"]),
-      section: parseInt(values["section"]),
-      size: parseInt(values["size"]),
+      section: parseInt(values["section.id_section"]),
+      size: values["size"],
     };
-    
-    console.log(updatedData);
+
+    /*  console.log("Este es el value: "+values["name"]);
+    console.log("UpdatedData: ");
+    console.log(updatedData); */
+
+    /* const mirar = products
+mirar.forEach(objeto => {
+  const mirar2 = objeto["name"]
+  const propiedad1 = objeto.name
+  const propiedad2 = mirar2
+ console.log("Esto es la propiedad 1: "+propiedad1);
+  console.log("Esto es la propiedad 2: "+propiedad2); 
+})*/
+
     try {
-      
+      //recopilar datos y enaviarlos por una solicitud http
       const formData = new FormData();
       formData.append("data", JSON.stringify(updatedData));
-      
       formData.append("name", updatedData.name);
       formData.append("descripcion", updatedData.descripcion);
       formData.append("price", updatedData.price);
       formData.append("stock", updatedData.stock);
       formData.append("section", updatedData.section);
       formData.append("size", updatedData.size);
-      
-      const productId = row.getValue("product_id"); //capture the id of the product
+
+      console.log("Esto es un formData: ");
+      console.log(formData);
+
+      //captura la id de el producto
+      const productId = row.getValue("product_id");
 
       const response = await axios.put(
         `http://localhost:3000/product/update/${productId}`,
@@ -50,19 +63,25 @@ export default function StockProducts() {
           },
         }
       );
-  
+      alert("Producto actualizado con éxito:", response.data);
 
       //cerrar modal
-      exitEditingMode()
-      
+      exitEditingMode();
     } catch (error) {
-      setError(error);
-      console.error("Error al actualizar el producto:", error);
-      console.log("Error en la actualización:", response.data.error);
+      console.error("Error en la solicitud:", error);
+
+      if (error.response) {
+        // la solicitud se realizó, pero el servidor devolvió un código de estado que no es 2xx
+        console.error("Respuesta del servidor:", error.response.data);
+      } else if (error.request) {
+        // solicitud no realizada
+        console.error("No se pudo completar la solicitud:", error.request);
+      } else {
+        // otro tipo de error
+        console.error("Error:", error.message);
+      }
     }
   };
-  
-  
 
   const handleCancelRowEdits = () => {
     setValidationErrors({});
@@ -79,7 +98,9 @@ export default function StockProducts() {
       }
       //send api delete request here, then refetch or update local table data for re-render
       try {
-        axios.delete(`http://localhost:3000/product/delete/${row.getValue("product_id")}`,{
+        axios.delete(
+          `http://localhost:3000/product/delete/${row.getValue("product_id")}`,
+          {
             headers: {
               accessToken: localStorage.getItem("accessToken"),
             },
@@ -140,9 +161,8 @@ export default function StockProducts() {
         }),
       },
       {
-        accessorKey: "section.section",
+        accessorKey: "section.id_section",
         header: "Sección",
-        enableEditing: false, //disable editing on this column
         size: 80,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...cell,
@@ -171,6 +191,7 @@ export default function StockProducts() {
     try {
       const response = await axios.get("http://localhost:3000/product/");
       setProducts(response.data.result);
+      // console.log(response.data.result);
       setLoading(false);
     } catch (error) {
       console.error("Error al obtener los productos:", error);
@@ -185,7 +206,6 @@ export default function StockProducts() {
     return () => clearInterval(interval);
     // Llama a la función fetchProducts dentro del efecto
   }, []);
-
 
   return (
     <div>
