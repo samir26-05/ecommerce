@@ -95,9 +95,9 @@ export default function NavHorizontal(props) {
 
       {type === 'products' ? (
         <BoxProducts>
-          <Box  >
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-              <Tab label="Creavr sdproducto" {...a11yProps(0)} className='whithoutOutline' />
+          <Box >
+            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{margin: 0}}>
+              <Tab label="Crear producto" {...a11yProps(0)} className='whithoutOutline' />
               <Tab label="Inventario" {...a11yProps(1)} className='whithoutOutline' />
             </Tabs>
           </Box>

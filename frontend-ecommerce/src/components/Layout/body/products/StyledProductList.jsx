@@ -16,7 +16,7 @@ export const ContainerPrincipal = styled.div`
 
 export const ContainerCard = styled.div`
   box-sizing: border-box;
-  margin: 10% auto;
+  margin: 2rem auto;
   width: 80%;
   background-color: #fff;
   @media (max-width: 768px) {
@@ -71,4 +71,9 @@ export const Price = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 1.4rem;
+  font-weight: 800;
+  div{
+    font-size: 1.8rem;
+  }
 `;

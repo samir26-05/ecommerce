@@ -6,6 +6,7 @@ import { useCart } from "../body/products/CardContext";
 import { MdAdd } from "react-icons/Md";
 import { AiOutlineMinus } from "react-icons/Ai";
 import { Header } from "./CarStyled";
+import AddProduct from "../../../utils";
 
 export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
   const [active, setActive] = useState(false);
@@ -27,21 +28,6 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
       (item) => item.product_id !== product.product_id
     );
     updateCart(results);
-  };
-
-  const onAddProduct = (product) => {
-    const updatedCart = [...cart];
-    const existingProduct = updatedCart.find(
-      (item) => item.product_id === product.product_id
-    );
-
-    if (existingProduct) {
-      existingProduct.quantity++;
-    } else {
-      updatedCart.push({ ...product, quantity: 1 });
-    }
-
-    updateCart(updatedCart);
   };
 
   const onDellProduct = (product) => {
@@ -100,7 +86,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
             <>
               <div>
                 {allProducts.map((product) => (
-                  <div className="cart-product" key={product.id}>
+                  <div className="cart-product" key={product.product_id}> {/* Aqui se cambió key={product.id} para quitar los errores de key*/}
                     <Link to={`/InfoProducts/${product.id}`}>
                       <div className="info-cart-product">
                         <img
@@ -124,14 +110,15 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                     </Link>
                     <div className="Infoon-product containerButtons">
                       <div className="containeraddanddell">
-                        <button className="btnAdd">
-                          <MdAdd
-                            className="iconAdd"
-                            onClick={() => onAddProduct(product)}
-                            id="Fill"
-                            size={"14px"}
-                          />
-                        </button>
+                        <AddProduct product={product}>
+                          <button className="btnAdd">
+                            <MdAdd
+                              className="iconAdd"
+                              id="Fill"
+                              size={"14px"}
+                            />
+                          </button>
+                        </AddProduct>
                         <button className="btnDell">
                           <AiOutlineMinus
                             className="iconDell"
