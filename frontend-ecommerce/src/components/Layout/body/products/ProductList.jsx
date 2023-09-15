@@ -53,7 +53,7 @@ export const ProductList = () => {
       </h1>
       <ContainerPrincipal>
         {products.slice(0, 8).map((product) => (
-          <ContainerCard key={product.id}>
+          <ContainerCard key={product.product_id}>
             <Card>
               <div className="BoxImg">
                 <Link to={`/InfoProducts/${product.name}`}>
