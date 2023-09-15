@@ -4,15 +4,14 @@ import { MainDiv, Colores, BoxMain, Section1, Section2, Image, Title, Reference,
 import Header from "../../components/Layout/header/Header";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useCart } from "../../components/Layout/body/products/CardContext";
 import axios from "axios";
+import AddProduct from "../../utils";
 
 const InfoProducts = () => {
   const { name } = useParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true)
   const [userEnterUser, setUserEnterUser] = useState(false);
-  const { cart, updateCart } = useCart();
   let navigate = useNavigate();
 
   const verifyEnter = () => {
@@ -55,20 +54,6 @@ const InfoProducts = () => {
     } else {
       setSelectedSize(index);
     }
-  };
-
-
-  const onAddProduct = (product) => {
-    const updatedCart = [...cart];
-    const existingProduct = updatedCart.find(item => item.id === product.id);
-
-    if (existingProduct) {
-      existingProduct.quantity++;
-    } else {
-      updatedCart.push({ ...product, quantity: 1 });
-    }
-    
-    updateCart(updatedCart);
   };
 
   const product = products.find(element => element.name === name);
@@ -115,9 +100,11 @@ const InfoProducts = () => {
             ))} */}
             [Tallas]
           </Sizes>
-          <ButtonBuys onClick={() => onAddProduct(product)}>
-            <Buys>Añadir A La Cesta</Buys>
-          </ButtonBuys>
+          <AddProduct product={product}>
+            <ButtonBuys>
+              <Buys>Añadir A La Cesta</Buys>
+            </ButtonBuys>
+          </AddProduct>
         </Section2>
       </BoxMain>
       </> )}

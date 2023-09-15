@@ -1,53 +1,29 @@
-
-/* ---------------- IMPORTACIONES ----------------- */
+/* eslint-disable react/prop-types */
 import { useCart } from "../components/Layout/body/products/CardContext";
 
-/* ---------------- IMPORTACIONES ----------------- */
-
-
-/* ------------- Función para añadir productos al carrito ---------------*/
-
-  
-
-/* export const OnAddProduct = (product) => {
+const AddProduct = ({ product, children }) => {
   const { cart, updateCart } = useCart();
-  const updatedCart = [...cart];
-  const existingProduct = updatedCart.find(item => item.id === product.id);
-  
-  if (existingProduct) {
-    existingProduct.quantity++;
-  } else {
-    updatedCart.push({ ...product, quantity: 1 });
-  }
-  
-  return updateCart(updatedCart);
-  
-} */
 
+  const onAddProduct = (product) => {
+    const updatedCart = Array.isArray(cart) ? [...cart] : [];
+    const existingProduct = updatedCart.find(
+      (item) => item.product_id === product.product_id
+    );
 
-export const OnAddProduct = (product) => {
-  const { cart, updateCart } = useCart();
-  const updatedCart = [...cart];
-  const existingProduct = updatedCart.find(item => item.id === product.id);
-  
-  if (existingProduct) {
-    existingProduct.quantity++;
-  } else {
-    updatedCart.push({ ...product, quantity: 1 });
-  }
-  
-  // Actualiza el carrito utilizando la función proporcionada por el hook
-  updateCart(updatedCart);
-}
+    if (existingProduct) {
+      existingProduct.quantity++;
+    } else {
+      updatedCart.push({ ...product, quantity: 1 });
+    }
 
-// Ahora puedes utilizar OnAddProduct en un componente de React
-function MiComponente() {
-  // ...
-  OnAddProduct(product);
-  // ...
-}
+    updateCart(updatedCart);
+  };
 
+  return (
+    <div style={{ cursor: "pointer" }} onClick={() => onAddProduct(product)}>
+      {children}
+    </div>
+  );
+};
 
-
-
-/* ------------- Función para añadir productos al carrito ---------------*/
+export default AddProduct;
