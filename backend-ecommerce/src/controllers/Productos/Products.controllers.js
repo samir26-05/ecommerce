@@ -52,7 +52,6 @@ export const CreateProduct = async (req, res) => {
   try {
     const { file } = req;
     const ruta = path.join(urlArchivos, file.filename);
-    console.log(ruta);
     if (!file) {
       res.status(404).json({ message: "no se ingreso ningun archivo" });
     }

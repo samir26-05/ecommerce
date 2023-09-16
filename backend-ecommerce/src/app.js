@@ -5,6 +5,7 @@ import RouteUser from "./routes/User.routes.js";
 import RouterProduct from "./routes/Product.routes.js";
 import RouterSupllier from "./routes/Supplier.routes.js";
 import RouterOrder from "./routes/order.routes.js";
+import { urlArchivos } from "./libs/constas.js";
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -18,6 +19,6 @@ app.get("/", (req, res) => {
 app.use("/supllier", RouterSupllier);
 app.use("/product", RouterProduct);
 app.use("/user", RouteUser);
-app.use("/api/file", FileServer("//jesus-afanador/uploads/"));
+app.use('/api/file',FileServer(urlArchivos))
 app.use("/order", RouterOrder);
 export default app;
