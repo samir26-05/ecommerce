@@ -5,7 +5,7 @@ const router = Router()
 
 router.get('/',Jwt.validatetoken,Order.GetOrder)
 router.post('/create',Jwt.validatetoken,Order.CreateOrder)
-router.get('/id/:id',Jwt.validatetoken,Order.GetOrderId)
+router.get('/name',Jwt.validatetoken,Order.GetOrderUser)
 router.get('/chekout',Jwt.validatetoken,Order.CheckoutPago)
 
 export default router
