@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 /* MATERIAL UI */
-import { Button, Box, Accordion, Typography, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Button, Box, Accordion, Typography, AccordionSummary, AccordionDetails, Card, CardContent, CardMedia, ListItem, Avatar, ListItemText, TextField } from '@mui/material';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import SendIcon from '@mui/icons-material/Send';
@@ -15,12 +15,12 @@ import bgr from '../../assets/Img/bgr.png'
 /* STYLES */
 import { Img, Div, BoxProducts } from './NavHorizontalStyled';
 import ShowOrders from './orders/ShowOrders';
-import CrudOrders from './orders/ShowOrders';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CreateUser from '../forms/clients/FormClient'
 import CrudProvider from './provider/ShowProvider';
 import { FlexDirCol } from '../StyledMain';
 import ShowClients from '../forms/clients/ShowClients';
+import Swal from 'sweetalert2';
 
 
 function CustomTabPanel(props) {
@@ -51,29 +51,88 @@ function a11yProps(index) {
 }
 
 export default function NavHorizontal(props) {
-
   const { type } = props
   const [value, setValue] = useState(0);
+  const [setError] = useState();
+  const userName = localStorage.getItem("username");
+  const token = localStorage.getItem("accessToken");
+  const [oneClients, setOneClients] = useState({
+    nombre: "",
+    apellido: "",
+    Phone_number: "",
+    address: "",
+    city: "",
+    country: "",
+    postalcode: "",
+    state: "",
+  });
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+
+  useEffect(() => {
+    async function fetchOneClients() {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/user/name/${userName}`,
+          {
+            headers: {
+              accessToken: token,
+            },
+          }
+        );
+        setOneClients(response.data);
+      } catch (error) {
+        setError(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Ocurrió un error al intentar almacenar la información!'
+        })
+      }
+    }
+
+    fetchOneClients();
+  }, [userName]);
   return (
 
-    <Box sx={{ width: '100%', position: 'relative' }}>
+    <Box sx={{ width: '100%' }}>
       {type === 'buy' ? (
         <div>
           <Box>
-            <h3 style={{ paddingButton: "50px", left: 570 }}>Mis compras</h3>
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ paddingTop: 20 }}>
+            <h3 style={{ paddingButton: "50px", left: 570 }}>MIS COMPRAS</h3>
+            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" >
               <Tab label="Pedidos" {...a11yProps(0)} className='whithoutOutline' />
               <Tab label="Tienda" {...a11yProps(1)} className='whithoutOutline' />
             </Tabs>
           </Box>
-
           <Div>
             <CustomTabPanel value={value} index={0} >
+              <Card sx={{ display: 'flex' }}>
+                <ListItem className="ListItem">
+                  <Avatar
+                    className="Avatar"
+                    alt={localStorage.getItem("username")}
+                    src="/static/images/avatar/1.jpg"
+                  />
+                  <ListItemText
+                    className="ListItemText"
+                    primary="Bienvenido"
+                    secondary={localStorage.getItem("username")}
+                  />
+                </ListItem>
+
+                <Box sx={{ display: 'flex', flexDirection: 'column', width: "30%" }}>
+                  <CardContent sx={{ flex: '1 0 auto' }}>
+                    <ListItem sx={{ py: 1, px: 0 }}>
+                      <ListItemText primary="Cliente" secondary={oneClients?.Personal_information?.nombre} />
+                    </ListItem>
+                  </CardContent>
+                </Box>
+              </Card>
               <Img src={bgr} alt="" />
               <h4>Aun no tienes compras online</h4>
               <span>Si no encuentras tu compra tal vez es porque hiciste el pedido sin estar registrado.</span>
@@ -96,7 +155,7 @@ export default function NavHorizontal(props) {
       {type === 'products' ? (
         <BoxProducts>
           <Box >
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{margin: 0}}>
+            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ margin: 0 }}>
               <Tab label="Crear producto" {...a11yProps(0)} className='whithoutOutline' />
               <Tab label="Inventario" {...a11yProps(1)} className='whithoutOutline' />
             </Tabs>

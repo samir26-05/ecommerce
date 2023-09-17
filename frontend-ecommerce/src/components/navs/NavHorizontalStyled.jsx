@@ -29,5 +29,4 @@ export const Div = styled.div`
 export const Img = styled.img`
     width: 200px;
     height: 200px;   
-     
 `
