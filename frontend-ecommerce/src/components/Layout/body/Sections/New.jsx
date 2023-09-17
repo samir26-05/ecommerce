@@ -91,8 +91,7 @@ function Contacto() {
                   <NewsImg img1={Slider1_1} img2={Slider1_2}></NewsImg>
                 </div>
                 <div className="card-content">
-                  <h2 className="name">David Dell</h2>
-                  <p className="description">The lorem text the section that</p>
+                  <h2 className="name">Ropa Oversize</h2>
                 </div>
               </div>
               <div className="card swiper-slide">
@@ -102,8 +101,7 @@ function Contacto() {
                 </div>
 
                 <div className="card-content">
-                  <h2 className="name">David Dell</h2>
-                  <p className="description">The lorem text the section that</p>
+                  <h2 className="name">Sensual y casual</h2>
                 </div>
               </div>
               <div className="card swiper-slide">
@@ -112,8 +110,7 @@ function Contacto() {
                   <NewsImg img1={Slider4_1} img2={Slider4_2}></NewsImg>
                 </div>
                 <div className="card-content">
-                  <h2 className="name">David Dell</h2>
-                  <p className="description">The lorem text the section that</p>
+                  <h2 className="name">Moda Deportiva</h2>
                 </div>
               </div>
               <div className="card swiper-slide">
@@ -122,8 +119,7 @@ function Contacto() {
                   <NewsImg img1={Slider5_1} img2={Slider5_2}></NewsImg>
                 </div>
                 <div className="card-content">
-                  <h2 className="name">David Dell</h2>
-                  <p className="description">The lorem text the section that</p>
+                  <h2 className="name">Tonos Neutros</h2>
                 </div>
               </div>
               <div className="card swiper-slide">
@@ -132,8 +128,7 @@ function Contacto() {
                   <NewsImg img1={Slider6_1} img2={Slider6_2}></NewsImg>
                 </div>
                 <div className="card-content">
-                  <h2 className="name">David Dell</h2>
-                  <p className="description">The lorem text the section that</p>
+                  <h2 className="name">Ropa Sostenible</h2>
                 </div>
               </div>
               <div className="card swiper-slide">
@@ -142,8 +137,7 @@ function Contacto() {
                   <NewsImg img1={Slider7_1} img2={Slider7_2}></NewsImg>
                 </div>
                 <div className="card-content">
-                  <h2 className="name">David Dell</h2>
-                  <p className="description">The lorem text the section that</p>
+                  <h2 className="name">Estilo Retro de los años 90</h2>
                 </div>
               </div>
               <div className="card swiper-slide">
@@ -152,8 +146,7 @@ function Contacto() {
                   <NewsImg img1={Slider8_1} img2={Slider8_2}></NewsImg>
                 </div>
                 <div className="card-content">
-                  <h2 className="name">David Dell</h2>
-                  <p className="description">The lorem text the section that</p>
+                  <h2 className="name">Estilo Bohemio</h2>
                 </div>
               </div>
               <div className="card swiper-slide">
@@ -162,8 +155,7 @@ function Contacto() {
                   <NewsImg img1={Slider9_1} img2={Slider9_2}></NewsImg>
                 </div>
                 <div className="card-content">
-                  <h2 className="name">David Dell</h2>
-                  <p className="description">The lorem text the section that</p>
+                  <h2 className="name">Tejidos Texturizados</h2>
                 </div>
               </div>
               <div className="card swiper-slide">
@@ -172,8 +164,7 @@ function Contacto() {
                   <NewsImg img1={Slider10_1} img2={Slider10_2}></NewsImg>
                 </div>
                 <div className="card-content">
-                  <h2 className="name">David Dell</h2>
-                  <p className="description">The lorem text the section that</p>
+                  <h2 className="name">Sastrería Moderna</h2>
                 </div>
               </div>
               <div className="card swiper-slide">
@@ -182,8 +173,7 @@ function Contacto() {
                   <NewsImg img1={Slider2_1} img2={Slider2_2}></NewsImg>
                 </div>
                 <div className="card-content">
-                  <h2 className="name">David Dell</h2>
-                  <p className="description">The lorem text the section that</p>
+                  <h2 className="name">Estampados de Animales</h2>
                 </div>
               </div>
             </div>

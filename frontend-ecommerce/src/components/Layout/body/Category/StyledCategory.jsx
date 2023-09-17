@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const ContainerFather = styled.div`
-  margin-top: 4%;
   padding: 1% 0 2% 0;
   width: 100%;
   background-color: #f5f5f5;

@@ -15,7 +15,7 @@ export const NewsImg = styled.div`
   background-size: cover;
   height: 30rem;
   width: 100%;
-  border-radius: 25px 25px 0 0;
+  border-radius: 5px 5px 0 0;
   :hover {
     background-image: url(${({ img2 }) => img2});
   }
@@ -42,7 +42,7 @@ export const Div = styled.div`
     border-radius: 25px;
   }
   .card {
-    border-radius: 25px;
+    border-radius: 5px;
     background-color: #fff;
   }
   /* 

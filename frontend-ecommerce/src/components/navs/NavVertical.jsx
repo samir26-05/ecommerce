@@ -10,6 +10,12 @@ import InfoCountUser from "./InfoCount";
 import { FlexDirCol, Div, Box } from "./NavVerticalStyled";
 import { useNavigate } from "react-router-dom";
 
+import { LiaDropbox  } from 'react-icons/lia';
+import {TbTruckDelivery} from 'react-icons/tb';
+import {PiUserList} from 'react-icons/pi';
+import {CiSettings} from 'react-icons/ci';
+import {BsBoxArrowInLeft} from 'react-icons/bs';
+
 function TabPanel(props) {
   // eslint-disable-next-line react/prop-types
   const { children, value, index, ...other } = props;
@@ -48,20 +54,7 @@ export default function NavVertical() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   const navegate = useNavigate();
 
@@ -72,7 +65,7 @@ export default function NavVertical() {
 
   return (
     <Box>
-      {localStorage.getItem("role") !== "Admin" ? (
+      {localStorage.getItem("role") === "Admin" ? (
         <Div>
           <Tabs className="Tabs" value={value} onChange={handleChange}>
             <Grid className="Grid" item xs={12} sm={6}>
@@ -82,35 +75,7 @@ export default function NavVertical() {
                   alt={localStorage.getItem("username")}
                   src="/static/images/avatar/1.jpg"
                 />
-                {/* <Box sx={{ flexGrow: 0 }}>
-                  <Tooltip title="Open settings">
-                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                      <Avatar  className="Avatar" alt={localStorage.getItem("username")}/>
-                    </IconButton>
-                  </Tooltip>
-                  <Menu
-                    sx={{ mt: '45px' }}
-                    id="menu-appbar"
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                  >
-                    {settings.map((setting) => (
-                      <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
-                      </MenuItem>
-                    ))}
-                  </Menu>
-                </Box> */}
+               
                 <ListItemText
                   className="ListItemText"
                   primary="Bienvenido"
@@ -118,12 +83,42 @@ export default function NavVertical() {
                 />
               </ListItem>
             </Grid>
-            <Tab className="Tab" label="Productos" {...a11yProps(1)} />
-            <Tab className="Tab" label="Pedidos" {...a11yProps(2)} />
-            <Tab className="Tab" label="Clientes" {...a11yProps(3)} />
-            <Tab className="Tab" label="Proveedores" {...a11yProps(4)} />
-            <Tab className="Tab" label="Cerrar sesión" onClick={salirSession} />
+            <ListItemText className="ListItemText" secondary="PANEL DE OPERACIONES" style={{marginTop:"30px", marginLeft:"0px"}}/>
+            <Tab className="Tab" {...a11yProps(1)} label={
+              <div>
+                <LiaDropbox style={{ marginRight: "8px", fontSize: "28px" }} />
+                Productos
+              </div>
+            }/>
+            <Tab className="Tab" {...a11yProps(2)} label={
+              <div>
+                <TbTruckDelivery style={{ marginRight: "8px", fontSize: "28px" }} />
+                Pedidos
+              </div>
+            }/>
+            <Tab className="Tab" {...a11yProps(3)} label={
+              <div>
+                <PiUserList style={{ marginRight: "8px", fontSize: "28px" }} />
+                Clientes
+              </div>
+            }/>
+            {/*  <Tab className="Tab" label="Proveedores" {...a11yProps(4)} /> */}
+            
+            <ListItemText className="ListItemText" secondary="CONFIGURACION  DE PERFIL" style={{marginTop:"80px", marginLeft:"0px"}}/>
+            <Tab className="Tab" {...a11yProps(4)}   label={
+              <div>
+                <CiSettings style={{ marginRight: "8px", fontSize: "28px" }} />
+                Info. general
+              </div>
+            }/>
+            <Tab className="Tab"  onClick={salirSession} label={
+              <div>
+                <BsBoxArrowInLeft style={{ marginRight: "8px", fontSize: "28px" }} />
+                Cerrar sesión
+              </div>
+            }/>
           </Tabs>
+        
           <div className="TabPanels">
             <TabPanel className="TabPanel" value={value} index={1}>
               <NavHorizontal className="NavHorizontal" type="products" />
@@ -134,9 +129,13 @@ export default function NavVertical() {
             <TabPanel className="TabPanel" value={value} index={3}>
               <NavHorizontal className="NavHorizontal" type="clientes" />
             </TabPanel>
-            <TabPanel className="TabPanel" value={value} index={4}>
+            {/*  <TabPanel className="TabPanel" value={value} index={4}>
               <NavHorizontal className="NavHorizontal" type="provider" />
+            </TabPanel> */}
+            <TabPanel className="TabPanel" value={value} index={4}>
+              <InfoCountUser />
             </TabPanel>
+
           </div>
         </Div>
       ) : (
@@ -157,10 +156,11 @@ export default function NavVertical() {
               </ListItem>
             </Grid>
             <Tab className="Tab" label="Mis compras" {...a11yProps(1)} />
-            <Tab className="Tab" label="Datos personales y direcciones" {...a11yProps(2)} />
+            <Tab className="Tab" label="Mi perfil" {...a11yProps(2)} />
             <Tab className="Tab" label="Cerrar sesión" onClick={salirSession} />
           </Tabs>
           <div className="TabPanels">
+
             <TabPanel className="TabPanel" value={value} index={1}>
               <NavHorizontal className="NavHorizontal" type="buy" />
             </TabPanel>
