@@ -1,4 +1,16 @@
-import styled from "styled-components"
+import styled from "styled-components";
+
+export const Boxx = styled.div`
+  width: 100%;
+  padding: 6% 2%;
+  background-color: aqua;
+`;
+
+export const BoxProducts = styled.div`
+.BoxProducts{
+  background-color: aqua;
+}
+`
 
 export const Div = styled.div`
     max-width: 744px;
@@ -14,20 +26,7 @@ export const Div = styled.div`
     color: black;
 `
 
-export const Div2 = styled.div`
-     /* Usamos min-height en lugar de height */
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    color: black;
-`
-
 export const Img = styled.img`
     width: 200px;
-    height: 200px;    
+    height: 200px;   
 `
-export const Imagen = styled.img`
-  width: 300px;
-  height: 450px;
-`;

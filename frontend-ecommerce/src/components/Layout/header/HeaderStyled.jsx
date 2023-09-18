@@ -11,7 +11,7 @@ export const Container = styled.div`
   z-index: 3;
   transition: all 0.2s ease-in-out;
   background-color: ${({ isUsedUser, isUsedPayment, hovered, headerColor }) =>
-    isUsedUser || isUsedPayment ? "#fff" : hovered ? "#fff" : headerColor};
+    isUsedUser || isUsedPayment ? "#ffffff" : hovered ? "#ffffff" : headerColor};
   box-shadow: ${({ isUsedBody, headerColor }) =>
     isUsedBody
       ? headerColor !== "transparent"
@@ -19,7 +19,7 @@ export const Container = styled.div`
         : "0px 0px 0px 0px"
       : "0px 0px 3px 2px #0000003b"};
   position: ${({ isUsedUser, isUsedBody }) =>
-    isUsedUser || isUsedBody ? "fixed" : "static"};
+    isUsedUser || isUsedBody ? "fixed" : "relative"};
 `;
 
 export const Cta = styled.button`
@@ -38,19 +38,18 @@ export const Span = styled.span`
   padding-bottom: 7px;
   letter-spacing: 4px;
   font-size: 14px;
-  padding-right: 10px;
   text-transform: uppercase;
   position: relative;
   color: rgb(0, 0, 0);
   :after {
     content: "";
     position: absolute;
-    width: 78%;
+    width: 97%;
     transform: scaleX(0);
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: ${({ textColor }) => textColor};
+    background-color: ${({ isUsedBody, textColor }) => isUsedBody ? textColor  : "#000"};
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
   }

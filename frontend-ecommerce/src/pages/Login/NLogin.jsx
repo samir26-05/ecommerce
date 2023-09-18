@@ -4,6 +4,7 @@ import { MainDiv, Section1, Section2 } from "./styleProducts";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
+import Swal from "sweetalert2";
 
 const NLogin = () => {
   const [email, setEmail] = useState("");

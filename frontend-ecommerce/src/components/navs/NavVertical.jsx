@@ -1,17 +1,20 @@
-import { useState } from 'react';
+import React, { useState } from "react";
 /* MATERIAL UI */
-import { Avatar, Box, Grid, ListItem, ListItemText } from '@mui/material';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import { Avatar, Grid, IconButton, ListItem, ListItemText, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 /* COMPONENTS */
-import NavHorizontal from './NavHorizontal';
-import InfoCountUser from './InfoCount';
+import NavHorizontal from "./NavHorizontal";
+import InfoCountUser from "./InfoCount";
 /* STYLES */
-import { Div } from '../../pages/user/styled';
-import { FlexDirCol } from '../StyledMain';
-import { useNavigate } from 'react-router-dom';
-import FooterUser from '../Layout/footer/FooterUser';
+import { FlexDirCol, Div, Box } from "./NavVerticalStyled";
+import { useNavigate } from "react-router-dom";
 
+import { LiaDropbox  } from 'react-icons/lia';
+import {TbTruckDelivery} from 'react-icons/tb';
+import {PiUserList} from 'react-icons/pi';
+import {CiSettings} from 'react-icons/ci';
+import {BsBoxArrowInLeft} from 'react-icons/bs';
 
 function TabPanel(props) {
   // eslint-disable-next-line react/prop-types
@@ -35,15 +38,17 @@ function TabPanel(props) {
 }
 
 function a11yProps(index) {
-
   return {
     id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
   };
-
 }
 
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
 export default function NavVertical() {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -51,72 +56,120 @@ export default function NavVertical() {
   };
 
 
-  const navegate = useNavigate()
+  const navegate = useNavigate();
 
   const salirSession = () => {
     localStorage.removeItem("accessToken");
-    navegate('/')
-  }
-
+    navegate("/");
+  };
 
   return (
-    <Div >
-      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '100hv', marginTop: 15 }}>
-        {localStorage.getItem("role") === "Admin" ?
-          <>
-            <Tabs value={value} onChange={handleChange} sx={{ width: 450, marginTop: 5, marginLeft: "50px", display: "flex", flexDirection: "column" }} >
-              <Grid item xs={12} sm={6} sx={{ position: "fixed"}}>
-                <ListItem sx={{ py: 1, px: 0 }}>
-                  <Avatar alt={localStorage.getItem("username")} src="/static/images/avatar/1.jpg" />
-                  <ListItemText primary="Bienvenido" secondary={localStorage.getItem("username")} sx={{ px: 1 }} />
-                </ListItem>
-              </Grid>
-              <Tab label="Productos" {...a11yProps(1)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "80px" }} />
-              <Tab label="Pedidos" {...a11yProps(2)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "130px" }} />
-              <Tab label="Clientes" {...a11yProps(3)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "180px" }} />
-              <Tab label="Proveedores" {...a11yProps(4)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "230px" }} />
-
-              <Tab label="Cerrar sesión" className='whithoutOutline' onClick={salirSession} {...a11yProps(7)} sx={{ position: "fixed", marginTop: "300px" }} />
-            </Tabs>
-            <TabPanel value={value} index={1}>
-              <NavHorizontal type="products" />
+    <Box>
+      {localStorage.getItem("role") === "Admin" ? (
+        <Div>
+          <Tabs className="Tabs" value={value} onChange={handleChange}>
+            <Grid className="Grid" item xs={12} sm={6}>
+              <ListItem className="ListItem">
+                <Avatar
+                  className="Avatar"
+                  alt={localStorage.getItem("username")}
+                  src="/static/images/avatar/1.jpg"
+                />
+               
+                <ListItemText
+                  className="ListItemText"
+                  primary="Bienvenido"
+                  secondary={localStorage.getItem("username")}
+                />
+              </ListItem>
+            </Grid>
+            <ListItemText className="ListItemText" secondary="PANEL DE OPERACIONES" style={{marginTop:"30px", marginLeft:"0px"}}/>
+            <Tab className="Tab" {...a11yProps(1)} label={
+              <div>
+                <LiaDropbox style={{ marginRight: "8px", fontSize: "28px" }} />
+                Productos
+              </div>
+            }/>
+            <Tab className="Tab" {...a11yProps(2)} label={
+              <div>
+                <TbTruckDelivery style={{ marginRight: "8px", fontSize: "28px" }} />
+                Pedidos
+              </div>
+            }/>
+            <Tab className="Tab" {...a11yProps(3)} label={
+              <div>
+                <PiUserList style={{ marginRight: "8px", fontSize: "28px" }} />
+                Clientes
+              </div>
+            }/>
+            {/*  <Tab className="Tab" label="Proveedores" {...a11yProps(4)} /> */}
+            
+            <ListItemText className="ListItemText" secondary="CONFIGURACION  DE PERFIL" style={{marginTop:"80px", marginLeft:"0px"}}/>
+            <Tab className="Tab" {...a11yProps(4)}   label={
+              <div>
+                <CiSettings style={{ marginRight: "8px", fontSize: "28px" }} />
+                Info. general
+              </div>
+            }/>
+            <Tab className="Tab"  onClick={salirSession} label={
+              <div>
+                <BsBoxArrowInLeft style={{ marginRight: "8px", fontSize: "28px" }} />
+                Cerrar sesión
+              </div>
+            }/>
+          </Tabs>
+        
+          <div className="TabPanels">
+            <TabPanel className="TabPanel" value={value} index={1}>
+              <NavHorizontal className="NavHorizontal" type="products" />
             </TabPanel>
-            <TabPanel value={value} index={2}>
-              <NavHorizontal type="order" />
+            <TabPanel className="TabPanel" value={value} index={2}>
+              <NavHorizontal className="NavHorizontal" type="order" />
             </TabPanel>
-            <TabPanel value={value} index={3}>
-              <NavHorizontal type="clientes" />
+            <TabPanel className="TabPanel" value={value} index={3}>
+              <NavHorizontal className="NavHorizontal" type="clientes" />
             </TabPanel>
-            <TabPanel value={value} index={4}>
-              <NavHorizontal type="provider" />
-            </TabPanel>
-          </>
-          :
-          <>
-            <Tabs value={value} onChange={handleChange} sx={{ width: 450, marginTop: 5, marginLeft: "50px", display: "flex", flexDirection: "column" }} >
-              <Grid item xs={12} sm={6} sx={{ position: "fixed"}}>
-                <ListItem sx={{ py: 1, px: 0 }}>
-                  <Avatar alt={localStorage.getItem("username")} src="/static/images/avatar/1.jpg" />
-                  <ListItemText primary="Bienvenido" secondary={localStorage.getItem("username")} sx={{ px: 1 }} />
-                </ListItem>
-              </Grid>
-              <Tab label="Mis compras" {...a11yProps(1)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "80px", outline: "none" }} />
-              <Tab label="Datos personales y direcciones" {...a11yProps(2)} className='whithoutOutline' sx={{ position: "fixed", marginTop: "130px" }} />
-
-              <Tab label="Cerrar sesión" className='whithoutOutline' onClick={salirSession} {...a11yProps(7)} sx={{ position: "fixed", marginTop: "210px" }} />
-            </Tabs>
-
-            <TabPanel value={value} index={1}>
-              <NavHorizontal type="buy" />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
+            {/*  <TabPanel className="TabPanel" value={value} index={4}>
+              <NavHorizontal className="NavHorizontal" type="provider" />
+            </TabPanel> */}
+            <TabPanel className="TabPanel" value={value} index={4}>
               <InfoCountUser />
             </TabPanel>
-          </>
-        }
 
-      </Box>
-      <FooterUser />
-    </Div>
+          </div>
+        </Div>
+      ) : (
+        <Div>
+          <Tabs className="Tabs" value={value} onChange={handleChange}>
+            <Grid className="Grid" item xs={12} sm={6}>
+              <ListItem className="ListItem">
+                <Avatar
+                  className="Avatar"
+                  alt={localStorage.getItem("username")}
+                  src="/static/images/avatar/1.jpg"
+                />
+                <ListItemText
+                  className="ListItemText"
+                  primary="Bienvenido"
+                  secondary={localStorage.getItem("username")}
+                />
+              </ListItem>
+            </Grid>
+            <Tab className="Tab" label="Mis compras" {...a11yProps(1)} />
+            <Tab className="Tab" label="Mi perfil" {...a11yProps(2)} />
+            <Tab className="Tab" label="Cerrar sesión" onClick={salirSession} />
+          </Tabs>
+          <div className="TabPanels">
+
+            <TabPanel className="TabPanel" value={value} index={1}>
+              <NavHorizontal className="NavHorizontal" type="buy" />
+            </TabPanel>
+            <TabPanel className="TabPanel" value={value} index={2}>
+              <InfoCountUser />
+            </TabPanel>
+          </div>
+        </Div>
+      )}
+    </Box>
   );
 }

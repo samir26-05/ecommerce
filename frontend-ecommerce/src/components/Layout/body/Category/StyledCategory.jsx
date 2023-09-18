@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const ContainerFather = styled.div`
-  margin-top: 4%;
   padding: 1% 0 2% 0;
   width: 100%;
   background-color: #f5f5f5;
@@ -27,8 +26,8 @@ export const ContainerH = styled.div`
     gap: 2%;
     display: flex;
     @media (max-width: 768px) {
-    width: 100%;
-  }
+      width: 100%;
+    }
   }
   @media (max-width: 768px) {
     height: 85%;
@@ -47,13 +46,17 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  color: black;
+
   p {
     margin: 2%;
   }
+
   cursor: pointer;
   :hover {
-    border: 1px solid;
+    border: 1px solid black;
   }
+
   .img {
     overflow: hidden;
     width: 100%;

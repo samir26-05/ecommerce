@@ -117,6 +117,7 @@ const Header = ({
                 <Span
                   className="span"
                   textColor={textColor}
+                  isUsedBody={isUsedBody}
                   style={{
                     textDecoration: "none",
 
@@ -128,8 +129,7 @@ const Header = ({
                         : textColor,
                   }}
                 >
-                  {" "}
-                  {page}{" "}
+                  {page}
                 </Span>
               </Cta>
             </Link>

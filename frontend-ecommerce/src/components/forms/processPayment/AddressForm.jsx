@@ -41,7 +41,7 @@ export default function AddressForm() {
 
   const updateInfoPersonal = async () => {
     try {
-      await axios.patch(
+      await axios.put(
         `http://localhost:3000/user/personal_information/${userName}`,
         oneClients,
         {

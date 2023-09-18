@@ -9,12 +9,16 @@ const CardCategory = ({ array }) => {
       {array.map((item, index) => (
         <Link to={`/section/${item.name}`} key={index}>
           <DivCategory>
-            <Card key={index}>
-              <div className="img">
-                <Img src={item.img} alt={item.name} />
-              </div>
+            <Card key={index} style={{ textDecoration: "none" }}>
               <div>
-                <p>{item.name}</p>
+                <div className="img">
+                  <Img src={item.img} alt={item.name} />
+                </div>
+              </div>
+              <div className="kaka">
+                <div>
+                  <p className="CateText">{item.name}</p>
+                </div>
               </div>
             </Card>
           </DivCategory>

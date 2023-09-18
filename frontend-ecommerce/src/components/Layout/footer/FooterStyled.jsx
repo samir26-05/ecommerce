@@ -83,7 +83,7 @@ export const Div = styled.div`
 
     .Wh p {
       position: absolute;
-      top: 0.4em;
+      top: -.1em;
       left: 1.15em;
       margin: 0;
       padding: 0;

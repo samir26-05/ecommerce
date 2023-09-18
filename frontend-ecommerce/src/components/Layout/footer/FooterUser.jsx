@@ -1,48 +1,32 @@
-import { Typography } from '@mui/material';
-import {FaFacebookF, FaTwitter, FaGoogle, FaInstagram} from 'react-icons/fa'
+import { Typography} from "@mui/material";
+import { Facebook, Twitter, Instagram } from "@mui/icons-material";
+import { Div, SocialIcon, } from "./FooterStyled";
 
-export default function FooterUser() {
+const FooterUser = () => {
+
   return (
-    <div className="" style={{width:"100%"}}>
-      <footer className="bg-ligth text-center text-white" >
-        {/* Grid container */}
-        <div className="container p-3  pb-0">
-          {/* Section: Social media */}
-          <section>
-            {/* Facebook */}
-            <a className="btn-floating m-1" href="#!" role="button">
-              <i className="white-icon"> <FaFacebookF/> </i>
-            </a>
-
-            {/* Twitter */}
-            <a className="btn-floating m-1" href="#!" role="button">
-              <i className="white-icon"><FaTwitter/></i>
-            </a>
-
-            {/* Google */}
-            <a className="btn-floating m-1" href="#!" role="button">
-              <i className="white-icon"><FaGoogle/></i>
-            </a>
-
-            {/* Instagram */}
-            <a className="btn-floating m-1" href="#!" role="button">
-              <i className="white-icon"><FaInstagram/></i>
-            </a>
-          </section>
-          {/* Section: Social media */}
+    <Div>
+      <div className="Networks">
+        <div>
+          <SocialIcon>
+            <Facebook />
+          </SocialIcon>
+          <SocialIcon>
+            <Twitter />
+          </SocialIcon>
+          <SocialIcon>
+            <Instagram />
+          </SocialIcon>
         </div>
-        {/* Grid container */}
-
-        {/* Copyright */}
-        <div className="text-center p-1 text-white">
+      </div>
+      <div className="Copyright">
         <Typography variant="body2">
-        <a className="text-dark" href="https://mdbootstrap.com/"  style={{color:"white"}}>  ©KALARY.com </a>
-          {new Date().getFullYear()} 
+          © {new Date().getFullYear()} KALARY. Todos los derechos
+          reservados.
         </Typography>
-        </div>
-        {/* Copyright */}
-      </footer>
-    </div>
+      </div>
+    </Div>
   );
-}
+};
 
+export default FooterUser;
