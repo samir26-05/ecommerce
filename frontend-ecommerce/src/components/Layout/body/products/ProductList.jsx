@@ -10,39 +10,21 @@ import {
 } from "./StyledProductList";
 import { GiShoppingBag } from "react-icons/gi";
 import { Link } from "react-router-dom";
-import { useCart } from "./CardContext";
 import axios from "axios";
-import "../../header/car.css";
+import AddProduct from "../../../../utils";
 
 export const ProductList = () => {
-  const { cart, updateCart } = useCart();
   const [products, setProducts] = useState([]);
 
-  const onAddProduct = (product) => {
-    const updatedCart = Array.isArray(cart) ? [...cart] : [];
-    const existingProduct = updatedCart.find(
-      (item) => item.product_id === product.product_id
-    );
-
-    if (existingProduct) {
-      existingProduct.quantity++;
-    } else {
-      updatedCart.push({ ...product, quantity: 1 });
-    }
-
-    updateCart(updatedCart);
-  };
-
-   async function fetchProducts() {
-    try {
-      const response = await axios.get("http://localhost:3000/product/");
-      setProducts(response.data.result);
-    } catch (error) {
-      console.error("Error al obtener los productos:", error);
-    }
-  }
-
   useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await axios.get("http://localhost:3000/product/");
+        setProducts(response.data.result);
+      } catch (error) {
+        console.error("Error al obtener los productos:", error);
+      }
+    }
 
     // Llama a la función fetchProducts dentro del efecto
     fetchProducts();
@@ -55,7 +37,7 @@ export const ProductList = () => {
       </h1>
       <ContainerPrincipal>
         {products.slice(0, 8).map((product) => (
-          <ContainerCard key={product.id}>
+          <ContainerCard key={product.product_id}>
             <Card>
               <div className="BoxImg">
                 <Link to={`/InfoProducts/${product.name}`}>
@@ -66,10 +48,9 @@ export const ProductList = () => {
                 <Tiltle>{product.name}</Tiltle>
                 <Price>
                   ${product.price}
-                  <GiShoppingBag
-                    onClick={() => onAddProduct(product)}
-                    size={"10%"}
-                  />
+                  <AddProduct product={product}>
+                    <GiShoppingBag/>
+                  </AddProduct>
                 </Price>
               </CardContent>
             </Card>

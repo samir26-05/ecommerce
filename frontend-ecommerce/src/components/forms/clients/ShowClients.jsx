@@ -5,54 +5,46 @@ import { useCallback, useMemo } from "react";
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 
-export default function ShowClients() { 
-  const [clients, setClients] = useState([]); 
-  const [error, setError] = useState(null); // Cambia 'null' por 'null' (sin comillas) 
-  const [tableData, setTableData] = useState(() => clients); 
-  const [validationErrors, setValidationErrors] = useState({}); 
+export default function ShowClients() {
+  const [clients, setClients] = useState([]);
+  const [error, setError] = useState(null);
 
-  const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => { 
-    const updatedData = { 
-      nombre: values["Personal_information.nombre"], 
-      apellido: values["Personal_information.apellido"], 
-      Phone_number: values["Personal_information.Phone_number"], 
-      address: values["Personal_information.address"], 
-      city: values["Personal_information.city"], 
-      country: values["Personal_information.country"], 
-      postalcode: values["Personal_information.postalcode"], 
-      state: values["Personal_information.state"], 
-    }; 
-    try { 
-      const formData = new FormData(); 
-      formData.append("data", JSON.stringify(updatedData)); 
-      formData.append("Personal_information.nombre", updatedData.nombre); 
-      formData.append("Personal_information.apellido", updatedData.apellido); 
-      formData.append("Personal_information.Phone_number", updatedData.Phone_number); 
-      formData.append("Personal_information.address", updatedData.address); 
-      formData.append("Personal_information.city", updatedData.city); 
-      formData.append("Personal_information.country", updatedData.country); 
-      formData.append("Personal_information.postalcode", updatedData.postalcode); 
-      formData.append("Personal_information.state", updatedData.state); 
-      axios.put( 
-        `http://localhost:3000/user/personal_information/${row.getValue(
-          "user_id" 
-        )}`, 
-        formData, 
-        { 
-          headers: { 
-            accessToken: localStorage.getItem("accessToken"), 
-          }, 
-        } 
-      ); 
-      //send/receive api updates here, then refetch or update local table data for re-render 
-      const updateProducts = [...clients]
-      updateProducts[row.index] = {...values, ...updatedData}
-      setClients(updateProducts)
-      exitEditingMode(); //required to exit editing mode and close modal 
-    } catch (error) { 
-      setError(error); 
-      console.log("Error al obtener los clientes:", error); 
-    } 
+  const [tableData, setTableData] = useState(() => clients);
+  const [validationErrors, setValidationErrors] = useState({});
+
+  const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
+    if (!Object.keys(validationErrors).length) {
+      try {
+        const response = await axios.put(
+          `http://localhost:3000/user/personal_information/id/${row.getValue("user_id")}`,
+          {
+            nombre: values["Personal_information.nombre"],
+            apellido: values["Personal_information.apellido"],
+            Phone_number: values["Personal_information.Phone_number"],
+            address: values["Personal_information.address"],
+            city: values["Personal_information.city"],
+            country: values["Personal_information.country"],
+            postalcode: values["Personal_information.postalcode"],
+            state: values["Personal_information.state"],
+          },
+          {
+            headers: {
+              accessToken: localStorage.getItem("accessToken"),
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          tableData[row.index] = values;
+          setTableData([...tableData]);
+          exitEditingMode();
+        }
+        console.log(response.data, '❤️❤️❤️')
+      } catch (error) {
+        setError(error);
+        console.log("Error al actualizar el cliente:", error.data);
+      }
+    }
   };
 
   const handleCancelRowEdits = () => {
@@ -60,26 +52,26 @@ export default function ShowClients() {
   };
 
   const handleDeleteRow = useCallback((row) => {
-      if (
-        !confirm(`¿Está seguro de eliminar al usuario ${row.getValue("Personal_information.nombre")}?`)
-      ) {
-        return;
-      }
-      //send api delete request here, then refetch or update local table data for re-render
-      try {
-        axios.delete(`http://localhost:3000/user/delete/${row.getValue("user_id")}`, {
-            headers: {
-              accessToken: localStorage.getItem("accessToken"),
-            },
-            data: {},
-          });
-        tableData.splice(row.index, 1);
-        setTableData([...tableData]);
-      } catch (error) {
-        setError(error);
-        console.log("Error al obtener los clientes:", error);
-      }
-    },
+    if (
+      !confirm(`¿Está seguro de eliminar al usuario ${row.getValue("Personal_information.nombre")}?`)
+    ) {
+      return;
+    }
+    //send api delete request here, then refetch or update local table data for re-render
+    try {
+      axios.delete(`http://localhost:3000/user/delete/${row.getValue("user_id")}`, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+        data: {},
+      });
+      tableData.splice(row.index, 1);
+      setTableData([...tableData]);
+    } catch (error) {
+      setError(error);
+      console.log("Error al obtener los clientes:", error);
+    }
+  },
 
     [tableData]
   );
@@ -172,6 +164,7 @@ export default function ShowClients() {
         data: {},
       });
       setClients(response.data);
+      console.log(response.data, '❤️❤️❤️')
     } catch (error) {
       setError(error);
       console.log("Error al obtener los clientes:", error);
@@ -220,8 +213,8 @@ export default function ShowClients() {
                 </Tooltip>
                 <Tooltip arrow placement="right" title="Delete">
                   <IconButton onClick={() => {
-                      handleDeleteRow(row);
-                    }}>
+                    handleDeleteRow(row);
+                  }}>
                     <Delete style={{ fill: "red" }} />
                   </IconButton>
                 </Tooltip>

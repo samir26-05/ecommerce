@@ -6,7 +6,6 @@ import { Container, Cta, Span } from "./HeaderStyled";
 import { BiUser } from "react-icons/bi";
 import { Carrito } from "./Car";
 import { useState, useEffect } from "react";
-import "./car.css";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -118,8 +117,10 @@ const Header = ({
                 <Span
                   className="span"
                   textColor={textColor}
+                  isUsedBody={isUsedBody}
                   style={{
                     textDecoration: "none",
+
                     color:
                       isUsedUser || isUsedPayment
                         ? "#000"
@@ -128,8 +129,7 @@ const Header = ({
                         : textColor,
                   }}
                 >
-                  {" "}
-                  {page}{" "}
+                  {page}
                 </Span>
               </Cta>
             </Link>

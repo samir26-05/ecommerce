@@ -1,0 +1,17 @@
+/* Globales */
+*::after,
+*::before,
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #000;
+}
+
+body {
+  color: #000;
+}
+
+img {
+  max-width: 100%;
+}

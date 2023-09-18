@@ -4,6 +4,7 @@ import axios from "axios";
 import * as Yup from "yup";
 import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
 import { MainDiv, Section1, Section2, LoginBox, LoginBoxInput, BoxButton, BoxLink, Redes, Error } from "./RegisterStyled";
+import Swal from "sweetalert2";
 
 const RegisterLogin = () => {
   const initialValues = {
@@ -18,6 +19,7 @@ const RegisterLogin = () => {
 
   const onSubmit = (data) => {
     axios.post("http://localhost:3000/user", data).then(() => {
+      Swal.fire("BIEN HECHO!", "Producto creado con exito!", "success");
       navigate("/");
     });
   };

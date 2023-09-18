@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./car.css";
 import cesta from "../../../assets/Img/cesta.png";
 import { useCart } from "../body/products/CardContext";
 import { MdAdd } from "react-icons/Md";
 import { AiOutlineMinus } from "react-icons/Ai";
+import { Header } from "./CarStyled";
+import AddProduct from "../../../utils";
 
 export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
-
   const [active, setActive] = useState(false);
   const { cart, updateCart } = useCart();
 
@@ -24,26 +24,17 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
     : 0;
 
   const onDeleteProduct = (product) => {
-    const results = cart.filter((item) => item.product_id !== product.product_id);
+    const results = cart.filter(
+      (item) => item.product_id !== product.product_id
+    );
     updateCart(results);
-  };
-
-  const onAddProduct = (product) => {
-    const updatedCart = [...cart];
-    const existingProduct = updatedCart.find((item) => item.product_id === product.product_id);
-
-    if (existingProduct) {
-      existingProduct.quantity++;
-    } else {
-      updatedCart.push({ ...product, quantity: 1 });
-    }
-
-    updateCart(updatedCart);
   };
 
   const onDellProduct = (product) => {
     const updatedCart = [...cart];
-    const existingProduct = updatedCart.find((item) => item.product_id === product.product_id);
+    const existingProduct = updatedCart.find(
+      (item) => item.product_id === product.product_id
+    );
     if (existingProduct) {
       if (existingProduct.quantity > 0) {
         existingProduct.quantity--;
@@ -59,10 +50,11 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
   };
 
   return (
-    <header>
+    <Header>
       <div className="container-icon">
-        <div className="container-cart-icon" onClick={() => setActive(!active)}>
+        <div onClick={() => setActive(!active)}>
           <svg
+            className="icon-cart"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -76,7 +68,6 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                 ? "#000"
                 : color
             }
-            className="icon-cart"
           >
             <path
               strokeLinecap="round"
@@ -88,15 +79,14 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
             <span id="contador-productos">{countProducts}</span>
           </div>
         </div>
-
         <div
           className={`container-cart-products ${active ? "" : "hidden-cart"}`}
         >
           {allProducts.length ? (
             <>
-              <div className="row-product">
+              <div>
                 {allProducts.map((product) => (
-                  <div className="cart-product" key={product.id}>
+                  <div className="cart-product" key={product.product_id}> {/* Aqui se cambió key={product.id} para quitar los errores de key*/}
                     <Link to={`/InfoProducts/${product.id}`}>
                       <div className="info-cart-product">
                         <img
@@ -120,14 +110,15 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                     </Link>
                     <div className="Infoon-product containerButtons">
                       <div className="containeraddanddell">
-                        <button className="btnAdd">
-                          <MdAdd
-                            className="iconAdd"
-                            onClick={() => onAddProduct(product)}
-                            id="Fill"
-                            size={"14px"}
-                          />
-                        </button>
+                        <AddProduct product={product}>
+                          <button className="btnAdd">
+                            <MdAdd
+                              className="iconAdd"
+                              id="Fill"
+                              size={"14px"}
+                            />
+                          </button>
+                        </AddProduct>
                         <button className="btnDell">
                           <AiOutlineMinus
                             className="iconDell"
@@ -209,6 +200,6 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
           )}
         </div>
       </div>
-    </header>
+    </Header>
   );
 };

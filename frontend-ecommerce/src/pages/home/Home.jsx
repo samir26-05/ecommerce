@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 /* COMPONENTS */
 import Body from "../../components/Layout/body/Body";
 import { Div } from "./HomeStyled";
+import Loading from "../loading/Loading";
 
 const HomePage = () => {
   const [loading, setLoading] = useState(true);
@@ -17,19 +18,10 @@ const HomePage = () => {
     } else {
       navigate("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <Div>
-      {loading ? (
-        <>
-          <h1>Cargando......</h1>
-        </>
-      ) : (
-        <Body />
-      )}
-    </Div>
-  );
+  return <Div>{loading ? <Loading /> : <Body />}</Div>;
 };
 
 export default HomePage;

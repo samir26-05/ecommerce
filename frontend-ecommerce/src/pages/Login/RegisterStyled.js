@@ -171,10 +171,13 @@ export const BoxButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   .ButtonRegistrar {
     background-color: #fff;
     border: none;
+  }
+
+  .ButtonRegistrar:focus {
+    outline: none;
   }
   @keyframes btn-anim1 {
     0% {
