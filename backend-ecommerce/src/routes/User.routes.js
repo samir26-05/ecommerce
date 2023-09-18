@@ -14,6 +14,7 @@ router.delete("/delete/:id", [Jwt.validatetoken, Jwt.isAdmin], User.DeleteUser);
 
 // routas de autiticacion
 router.get("/auths",Jwt.validatetoken, Auth.TokenAccess);
+router.put("/password/update",Jwt.validatetoken,Auth.UpdatePassword)
 export default router;
 
 // routas de datos personales
