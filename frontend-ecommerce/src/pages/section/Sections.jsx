@@ -102,7 +102,7 @@ export default function Sections() {
     }
     fetchProducts();
   }, []);
-  
+  console.log(products, 'products');
   return (
     <Box sx={{ width: "100%", height: "100vh", overflowY: "scroll" }}>
       <Header isUsedUser={userEnterUser} />
