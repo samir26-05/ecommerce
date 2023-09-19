@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios'
 /* MATERIAL UI */
 import {Button, Box} from "@mui/material";
 import Tab from "@mui/material/Tab";
@@ -164,8 +165,8 @@ export default function NavHorizontal(props) {
         <BoxProducts>
           <h3 style={{ paddingButton: "50px", left: 570 }}> <LiaDropbox style={{fontSize:"40px", marginTop:"-5px"}} /> MIS PRODUCTOS</h3>
           <Box>
-            <Tabs value={value} onChange={handleChange}>
-              <Tab
+            <Tabs value={value} onChange={handleChange} style={{display:"flex", flexDirection:"row"}}>
+              <Tab 
                 label="Crear producto"
                 {...a11yProps(0)}
                 className="whithoutOutline"

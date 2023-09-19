@@ -1,6 +1,6 @@
 import { useState } from "react";
 /* MATERIAL UI */
-import { Avatar, Grid, ListItem, ListItemText } from "@mui/material";
+import { Avatar, Grid, ListItem, ListItemText} from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 /* COMPONENTS */
@@ -15,8 +15,9 @@ import { TbTruckDelivery } from 'react-icons/tb';
 import { PiUserList } from 'react-icons/pi';
 import { CiSettings } from 'react-icons/ci';
 import { BsBoxArrowInLeft } from 'react-icons/bs';
+import { BiUserCircle } from 'react-icons/bi';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
-import { AiOutlineUserDelete } from 'react-icons/ai';
+
 
 
 function TabPanel(props) {
@@ -46,6 +47,9 @@ function a11yProps(index) {
     "aria-controls": `vertical-tabpanel-${index}`,
   };
 }
+
+// eslint-disable-next-line no-unused-vars
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function NavVertical() {
 
@@ -81,8 +85,9 @@ export default function NavVertical() {
                   secondary={localStorage.getItem("username")}
                 />
               </ListItem>
+              <ListItemText className="ListItemText" secondary="PANEL DE OPERACIONES" style={{marginTop:"30px", marginLeft:"0px"}}/>
             </Grid>
-            <ListItemText className="ListItemText" secondary="PANEL DE OPERACIONES" style={{marginTop:"30px", marginLeft:"0px"}}/>
+            
             <Tab className="Tab" {...a11yProps(1)} label={
               <div>
                 <LiaDropbox style={{ marginRight: "8px", fontSize: "28px" }} />
@@ -102,9 +107,7 @@ export default function NavVertical() {
               </div>
             } />
             {/*  <Tab className="Tab" label="Proveedores" {...a11yProps(4)} /> */}
-            
-            <ListItemText className="ListItemText" secondary="CONFIGURACION  DE PERFIL" style={{marginTop:"80px", marginLeft:"0px"}}/>
-            <Tab className="Tab" {...a11yProps(4)}   label={
+            <Tab className="Tab" {...a11yProps(4)} style={{ marginTop: "60px", }} label={
               <div>
                 <CiSettings style={{ marginRight: "8px", fontSize: "28px" }} />
                 Info. general
@@ -166,7 +169,7 @@ export default function NavVertical() {
             } />
             <Tab className="Tab" {...a11yProps(2)} label={
               <div>
-                <AiOutlineUserDelete style={{ marginRight: "8px", fontSize: "28px" }} />
+                <BiUserCircle style={{ marginRight: "8px", fontSize: "28px" }} />
                 Mi perfil
               </div>
             } />

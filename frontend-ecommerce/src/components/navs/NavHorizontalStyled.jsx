@@ -3,12 +3,17 @@ import styled from "styled-components";
 export const Boxx = styled.div`
   width: 100%;
   padding: 6% 2%;
-  background-color: aqua;
 `;
 
 export const BoxProducts = styled.div`
-.BoxProducts{
-  background-color: aqua;
+.MuiTabs-flexContainer, .css-heg063-MuiTabs-flexContainer {
+  display: flex !important;
+  flex-direction: row !important;
+}
+#simple-tab-0, #simple-tab-1{
+  width: 12%;
+  color: black;
+  font-weight: 600;
 }
 `
 
