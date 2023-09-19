@@ -3,8 +3,19 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
 import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
-import { MainDiv, Section1, Section2, LoginBox, LoginBoxInput, BoxButton, BoxLink, Redes, Error } from "./RegisterStyled";
+import {
+  MainDiv,
+  Section1,
+  Section2,
+  LoginBox,
+  LoginBoxInput,
+  BoxButton,
+  BoxLink,
+  Redes,
+  Error,
+} from "./RegisterStyled";
 import Swal from "sweetalert2";
+import { BubblyLink } from "react-bubbly-transitions";
 
 const RegisterLogin = () => {
   const vista = ("register");
@@ -19,33 +30,51 @@ const RegisterLogin = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:3000/user", data).then(() => {
-      Swal.fire("BIEN HECHO!", "Producto creado con exito!", "success");
-      navigate("/");
-    });
+    axios
+      .post("http://localhost:3000/user", data)
+      .then((response) => {
+        const successMessage = response.data.message;
+        Swal.fire("BIEN HECHO!", successMessage, "success");
+        navigate("/");
+      })
+      .catch((error) => {
+        
+        const messageError1 = error.response.data.error[0].message
+        const messageError2 = error.response.data.error[0].message
+        Swal.fire(messageError1, error, "error");
+        Swal.fire(messageError2, error, "error");
+      });
+      
   };
 
   const validationSchema = Yup.object().shape({
     user: Yup.string()
-      .min(3)
-      .max(15)
+      .min(3, "El usuario debe tener al menos 3 caracteres")
+      .max(15, "El usuario debe tener un máximo de 15 caracteres")
       .required("Debes ingresar un nombre de usuario *"),
     nombre: Yup.string()
-      .min(3)
-      .max(15)
+      .min(3, "El nombre debe tener al menos 3 caracteres")
+      .max(15, "El nombre debe tener un máximo de 15 caracteres")
       .required("Debes ingresar un nombre valido *"),
     apellido: Yup.string()
-      .min(3)
-      .max(15)
+      .min(3, "El apellido debe tener al menos 3 caracteres")
+      .max(15, "El apellido debe tener un máximo de 15 caracteres")
       .required("Debes ingresar un apellido *"),
     email: Yup.string()
       .email("Debe ser un email válido *")
       .required("Debes ingresar un email *"),
     password: Yup.string()
-      .min(4)
-      .max(15)
+      .min(4, "La contraseña debe tener al menos 4 caracteres")
+      .max(15, "La contraseña debe tener un máximo de 15 caracteres")
       .required("Debes ingresar una contraseña *"),
   });
+
+  const MyBublyLink = ({ to, children }) => (
+    <BubblyLink to={to} colorStart="#000" colorEnd="#fff" duration={800}>
+      {" "}
+      {children}{" "}
+    </BubblyLink>
+  );
 
   return (
     <MainDiv>
@@ -113,9 +142,9 @@ const RegisterLogin = () => {
           <BoxLink>
             <p className="a1">
               ¿Ya tienes cuenta?
-              <Link to={"/"}>
+              <MyBublyLink to={"/"}>
                 <a className="a2">¡Inicia Sesion!</a>
-              </Link>
+              </MyBublyLink>
             </p>
           </BoxLink>
           <Redes>
