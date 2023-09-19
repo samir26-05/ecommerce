@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { orderData } from './OrderData';
+import { TbTruckDelivery } from 'react-icons/tb';
 
 const CrudOrders = () => {
   const [tableData, setTableData] = useState(() => orderData);
@@ -100,6 +101,7 @@ const CrudOrders = () => {
 
   return (
     <>
+     <h3 style={{ paddingButton: "50px", left: 570 }}> <TbTruckDelivery style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS PEDIDOS</h3>
       <MaterialReactTable
         displayColumnDefOptions={{
           'mrt-row-actions': {

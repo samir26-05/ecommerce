@@ -4,6 +4,7 @@ import { MaterialReactTable } from "material-react-table";
 import { useCallback, useMemo } from "react";
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
+import { PiUserList } from "react-icons/pi";
 
 export default function ShowClients() {
   const [clients, setClients] = useState([]);
@@ -188,6 +189,7 @@ export default function ShowClients() {
         <div>Error al obtener los clientes: {error.message}</div>
       ) : (
         <>
+          <h3 style={{ paddingButton: "50px", left: 570 }}> <PiUserList style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS CLIENTES</h3>
           <MaterialReactTable
             displayColumnDefOptions={{
               "mrt-row-actions": {
