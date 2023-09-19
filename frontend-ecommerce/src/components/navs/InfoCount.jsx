@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 /* MATERIAL UI */
-import { Button, Accordion, Typography, AccordionSummary, AccordionDetails, Card, ListItem, Avatar, ListItemText} from '@mui/material';
+import { Button, Accordion, Typography, AccordionSummary, AccordionDetails, Card, ListItem, Avatar, ListItemText } from '@mui/material';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 /* COMPONENTS */
@@ -8,7 +8,7 @@ import UpdatePass from '../forms/infoUser/UpdatePass';
 import UpdateEmail from '../forms/infoUser/UpdateEmail';
 import DataPersonal from '../forms/infoUser/DataPersonal'
 import axios from "axios";
-import {BiUserCircle} from 'react-icons/bi'
+import { BiUserCircle } from 'react-icons/bi'
 
 export default function InfoCountUser() {
     const [oneClients, setOneClients] = useState({
@@ -55,28 +55,28 @@ export default function InfoCountUser() {
     };
 
     return (
-        <div style={{width: "100%"}}>
-            <div style={{display:"flex", }}>
-              <h3 style={{ paddingButton: "50px", left: 570 }}><BiUserCircle style={{fontSize:"40px", marginTop:"-5px"}}/> MI CUENTA</h3>
-            <Button
+        <div style={{ width: "100%" }}>
+            <div style={{ display: "flex", }}>
+                <h3 style={{ paddingButton: "50px" }}><BiUserCircle style={{ fontSize: "40px", marginTop: "-5px" }} /> MI CUENTA</h3>
+                <Button
                     variant="contained"
                     className="whithoutOutline"
-                    style={{ backgroundColor: "black", height: 50, marginLeft: "74%", marginBotton:"10px" }}
+                    style={{ backgroundColor: "black", height: 50, marginLeft: "72%", marginBotton: "10px" }}
                     type="submit"
                     value="registrar"
                     onClick={handleUpdateProfileClick}
                 >
                     ACTUALIZAR PERFIL
-                </Button>  
+                </Button>
             </div>
-            
+
             <div style={{ paddingTop: 20 }}>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <Card sx={{ display: 'flex', width: "60%", marginBtton: 20,justifyContent: "space-between"}}>
-                        <ListItem className="ListItem" style={{marginLeft:"90px"}}>
-                            <Avatar className="Avatar"/>
-                            <ListItemText primary={oneClients?.Personal_information?.nombre + " " + oneClients?.Personal_information?.apellido} 
-                                secondary={userName}  style={{marginLeft:"10px"}}/>
+                    <Card sx={{ display: 'flex', width: "60%", marginBtton: 20, justifyContent: "space-between" }}>
+                        <ListItem className="ListItem" style={{ marginLeft: "90px" }}>
+                            <Avatar className="Avatar" />
+                            <ListItemText primary={oneClients?.Personal_information?.nombre + " " + oneClients?.Personal_information?.apellido}
+                                secondary={userName} style={{ marginLeft: "10px" }} />
                         </ListItem>
                         <ListItem sx={{ py: 1, px: 0 }}>
                             <ListItemText primary="SILVER USER" />
@@ -116,60 +116,60 @@ export default function InfoCountUser() {
                     </ListItem>
 
                 </Card>
-               
+
                 {showAccordions && (
                     <>
-                <Accordion style={{marginTop:"30px"}}>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                    >
-                        <Typography>CONTRASEÑA</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography style={{ paddingButton: "50px" }}>
-                            Por favor, recuerda que la nueva contraseña debe contener un número y una letra mayúscula, además de un mínimo de 8 caracteres.
-                        </Typography>
-                        <UpdatePass />
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel2a-content"
-                        id="panel2a-header"
-                    >
-                        <Typography>TU EMAIL</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            Si quieres cambiar el mail y/o la contrseña asociados a tu cuenta completa los siguientes campos.
-                        </Typography>
-                        <UpdateEmail />
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel2a-content"
-                        id="panel2a-header"
-                    >
-                        <Typography>DATOS PERSONALES Y FACTURACION</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            Si quieres cambiar informacion personal asociados a tu cuenta completa los siguientes campos.
-                        </Typography>
-                        <Typography>
-                            Consulta y modifica tus datos personales. Datos de facturación
-                        </Typography>
-                        <DataPersonal />
+                        <Accordion style={{ marginTop: "30px" }}>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography>CONTRASEÑA</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography style={{ paddingButton: "50px" }}>
+                                    Por favor, recuerda que la nueva contraseña debe contener un número y una letra mayúscula, además de un mínimo de 8 caracteres.
+                                </Typography>
+                                <UpdatePass />
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel2a-content"
+                                id="panel2a-header"
+                            >
+                                <Typography>TU EMAIL</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography>
+                                    Si quieres cambiar el mail y/o la contrseña asociados a tu cuenta completa los siguientes campos.
+                                </Typography>
+                                <UpdateEmail />
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel2a-content"
+                                id="panel2a-header"
+                            >
+                                <Typography>DATOS PERSONALES Y FACTURACION</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography>
+                                    Si quieres cambiar informacion personal asociados a tu cuenta completa los siguientes campos.
+                                </Typography>
+                                <Typography>
+                                    Consulta y modifica tus datos personales. Datos de facturación
+                                </Typography>
+                                <DataPersonal />
 
-                    </AccordionDetails>
-                </Accordion>
-                </>
-                 )}
+                            </AccordionDetails>
+                        </Accordion>
+                    </>
+                )}
             </div>
         </div>
 

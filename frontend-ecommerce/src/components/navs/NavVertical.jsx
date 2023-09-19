@@ -1,6 +1,6 @@
 import { useState } from "react";
 /* MATERIAL UI */
-import { Avatar, Grid, ListItem, ListItemText } from "@mui/material";
+import { Avatar, Grid, ListItem, ListItemText} from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 /* COMPONENTS */
@@ -15,8 +15,9 @@ import { TbTruckDelivery } from 'react-icons/tb';
 import { PiUserList } from 'react-icons/pi';
 import { CiSettings } from 'react-icons/ci';
 import { BsBoxArrowInLeft } from 'react-icons/bs';
+import { BiUserCircle } from 'react-icons/bi';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
-import { AiOutlineUserDelete } from 'react-icons/ai';
+
 
 
 function TabPanel(props) {
@@ -47,7 +48,11 @@ function a11yProps(index) {
   };
 }
 
+// eslint-disable-next-line no-unused-vars
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
 export default function NavVertical() {
+
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -80,10 +85,9 @@ export default function NavVertical() {
                   secondary={localStorage.getItem("username")}
                 />
               </ListItem>
-              <ListItemText className="ListItemText" secondary="PANEL DE OPERACIONES" style={{ marginTop: "30px", marginLeft: "0px" }} />
-
+              <ListItemText className="ListItemText" secondary="PANEL DE OPERACIONES" style={{marginTop:"30px", marginLeft:"0px"}}/>
             </Grid>
-
+            
             <Tab className="Tab" {...a11yProps(1)} label={
               <div>
                 <LiaDropbox style={{ marginRight: "8px", fontSize: "28px" }} />
@@ -165,7 +169,7 @@ export default function NavVertical() {
             } />
             <Tab className="Tab" {...a11yProps(2)} label={
               <div>
-                <AiOutlineUserDelete style={{ marginRight: "8px", fontSize: "28px" }} />
+                <BiUserCircle style={{ marginRight: "8px", fontSize: "28px" }} />
                 Mi perfil
               </div>
             } />

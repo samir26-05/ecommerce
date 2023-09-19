@@ -7,6 +7,7 @@ import { MainDiv, Section1, Section2, LoginBox, LoginBoxInput, BoxButton, BoxLin
 import Swal from "sweetalert2";
 
 const RegisterLogin = () => {
+  const vista = ("register");
   const initialValues = {
     user: "",
     nombre: "",
@@ -232,7 +233,7 @@ const RegisterLogin = () => {
         </LoginBox>
       </Section1>
       <Section2>
-        <DemoAutoPlay />
+        <DemoAutoPlay vista={vista} />
       </Section2>
     </MainDiv>
   );

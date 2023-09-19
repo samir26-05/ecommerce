@@ -9,7 +9,8 @@ import { BoxLink, Redes } from "./RegisterStyled";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const vista = ("login");
+  
   let navigate = useNavigate();
 
   const loginn = async (event) => {
@@ -33,7 +34,7 @@ const Login = () => {
   return (
     <MainDiv>
       <Section1>
-        <DemoAutoPlay />
+        <DemoAutoPlay vista={vista}/>
       </Section1>
       <Section2>
         <LoginBox>
