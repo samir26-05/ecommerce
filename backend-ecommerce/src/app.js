@@ -19,5 +19,6 @@ app.use("/supllier", RouterSupllier);
 app.use("/product", RouterProduct);
 app.use("/user", RouteUser);
 app.use("/api/file", FileServer("//jesus-afanador/uploads/"));
+app.use("/api/file/avatar",FileServer("//jesus-afanador/uploads/icon/"))
 app.use("/order", RouterOrder);
 export default app;

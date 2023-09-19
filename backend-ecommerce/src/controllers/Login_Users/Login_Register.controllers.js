@@ -6,7 +6,9 @@ import { encryptPassword, compare } from "../../libs/Bcryptjs.js";
 import { sequelize } from "../../database.js";
 import jwt from "jsonwebtoken";
 import { SECRET } from "../../config.js";
-
+import { AvatarUser, avatarfile } from "../../libs/constas.js";
+import fs from "fs";
+import path from "path";
 export const CreateUser = async (req, res) => {
   try {
     const result = await ValidRegister(req.body);
@@ -91,12 +93,21 @@ export const Login = async (req, res) => {
 export const GetUsers = async (req, res) => {
   try {
     const result = await User.findAll({
-      where: {role_id: 2},
-      attributes: ["user_id","user", "email"],
+      where: { role_id: 2 },
+      attributes: ["user_id", "user", "email", "avatar"],
       include: [
         {
           model: sequelize.model("Personal_information"),
-          attributes: ["nombre", "apellido", "Phone_number", "address", "city","country","postalcode","state"],
+          attributes: [
+            "nombre",
+            "apellido",
+            "Phone_number",
+            "address",
+            "city",
+            "country",
+            "postalcode",
+            "state",
+          ],
         },
       ],
     });
@@ -111,21 +122,62 @@ export const GetUsers = async (req, res) => {
 
 export const GetUsersName = async (req, res) => {
   try {
-  const {name} = req.params
-  const result = await User.findOne({where: {user: name},
-    attributes: ["user"],
-    include: [
-      {
-        model: sequelize.model("Personal_information"),
-        attributes: ["nombre", "apellido", "Phone_number", "address", "city","country","postalcode","state"],
-      },
-    ],
-  })
-  if(!result){
-    return res.status(404).json({message: 'Este usuario no se encuentra registrado'})
-  }
-  res.status(200).json(result)
+    const { name } = req.params;
+    const result = await User.findOne({
+      where: { user: name },
+      attributes: ["user_id", "user", "email", "avatar"],
+      include: [
+        {
+          model: sequelize.model("Personal_information"),
+          attributes: [
+            "nombre",
+            "apellido",
+            "Phone_number",
+            "address",
+            "city",
+            "country",
+            "postalcode",
+            "state",
+          ],
+        },
+      ],
+    });
+    if (!result) {
+      return res
+        .status(404)
+        .json({ message: "Este usuario no se encuentra registrado" });
+    }
+    res.status(200).json(result);
   } catch (error) {
-  res.status(500).json({error: error.message})
+    res.status(500).json({ error: error.message });
   }
-}
+};
+
+export const UpdateAvatar = async (req, res) => {
+  try {
+    const { UserId } = req;
+    const { file } = req;
+    const user = await User.findOne({ where: { user_id: UserId } });
+    if (!user.avatar) {
+      const ruta = encodeURI(avatarfile + file.filename);
+      user.avatar = ruta;
+      user.save();
+      return res
+        .status(200)
+        .json({ message: "foto de perfil añadida con exito" });
+    }
+    if (user.avatar) {
+      const File = user.avatar.split("/").slice(3);
+      fs.unlinkSync(path.join(AvatarUser, File[3]));
+      const ruta = encodeURI(avatarfile + file.filename);
+      user.avatar = ruta;
+      user.save();
+      return res
+        .status(200)
+        .json({ message: "foto de perfil actualizada con exito" });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: error.message });
+  }
+};

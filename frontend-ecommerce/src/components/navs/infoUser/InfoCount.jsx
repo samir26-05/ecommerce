@@ -4,9 +4,9 @@ import { Button, Accordion, Typography, AccordionSummary, AccordionDetails, Card
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 /* COMPONENTS */
-import UpdatePass from '../forms/infoUser/UpdatePass';
-import UpdateEmail from '../forms/infoUser/UpdateEmail';
-import DataPersonal from '../forms/infoUser/DataPersonal'
+import UpdatePass from './UpdatePass';
+import UpdateEmail from './UpdateEmail';
+import DataPersonal from './DataPersonal'
 import axios from "axios";
 import { BiUserCircle } from 'react-icons/bi'
 
@@ -165,7 +165,6 @@ export default function InfoCountUser() {
                                     Consulta y modifica tus datos personales. Datos de facturación
                                 </Typography>
                                 <DataPersonal />
-
                             </AccordionDetails>
                         </Accordion>
                     </>

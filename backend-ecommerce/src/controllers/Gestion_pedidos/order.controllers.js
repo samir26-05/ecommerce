@@ -45,15 +45,15 @@ export const CreateOrder = async (req, res) => {
   }
 };
 
-export const GetOrderId = async (req, res) => {
+export const GetOrderUser = async (req, res) => {
   try {
-    const { id } = req.params;
-    const result = await Orden_compra.findOne({ where: { id_order: id } });
+    const { UserId  } = req
+    const result = await Orden_compra.findOne({ where: { user_id: UserId } });
     if (!result) {
       return res.status(404).json({ message: "Orden no encontrada" });
     }
     const GetProductId = {
-      id_order: result.id_order,
+      id_order: UserId,
       user_id: result.user_id,
       products: JSON.parse(result.products), // Convierte la cadena JSON en objeto
       discount: result.discount,

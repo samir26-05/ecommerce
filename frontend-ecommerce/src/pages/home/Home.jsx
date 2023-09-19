@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 /* COMPONENTS */
 import Body from "../../components/Layout/body/Body";
 import { Div } from "./HomeStyled";
-import Loading from "../loading/Loading";
+import Loading from "../../components/loading/Loading";
 
 const HomePage = () => {
   const [loading, setLoading] = useState(true);
