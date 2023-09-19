@@ -4,7 +4,6 @@ import { ValidRegisterProduct } from "../../schemas/productos/CreateProduct.js";
 import { ValidRegisterUpdate } from "../../schemas/productos/UpdateProduct.js";
 import { ipFileServer, urlArchivos } from "../../libs/constas.js";
 import { category } from "../../models/productos/categoria.js";
-import { section } from "../../models/productos/section.js";
 import fs from "fs";
 import path from "path";
 
@@ -52,7 +51,6 @@ export const CreateProduct = async (req, res) => {
   try {
     const { file } = req;
     const ruta = path.join(urlArchivos, file.filename);
-    console.log(ruta);
     if (!file) {
       res.status(404).json({ message: "no se ingreso ningun archivo" });
     }

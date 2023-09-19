@@ -21,7 +21,6 @@ export const UpdatePassword = async (req, res) => {
     result.save();
     res.status(200).json({ message: "la Contraseña se cambio correctamente" });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error: error.message });
   }
 };
