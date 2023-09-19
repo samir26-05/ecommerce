@@ -1,6 +1,6 @@
 import { useState } from "react";
 /* MATERIAL UI */
-import { Avatar, Grid, IconButton, ListItem, ListItemText, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
+import { Avatar, Grid, ListItem, ListItemText } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 /* COMPONENTS */
@@ -47,11 +47,8 @@ function a11yProps(index) {
   };
 }
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
 export default function NavVertical() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
