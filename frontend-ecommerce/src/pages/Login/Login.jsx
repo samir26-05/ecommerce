@@ -3,8 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
-import { LoginBox, MainDiv, Section1, Section2, LoginBoxInput, BoxButton } from "./LoginStyled";
+import {
+  LoginBox,
+  MainDiv,
+  Section1,
+  Section2,
+  LoginBoxInput,
+  BoxButton,
+} from "./LoginStyled";
 import { BoxLink, Redes } from "./RegisterStyled";
+import { BubblyLink } from "react-bubbly-transitions";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,14 +29,28 @@ const Login = () => {
       });
       console.log(response);
       localStorage.setItem("accessToken", response.data);
-      localStorage.setItem("username", jwt_decode(localStorage.getItem("accessToken")).username)
-      localStorage.setItem("role", jwt_decode(localStorage.getItem("accessToken")).role)
+      localStorage.setItem(
+        "username",
+        jwt_decode(localStorage.getItem("accessToken")).username
+      );
+      localStorage.setItem(
+        "role",
+        jwt_decode(localStorage.getItem("accessToken")).role
+      );
+
       navigate("/home");
     } catch (error) {
       console.error(error);
       alert(error.response.data.message);
     }
   };
+
+  const MyBublyLink = ({ to, children }) => (
+    <BubblyLink to={to} colorStart="#000" colorEnd="#ffffff" duration={800}>
+      {" "}
+      {children}{" "}
+    </BubblyLink>
+  );
 
   return (
     <MainDiv>
@@ -61,6 +83,7 @@ const Login = () => {
               />
               <label>Password</label>
             </LoginBoxInput>
+
             <BoxButton>
               <a onClick={loginn}>
                 <span></span>
@@ -74,9 +97,9 @@ const Login = () => {
           <BoxLink>
             <p className="a1">
               ¿No tienes cuenta?
-              <Link to={"/register"}>
+              <MyBublyLink to={"/register"}>
                 <a className="a2">¡Regístrate!</a>
-              </Link>
+              </MyBublyLink>
             </p>
           </BoxLink>
           <Redes>
