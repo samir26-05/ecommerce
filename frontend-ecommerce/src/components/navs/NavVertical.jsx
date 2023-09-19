@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 /* MATERIAL UI */
-import { Avatar, Grid, IconButton, ListItem, ListItemText, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
+import { Avatar, Grid, ListItem, ListItemText} from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 /* COMPONENTS */
@@ -44,10 +44,13 @@ function a11yProps(index) {
   };
 }
 
+// eslint-disable-next-line no-unused-vars
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function NavVertical() {
+  // eslint-disable-next-line no-unused-vars
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [value, setValue] = useState(0);
 
@@ -82,8 +85,9 @@ export default function NavVertical() {
                   secondary={localStorage.getItem("username")}
                 />
               </ListItem>
+              <ListItemText className="ListItemText" secondary="PANEL DE OPERACIONES" style={{marginTop:"30px", marginLeft:"0px"}}/>
             </Grid>
-            <ListItemText className="ListItemText" secondary="PANEL DE OPERACIONES" style={{marginTop:"30px", marginLeft:"0px"}}/>
+            
             <Tab className="Tab" {...a11yProps(1)} label={
               <div>
                 <LiaDropbox style={{ marginRight: "8px", fontSize: "28px" }} />
@@ -104,7 +108,9 @@ export default function NavVertical() {
             }/>
             {/*  <Tab className="Tab" label="Proveedores" {...a11yProps(4)} /> */}
             
+            <div>
             <ListItemText className="ListItemText" secondary="CONFIGURACION  DE PERFIL" style={{marginTop:"80px", marginLeft:"0px"}}/>
+            </div>
             <Tab className="Tab" {...a11yProps(4)}   label={
               <div>
                 <CiSettings style={{ marginRight: "8px", fontSize: "28px" }} />
