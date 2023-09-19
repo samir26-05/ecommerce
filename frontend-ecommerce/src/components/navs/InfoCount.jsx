@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 /* MATERIAL UI */
-import { Button, Box, Accordion, Typography, AccordionSummary, AccordionDetails, Card, CardContent, CardMedia, ListItem, Avatar, ListItemText, TextField } from '@mui/material';
+import { Button, Accordion, Typography, AccordionSummary, AccordionDetails, Card, ListItem, Avatar, ListItemText} from '@mui/material';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 /* COMPONENTS */
@@ -8,8 +8,7 @@ import UpdatePass from '../forms/infoUser/UpdatePass';
 import UpdateEmail from '../forms/infoUser/UpdateEmail';
 import DataPersonal from '../forms/infoUser/DataPersonal'
 import axios from "axios";
-import Swal from 'sweetalert2'
-import {PiUserListBold} from 'react-icons/pi'
+import {BiUserCircle} from 'react-icons/bi'
 
 export default function InfoCountUser() {
     const [oneClients, setOneClients] = useState({
@@ -57,8 +56,20 @@ export default function InfoCountUser() {
 
     return (
         <div style={{width: "100%"}}>
+            <div style={{display:"flex", }}>
+              <h3 style={{ paddingButton: "50px", left: 570 }}><BiUserCircle style={{fontSize:"40px", marginTop:"-5px"}}/> MI CUENTA</h3>
+            <Button
+                    variant="contained"
+                    className="whithoutOutline"
+                    style={{ backgroundColor: "black", height: 50, marginLeft: "74%", marginBotton:"10px" }}
+                    type="submit"
+                    value="registrar"
+                    onClick={handleUpdateProfileClick}
+                >
+                    ACTUALIZAR PERFIL
+                </Button>  
+            </div>
             
-            <h3 style={{ paddingButton: "50px", left: 570 }}><PiUserListBold style={{fontSize:"45px", marginTop:"-5px"}}/> MI CUENTA</h3>
             <div style={{ paddingTop: 20 }}>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <Card sx={{ display: 'flex', width: "60%", marginBtton: 20,justifyContent: "space-between"}}>
@@ -105,16 +116,7 @@ export default function InfoCountUser() {
                     </ListItem>
 
                 </Card>
-                <Button
-                    variant="contained"
-                    className="whithoutOutline"
-                    style={{ backgroundColor: "black", height: 50, marginLeft: "85%", marginBotton:"10px" }}
-                    type="submit"
-                    value="registrar"
-                    onClick={handleUpdateProfileClick}
-                >
-                    ACTUALIZAR PERFIL
-                </Button>
+               
                 {showAccordions && (
                     <>
                 <Accordion style={{marginTop:"30px"}}>

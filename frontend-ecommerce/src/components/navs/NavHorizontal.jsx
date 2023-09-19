@@ -3,31 +3,28 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 /* MATERIAL UI */
-import {
-  Button,
-  Box,
-  Accordion,
-  Typography,
-  AccordionSummary,
-  AccordionDetails,
-} from "@mui/material";
+import {Button, Box} from "@mui/material";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import SendIcon from "@mui/icons-material/Send";
 /* COMPONENETS */
 import StockProducts from "../forms/products/StockProducts";
 import { FormProduct } from "../forms/products/CreateProducts";
+import ShowOrders from "./orders/ShowOrders";
+import CreateUser from "../forms/clients/FormClient";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CrudProvider from "./provider/ShowProvider";
+import ShowClients from "../forms/clients/ShowClients";
 /* IMG */
 import bgr from "../../assets/Img/bgr.png";
 /* STYLES */
 import { Img, Div, BoxProducts } from "./NavHorizontalStyled";
-import ShowOrders from "./orders/ShowOrders";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CreateUser from "../forms/clients/FormClient";
-import CrudProvider from "./provider/ShowProvider";
 import { FlexDirCol } from "../StyledMain";
-import ShowClients from "../forms/clients/ShowClients";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+
 import Swal from "sweetalert2";
+import { LiaDropbox } from "react-icons/lia";
+
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -106,7 +103,7 @@ export default function NavHorizontal(props) {
       {type === "buy" ? (
         <div>
           <Box>
-            <h3 style={{ paddingButton: "50px", left: 570 }}>MIS COMPRAS</h3>
+            <h3 style={{ paddingButton: "50px", left: 570 }}> <HiOutlineShoppingBag style={{fontSize:"40px", marginTop:"-5px"}} /> MIS COMPRAS</h3>
             <Tabs
               value={value}
               onChange={handleChange}
@@ -165,6 +162,7 @@ export default function NavHorizontal(props) {
 
       {type === "products" ? (
         <BoxProducts>
+          <h3 style={{ paddingButton: "50px", left: 570 }}> <LiaDropbox style={{fontSize:"40px", marginTop:"-5px"}} /> MIS PRODUCTOS</h3>
           <Box>
             <Tabs value={value} onChange={handleChange}>
               <Tab
@@ -201,14 +199,6 @@ export default function NavHorizontal(props) {
       {type === "clientes" ? (
         <div>
           <ShowClients />
-          {/* <Accordion >
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-              <Typography>Crear Nuevo Usuario</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <CreateUser />
-            </AccordionDetails>
-          </Accordion> */}
         </div>
       ) : (
         ""
