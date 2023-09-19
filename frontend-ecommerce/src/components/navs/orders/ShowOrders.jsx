@@ -1,19 +1,49 @@
 /* eslint-disable react/prop-types */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MaterialReactTable } from 'material-react-table';
 import {
   Box,
   IconButton,
+  MenuItem,
   Tooltip,
   Typography,
 } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
-import { orderData } from './OrderData';
 import { TbTruckDelivery } from 'react-icons/tb';
+import axios from 'axios';
+import Swal from "sweetalert2";
+import { AiFillEye } from 'react-icons/ai';
 
 const CrudOrders = () => {
-  const [tableData, setTableData] = useState(() => orderData);
+  const [orders, setOrders] = useState([]);
   const [validationErrors, setValidationErrors] = useState({});
+  const [tableData, setTableData] = useState(() => orders);
+  const [setError] = useState();
+  
+  async function fetchOrders() {
+    try {
+      const response = await axios.get(`http://localhost:3000/order`,{
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        }
+      );
+      setOrders(response.data);
+      console.log(response.data);
+    } catch (error) {
+      setError(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ocurrió un error al intentar obtener la información!",
+      });
+    }
+  }
+
+  useEffect(() => {
+    fetchOrders()
+  }, [])
+
 
 
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
@@ -48,32 +78,40 @@ const CrudOrders = () => {
   const columns = useMemo(
     () => [
       {
-        accessorKey: 'id',
-        header: 'ID',
+        accessorKey: 'id_order',
+        header: 'ID Pedido',
         enableColumnOrdering: false,
         enableEditing: false, //disable editing on this column
         enableSorting: false,
-        size: 80,
+        size: 20,
       },
       {
-        accessorKey: 'ref',
-        header: 'Referencia / Transfer',
+        accessorKey: 'user_id',
+        header: 'ID Usuario',
+        size: 20,
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...(cell),
+        }),
+      },
+      {
+        accessorKey: 'createdAt',
+        header: 'Fecha de creación',
         size: 140,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...(cell),
         }),
       },
       {
-        accessorKey: 'date',
-        header: 'Fecha',
-        size: 140,
+        accessorKey: 'subtotal',
+        header: 'Subtotal',
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...(cell),
+          type: 'number',
         }),
       },
       {
-        accessorKey: 'amount',
-        header: 'Valor',
+        accessorKey: 'total_value',
+        header: 'Total',
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...(cell),
           type: 'number',
@@ -82,15 +120,13 @@ const CrudOrders = () => {
       {
         accessorKey: 'paymentMethod',
         header: 'Método de pago',
-        size: 80,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...(cell),
         }),
       },
       {
-        accessorKey: 'status',
+        accessorKey: 'id_state',
         header: 'Estado',
-        size: 80,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...(cell),
         }),
@@ -112,7 +148,7 @@ const CrudOrders = () => {
           },
         }}
         columns={columns}
-        data={tableData}
+        data={orders}
         editingMode="modal" //default
         enableColumnOrdering
         enableEditing
@@ -120,14 +156,19 @@ const CrudOrders = () => {
         onEditingRowCancel={handleCancelRowEdits}
         renderRowActions={({ row, table }) => (
           <Box sx={{ display: 'flex', gap: '1rem' }}>
-            <Tooltip arrow placement="left" title="Edit">
+            <Tooltip arrow placement="bottom" title="Editar">
               <IconButton onClick={() => table.setEditingRow(row)}>
                 <Edit />
               </IconButton>
             </Tooltip>
-            <Tooltip arrow placement="right" title="Delete">
+            <Tooltip arrow placement="bottom" title="Eliminar">
               <IconButton onClick={() => handleDeleteRow(row)}>
                 <Delete style={{fill:"red"}}/>
+              </IconButton>
+            </Tooltip>
+            <Tooltip arrow placement="bottom" title="Ver pedido">
+              <IconButton /* onClick={() => handleDeleteRow(row)} --Función */>
+                <AiFillEye style={{fill:"black"}}/>
               </IconButton>
             </Tooltip>
           </Box>
