@@ -23,7 +23,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 
 import Swal from "sweetalert2";
 import { LiaDropbox } from "react-icons/lia";
-import DetailsOrder from "./orders/DetailsOrders";
+import DetailsOrder from "./orders/Details/DetailsOrder";
 
 
 function CustomTabPanel(props) {

@@ -7,15 +7,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 import Swal from 'sweetalert2'
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import CryptoJS from 'crypto-js'
 import axios from "axios";
-
 /* COMPONENTS */
 import { useCart } from '../../Layout/body/products/CardContext';
+import TotalSummary from '../../navs/orders/Details/TotalSummary';
+
 
 export default function Review() {
-
   const [oneClients, setOneClients] = useState({
     nombre: "",
     apellido: "",
@@ -64,9 +64,21 @@ export default function Review() {
   const totalCantidadProductos = products.reduce((total, product) => total + product.quantity, 0);
   const isTotalMayor6 = totalCantidadProductos > 6;
   const descuento = isTotalMayor6 ? products.reduce((total, product) => total + product.price * product.quantity, 0) * 0.1 : 0;
-  const subtotal = products.reduce((total, product) => total + product.price * product.quantity, 0) - descuento;
-  const iva = subtotal * 0.19;
 
+  const subtotal = products.reduce((total, product) => total + product.price * product.quantity, 0);
+  const iva = subtotal * 0.19;
+  const subTotal2 = subtotal - iva
+  const valorTotal = subTotal2 + iva - descuento
+
+  const reviewVariables = {
+    totalCantidadProductos,
+    isTotalMayor6,
+    descuento,
+    subtotal,
+    iva,
+    subTotal2,
+    valorTotal,
+  };
 
   const apiKey = '4Vj8eK4rloUd272L48hsrarnUA';// defecto
   const merchantId = '508029';// defecto
@@ -108,11 +120,11 @@ export default function Review() {
         <Typography variant="h5" gutterBottom sx={{ fontFamily: "-moz-initial" }}>
           Detalle orden de compra
         </Typography>
-      </div> 
+      </div>
       <Grid container spacing={0} sx={{ padding: "0px 0px 15px 0px" }}>
         <Grid item xs={3} sm={4}>
           <ListItem sx={{ py: 1, px: 0 }}>
-            <ListItemText primary="PRODUCTO" />
+            <ListItemText> {totalCantidadProductos} PRODUCTO(S)</ListItemText>
           </ListItem>
         </Grid>
         <Grid item xs={0} sm={4}>
@@ -150,21 +162,39 @@ export default function Review() {
       </Grid>
 
       {/* TOTALES */}
-      <Grid item container xs={6} sm={12} sx={{
-        border: "solid 1px gray", justifyContent: "space-around", alignItems: "center", fontWeight: "bold", height: "auto"
-      }}>
-        <Typography > {totalCantidadProductos} Productos </Typography>
-        <Typography style={{ fontWeight: "bold" }}>Total a pagar: {subtotal}</Typography>
-        
-        <ListItem sx={{ py: 1, px: 0 }}>
-          <Typography variant="subtitle1" sx={{ flexDirection: "column", display: "flex", marginLeft: 20 }}>
-            {isTotalMayor6 && (
-              <React.Fragment>
-                <Typography>Descuento (10%): $ {descuento}</Typography>
-              </React.Fragment>
-            )}
-          </Typography>
-        </ListItem>
+      <Grid item xs={6} sm={12} sx={{ px: 2, flexDirection: "row", display: "flex", border: "solid 1px gray", justifyContent: "space-around", alignItems: "center", fontWeight: "bold", height: "auto" }}>
+        <Box>
+          <Typography >  SubTotal: ------------------------------------- </Typography>
+          <Typography >  Iva (19%): ------------------------------------ </Typography>
+          <ListItem sx={{ py: 1, px: 0 }}>
+            <Typography variant="subtitle1" sx={{ flexDirection: "row", display: "flex" }}>
+              {isTotalMayor6 && (
+                <React.Fragment>
+                  <Typography>Descuento (10%): -------------------------- </Typography>
+                </React.Fragment>
+              )}
+            </Typography>
+          </ListItem>
+          <Typography style={{ fontWeight: "bold" }}>Total a pagar: ------------------------------</Typography>
+        </Box>
+        <Box>
+          <Typography > $ {subTotal2} </Typography>
+          <Typography > $ {iva} </Typography>
+          <ListItem sx={{ py: 1, px: 0 }}>
+            <Typography variant="subtitle1" sx={{ flexDirection: "row", display: "flex" }}>
+              {isTotalMayor6 && (
+                <React.Fragment>
+                  <Typography> $ {descuento}</Typography>
+                </React.Fragment>
+              )}
+            </Typography>
+          </ListItem>
+          <Typography style={{ fontWeight: "bold" }}>$ {valorTotal}</Typography>
+          <React.Fragment>
+
+          </React.Fragment>
+        </Box>
+
       </Grid>
 
       <div>
@@ -179,18 +209,22 @@ export default function Review() {
           <input name="currency" type="hidden" value="COP" />
           <input name="signature" type="hidden" value={hash} />
           <input name="test" type="hidden" value="0" />
-          <input name="buyerEmail" type="hidden"  value={localStorage.getItem("email")} />
+          <input name="buyerEmail" type="hidden" value={localStorage.getItem("email")} />
           <input name="responseUrl" type="hidden" value="http://www.test.com/response" />
           <input name="confirmationUrl" type="hidden" value="http://localhost:5173/home" />
-          <Button name="Submit" type="submit" variant="" style={{ backgroundColor: "black", color: "white", marginLeft:"390px", marginTop:"50px" }} >
+          <Button name="Submit" type="submit" variant="" style={{ backgroundColor: "black", color: "white", marginLeft: "390px", marginTop: "50px" }} >
             PAGAR
           </Button>
         </form>
       </div>
 
+      <TotalSummary reviewVariables={reviewVariables} />
+
     </React.Fragment>
 
   );
+
+
 
 }
 
