@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MaterialReactTable } from 'material-react-table';
@@ -12,8 +13,7 @@ import { Delete, Edit } from '@mui/icons-material';
 import { TbTruckDelivery } from 'react-icons/tb';
 import axios from 'axios';
 import Swal from "sweetalert2";
-import { AiFillEye } from 'react-icons/ai';
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
 const CrudOrders = () => {
   const [orders, setOrders] = useState([]);
   const [validationErrors, setValidationErrors] = useState({});
@@ -42,7 +42,7 @@ const CrudOrders = () => {
 
   useEffect(() => {
     fetchOrders()
-  }, [])
+  },)
 
 
 
@@ -59,7 +59,7 @@ const CrudOrders = () => {
     setValidationErrors({});
   };
 
-  const handleDeleteRow = useCallback(
+/*   const handleDeleteRow = useCallback(
     (row) => {
       if (
         !confirm(`Are you sure you want to delete ${row.getValue('name')}`)
@@ -71,7 +71,7 @@ const CrudOrders = () => {
       setTableData([...tableData]);
     },
     [tableData],
-  );
+  ); */
 
 
 
@@ -79,7 +79,7 @@ const CrudOrders = () => {
     () => [
       {
         accessorKey: 'id_order',
-        header: 'ID Pedido',
+        header: 'ID',
         enableColumnOrdering: false,
         enableEditing: false, //disable editing on this column
         enableSorting: false,
@@ -87,7 +87,7 @@ const CrudOrders = () => {
       },
       {
         accessorKey: 'user_id',
-        header: 'ID Usuario',
+        header: 'Usuario',
         size: 20,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...(cell),
@@ -162,13 +162,13 @@ const CrudOrders = () => {
               </IconButton>
             </Tooltip>
             <Tooltip arrow placement="bottom" title="Eliminar">
-              <IconButton onClick={() => handleDeleteRow(row)}>
+              <IconButton>
                 <Delete style={{fill:"red"}}/>
               </IconButton>
             </Tooltip>
             <Tooltip arrow placement="bottom" title="Ver pedido">
               <IconButton /* onClick={() => handleDeleteRow(row)} --Función */>
-                <AiFillEye style={{fill:"black"}}/>
+                <VisibilityIcon style={{fill:"black"}}/>
               </IconButton>
             </Tooltip>
           </Box>
