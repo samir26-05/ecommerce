@@ -2,19 +2,18 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios'
 /* MATERIAL UI */
-import {Button, Box} from "@mui/material";
+import { Button, Box } from "@mui/material";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import SendIcon from "@mui/icons-material/Send";
 /* COMPONENETS */
-import StockProducts from "../forms/products/StockProducts";
-import { FormProduct } from "../forms/products/CreateProducts";
+import StockProducts from "../navs/products/StockProducts";
+import { FormProduct } from "../navs/products/CreateProducts";
 import ShowOrders from "./orders/ShowOrders";
-import CreateUser from "../forms/clients/FormClient";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CrudProvider from "./provider/ShowProvider";
-import ShowClients from "../forms/clients/ShowClients";
+import ShowClients from "./clients/ShowClients";
 /* IMG */
 import bgr from "../../assets/Img/bgr.png";
 /* STYLES */
@@ -24,7 +23,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 
 import Swal from "sweetalert2";
 import { LiaDropbox } from "react-icons/lia";
-import axios from "axios";
+import DetailsOrder from "./orders/DetailsOrders";
 
 
 function CustomTabPanel(props) {
@@ -103,7 +102,7 @@ export default function NavHorizontal(props) {
       {type === "buy" ? (
         <div>
           <Box>
-            <h3 style={{ paddingButton: "50px", left: 570 }}> <HiOutlineShoppingBag style={{fontSize:"40px", marginTop:"-5px"}} /> MIS COMPRAS</h3>
+            <h3 style={{ paddingButton: "50px", left: 570 }}> <HiOutlineShoppingBag style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS COMPRAS</h3>
             <Tabs
               value={value}
               onChange={handleChange}
@@ -162,10 +161,10 @@ export default function NavHorizontal(props) {
 
       {type === "products" ? (
         <BoxProducts>
-          <h3 style={{ paddingButton: "50px", left: 570 }}> <LiaDropbox style={{fontSize:"40px", marginTop:"-5px"}} /> MIS PRODUCTOS</h3>
+          <h3 style={{ paddingButton: "50px", left: 570 }}> <LiaDropbox style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS PRODUCTOS</h3>
           <Box>
-            <Tabs value={value} onChange={handleChange}>
-              <Tab
+            <Tabs value={value} onChange={handleChange} style={{display:"flex", flexDirection:"row"}}>
+              <Tab 
                 label="Crear producto"
                 {...a11yProps(0)}
                 className="whithoutOutline"
@@ -189,28 +188,36 @@ export default function NavHorizontal(props) {
       )}
 
       {type === "order" ? (
-        <div>
+        /* <div>
           <ShowOrders />
-        </div>
+        </div> */
+        < BoxProducts >
+          <DetailsOrder />
+        </BoxProducts>
       ) : (
         ""
-      )}
+      )
+      }
 
-      {type === "clientes" ? (
-        <div>
-          <ShowClients />
-        </div>
-      ) : (
-        ""
-      )}
+      {
+        type === "clientes" ? (
+          <div>
+            <ShowClients />
+          </div>
+        ) : (
+          ""
+        )
+      }
 
-      {type === "provider" ? (
-        <div>
-          <CrudProvider />
-        </div>
-      ) : (
-        ""
-      )}
-    </Box>
+      {
+        type === "provider" ? (
+          <div>
+            <CrudProvider />
+          </div>
+        ) : (
+          ""
+        )
+      }
+    </Box >
   );
 }

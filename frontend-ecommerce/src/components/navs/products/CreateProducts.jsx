@@ -293,7 +293,7 @@ export const FormProduct = () => {
       <Button
         variant="contained"
         className="whithoutOutline"
-        style={{ backgroundColor: "black", height: 50, marginLeft: "32%" }}
+        style={{ backgroundColor: "black", height: 50, marginLeft: "17.5%" }}
         type="submit"
         value="registrar"
       >

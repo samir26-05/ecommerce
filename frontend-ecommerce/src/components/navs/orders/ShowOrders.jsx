@@ -14,6 +14,9 @@ import { TbTruckDelivery } from 'react-icons/tb';
 import axios from 'axios';
 import Swal from "sweetalert2";
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { GiCheckboxTree } from 'react-icons/gi';
+import DetailsOrder from './DetailsOrders';
+
 const CrudOrders = () => {
   const [orders, setOrders] = useState([]);
   const [validationErrors, setValidationErrors] = useState({});
@@ -43,6 +46,8 @@ const CrudOrders = () => {
   useEffect(() => {
     fetchOrders()
   },)
+  const [showTable, setShowTable] = useState(true);
+  const [showDetails, setShowDetails] = useState(false);
 
 
 
@@ -54,6 +59,20 @@ const CrudOrders = () => {
       exitEditingMode(); //required to exit editing mode and close modal
     }
   };
+
+ 
+  const handleShowDetails = () => {
+    setShowTable(false);
+    setShowDetails(true);
+  };
+
+  useEffect(() => {
+    console.log(showTable, 'show table');
+    console.log(showDetails, 'show details');
+  }, [showTable, showDetails]);
+
+
+
 
   const handleCancelRowEdits = () => {
     setValidationErrors({});
@@ -136,50 +155,60 @@ const CrudOrders = () => {
   );
 
   return (
-    <>
-     <h3 style={{ paddingButton: "50px", left: 570 }}> <TbTruckDelivery style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS PEDIDOS</h3>
-      <MaterialReactTable
-        displayColumnDefOptions={{
-          'mrt-row-actions': {
-            muiTableHeadCellProps: {
-              align: 'center',
-            },
-            size: 120,
-          },
-        }}
-        columns={columns}
-        data={orders}
-        editingMode="modal" //default
-        enableColumnOrdering
-        enableEditing
-        onEditingRowSave={handleSaveRowEdits}
-        onEditingRowCancel={handleCancelRowEdits}
-        renderRowActions={({ row, table }) => (
-          <Box sx={{ display: 'flex', gap: '1rem' }}>
-            <Tooltip arrow placement="bottom" title="Editar">
-              <IconButton onClick={() => table.setEditingRow(row)}>
-                <Edit />
-              </IconButton>
-            </Tooltip>
-            <Tooltip arrow placement="bottom" title="Eliminar">
-              <IconButton>
-                <Delete style={{fill:"red"}}/>
-              </IconButton>
-            </Tooltip>
-            <Tooltip arrow placement="bottom" title="Ver pedido">
-              <IconButton /* onClick={() => handleDeleteRow(row)} --Función */>
-                <VisibilityIcon style={{fill:"black"}}/>
-              </IconButton>
-            </Tooltip>
-          </Box>
-        )}
-        renderTopToolbarCustomActions={() => (
-            <>
-            <div></div>
-            <Typography style={{fontSize:"1.2rem", fontWeight:"500", width:"20rem", textAlign:"end"}}>Lista de Pedidos</Typography>
-            </>
-        )}
-      />
+     <>
+      {showTable && (
+        <>
+          <div style={{ display: "flex", }}>
+            <h3 style={{ paddingButton: "50px" }}><GiCheckboxTree style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS PEDIDOS</h3>
+          </div>
+
+          <MaterialReactTable
+            displayColumnDefOptions={{
+              'mrt-row-actions': {
+                muiTableHeadCellProps: {
+                  align: 'center',
+                },
+                size: 120,
+              },
+            }}
+            columns={columns}
+            data={orders}
+            editingMode="modal" //default
+            enableColumnOrdering
+            enableEditing
+            onEditingRowSave={handleSaveRowEdits}
+            onEditingRowCancel={handleCancelRowEdits}
+            renderRowActions={({ row, table }) => (
+              <Box sx={{ display: 'flex', gap: '1rem' }}>
+                <Tooltip arrow placement="left" title="Editar">
+                  <IconButton onClick={() => table.setEditingRow(row)}>
+                    <Edit />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip arrow placement="right" title="Eliminar">
+                  <IconButton /* onClick={() => handleDeleteRow(row)} */>
+                    <Delete style={{ fill: "red" }} />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip arrow placement="bottom" title="Ver pedido">
+                  <IconButton /* onClick={() => handleDeleteRow(row)} --Función */>
+                    <VisibilityIcon style={{fill:"black"}}/>
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            )}
+            renderTopToolbarCustomActions={() => (
+              <>
+                <div></div>
+                <Typography style={{ fontSize: "1.2rem", fontWeight: "500", width: "20rem", textAlign: "end" }}>Lista de Pedidos</Typography>
+              </>
+            )}
+          />
+        </>
+      )}
+      {showDetails && (
+  <DetailsOrder onShowTable={handleShowDetails} />
+)}
     </>
   );
 };
