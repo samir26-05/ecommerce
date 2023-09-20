@@ -191,7 +191,7 @@ export default function NavHorizontal(props) {
         /* <div>
           <ShowOrders />
         </div> */
-        < BoxProducts >
+        <BoxProducts>
           <DetailsOrder />
         </BoxProducts>
       ) : (

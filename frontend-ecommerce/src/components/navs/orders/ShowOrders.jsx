@@ -1,38 +1,32 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { MaterialReactTable } from 'material-react-table';
-import {
-  Box,
-  IconButton,
-  MenuItem,
-  Tooltip,
-  Typography,
-} from '@mui/material';
-import { Delete, Edit } from '@mui/icons-material';
-import { TbTruckDelivery } from 'react-icons/tb';
-import axios from 'axios';
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { MaterialReactTable } from "material-react-table";
+import { Box, IconButton, MenuItem, Tooltip, Typography } from "@mui/material";
+import { Delete, Edit } from "@mui/icons-material";
+import { TbTruckDelivery } from "react-icons/tb";
+import axios from "axios";
 import Swal from "sweetalert2";
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import { GiCheckboxTree } from 'react-icons/gi';
-import DetailsOrder from './DetailsOrders';
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { GiCheckboxTree } from "react-icons/gi";
+import DetailsOrder from "./DetailsOrders";
 
 const CrudOrders = () => {
   const [orders, setOrders] = useState([]);
   const [validationErrors, setValidationErrors] = useState({});
+  const [seeOrder, setSeeOrder] = useState(false)
+  const [row, setRow] = useState([]);
   const [tableData, setTableData] = useState(() => orders);
   const [setError] = useState();
-  
+
   async function fetchOrders() {
     try {
-      const response = await axios.get(`http://localhost:3000/order`,{
-          headers: {
-            accessToken: localStorage.getItem("accessToken"),
-          },
-        }
-      );
+      const response = await axios.get(`http://localhost:3000/order`, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      });
       setOrders(response.data);
-      console.log(response.data);
     } catch (error) {
       setError(error);
       Swal.fire({
@@ -44,12 +38,14 @@ const CrudOrders = () => {
   }
 
   useEffect(() => {
-    fetchOrders()
-  },)
-  const [showTable, setShowTable] = useState(true);
-  const [showDetails, setShowDetails] = useState(false);
+    fetchOrders();
 
+    const interval = setInterval(() => {
+      fetchOrders();
+    }, 1000)
 
+    return () => clearInterval(interval)
+  });
 
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     if (!Object.keys(validationErrors).length) {
@@ -60,25 +56,12 @@ const CrudOrders = () => {
     }
   };
 
- 
-  const handleShowDetails = () => {
-    setShowTable(false);
-    setShowDetails(true);
-  };
-
-  useEffect(() => {
-    console.log(showTable, 'show table');
-    console.log(showDetails, 'show details');
-  }, [showTable, showDetails]);
-
-
-
 
   const handleCancelRowEdits = () => {
     setValidationErrors({});
   };
 
-/*   const handleDeleteRow = useCallback(
+  /*   const handleDeleteRow = useCallback(
     (row) => {
       if (
         !confirm(`Are you sure you want to delete ${row.getValue('name')}`)
@@ -91,8 +74,6 @@ const CrudOrders = () => {
     },
     [tableData],
   ); */
-
-
 
   const columns = useMemo(
     () => [
@@ -153,10 +134,17 @@ const CrudOrders = () => {
     ],
     [],
   );
+  const ViewOrder = (row) => {
+    setSeeOrder(!seeOrder)
+    setRow(row)
+    console.log(row);
+  }
 
   return (
      <>
-      {showTable && (
+        {seeOrder ? 
+        <DetailsOrder order={row} test={seeOrder}/>
+        :
         <>
           <div style={{ display: "flex", }}>
             <h3 style={{ paddingButton: "50px" }}><GiCheckboxTree style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS PEDIDOS</h3>
@@ -185,13 +173,8 @@ const CrudOrders = () => {
                     <Edit />
                   </IconButton>
                 </Tooltip>
-                <Tooltip arrow placement="right" title="Eliminar">
-                  <IconButton /* onClick={() => handleDeleteRow(row)} */>
-                    <Delete style={{ fill: "red" }} />
-                  </IconButton>
-                </Tooltip>
                 <Tooltip arrow placement="bottom" title="Ver pedido">
-                  <IconButton /* onClick={() => handleDeleteRow(row)} --Función */>
+                  <IconButton onClick={() => ViewOrder(row.original)} >
                     <VisibilityIcon style={{fill:"black"}}/>
                   </IconButton>
                 </Tooltip>
@@ -204,14 +187,9 @@ const CrudOrders = () => {
               </>
             )}
           />
-        </>
-      )}
-      {showDetails && (
-  <DetailsOrder onShowTable={handleShowDetails} />
-)}
+        </>}
     </>
   );
 };
-
 
 export default CrudOrders;
