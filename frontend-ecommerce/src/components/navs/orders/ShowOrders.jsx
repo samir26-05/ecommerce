@@ -9,7 +9,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { GiCheckboxTree } from "react-icons/gi";
-import DetailsOrder from "./DetailsOrders";
+import DetailsOrder from "./Details/DetailsOrder";
 
 const CrudOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -46,6 +46,9 @@ const CrudOrders = () => {
 
     return () => clearInterval(interval)
   });
+
+
+
 
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     if (!Object.keys(validationErrors).length) {

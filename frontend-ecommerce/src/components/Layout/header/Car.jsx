@@ -18,10 +18,12 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
     : 0;
   const total = Array.isArray(cart)
     ? cart.reduce(
-        (total, product) => total + product.price * product.quantity,
+        (total, product) =>  product.price * product.quantity,
         0
       )
     : 0;
+
+
 
   const onDeleteProduct = (product) => {
     const results = cart.filter(
