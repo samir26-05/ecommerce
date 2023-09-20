@@ -74,29 +74,28 @@ export default function NavHorizontal(props) {
     setValue(newValue);
   };
 
-  useEffect(() => {
-    async function fetchOneClients() {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/user/name/${userName}`,
-          {
-            headers: {
-              accessToken: token,
-            },
-          }
-        );
-        setOneClients(response.data);
-      } catch (error) {
-        setError(error);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Ocurrió un error al intentar almacenar la información!",
-        });
-      }
+  async function fetchOneClients() {
+    try {
+      const response = await axios.get(`http://localhost:3000/user/name/${userName}`,{
+          headers: {
+            accessToken: token,
+          },
+        }
+      );
+      setOneClients(response.data);
+    } catch (error) {
+      setError(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ocurrió un error al intentar almacenar la información!",
+      });
     }
+  }
 
+  useEffect(() => {
     fetchOneClients();
+
   }, [userName]);
   return (
     <Box sx={{ width: "100%" }}>
@@ -192,7 +191,7 @@ export default function NavHorizontal(props) {
         /* <div>
           <ShowOrders />
         </div> */
-        < BoxProducts >
+        <BoxProducts>
           <DetailsOrder />
         </BoxProducts>
       ) : (

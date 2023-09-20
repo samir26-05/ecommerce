@@ -64,14 +64,14 @@ export const Login = async (req, res) => {
       where: { email },
     });
     if (!Existemail) {
-      return res.status(404).json({ message: "Email no encontrado" });
+      return res.status(404).json({ message: "!!Email No Encontrado¡¡" });
     }
 
     const PasswordCorrect = await compare(password, Existemail.password);
     if (!PasswordCorrect) {
       return res
         .status(404)
-        .json({ message: "Combinacion de email y constraseña incorrecta" });
+        .json({ message: "!!Combinacion De Email Y Constraseña Incorrecta¡¡" });
     }
     const rol = await Roles.findOne({
       where: { role_id: Existemail.role_id },
