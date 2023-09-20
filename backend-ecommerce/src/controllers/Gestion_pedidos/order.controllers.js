@@ -57,6 +57,7 @@ export const CreateOrder = async (req, res) => {
       products: result.products, // Convierte la cadena JSON en objeto
       discount: result.discount,
       subtotal: result.subtotal,
+      iva: result.iva,
       total_value: result.total_value,
       id_state: result.id_state,
     });
@@ -116,9 +117,8 @@ export const CheckoutPago = async (req, res) => {
           },
           { where: { product_id: value.product_id } }
         );
-        console.log(FoundProduct);
       });
-      res.status(200).json({ message: "Producto Pagado con exito" });
+      res.status(200).json({ message: "El pago se hizo Exitoso" });
     }
   } catch (error) {
     console.log(error);
