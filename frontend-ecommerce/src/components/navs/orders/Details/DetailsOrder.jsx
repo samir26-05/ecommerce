@@ -7,7 +7,6 @@ import { TbTruckDelivery } from 'react-icons/tb'
 import { GiCardboardBox, GiCheckboxTree } from 'react-icons/gi'
 import TotalSummary from './TotalSummary';
 import TableDetailsProducts from './DetailsProducts';
-import { Div } from '../../NavHorizontalStyled';
 
 const steps = ['DESPACHO', 'EN CAMINO', 'RECIBIDO',];
 

@@ -40,13 +40,12 @@ export default function ShowClients() {
           setTableData([...tableData]);
           exitEditingMode();
         }
-        console.log(response.data, '❤️❤️❤️')
       } catch (error) {
         setError(error);
-        console.log("Error al actualizar el cliente:", error.data);
       }
     }
   };
+
 
   const handleCancelRowEdits = () => {
     setValidationErrors({});
@@ -70,7 +69,6 @@ export default function ShowClients() {
       setTableData([...tableData]);
     } catch (error) {
       setError(error);
-      console.log("Error al obtener los clientes:", error);
     }
   },
 
@@ -165,10 +163,8 @@ export default function ShowClients() {
         data: {},
       });
       setClients(response.data);
-      console.log(response.data, '❤️❤️❤️')
     } catch (error) {
       setError(error);
-      console.log("Error al obtener los clientes:", error);
     }
   }
 
@@ -182,6 +178,8 @@ export default function ShowClients() {
     return () => clearInterval(interval)
 
   }, []);
+
+
 
   return (
     <div>
