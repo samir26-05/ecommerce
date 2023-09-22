@@ -127,7 +127,7 @@ export default function NavHorizontal(props) {
               <Img src={bgr} alt="" />
               <h4>Aun no tienes compras online</h4>
               <span>
-                Si no encuentras tu compra tal vez es porque hiciste el pedido
+                Si no encuentdras tu compra tal vez es porque hiciste el pedido
                 sin estar registrado.
               </span>
               <Button

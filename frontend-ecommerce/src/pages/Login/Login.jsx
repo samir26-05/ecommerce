@@ -3,14 +3,22 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
-import { LoginBox, MainDiv, Section1, Section2, LoginBoxInput, BoxButton } from "./LoginStyled";
-import { BoxLink, Redes } from "./RegisterStyled";
+import {
+  LoginBox,
+  MainDiv,
+  Section1,
+  Section2,
+  LoginBoxInput,
+  BoxButton,
+} from "./loginstyled";
+
+import { BoxLink, Redes } from "./registerstyled";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const vista = ("login");
-  
+  const vista = "login";
+
   let navigate = useNavigate();
 
   const loginn = async (event) => {
@@ -22,8 +30,14 @@ const Login = () => {
       });
       console.log(response);
       localStorage.setItem("accessToken", response.data);
-      localStorage.setItem("username", jwt_decode(localStorage.getItem("accessToken")).username)
-      localStorage.setItem("role", jwt_decode(localStorage.getItem("accessToken")).role)
+      localStorage.setItem(
+        "username",
+        jwt_decode(localStorage.getItem("accessToken")).username
+      );
+      localStorage.setItem(
+        "role",
+        jwt_decode(localStorage.getItem("accessToken")).role
+      );
       navigate("/home");
     } catch (error) {
       console.error(error);
@@ -34,7 +48,7 @@ const Login = () => {
   return (
     <MainDiv>
       <Section1>
-        <DemoAutoPlay vista={vista}/>
+        <DemoAutoPlay vista={vista} />
       </Section1>
       <Section2>
         <LoginBox>

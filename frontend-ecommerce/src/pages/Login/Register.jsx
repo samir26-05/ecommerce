@@ -3,11 +3,21 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
 import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
-import { MainDiv, Section1, Section2, LoginBox, LoginBoxInput, BoxButton, BoxLink, Redes, Error } from "./RegisterStyled";
+import {
+  MainDiv,
+  Section1,
+  Section2,
+  LoginBox,
+  LoginBoxInput,
+  BoxButton,
+  BoxLink,
+  Redes,
+  Error,
+} from "./registerstyled";
 import Swal from "sweetalert2";
 
 const RegisterLogin = () => {
-  const vista = ("register");
+  const vista = "register";
   const initialValues = {
     user: "",
     nombre: "",
@@ -19,10 +29,14 @@ const RegisterLogin = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:3000/user", data).then(() => {
-      Swal.fire("BIEN HECHO!", "Producto creado con exito!", "success");
-      navigate("/");
-    });
+    if (data) {
+      axios.post("http://localhost:3000/user", data).then(() => {
+        Swal.fire("REGISTRO EXITOSO!", "Usuario creado con éxito!", "success");
+        navigate("/");
+      });
+    } else {
+      Swal.fire("ERROR!", "Complete el formulario correctamente!", "error");
+    }
   };
 
   const validationSchema = Yup.object().shape({

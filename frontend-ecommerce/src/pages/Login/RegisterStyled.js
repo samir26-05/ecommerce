@@ -251,7 +251,7 @@ export const Redes = styled.div`
     list-style: none;
     @media (max-width: 768px) {
       margin-bottom: 50px;
-  }
+    }
   }
 
   .socail-media li a {
