@@ -17,6 +17,7 @@ import {
 import Swal from "sweetalert2";
 import { BubblyLink } from "react-bubbly-transitions";
 
+
 const RegisterLogin = () => {
   const initialValues = {
     user: "",
@@ -33,7 +34,7 @@ const RegisterLogin = () => {
       .post("http://localhost:3000/user", data)
       .then((response) => {
         const successMessage = response.data.message;
-        Swal.fire("BIEN HECHO!", successMessage, "success");
+        Swal.fire("REGISTRO EXITOSO!", successMessage, "success");
         navigate("/");
       })
       .catch((error) => {

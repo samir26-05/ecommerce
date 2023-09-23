@@ -39,6 +39,7 @@ export const DivCategory = styled.div`
   height: 100%;
 `;
 
+
 export const Card = styled.div`
   letter-spacing: 2px;
   text-align: center;
