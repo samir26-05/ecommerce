@@ -17,7 +17,7 @@ const CrudOrders = () => {
   const [seeOrder, setSeeOrder] = useState(false)
   const [row, setRow] = useState([]);
   const [tableData, setTableData] = useState(() => orders);
-  const [setError] = useState();
+  const [, setError] = useState();
 
   async function fetchOrders() {
     try {
@@ -37,17 +37,7 @@ const CrudOrders = () => {
     }
   }
 
-  useEffect(() => {
-    fetchOrders();
-
-    const interval = setInterval(() => {
-      fetchOrders();
-    }, 1000)
-
-    return () => clearInterval(interval)
-  });
-
-
+fetchOrders()
 
 
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
@@ -140,13 +130,12 @@ const CrudOrders = () => {
   const ViewOrder = (row) => {
     setSeeOrder(!seeOrder)
     setRow(row)
-    console.log(row);
   }
 
   return (
      <>
         {seeOrder ? 
-        <DetailsOrder order={row} test={seeOrder}/>
+        <DetailsOrder order={row} seeOrder={seeOrder}/>
         :
         <>
           <div style={{ display: "flex", }}>
