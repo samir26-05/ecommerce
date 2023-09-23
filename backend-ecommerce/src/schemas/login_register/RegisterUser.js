@@ -13,7 +13,10 @@ const RegisterValidator = z.object({
         }
         return true;
       },
-      { message: "este usuario ya se encuentra registrado" }
+      {
+        message:
+          "¡Nombre de Usuario Ya Registrado, Intenta Cambiarlo!",
+      }
     ),
   nombre: z.string().nullable(),
   apellido: z.string().nullable(),
@@ -29,7 +32,7 @@ const RegisterValidator = z.object({
         }
         return true;
       },
-      { message: "este correo ya se encuentra registrado " }
+      { message: "¡Email Ya Registrado, Intenta Cambiarlo!" }
     ),
   role_id: z.number().optional(),
 });

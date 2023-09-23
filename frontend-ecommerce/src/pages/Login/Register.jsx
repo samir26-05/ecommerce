@@ -29,35 +29,40 @@ const RegisterLogin = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    if (data) {
-      axios.post("http://localhost:3000/user", data).then(() => {
-        Swal.fire("REGISTRO EXITOSO!", "Usuario creado con éxito!", "success");
+    axios
+      .post("http://localhost:3000/user", data)
+      .then((response) => {
+        const successMessage = response.data.message;
+        Swal.fire("BIEN HECHO!", successMessage, "success");
         navigate("/");
+      })
+      .catch((error) => {
+        const messageError1 = error.response.data.error[0].message;
+        const messageError2 = error.response.data.error[0].message;
+        Swal.fire(messageError1, error, "error");
+        Swal.fire(messageError2, error, "error");
       });
-    } else {
-      Swal.fire("ERROR!", "Complete el formulario correctamente!", "error");
-    }
   };
 
   const validationSchema = Yup.object().shape({
     user: Yup.string()
-      .min(3)
-      .max(15)
+      .min(3, "El usuario debe tener al menos 3 caracteres")
+      .max(15, "El usuario debe tener un máximo de 15 caracteres")
       .required("Debes ingresar un nombre de usuario *"),
     nombre: Yup.string()
-      .min(3)
-      .max(15)
+      .min(3, "El nombre debe tener al menos 3 caracteres")
+      .max(15, "El nombre debe tener un máximo de 15 caracteres")
       .required("Debes ingresar un nombre valido *"),
     apellido: Yup.string()
-      .min(3)
-      .max(15)
+      .min(3, "El apellido debe tener al menos 3 caracteres")
+      .max(15, "El apellido debe tener un máximo de 15 caracteres")
       .required("Debes ingresar un apellido *"),
     email: Yup.string()
       .email("Debe ser un email válido *")
       .required("Debes ingresar un email *"),
     password: Yup.string()
-      .min(4)
-      .max(15)
+      .min(4, "La contraseña debe tener al menos 4 caracteres")
+      .max(15, "La contraseña debe tener un máximo de 15 caracteres")
       .required("Debes ingresar una contraseña *"),
   });
 

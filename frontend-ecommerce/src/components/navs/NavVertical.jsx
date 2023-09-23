@@ -5,7 +5,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 /* COMPONENTS */
 import NavHorizontal from "./NavHorizontal";
-import InfoCountUser from "./InfoCount";
+import InfoCountUser from "./infoUser/InfoCount";
 /* STYLES */
 import { FlexDirCol, Div, Box } from "./NavVerticalStyled";
 import { useNavigate } from "react-router-dom";
@@ -68,6 +68,7 @@ export default function NavVertical() {
 
   return (
     <Box>
+      {/* SIDEBAR - MENU ADMIN */}
       {localStorage.getItem("role") === "Admin" ? (
         <Div>
           <Tabs className="Tabs" value={value} onChange={handleChange}>
@@ -78,7 +79,6 @@ export default function NavVertical() {
                   alt={localStorage.getItem("username")}
                   src="/static/images/avatar/1.jpg"
                 />
-
                 <ListItemText
                   className="ListItemText"
                   primary="Bienvenido"
@@ -87,17 +87,16 @@ export default function NavVertical() {
               </ListItem>
               <ListItemText className="ListItemText" secondary="PANEL DE OPERACIONES" style={{marginTop:"30px", marginLeft:"0px"}}/>
             </Grid>
-            
             <Tab className="Tab" {...a11yProps(1)} label={
               <div>
-                <LiaDropbox style={{ marginRight: "8px", fontSize: "28px" }} />
-                Productos
+                <TbTruckDelivery style={{ marginRight: "8px", fontSize: "28px" }} />
+                Pedidos
               </div>
             } />
             <Tab className="Tab" {...a11yProps(2)} label={
               <div>
-                <TbTruckDelivery style={{ marginRight: "8px", fontSize: "28px" }} />
-                Pedidos
+                <LiaDropbox style={{ marginRight: "8px", fontSize: "28px" }} />
+                Productos
               </div>
             } />
             <Tab className="Tab" {...a11yProps(3)} label={
@@ -126,11 +125,11 @@ export default function NavVertical() {
           </Tabs>
 
           <div className="TabPanels">
-            <TabPanel className="TabPanel" value={value} index={1}>
-              <NavHorizontal className="NavHorizontal" type="products" />
+          <TabPanel className="TabPanel" value={value} index={1}>
+              <NavHorizontal className="NavHorizontal" type="order" />
             </TabPanel>
             <TabPanel className="TabPanel" value={value} index={2}>
-              <NavHorizontal className="NavHorizontal" type="order" />
+              <NavHorizontal className="NavHorizontal" type="products" />
             </TabPanel>
             <TabPanel className="TabPanel" value={value} index={3}>
               <NavHorizontal className="NavHorizontal" type="clientes" />
@@ -144,7 +143,8 @@ export default function NavVertical() {
 
           </div>
         </Div>
-      ) : (
+      ) : ( 
+        /* MENU CLIENTE */
         <Div>
           <Tabs className="Tabs" value={value} onChange={handleChange}>
             <Grid className="Grid" item xs={12} sm={6}>
@@ -181,7 +181,6 @@ export default function NavVertical() {
             } />
           </Tabs>
           <div className="TabPanels">
-
             <TabPanel className="TabPanel" value={value} index={1}>
               <NavHorizontal className="NavHorizontal" type="buy" />
             </TabPanel>

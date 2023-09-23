@@ -4,18 +4,16 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios'
 /* MATERIAL UI */
-import {Button, Box} from "@mui/material";
+import { Button, Box } from "@mui/material";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import SendIcon from "@mui/icons-material/Send";
 /* COMPONENETS */
-import StockProducts from "../forms/products/StockProducts";
-import { FormProduct } from "../forms/products/CreateProducts";
+import StockProducts from "../navs/products/StockProducts";
+import { FormProduct } from "../navs/products/CreateProducts";
 import ShowOrders from "./orders/ShowOrders";
-import CreateUser from "../forms/clients/FormClient";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CrudProvider from "./provider/ShowProvider";
-import ShowClients from "../forms/clients/ShowClients";
+import ShowClients from "./clients/ShowClients";
 /* IMG */
 import bgr from "../../assets/Img/bgr.png";
 /* STYLES */
@@ -25,6 +23,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 
 import Swal from "sweetalert2";
 import { LiaDropbox } from "react-icons/lia";
+import DetailsOrder from "./orders/Details/DetailsOrder";
 
 
 function CustomTabPanel(props) {
@@ -75,37 +74,37 @@ export default function NavHorizontal(props) {
     setValue(newValue);
   };
 
-  useEffect(() => {
-    async function fetchOneClients() {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/user/name/${userName}`,
-          {
-            headers: {
-              accessToken: token,
-            },
-          }
-        );
-        setOneClients(response.data);
-      } catch (error) {
-        setError(error);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Ocurrió un error al intentar almacenar la información!",
-        });
-      }
+  async function fetchOneClients() {
+    try {
+      const response = await axios.get(`http://localhost:3000/user/name/${userName}`,{
+          headers: {
+            accessToken: token,
+          },
+        }
+      );
+      setOneClients(response.data);
+    } catch (error) {
+      setError(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ocurrió un error al intentar almacenar la información!",
+      });
     }
+  }
 
+  useEffect(() => {
     fetchOneClients();
+
   }, [userName]);
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box>
       {type === "buy" ? (
-        <div>
-          <Box>
-            <h3 style={{ paddingButton: "50px", left: 570 }}> <HiOutlineShoppingBag style={{fontSize:"40px", marginTop:"-5px"}} /> MIS COMPRAS</h3>
+        <div >
+          <Box sx={{ width: "100%"}}>
+            <h3 style={{textAlign:"center"}}> <HiOutlineShoppingBag style={{ fontSize: "35px", marginTop: "-5px" }} /> MIS COMPRAS</h3>
             <Tabs
+            sx={{ width: "100%"}}
               value={value}
               onChange={handleChange}
               aria-label="basic tabs example"
@@ -123,14 +122,16 @@ export default function NavHorizontal(props) {
             </Tabs>
           </Box>
           <Div>
-            <CustomTabPanel value={value} index={0}>
+            <CustomTabPanel //fghdgfhd
+            value={value} index={0}>
               <Img src={bgr} alt="" />
-              <h4>Aun no tienes compras online</h4>
-              <span>
+              <h4 style={{ width: "100%"}}>Aun no tienes compras online</h4>
+              <span style={{ width: "100%"}}>
                 Si no encuentdras tu compra tal vez es porque hiciste el pedido
                 sin estar registrado.
               </span>
               <Button
+              sx={{ width: "100%"}}
                 variant="text"
                 className="whithoutOutline"
                 endIcon={<SendIcon />}
@@ -139,13 +140,13 @@ export default function NavHorizontal(props) {
               </Button>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-              <Img src={bgr} alt="" />
+              <Img sx={{ width: "100%"}} src={bgr} alt="" />
               <h4>Aún no tienes compras en tienda</h4>
               <span>
                 Pero puedes hacer tu pedido online ¡y te lo mandamos a casa!
               </span>
               <br />
-              <Link to={"/"}>
+              <Link to={"/home"}>
                 <Button
                   variant="contained"
                   className="whithoutOutline"
@@ -163,7 +164,7 @@ export default function NavHorizontal(props) {
 
       {type === "products" ? (
         <BoxProducts>
-          <h3 style={{ paddingButton: "50px", left: 570 }}> <LiaDropbox style={{fontSize:"40px", marginTop:"-5px"}} /> MIS PRODUCTOS</h3>
+          <h3 style={{ paddingButton: "50px", left: 570 }}> <LiaDropbox style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS PRODUCTOS</h3>
           <Box>
             <Tabs value={value} onChange={handleChange} style={{display:"flex", flexDirection:"row"}}>
               <Tab 
@@ -190,28 +191,36 @@ export default function NavHorizontal(props) {
       )}
 
       {type === "order" ? (
-        <div>
+        /* <div>
           <ShowOrders />
-        </div>
+        </div> */
+        <BoxProducts>
+          <DetailsOrder />
+        </BoxProducts>
       ) : (
         ""
-      )}
+      )
+      }
 
-      {type === "clientes" ? (
-        <div>
-          <ShowClients />
-        </div>
-      ) : (
-        ""
-      )}
+      {
+        type === "clientes" ? (
+          <div>
+            <ShowClients />
+          </div>
+        ) : (
+          ""
+        )
+      }
 
-      {type === "provider" ? (
-        <div>
-          <CrudProvider />
-        </div>
-      ) : (
-        ""
-      )}
-    </Box>
+      {
+        type === "provider" ? (
+          <div>
+            <CrudProvider />
+          </div>
+        ) : (
+          ""
+        )
+      }
+    </Box >
   );
 }

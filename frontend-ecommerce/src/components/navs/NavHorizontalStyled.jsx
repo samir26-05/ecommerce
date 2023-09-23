@@ -29,6 +29,10 @@ export const Div = styled.div`
     text-align: center;
     background-color: white;
     color: black;
+    .fvvBKb {
+      max-width: 0 !important;
+      min-height: 0!important;
+    }
 `
 
 export const Img = styled.img`

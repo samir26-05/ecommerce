@@ -11,7 +11,6 @@ import {
   LoginBoxInput,
   BoxButton,
 } from "./loginstyled";
-
 import { BoxLink, Redes } from "./registerstyled";
 
 const Login = () => {
@@ -76,6 +75,7 @@ const Login = () => {
               />
               <label>Password</label>
             </LoginBoxInput>
+
             <BoxButton>
               <a onClick={loginn}>
                 <span></span>
