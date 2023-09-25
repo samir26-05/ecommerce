@@ -100,6 +100,13 @@ export default function Sections() {
     );
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <PageSections>
       <Header isUsedUser={userEnterUser} />
@@ -114,9 +121,9 @@ export default function Sections() {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
           >
-            <Tab label="productos" index={0} />
+            <Tab label="productos" index={0} onClick={scrollToTop} />
             {Categories.map((item, index) => (
-              <Tab label={item.name} key={index} />
+              <Tab label={item.name} key={index} onClick={scrollToTop} />
             ))}
           </Tabs>
         </div>

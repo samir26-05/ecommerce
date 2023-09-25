@@ -66,10 +66,10 @@ const Header = ({
       headerColor={headerColor}
       hovered={hovered}
     >
-      <Toolbar>
+      <Toolbar sx={{height:"100%"}}>
         <Typography
           className="Typography"
-          variant="h1"
+          variant="h2"
           noWrap
           component="a"
           href="/home"

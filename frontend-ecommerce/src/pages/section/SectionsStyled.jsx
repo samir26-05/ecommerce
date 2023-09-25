@@ -9,9 +9,12 @@ export const PageSections = styled.div`
     text-align: center;
     letter-spacing: 3px;
     font-weight: 100;
-    padding: 6% 0 1% 0;
+    padding: 5% 0 1% 0;
   }
   .Category {
+    position: sticky;
+    top: 8%;
+    background-color: #fff;
     width: 100%;
     display: flex;
     justify-content: center;

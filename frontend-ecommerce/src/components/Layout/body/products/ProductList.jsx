@@ -32,7 +32,7 @@ export const ProductList = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: "center", margin: "4% 0 1% 0", letterSpacing:"3px"}}>
+      <h1 style={{ textAlign: "center", margin: "4% 0 1% 0", letterSpacing:"4px", fontWeight:"100"}}>
         Productos Destacados
       </h1>
       <ContainerPrincipal>
