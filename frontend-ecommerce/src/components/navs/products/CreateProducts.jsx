@@ -111,13 +111,10 @@ export const FormProduct = () => {
   const formData = new FormData();
   formData.append("data", JSON.stringify(newProduct));
   formData.append("file", File);
-  console.log(newProduct);
-  console.log(proper);
 
   const CreateProduct = async (event) => {
     event.preventDefault();
-    axios
-      .post("http://localhost:3000/product/create", formData, {
+    axios.post("http://localhost:3000/product/create", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           accessToken: token,
@@ -126,7 +123,6 @@ export const FormProduct = () => {
      
       .then((response) => {
         Swal.fire("BIEN HECHO!", "Producto creado con exito!", "success");
-        console.log(response.data);
       })
       .catch((error) => {
         Swal.fire({

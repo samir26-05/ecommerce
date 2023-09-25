@@ -70,15 +70,6 @@ export default function Review() {
   const subTotal2 = subtotal - iva
   const valorTotal = subTotal2 + iva - descuento
 
-  const reviewVariables = {
-    totalCantidadProductos,
-    isTotalMayor6,
-    descuento,
-    subtotal,
-    iva,
-    subTotal2,
-    valorTotal,
-  };
 
   const apiKey = '4Vj8eK4rloUd272L48hsrarnUA';// defecto
   const merchantId = '508029';// defecto
@@ -217,8 +208,6 @@ export default function Review() {
           </Button>
         </form>
       </div>
-
-      <TotalSummary reviewVariables={reviewVariables} />
 
     </React.Fragment>
 

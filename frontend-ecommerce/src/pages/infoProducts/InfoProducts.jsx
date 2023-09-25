@@ -38,7 +38,7 @@ const InfoProducts = () => {
   
   async function fetchProducts() {
     try {
-      const response = await axios.get("http://localhost:3000/product/");
+      const response = await axios.get("http://localhost:3000/product");
       setProducts(response.data.result);
       console.log(response.data.result);
     } catch (error) {

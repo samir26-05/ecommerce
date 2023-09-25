@@ -13,12 +13,12 @@ import {
   BoxLink,
   Redes,
   Error,
-} from "./RegisterStyled";
+} from "./registerstyled";
 import Swal from "sweetalert2";
 
 
 const RegisterLogin = () => {
-  const vista = ("register");
+  const vista = "register";
   const initialValues = {
     user: "",
     nombre: "",
@@ -38,13 +38,11 @@ const RegisterLogin = () => {
         navigate("/");
       })
       .catch((error) => {
-        
-        const messageError1 = error.response.data.error[0].message
-        const messageError2 = error.response.data.error[0].message
+        const messageError1 = error.response.data.error[0].message;
+        const messageError2 = error.response.data.error[0].message;
         Swal.fire(messageError1, error, "error");
         Swal.fire(messageError2, error, "error");
       });
-      
   };
 
   const validationSchema = Yup.object().shape({
@@ -68,8 +66,6 @@ const RegisterLogin = () => {
       .max(15, "La contraseña debe tener un máximo de 15 caracteres")
       .required("Debes ingresar una contraseña *"),
   });
-
-
 
   return (
     <MainDiv>
@@ -137,9 +133,9 @@ const RegisterLogin = () => {
           <BoxLink>
             <p className="a1">
               ¿Ya tienes cuenta?
-              <Link to={'/'}>
+              <Link to={"/"}>
                 <a className="a2">¡Inicia Sesion!</a>
-                </Link>
+              </Link>
             </p>
           </BoxLink>
           <Redes>

@@ -8,7 +8,7 @@ import UpdatePass from './UpdatePass';
 import UpdateEmail from './UpdateEmail';
 import DataPersonal from './DataPersonal'
 import axios from "axios";
-import { BiUserCircle } from 'react-icons/bi'
+import { BiUserCircle, BiPencil } from 'react-icons/bi'
 
 export default function InfoCountUser() {
     const [oneClients, setOneClients] = useState({
@@ -20,13 +20,16 @@ export default function InfoCountUser() {
         country: "",
         postalcode: "",
         state: "",
+        avatarUrl: ""
     });
+    
     const [error, setError] = useState();
     const [showAccordions, setShowAccordions] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const token = localStorage.getItem("accessToken")
     const userName = localStorage.getItem("username");
-    console.log(token)
+
 
     useEffect(() => {
         async function fetchOneClients() {
@@ -40,19 +43,47 @@ export default function InfoCountUser() {
                     }
                 );
                 setOneClients(response.data);
-                console.log(response.data, "❤️❤️❤️")
             } catch (error) {
                 setError(error);
-                console.log(error, "❤️❤️❤️");
             }
         }
-
         fetchOneClients();
     }, []);
+
 
     const handleUpdateProfileClick = () => {
         setShowAccordions(true);
     };
+
+    const handleImageSelect = (event) => {
+        const file = event.target.files[0];
+        setSelectedImage(file); // Almacena el archivo seleccionado en el estado local
+    };
+    
+    const handleUpdateAvatar = async () => {
+        if (!selectedImage) {
+          // Validación: Asegúrate de que se haya seleccionado una imagen
+          return;
+        }
+      
+        const formData = new FormData();
+        formData.append("avatar", selectedImage);
+      
+        try {
+          const response = await axios.patch("http://localhost:3000/user/avatar", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              accessToken: token,
+            },
+          });
+      
+          // Actualiza la URL del avatar en el estado local
+          setOneClients({ ...oneClients, avatarUrl: response.data.avatarUrl });
+          console.log('Avatar actualizado con éxito');
+        } catch (error) {
+          console.error('Error al actualizar el avatar:', error);
+        }
+      };
 
     return (
         <div style={{ width: "100%" }}>
@@ -73,11 +104,31 @@ export default function InfoCountUser() {
             <div style={{ paddingTop: 20 }}>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <Card sx={{ display: 'flex', width: "60%", marginBtton: 20, justifyContent: "space-between" }}>
-                        <ListItem className="ListItem" style={{ marginLeft: "90px" }}>
-                            <Avatar className="Avatar" />
-                            <ListItemText primary={oneClients?.Personal_information?.nombre + " " + oneClients?.Personal_information?.apellido}
-                                secondary={userName} style={{ marginLeft: "10px" }} />
-                        </ListItem>
+                    <ListItem className="ListItem" style={{ marginLeft: "90px" }}>
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageSelect}
+                    style={{ display: 'none' }}
+                    id="avatar-upload-input"
+                />
+                <label htmlFor="avatar-upload-input">
+                    <Button variant="" component="span">
+                        <BiPencil />
+                        <Avatar
+                            alt="Avatar"
+                            src={selectedImage ? URL.createObjectURL(selectedImage) : oneClients.avatarUrl || 'URL_DE_AVATAR_POR_DEFECTO'}
+                            sx={{ width: 100, height: 100 }}
+                        />
+                    </Button>
+                </label>
+
+                <ListItemText primary={oneClients?.Personal_information?.nombre + " " + oneClients?.Personal_information?.apellido}
+                    secondary={userName} style={{ marginLeft: "10px" }} />
+            </ListItem>
+            <Button variant="contained" onClick={handleUpdateAvatar}>
+                Actualizar Avatar
+            </Button>
                         <ListItem sx={{ py: 1, px: 0 }}>
                             <ListItemText primary="SILVER USER" />
                         </ListItem>
