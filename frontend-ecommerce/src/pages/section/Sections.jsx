@@ -87,12 +87,13 @@ export default function Sections() {
   }, []);
 
   let sectionProducts;
+  let categoryProducts;
   if (page === "Hombre" || page === "Mujer") {
     sectionProducts = products.filter(
       (product) => product.section.section === page
     );
   } else {
-    sectionProducts = products.filter(
+    categoryProducts = products.filter(
       (product) => product.category.category === page
     );
   }
@@ -124,18 +125,18 @@ export default function Sections() {
         <CustomTabPanel value={value} index={0}>
           <ShowProducts
             products={
-              page === "Hombre" || page === "Mujer" ? sectionProducts : products
+              page === "Hombre" || page === "Mujer" ? sectionProducts : categoryProducts
             }
             currentPage={currentPage}
             productsPerPage={productsPerPage}
           />
-          {sectionProducts.length > productsPerPage && (
+          {/* {sectionProducts.length > productsPerPage && (
             <Pagination
               count={Math.ceil(sectionProducts.length / productsPerPage)}
               page={currentPage}
               onChange={handlePageChange}
             />
-          )}
+          )} */}
         </CustomTabPanel>
         {Categories.map((item, index) => (
           <CustomTabPanel value={value} index={index + 1} key={index}>
@@ -147,13 +148,13 @@ export default function Sections() {
             ) : (
               <ShowProducts products={products} />
             )}
-            {sectionProducts.length > productsPerPage && (
+            {/* {sectionProducts.length > productsPerPage && (
               <Pagination
                 count={Math.ceil(sectionProducts.length / productsPerPage)}
                 page={currentPage}
                 onChange={handlePageChange}
               />
-            )}
+            )} */}
           </CustomTabPanel>
         ))}
       </Div>

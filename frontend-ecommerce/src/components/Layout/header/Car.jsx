@@ -87,7 +87,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                     {" "}
                     {/* Aqui se cambió key={product.id} para quitar los errores de key*/}
                     <Link
-                      to={`/InfoProducts/${product.id}`}
+                      to={`/InfoProducts/${product.name}`}
                       style={{ textDecoration: "none" }}
                     >
                       <div className="info-cart-product">
