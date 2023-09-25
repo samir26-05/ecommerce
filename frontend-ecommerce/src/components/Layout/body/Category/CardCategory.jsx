@@ -7,9 +7,13 @@ const CardCategory = ({ array }) => {
     <>
       {/* eslint-disable-next-line react/prop-types */}
       {array.map((item, index) => (
-        <Link to={`/section/${item.name}`} key={index}>
+        <Link
+          to={`/section/${item.name}`}
+          key={index}
+          style={{ textDecoration: "none" }}
+        >
           <DivCategory>
-            <Card key={index} style={{ textDecoration: "none" }}>
+            <Card key={index}>
               <div>
                 <div className="img">
                   <Img src={item.img} alt={item.name} />

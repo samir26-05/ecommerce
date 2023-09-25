@@ -64,6 +64,7 @@ export const CardContent = styled.div`
 
 export const Tiltle = styled.h1`
   font-size: 0.75rem;
+  margin: 1% 0;
   color: #636363;
 `;
 
@@ -72,7 +73,7 @@ export const Price = styled.div`
   align-items: center;
   justify-content: space-between;
   font-size: 1.4rem;
-  font-weight: 800;
+  font-weight: 600;
   div{
     font-size: 1.8rem;
   }

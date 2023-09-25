@@ -71,7 +71,7 @@ export const Div = styled.div`
     }
 
     .Wh {
-      background-color: #fff;
+      background-color: transparent;
       border: 1px solid #25d366;
       position: relative;
       width: 70%;
@@ -97,10 +97,10 @@ export const Div = styled.div`
       right: 0.5em;
       margin: 0;
       padding: 0;
-      opacity: 0;
+      opacity: 1;
       transition: 0.5s;
       height: 1em;
-      fill: #fff;
+      fill: #25d366;
     }
 
     .Wh:hover p {
@@ -110,6 +110,7 @@ export const Div = styled.div`
 
     .Wh:hover svg {
       opacity: 1;
+      fill: #ffffff;
     }
 
     .Wh:hover {

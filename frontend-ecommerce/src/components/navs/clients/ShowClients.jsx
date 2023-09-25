@@ -42,10 +42,10 @@ export default function ShowClients() {
         }
       } catch (error) {
         setError(error);
-        console.log("Error al actualizar el cliente:", error.data);
       }
     }
   };
+
 
   const handleCancelRowEdits = () => {
     setValidationErrors({});
@@ -69,7 +69,6 @@ export default function ShowClients() {
       setTableData([...tableData]);
     } catch (error) {
       setError(error);
-      console.log("Error al obtener los clientes:", error);
     }
   },
 
@@ -166,7 +165,6 @@ export default function ShowClients() {
       setClients(response.data);
     } catch (error) {
       setError(error);
-      console.log("Error al obtener los clientes:", error);
     }
   }
 
@@ -180,6 +178,8 @@ export default function ShowClients() {
     return () => clearInterval(interval)
 
   }, []);
+
+
 
   return (
     <div>

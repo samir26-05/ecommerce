@@ -6,32 +6,34 @@ export const Boxx = styled.div`
 `;
 
 export const BoxProducts = styled.div`
-.MuiTabs-flexContainer, .css-heg063-MuiTabs-flexContainer {
-  display: flex !important;
-  flex-direction: row !important;
-}
-#simple-tab-0, #simple-tab-1{
-  width: 12%;
-  color: black;
-  font-weight: 600;
-}
-`
+  .MuiTabs-flexContainer,
+  .css-heg063-MuiTabs-flexContainer {
+    display: flex !important;
+    flex-direction: row !important;
+  }
+  #simple-tab-0,
+  #simple-tab-1 {
+    width: 12%;
+    color: black;
+    font-weight: 600;
+  }
+`;
 
 export const Div = styled.div`
-    max-width: 744px;
-    width: 100vw;
-    height: 100%;
-    min-height: 80vh;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    background-color: white;
-    color: black;
-`
+  max-width: 744px;
+  width: 100vw;
+  height: 100%;
+  min-height: 80vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+  color: black;
+`;
 
 export const Img = styled.img`
-    width: 200px;
-    height: 200px;   
-`
+  width: 200px;
+  height: 200px;
+`;
