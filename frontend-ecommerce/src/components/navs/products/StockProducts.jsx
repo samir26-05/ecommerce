@@ -24,19 +24,6 @@ export default function StockProducts() {
       size: values["size"],
     };
 
-    /*  console.log("Este es el value: "+values["name"]);
-    console.log("UpdatedData: ");
-    console.log(updatedData); */
-
-    /* const mirar = products
-mirar.forEach(objeto => {
-  const mirar2 = objeto["name"]
-  const propiedad1 = objeto.name
-  const propiedad2 = mirar2
- console.log("Esto es la propiedad 1: "+propiedad1);
-  console.log("Esto es la propiedad 2: "+propiedad2); 
-})*/
-
     try {
       //recopilar datos y enaviarlos por una solicitud http
       const formData = new FormData();

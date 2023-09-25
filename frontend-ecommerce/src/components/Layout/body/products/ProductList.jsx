@@ -7,11 +7,13 @@ import {
   Tiltle,
   CardContent,
   Price,
+  ProductTituloTextH2,
 } from "./StyledProductList";
 import { GiShoppingBag } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import axios from "axios";
 import AddProduct from "../../../../utils";
+
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -30,11 +32,12 @@ export const ProductList = () => {
     fetchProducts();
   }, []);
 
+
   return (
     <>
-      <h1 style={{ textAlign: "center", margin: "4% 0 1% 0", letterSpacing:"3px"}}>
+      <ProductTituloTextH2>
         Productos Destacados
-      </h1>
+      </ProductTituloTextH2>
       <ContainerPrincipal>
         {products.slice(0, 8).map((product) => (
           <ContainerCard key={product.product_id}>
@@ -49,7 +52,7 @@ export const ProductList = () => {
                 <Price>
                   ${product.price}
                   <AddProduct product={product}>
-                    <GiShoppingBag/>
+                    <GiShoppingBag />
                   </AddProduct>
                 </Price>
               </CardContent>
