@@ -87,10 +87,13 @@ export default function Sections() {
   
 
   let sectionProducts;
+  let categoryProducts;
   if (page === 'Hombre' || page === 'Mujer') {
     sectionProducts = products.filter((product) => product.section.section === page);
+    console.log(sectionProducts, 'if');
   } else {
-    sectionProducts = products.filter((product) => product.category.category === page);
+    categoryProducts = products.filter((product) => product.category.category === page);
+    console.log(categoryProducts, "else");
   }
 
   return (
@@ -113,32 +116,32 @@ export default function Sections() {
           <FlexRow style={{ flexWrap: "wrap" }}>
             <ShowProducts products={page === 'Hombre' || page === 'Mujer' ? sectionProducts : products} currentPage={currentPage} productsPerPage={productsPerPage} />
           </FlexRow>
-          {sectionProducts.length > productsPerPage && (
+          {/* {sectionProducts.length > productsPerPage && (
             <Pagination
               count={Math.ceil(sectionProducts.length / productsPerPage)}
               page={currentPage}
               onChange={handlePageChange}
             />
-          )}
+          )} */}
         </CustomTabPanel>
         {Categories.map((item, index) => (
           <CustomTabPanel value={value} index={index + 1} key={index}>
             <FlexRow style={{ flexWrap: "wrap" }}>
 
               {page === 'Mujer' || page === 'Hombre' ? 
-              <FilterSections category={item.name} sectionProducts={sectionProducts} />
+              <FilterSections category={item.name} sectionProducts={categoryProducts} />
               : 
               <ShowProducts products={products}/>
               }
               
             </FlexRow>
-            {sectionProducts.length > productsPerPage && (
+            {/* {sectionProducts.length > productsPerPage && (
               <Pagination
                 count={Math.ceil(sectionProducts.length / productsPerPage)}
                 page={currentPage}
                 onChange={handlePageChange}
               />
-            )}
+            )} */}
           </CustomTabPanel>
         ))}
       </Div>

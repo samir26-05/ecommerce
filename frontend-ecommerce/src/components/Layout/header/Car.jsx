@@ -89,7 +89,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
               <div>
                 {allProducts.map((product) => (
                   <div className="cart-product" key={product.product_id}> {/* Aqui se cambió key={product.id} para quitar los errores de key*/}
-                    <Link to={`/InfoProducts/${product.id}`}>
+                    <Link to={`/InfoProducts/${product.name}`}>
                       <div className="info-cart-product">
                         <img
                           src={product.img_video}

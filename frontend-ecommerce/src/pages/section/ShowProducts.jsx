@@ -15,7 +15,7 @@ const ShowProducts = ({ products, currentPage, productsPerPage }) => {
 
   return (
     <>
-      {visibleProducts.map((item) => (
+      {products.map((item) => (
         <ContainerCard key={item.id} style={{ width: "19.5%" }}>
           <Card>
             <Link to={`/InfoProducts/${item.name}`}>
