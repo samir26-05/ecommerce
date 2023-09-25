@@ -88,12 +88,14 @@ export default function Sections() {
 
   let sectionProducts;
   let categoryProducts;
-  if (page === 'Hombre' || page === 'Mujer') {
-    sectionProducts = products.filter((product) => product.section.section === page);
-    console.log(sectionProducts, 'if');
+  if (page === "Hombre" || page === "Mujer") {
+    sectionProducts = products.filter(
+      (product) => product.section.section === page
+    );
   } else {
-    categoryProducts = products.filter((product) => product.category.category === page);
-    console.log(categoryProducts, "else");
+    categoryProducts = products.filter(
+      (product) => product.category.category === page
+    );
   }
 
   return (
@@ -113,9 +115,13 @@ export default function Sections() {
 
       <Div>
         <CustomTabPanel value={value} index={0}>
-          <FlexRow style={{ flexWrap: "wrap" }}>
-            <ShowProducts products={page === 'Hombre' || page === 'Mujer' ? sectionProducts : products} currentPage={currentPage} productsPerPage={productsPerPage} />
-          </FlexRow>
+          <ShowProducts
+            products={
+              page === "Hombre" || page === "Mujer" ? sectionProducts : categoryProducts
+            }
+            currentPage={currentPage}
+            productsPerPage={productsPerPage}
+          />
           {/* {sectionProducts.length > productsPerPage && (
             <Pagination
               count={Math.ceil(sectionProducts.length / productsPerPage)}
@@ -126,15 +132,14 @@ export default function Sections() {
         </CustomTabPanel>
         {Categories.map((item, index) => (
           <CustomTabPanel value={value} index={index + 1} key={index}>
-            <FlexRow style={{ flexWrap: "wrap" }}>
-
-              {page === 'Mujer' || page === 'Hombre' ? 
-              <FilterSections category={item.name} sectionProducts={categoryProducts} />
-              : 
-              <ShowProducts products={products}/>
-              }
-              
-            </FlexRow>
+            {page === "Mujer" || page === "Hombre" ? (
+              <FilterSections
+                category={item.name}
+                sectionProducts={sectionProducts}
+              />
+            ) : (
+              <ShowProducts products={products} />
+            )}
             {/* {sectionProducts.length > productsPerPage && (
               <Pagination
                 count={Math.ceil(sectionProducts.length / productsPerPage)}

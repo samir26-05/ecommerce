@@ -20,7 +20,7 @@ const ShowProducts = ({ products, currentPage, productsPerPage }) => {
 
   return (
     <DivCards>
-      {visibleProducts.map((item) => (
+      {products.map((item) => (
         <ContainerCard key={item.id}>
           <Card>
             <div className="BoxImg">
