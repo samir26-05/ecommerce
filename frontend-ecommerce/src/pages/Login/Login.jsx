@@ -12,12 +12,13 @@ import {
   BoxButton,
 } from "./LoginStyled";
 import { BoxLink, Redes } from "./RegisterStyled";
-import { BubblyLink } from "react-bubbly-transitions";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const vista = ("login");
+  
   let navigate = useNavigate();
 
   const loginn = async (event) => {
@@ -45,17 +46,12 @@ const Login = () => {
     }
   };
 
-  const MyBublyLink = ({ to, children }) => (
-    <BubblyLink to={to} colorStart="#000" colorEnd="#ffffff" duration={800}>
-      {" "}
-      {children}{" "}
-    </BubblyLink>
-  );
+
 
   return (
     <MainDiv>
       <Section1>
-        <DemoAutoPlay />
+        <DemoAutoPlay vista={vista}/>
       </Section1>
       <Section2>
         <LoginBox>
@@ -97,9 +93,9 @@ const Login = () => {
           <BoxLink>
             <p className="a1">
               ¿No tienes cuenta?
-              <MyBublyLink to={"/register"}>
+              <Link to={'/register'}>
                 <a className="a2">¡Regístrate!</a>
-              </MyBublyLink>
+              </Link>
             </p>
           </BoxLink>
           <Redes>

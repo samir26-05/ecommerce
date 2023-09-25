@@ -2,32 +2,29 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios'
 /* MATERIAL UI */
-import {
-  Button,
-  Box,
-  Accordion,
-  Typography,
-  AccordionSummary,
-  AccordionDetails,
-} from "@mui/material";
+import { Button, Box } from "@mui/material";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import SendIcon from "@mui/icons-material/Send";
 /* COMPONENETS */
-import StockProducts from "../forms/products/StockProducts";
-import { FormProduct } from "../forms/products/CreateProducts";
+import StockProducts from "../navs/products/StockProducts";
+import { FormProduct } from "../navs/products/CreateProducts";
+import ShowOrders from "./orders/ShowOrders";
+import CrudProvider from "./provider/ShowProvider";
+import ShowClients from "./clients/ShowClients";
 /* IMG */
 import bgr from "../../assets/Img/bgr.png";
 /* STYLES */
 import { Img, Div, BoxProducts } from "./NavHorizontalStyled";
-import ShowOrders from "./orders/ShowOrders";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CreateUser from "../forms/clients/FormClient";
-import CrudProvider from "./provider/ShowProvider";
 import { FlexDirCol } from "../StyledMain";
-import ShowClients from "../forms/clients/ShowClients";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+
 import Swal from "sweetalert2";
+import { LiaDropbox } from "react-icons/lia";
+import DetailsOrder from "./orders/Details/DetailsOrder";
+
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -77,36 +74,35 @@ export default function NavHorizontal(props) {
     setValue(newValue);
   };
 
-  useEffect(() => {
-    async function fetchOneClients() {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/user/name/${userName}`,
-          {
-            headers: {
-              accessToken: token,
-            },
-          }
-        );
-        setOneClients(response.data);
-      } catch (error) {
-        setError(error);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Ocurrió un error al intentar almacenar la información!",
-        });
-      }
+  async function fetchOneClients() {
+    try {
+      const response = await axios.get(`http://localhost:3000/user/name/${userName}`,{
+          headers: {
+            accessToken: token,
+          },
+        }
+      );
+      setOneClients(response.data);
+    } catch (error) {
+      setError(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ocurrió un error al intentar almacenar la información!",
+      });
     }
+  }
 
+  useEffect(() => {
     fetchOneClients();
+
   }, [userName]);
   return (
     <Box sx={{ width: "100%" }}>
       {type === "buy" ? (
         <div>
           <Box>
-            <h3 style={{ paddingButton: "50px", left: 570 }}>MIS COMPRAS</h3>
+            <h3 style={{ paddingButton: "50px", left: 570 }}> <HiOutlineShoppingBag style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS COMPRAS</h3>
             <Tabs
               value={value}
               onChange={handleChange}
@@ -165,9 +161,10 @@ export default function NavHorizontal(props) {
 
       {type === "products" ? (
         <BoxProducts>
+          <h3 style={{ paddingButton: "50px", left: 570 }}> <LiaDropbox style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS PRODUCTOS</h3>
           <Box>
-            <Tabs value={value} onChange={handleChange}>
-              <Tab
+            <Tabs value={value} onChange={handleChange} style={{display:"flex", flexDirection:"row"}}>
+              <Tab 
                 label="Crear producto"
                 {...a11yProps(0)}
                 className="whithoutOutline"
@@ -191,36 +188,36 @@ export default function NavHorizontal(props) {
       )}
 
       {type === "order" ? (
-        <div>
+        /* <div>
           <ShowOrders />
-        </div>
+        </div> */
+        <BoxProducts>
+          <DetailsOrder />
+        </BoxProducts>
       ) : (
         ""
-      )}
+      )
+      }
 
-      {type === "clientes" ? (
-        <div>
-          <ShowClients />
-          {/* <Accordion >
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-              <Typography>Crear Nuevo Usuario</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <CreateUser />
-            </AccordionDetails>
-          </Accordion> */}
-        </div>
-      ) : (
-        ""
-      )}
+      {
+        type === "clientes" ? (
+          <div>
+            <ShowClients />
+          </div>
+        ) : (
+          ""
+        )
+      }
 
-      {type === "provider" ? (
-        <div>
-          <CrudProvider />
-        </div>
-      ) : (
-        ""
-      )}
-    </Box>
+      {
+        type === "provider" ? (
+          <div>
+            <CrudProvider />
+          </div>
+        ) : (
+          ""
+        )
+      }
+    </Box >
   );
 }

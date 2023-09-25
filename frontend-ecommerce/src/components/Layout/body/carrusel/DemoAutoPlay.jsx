@@ -5,36 +5,39 @@ import BlackSuit from "../../../../assets/Img/blacksuit.jpg";
 import damaNegro from "../../../../assets/Img/damaNegro.jpg";
 import ropaNegro from "../../../../assets/Img/ropaNegro.jpg";
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+// eslint-disable-next-line react/prop-types
+const DemoAutoPlay = ({ vista }) => {
+  const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-const styles = {
-  root: {
-    position: "relative",
-  },
-  slide: {
-    padding: 15,
-    minHeight: 800,
-    minWidth: 591,
-    color: "#000000",
-  },
-  slide1: {
-    backgroundImage: `url(${BlackSuit})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center center",
-  },
-  slide2: {
-    backgroundImage: `url(${damaNegro})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  },
-  slide3: {
-    backgroundImage: `url(${ropaNegro})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  },
-};
+  const minHeight = vista === "login" || vista === "register" ? 950 : 800;
 
-function DemoAutoPlay() {
+  const styles = {
+    root: {
+      position: "relative",
+    },
+    slide: {
+      padding: 15,
+      minHeight: minHeight,
+      minWidth: 591,
+      color: "#000000",
+    },
+    slide1: {
+      backgroundImage: `url(${BlackSuit})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center center",
+    },
+    slide2: {
+      backgroundImage: `url(${damaNegro})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    },
+    slide3: {
+      backgroundImage: `url(${ropaNegro})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    },
+  };
+
   const [index, setIndex] = useState(0);
 
   const handleChangeIndex = (newIndex) => {
@@ -42,6 +45,7 @@ function DemoAutoPlay() {
   };
 
   return (
+    // eslint-disable-next-line react/no-unknown-property
     <div style={styles.root}>
       <AutoPlaySwipeableViews
         index={index}
@@ -60,6 +64,6 @@ function DemoAutoPlay() {
       </AutoPlaySwipeableViews>
     </div>
   );
-}
+};
 
 export default DemoAutoPlay;

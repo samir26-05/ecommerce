@@ -28,6 +28,10 @@ export const User = sequelize.define(
       allowNull: false,
       defaultValue: 2,
     },
+    avatar: {
+      type: DataTypes.STRING(500),
+      allowNull: true
+    }
   },
   {
     tableName: "user",

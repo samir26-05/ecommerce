@@ -124,7 +124,13 @@ export default function Sections() {
         {Categories.map((item, index) => (
           <CustomTabPanel value={value} index={index + 1} key={index}>
             <FlexRow style={{ flexWrap: "wrap" }}>
-              {page === 'Mujer' || page === 'Hombre' ? <FilterSections category={item.name} sectionProducts={sectionProducts} /> : <ShowProducts products={products} currentPage={currentPage} productsPerPage={productsPerPage} />}
+
+              {page === 'Mujer' || page === 'Hombre' ? 
+              <FilterSections category={item.name} sectionProducts={sectionProducts} />
+              : 
+              <ShowProducts products={products}/>
+              }
+              
             </FlexRow>
             {sectionProducts.length > productsPerPage && (
               <Pagination

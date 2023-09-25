@@ -15,10 +15,10 @@ import {
   Error,
 } from "./RegisterStyled";
 import Swal from "sweetalert2";
-import { BubblyLink } from "react-bubbly-transitions";
 
 
 const RegisterLogin = () => {
+  const vista = ("register");
   const initialValues = {
     user: "",
     nombre: "",
@@ -69,12 +69,7 @@ const RegisterLogin = () => {
       .required("Debes ingresar una contraseña *"),
   });
 
-  const MyBublyLink = ({ to, children }) => (
-    <BubblyLink to={to} colorStart="#000" colorEnd="#fff" duration={800}>
-      {" "}
-      {children}{" "}
-    </BubblyLink>
-  );
+
 
   return (
     <MainDiv>
@@ -142,9 +137,9 @@ const RegisterLogin = () => {
           <BoxLink>
             <p className="a1">
               ¿Ya tienes cuenta?
-              <MyBublyLink to={"/"}>
+              <Link to={'/'}>
                 <a className="a2">¡Inicia Sesion!</a>
-              </MyBublyLink>
+                </Link>
             </p>
           </BoxLink>
           <Redes>
@@ -262,7 +257,7 @@ const RegisterLogin = () => {
         </LoginBox>
       </Section1>
       <Section2>
-        <DemoAutoPlay />
+        <DemoAutoPlay vista={vista} />
       </Section2>
     </MainDiv>
   );

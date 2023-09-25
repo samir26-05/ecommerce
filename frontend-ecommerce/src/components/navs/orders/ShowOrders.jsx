@@ -1,18 +1,53 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useCallback, useMemo, useState } from 'react';
-import { MaterialReactTable } from 'material-react-table';
-import {
-  Box,
-  IconButton,
-  Tooltip,
-  Typography,
-} from '@mui/material';
-import { Delete, Edit } from '@mui/icons-material';
-import { orderData } from './OrderData';
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { MaterialReactTable } from "material-react-table";
+import { Box, IconButton, MenuItem, Tooltip, Typography } from "@mui/material";
+import { Delete, Edit } from "@mui/icons-material";
+import { TbTruckDelivery } from "react-icons/tb";
+import axios from "axios";
+import Swal from "sweetalert2";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { GiCheckboxTree } from "react-icons/gi";
+import DetailsOrder from "./Details/DetailsOrder";
 
 const CrudOrders = () => {
-  const [tableData, setTableData] = useState(() => orderData);
+  const [orders, setOrders] = useState([]);
   const [validationErrors, setValidationErrors] = useState({});
+  const [seeOrder, setSeeOrder] = useState(false)
+  const [row, setRow] = useState([]);
+  const [tableData, setTableData] = useState(() => orders);
+  const [setError] = useState();
+
+  async function fetchOrders() {
+    try {
+      const response = await axios.get(`http://localhost:3000/order`, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      });
+      setOrders(response.data);
+    } catch (error) {
+      setError(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ocurrió un error al intentar obtener la información!",
+      });
+    }
+  }
+
+  useEffect(() => {
+    fetchOrders();
+
+    const interval = setInterval(() => {
+      fetchOrders();
+    }, 1000)
+
+    return () => clearInterval(interval)
+  });
+
+
 
 
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
@@ -24,11 +59,12 @@ const CrudOrders = () => {
     }
   };
 
+
   const handleCancelRowEdits = () => {
     setValidationErrors({});
   };
 
-  const handleDeleteRow = useCallback(
+  /*   const handleDeleteRow = useCallback(
     (row) => {
       if (
         !confirm(`Are you sure you want to delete ${row.getValue('name')}`)
@@ -40,39 +76,45 @@ const CrudOrders = () => {
       setTableData([...tableData]);
     },
     [tableData],
-  );
-
-
+  ); */
 
   const columns = useMemo(
     () => [
       {
-        accessorKey: 'id',
+        accessorKey: 'id_order',
         header: 'ID',
         enableColumnOrdering: false,
         enableEditing: false, //disable editing on this column
         enableSorting: false,
-        size: 80,
+        size: 20,
       },
       {
-        accessorKey: 'ref',
-        header: 'Referencia / Transfer',
+        accessorKey: 'user_id',
+        header: 'Usuario',
+        size: 20,
+        muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
+          ...(cell),
+        }),
+      },
+      {
+        accessorKey: 'createdAt',
+        header: 'Fecha de creación',
         size: 140,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...(cell),
         }),
       },
       {
-        accessorKey: 'date',
-        header: 'Fecha',
-        size: 140,
+        accessorKey: 'subtotal',
+        header: 'Subtotal',
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...(cell),
+          type: 'number',
         }),
       },
       {
-        accessorKey: 'amount',
-        header: 'Valor',
+        accessorKey: 'total_value',
+        header: 'Total',
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...(cell),
           type: 'number',
@@ -81,15 +123,13 @@ const CrudOrders = () => {
       {
         accessorKey: 'paymentMethod',
         header: 'Método de pago',
-        size: 80,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...(cell),
         }),
       },
       {
-        accessorKey: 'status',
+        accessorKey: 'id_state',
         header: 'Estado',
-        size: 80,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...(cell),
         }),
@@ -97,49 +137,62 @@ const CrudOrders = () => {
     ],
     [],
   );
+  const ViewOrder = (row) => {
+    setSeeOrder(!seeOrder)
+    setRow(row)
+    console.log(row);
+  }
 
   return (
-    <>
-      <MaterialReactTable
-        displayColumnDefOptions={{
-          'mrt-row-actions': {
-            muiTableHeadCellProps: {
-              align: 'center',
-            },
-            size: 120,
-          },
-        }}
-        columns={columns}
-        data={tableData}
-        editingMode="modal" //default
-        enableColumnOrdering
-        enableEditing
-        onEditingRowSave={handleSaveRowEdits}
-        onEditingRowCancel={handleCancelRowEdits}
-        renderRowActions={({ row, table }) => (
-          <Box sx={{ display: 'flex', gap: '1rem' }}>
-            <Tooltip arrow placement="left" title="Edit">
-              <IconButton onClick={() => table.setEditingRow(row)}>
-                <Edit />
-              </IconButton>
-            </Tooltip>
-            <Tooltip arrow placement="right" title="Delete">
-              <IconButton onClick={() => handleDeleteRow(row)}>
-                <Delete style={{fill:"red"}}/>
-              </IconButton>
-            </Tooltip>
-          </Box>
-        )}
-        renderTopToolbarCustomActions={() => (
-            <>
-            <div></div>
-            <Typography style={{fontSize:"1.2rem", fontWeight:"500", width:"20rem", textAlign:"end"}}>Lista de Pedidos</Typography>
-            </>
-        )}
-      />
+     <>
+        {seeOrder ? 
+        <DetailsOrder order={row} test={seeOrder}/>
+        :
+        <>
+          <div style={{ display: "flex", }}>
+            <h3 style={{ paddingButton: "50px" }}><GiCheckboxTree style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS PEDIDOS</h3>
+          </div>
+
+          <MaterialReactTable
+            displayColumnDefOptions={{
+              'mrt-row-actions': {
+                muiTableHeadCellProps: {
+                  align: 'center',
+                },
+                size: 120,
+              },
+            }}
+            columns={columns}
+            data={orders}
+            editingMode="modal" //default
+            enableColumnOrdering
+            enableEditing
+            onEditingRowSave={handleSaveRowEdits}
+            onEditingRowCancel={handleCancelRowEdits}
+            renderRowActions={({ row, table }) => (
+              <Box sx={{ display: 'flex', gap: '1rem' }}>
+                <Tooltip arrow placement="left" title="Editar">
+                  <IconButton onClick={() => table.setEditingRow(row)}>
+                    <Edit />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip arrow placement="bottom" title="Ver pedido">
+                  <IconButton onClick={() => ViewOrder(row.original)} >
+                    <VisibilityIcon style={{fill:"black"}}/>
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            )}
+            renderTopToolbarCustomActions={() => (
+              <>
+                <div></div>
+                <Typography style={{ fontSize: "1.2rem", fontWeight: "500", width: "20rem", textAlign: "end" }}>Lista de Pedidos</Typography>
+              </>
+            )}
+          />
+        </>}
     </>
   );
 };
-
 
 export default CrudOrders;

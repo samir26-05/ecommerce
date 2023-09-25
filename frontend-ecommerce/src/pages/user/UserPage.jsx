@@ -7,7 +7,7 @@ import NavVertical from "../../components/navs/NavVertical";
 import FooterUser from "../../components/Layout/footer/FooterUser";
 /* styles */
 import { Div, BoxUser } from "./UserPageStyled";
-import Loading from "../loading/Loading";
+import Loading from "../../components/loading/Loading";
 
 
 const UserPage = () => {
