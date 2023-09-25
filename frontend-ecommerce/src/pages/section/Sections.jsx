@@ -1,16 +1,18 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import Header from "../../components/Layout/header/Header.jsx";
-import Footer from '../../components/Layout/footer/Footer.jsx'
+import Footer from "../../components/Layout/footer/Footer.jsx";
 import { useParams } from "react-router-dom";
-import { Pagination, Tab, Tabs } from "@mui/material";
+import { Tab, Tabs, Pagination } from "@mui/material";
 import { Categories } from "../../components/Layout/body/Category/IndexCategory.jsx";
 import axios from "axios";
-import { Div } from "../../components/Layout/footer/FooterStyled.jsx";
-import { FlexDirCol, FlexRow } from "../../components/StyledMain.jsx";
+import { PageSections, Div } from "./SectionsStyled.jsx";
+import { FlexDirCol } from "../../components/StyledMain.jsx";
 import ShowProducts from "./ShowProducts.jsx";
 import FilterSections from "./FilterSections.jsx";
 
@@ -48,7 +50,7 @@ export default function Sections() {
     setValue(newValue);
   };
 
-   const handlePageChange = (event, newPage) => {
+  const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
   };
 
@@ -84,8 +86,6 @@ export default function Sections() {
     fetchProducts();
   }, []);
 
-  
-
   let sectionProducts;
   let categoryProducts;
   if (page === "Hombre" || page === "Mujer") {
@@ -99,25 +99,35 @@ export default function Sections() {
   }
 
   return (
-    <Box sx={{ borde: "1px solid red", width: "100%", height: "100vh", overflowY: "scroll" }}>
+    <PageSections>
       <Header isUsedUser={userEnterUser} />
-      <h1 style={{ marginTop: "120px", textAlign: "center" }}>{page}</h1>
-      {page === 'Mujer' || page === 'Hombre' ?
-        <Box sx={{ width: '100%', bgcolor: 'background.paper', display: "flex", justifyContent: "center" }}>
-          <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto" aria-label="scrollable auto tabs example" >
-            <Tab label='productos' index={0} />
+      <h1 className="Tiltle">{page}</h1>
+      {page === "Mujer" || page === "Hombre" ? (
+        <div className="Category">
+          <Tabs
+            className="panel"
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="scrollable auto tabs example"
+          >
+            <Tab label="productos" index={0} />
             {Categories.map((item, index) => (
               <Tab label={item.name} key={index} />
             ))}
           </Tabs>
-        </Box>
-        : ""}
-
+        </div>
+      ) : (
+        ""
+      )}
       <Div>
         <CustomTabPanel value={value} index={0}>
           <ShowProducts
             products={
-              page === "Hombre" || page === "Mujer" ? sectionProducts : categoryProducts
+              page === "Hombre" || page === "Mujer"
+                ? sectionProducts
+                : categoryProducts
             }
             currentPage={currentPage}
             productsPerPage={productsPerPage}
@@ -150,8 +160,7 @@ export default function Sections() {
           </CustomTabPanel>
         ))}
       </Div>
-
       <Footer />
-    </Box>
+    </PageSections>
   );
 }

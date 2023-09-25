@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import {
   DivCards,
@@ -6,7 +7,7 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Price
+  Price,
 } from "./SectionsStyled";
 import { Link } from "react-router-dom";
 import AddProduct from "../../utils";
@@ -24,7 +25,10 @@ const ShowProducts = ({ products, currentPage, productsPerPage }) => {
         <ContainerCard key={item.id}>
           <Card>
             <div className="BoxImg">
-              <Link to={`/InfoProducts/${item.name}`} style={{textDecoration:"none"}}>
+              <Link
+                to={`/InfoProducts/${item.name}`}
+                style={{ textDecoration: "none" }}
+              >
                 <CardMedia src={item.img_video} alt={item.name} />
               </Link>
             </div>
