@@ -17,13 +17,8 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
     ? cart.reduce((count, product) => count + product.quantity, 0)
     : 0;
   const total = Array.isArray(cart)
-    ? cart.reduce(
-        (total, product) =>  product.price * product.quantity,
-        0
-      )
+    ? cart.reduce((total, product) => product.price * product.quantity, 0)
     : 0;
-
-
 
   const onDeleteProduct = (product) => {
     const results = cart.filter(
@@ -113,7 +108,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                     <div className="Infoon-product containerButtons">
                       <div className="containeraddanddell">
                         <AddProduct product={product}>
-                          <button className="btnAdd">
+                          <button className="btnAdd O">
                             <MdAdd
                               className="iconAdd"
                               id="Fill"
@@ -121,7 +116,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                             />
                           </button>
                         </AddProduct>
-                        <button className="btnDell">
+                        <button className="btnDell O">
                           <AiOutlineMinus
                             className="iconDell"
                             onClick={() =>
@@ -134,7 +129,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                           />
                         </button>
                       </div>
-                      <button className="btndele">
+                      <button className="btndele O">
                         <svg
                           viewBox="0 0 15 17.5"
                           height="15"
@@ -160,7 +155,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                 <span className="total-pagar">${total.toFixed()}</span>
               </div>
               <div className="btns">
-                <Link to={"/payment"}>
+                <Link to={"/payment"} style={{ textDecoration: "none" }}>
                   <button className="fancy pa">
                     <span className="top-key"></span>
                     <span className="text">Pagar</span>

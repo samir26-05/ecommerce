@@ -86,7 +86,7 @@ export const Header = styled.div`
     flex-direction: column;
     justify-content: center;
   }
-  
+
   .titulo-producto-carrito {
     color: #000000;
     font-size: 0.85rem;
@@ -162,6 +162,10 @@ export const Header = styled.div`
 
   .btndele:hover > .icon path {
     fill: rgb(168, 7, 7);
+  }
+
+  .O {
+    outline: none !important;
   }
 
   .cart-total {
