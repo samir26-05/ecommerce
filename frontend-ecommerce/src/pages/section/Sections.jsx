@@ -92,6 +92,8 @@ export default function Sections() {
     sectionProducts = products.filter(
       (product) => product.section.section === page
     );
+  } if (page === "Todxs") {
+      sectionProducts = products
   } else {
     categoryProducts = products.filter(
       (product) => product.category.category === page
@@ -124,11 +126,7 @@ export default function Sections() {
       <Div>
         <CustomTabPanel value={value} index={0}>
           <ShowProducts
-            products={
-              page === "Hombre" || page === "Mujer"
-                ? sectionProducts
-                : categoryProducts
-            }
+            products={sectionProducts}
             currentPage={currentPage}
             productsPerPage={productsPerPage}
           />
@@ -148,7 +146,7 @@ export default function Sections() {
                 sectionProducts={sectionProducts}
               />
             ) : (
-              <ShowProducts products={products} />
+              <ShowProducts products={categoryProducts} />
             )}
             {/* {sectionProducts.length > productsPerPage && (
               <Pagination
