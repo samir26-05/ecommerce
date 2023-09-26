@@ -15,6 +15,7 @@ import { PageSections, Div } from "./SectionsStyled.jsx";
 import { FlexDirCol } from "../../components/StyledMain.jsx";
 import ShowProducts from "./ShowProducts.jsx";
 import FilterSections from "./FilterSections.jsx";
+import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay.jsx";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -130,6 +131,7 @@ export default function Sections() {
   return (
     <PageSections ShadowColor={ShadowColor}>
       <Header isUsedUser={userEnterUser} />
+      {/* <DemoAutoPlay></DemoAutoPlay> */}
       <h1 className="Tiltle">{page}</h1>
       {page === "Mujer" || page === "Hombre" ? (
         <div className="Category">

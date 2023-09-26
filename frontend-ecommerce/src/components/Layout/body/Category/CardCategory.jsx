@@ -1,28 +1,31 @@
 import { Link } from "react-router-dom";
-import { Card, Img } from "./StyledCategory";
+import { Card, DivCards } from "./StyledCategory";
 
 // eslint-disable-next-line react/prop-types
 const CardCategory = ({ array }) => {
   return (
-    <>
+    <DivCards>
       {/* eslint-disable-next-line react/prop-types */}
       {array.map((item, index) => (
-        <Link
-          to={`/section/${item.name}`}
-          key={index}
-          style={{ textDecoration: "none" }}
-        >
-          <Card key={index}>
+        <Card key={index}>
+          <Link
+            to={`/section/${item.name}`}
+            key={index}
+            style={{ textDecoration: "none" }}
+          >
             <div className="Img">
-              <Img src={item.img} alt={item.name} />
+              <img
+                src={item.img}
+                alt={item.name}
+              />
             </div>
             <div className="Text">
               <p>{item.name}</p>
             </div>
-          </Card>
-        </Link>
+          </Link>
+        </Card>
       ))}
-    </>
+    </DivCards>
   );
 };
 
