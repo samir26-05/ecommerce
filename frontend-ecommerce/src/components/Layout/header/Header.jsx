@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const pages = ["Inicio", "Mujer", "Hombre", /*"Todxs"*/];
+export const pages = ["Inicio", "Mujer", "Hombre", /* "Todxs" */];
 
 const Header = ({
   products,
@@ -66,10 +66,10 @@ const Header = ({
       headerColor={headerColor}
       hovered={hovered}
     >
-      <Toolbar>
+      <Toolbar sx={{height:"100%"}}>
         <Typography
           className="Typography"
-          variant="h1"
+          variant="h2"
           noWrap
           component="a"
           href="/home"

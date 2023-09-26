@@ -1,17 +1,21 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-
-.BoxCar{
-  @media (max-width:768px) {
-        left: 1200%;
+  .BoxCar {
+    @media (max-width: 768px) {
+      left: 1200%;
     }
-}
+  }
   width: 100%;
+  height: 8%;
   z-index: 3;
   transition: all 0.2s ease-in-out;
   background-color: ${({ isUsedUser, isUsedPayment, hovered, headerColor }) =>
-    isUsedUser || isUsedPayment ? "#ffffff" : hovered ? "#ffffff" : headerColor};
+    isUsedUser || isUsedPayment
+      ? "#ffffff"
+      : hovered
+      ? "#ffffff"
+      : headerColor};
   box-shadow: ${({ isUsedBody, headerColor }) =>
     isUsedBody
       ? headerColor !== "transparent"
@@ -49,7 +53,8 @@ export const Span = styled.span`
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: ${({ isUsedBody, textColor }) => isUsedBody ? textColor  : "#000"};
+    background-color: ${({ isUsedBody, textColor }) =>
+      isUsedBody ? textColor : "#000"};
     transform-origin: bottom right;
     transition: transform 0.25s ease-out;
   }

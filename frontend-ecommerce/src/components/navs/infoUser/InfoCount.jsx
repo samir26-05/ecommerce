@@ -25,7 +25,7 @@ export default function InfoCountUser() {
     
     const [error, setError] = useState();
     const [showAccordions, setShowAccordions] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState();
 
     const token = localStorage.getItem("accessToken")
     const userName = localStorage.getItem("username");
@@ -67,7 +67,7 @@ export default function InfoCountUser() {
         }
       
         const formData = new FormData();
-        formData.append("avatar", selectedImage);
+        console.log(selectedImage, 'esta es mi avatar ❤️❤️❤️')
       
         try {
           const response = await axios.patch("http://localhost:3000/user/avatar", formData, {
@@ -76,7 +76,6 @@ export default function InfoCountUser() {
               accessToken: token,
             },
           });
-      
           // Actualiza la URL del avatar en el estado local
           setOneClients({ ...oneClients, avatarUrl: response.data.avatarUrl });
           console.log('Avatar actualizado con éxito');
@@ -84,6 +83,8 @@ export default function InfoCountUser() {
           console.error('Error al actualizar el avatar:', error);
         }
       };
+
+
 
     return (
         <div style={{ width: "100%" }}>

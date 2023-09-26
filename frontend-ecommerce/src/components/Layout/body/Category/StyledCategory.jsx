@@ -14,7 +14,12 @@ export const DivTitle = styled.div`
   text-align: center;
   width: 100%;
   margin: 1% 0;
-  letter-spacing: 3px;
+  h2 {
+    width: 100%;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 100;
+  }
 `;
 
 export const ContainerH = styled.div`

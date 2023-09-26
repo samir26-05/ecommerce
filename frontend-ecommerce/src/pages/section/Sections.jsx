@@ -92,6 +92,8 @@ export default function Sections() {
     sectionProducts = products.filter(
       (product) => product.section.section === page
     );
+  } if (page === "Todxs") {
+      sectionProducts = products
   } else {
     categoryProducts = products.filter(
       (product) => product.category.category === page
