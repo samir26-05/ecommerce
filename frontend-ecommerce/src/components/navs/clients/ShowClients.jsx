@@ -71,7 +71,6 @@ export default function ShowClients() {
       setError(error);
     }
   },
-
     [tableData]
   );
 

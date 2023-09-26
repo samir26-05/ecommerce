@@ -9,6 +9,7 @@ import UpdateEmail from './UpdateEmail';
 import DataPersonal from './DataPersonal'
 import axios from "axios";
 import { BiUserCircle, BiPencil } from 'react-icons/bi'
+import Swal from 'sweetalert2';
 
 export default function InfoCountUser() {
     const [oneClients, setOneClients] = useState({
@@ -22,10 +23,14 @@ export default function InfoCountUser() {
         state: "",
         avatarUrl: ""
     });
-    
+
     const [error, setError] = useState();
     const [showAccordions, setShowAccordions] = useState(false);
-    const [selectedImage, setSelectedImage] = useState();
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [avatarUrl, setAvatarUrl] = useState("");
+    const [avatar, setAvatar] = useState({
+        avatar: "",
+    });
 
     const token = localStorage.getItem("accessToken")
     const userName = localStorage.getItem("username");
@@ -47,6 +52,23 @@ export default function InfoCountUser() {
                 setError(error);
             }
         }
+
+        async function getAvatar() {
+            try {
+                const response = await axios.get(
+                    `http://localhost:3000/user/name/${userName}`,
+                    {
+                        headers: {
+                            accessToken: token,
+                        },
+                    }
+                );
+                setAvatar(response.data);
+            } catch (error) {
+                setError(error);
+            }
+        }
+        getAvatar()
         fetchOneClients();
     }, []);
 
@@ -56,34 +78,46 @@ export default function InfoCountUser() {
     };
 
     const handleImageSelect = (event) => {
-        const files = event.target.files[0];
-        setSelectedImage(files); // Almacena el archivo seleccionado en el estado local
+        const filed = event.target.files[0];
+        setSelectedImage(filed);
     };
-  
+
 
     const handleUpdateAvatar = async () => {
         if (!selectedImage) {
-            console.error('No se encuentra ningun avatar 😒😒😒😒', error);
-          return;
+            console.error('No se ha seleccionado ninguna imagen.');
+            return;
         }
-       
-      const file = selectedImage
-        console.log(selectedImage, 'esta es mi avatar ❤️❤️❤️')
-      
+
+        const formData = new FormData();
+        formData.append("file", selectedImage);
+
         try {
-          const response = await axios.patch("http://localhost:3000/user/avatar", file, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              accessToken: token,
-            },
-          });
-          // Actualiza la URL del avatar en el estado local
-          setOneClients({ ...oneClients, avatarUrl: response.data.avatarUrl });
-          console.log('Avatar actualizado con éxito');
+            const response = await axios.patch(
+                "http://localhost:3000/user/avatar", // Asegúrate de que la URL sea correcta
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "accessToken": token
+                    },
+                }
+            );
+            // Actualiza la URL del avatar en el estado local
+            setAvatarUrl(response.data);
+            Swal.fire("BIEN HECHO!", "Foto de perfil actualizado con exito!", "success");
         } catch (error) {
-          console.error('Error al actualizar el avatar:', error);
+            console.error('Error al actualizar el avatar:', error);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Ocurrió un error al intentar actualizar la foto de perfil!",
+            });
         }
-      };
+    };
+    useEffect(() => {
+        handleUpdateAvatar()
+    }, []);
 
 
 
@@ -106,34 +140,34 @@ export default function InfoCountUser() {
             <div style={{ paddingTop: 20 }}>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <Card sx={{ display: 'flex', width: "60%", marginBtton: 20, justifyContent: "space-between" }}>
-                    <ListItem className="ListItem" style={{ marginLeft: "90px" }}>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageSelect}
-                    style={{ display: 'none' }}
-                    id="avatar-upload-input"
-                />
-                <label htmlFor="avatar-upload-input">
-                    <Button variant="" component="span">
-                        <BiPencil />
-                        <Avatar
-                            alt="Avatar"
-                            src={selectedImage ? URL.createObjectURL(selectedImage) : oneClients.avatarUrl || 'URL_DE_AVATAR_POR_DEFECTO'}
-                            sx={{ width: 100, height: 100 }}
-                        />
-                    </Button>
-                </label>
+                        <ListItem className="ListItem" style={{ marginLeft: "30px" }}>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageSelect}
+                                style={{ display: 'none', backgroundColor: "none" }}
+                                id="avatar-upload-input"
+                            />
+                            <label htmlFor="avatar-upload-input">
+                                <Button variant="" component="span">
+                                    <Avatar
+                                        alt={localStorage.getItem("username")}
+                                        src={selectedImage ? URL.createObjectURL(selectedImage) : avatar.avatar || 'URL_DE_AVATAR_POR_DEFECTO'} 
+                                        sx={{ width: 100, height: 100, objectFit: "contain" }}
+                                    /><BiPencil style={{ marginTop: '70px' }} />
+                                </Button>
+                            </label>
 
-                <ListItemText primary={oneClients?.Personal_information?.nombre + " " + oneClients?.Personal_information?.apellido}
-                    secondary={userName} style={{ marginLeft: "10px" }} />
-            </ListItem>
-            <Button variant="contained" onClick={handleUpdateAvatar}>
-                Actualizar Avatar
-            </Button>
-                        <ListItem sx={{ py: 1, px: 0 }}>
+                            <ListItemText primary={oneClients?.Personal_information?.nombre + " " + oneClients?.Personal_information?.apellido}
+                                secondary={userName} sx={{ px: 1, width: 170 }} />
+                        </ListItem>
+
+                        <ListItem sx={{ py: 2, px: 8 }}>
                             <ListItemText primary="SILVER USER" />
                         </ListItem>
+                        <Button variant="contained" onClick={handleUpdateAvatar} sx={{ ml: 1, backgroundColor: "black", color: "white", fontSize: "9px", width: '20%' }}>
+                            Actualizar Avatar
+                        </Button>
                     </Card>
                     <Card sx={{ display: 'flex', width: "10%" }}>
                         <ListItem className="ListItem">
