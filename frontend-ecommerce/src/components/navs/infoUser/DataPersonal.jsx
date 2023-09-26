@@ -2,7 +2,11 @@
 import Box from '@mui/material/Box';
 import { Button, TextField, FormControlLabel, Radio } from '@mui/material';
 
-export default function DataPersonal() {
+export default function DataPersonal({name, lastName
+}) {
+
+  
+
   return (
     <Box
       component="form"
@@ -13,7 +17,7 @@ export default function DataPersonal() {
       autoComplete="off"
     >
       <div>
-        <TextField id="outlined-multiline-flexible" label="Nombre*" multiline maxRows={3} />
+        <TextField id="outlined-multiline-flexible" label={name} multiline maxRows={3} />
         <TextField id="outlined-multiline-flexible" label="Apellidos*" multiline maxRows={3} />
         <TextField id="outlined-multiline-flexible" label="Direccion*" multiline maxRows={3} />
         <TextField id="outlined-multiline-flexible" label="Completa tu direccion" multiline maxRows={3} />
