@@ -56,21 +56,22 @@ export default function InfoCountUser() {
     };
 
     const handleImageSelect = (event) => {
-        const file = event.target.files[0];
-        setSelectedImage(file); // Almacena el archivo seleccionado en el estado local
+        const files = event.target.files[0];
+        setSelectedImage(files); // Almacena el archivo seleccionado en el estado local
     };
-    
+  
+
     const handleUpdateAvatar = async () => {
         if (!selectedImage) {
-          // Validación: Asegúrate de que se haya seleccionado una imagen
+            console.error('No se encuentra ningun avatar 😒😒😒😒', error);
           return;
         }
-      
-        const formData = new FormData();
+       
+      const file = selectedImage
         console.log(selectedImage, 'esta es mi avatar ❤️❤️❤️')
       
         try {
-          const response = await axios.patch("http://localhost:3000/user/avatar", formData, {
+          const response = await axios.patch("http://localhost:3000/user/avatar", file, {
             headers: {
               "Content-Type": "multipart/form-data",
               accessToken: token,
