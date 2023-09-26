@@ -17,15 +17,17 @@ flex-direction: row;
 `;
 
 export const Section1 = styled.div`
+position: relative;
+top: 11%;
 width: 50%;
-height: 100%;
+height: 89%;
 box-sizing: border-box;
 display: flex;
 flex-direction: row;
 justify-content: center;
 `; 
 
-export const Video = styled.video`
+export const Image = styled.img`
 height: 100%;
 box-sizing: border-box;
 margin: 0;
@@ -33,15 +35,14 @@ object-fit: cover;
 `;
 
 export const Section2 = styled.div`
-position: fixed;
-left: 50%;
+position: relative;
+top: 11%;
 width: 50%;
-height: 100%;
+height: 89%;
 box-sizing: border-box;
 margin: 0;
 display: flex;
 justify-content: center;
-align-items: center;
 flex-direction: column;
 `;
 
@@ -64,11 +65,13 @@ font-weight: 600;
 `;
 
 export const Price = styled.div`
-width: 80%;
-font-size: 1.4rem;
 position: relative;
 bottom: 22%;
+font-size: 1.4rem;
 font-weight: 800;
+div{
+  font-size: 1.8rem;
+}
 `;
 
 export const ColorProducts = styled.div`

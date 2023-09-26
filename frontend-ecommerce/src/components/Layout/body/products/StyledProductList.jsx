@@ -1,92 +1,87 @@
 import styled from "styled-components";
 
-export const Div = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-`;
-
 export const ContainerPrincipal = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 80%;
-  margin: 0 10% 0 10%;
+  margin: 0 0 2% 0;
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(4, minmax(25%, 1fr));
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
+  img {
+    max-width: 100%;
+  }
 `;
 
 export const ContainerCard = styled.div`
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
-  margin: 2%;
-  :hover {
-    border: #000000 1px solid;
+  margin: 2rem auto;
+  width: 80%;
+  background-color: #fff;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
 export const Card = styled.div`
-  position: relative;
-  width: 100%;
+
   height: 100%;
-  box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: all 120ms;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-  overflow: hidden;
+  flex-direction: column;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.171);
+  user-select: none;
+  font-weight: bolder;
+  font-size: 1rem;
+  color: black;
+  :hover {
+    border: 1px solid black;
+  }
 
-  ::after {
+  .BoxImg {
+    height: 100%;
     text-align: center;
-    /* content: "${({ daata }) => daata || "asdaw"}"; */
-    content: "Añadir";
-    position: absolute;
-    left: 0;
-    bottom: -50px;
-    background: #000000;
-    color: #fff;
-    height: 2.5em;
-    width: 100%;
-    transition: all 90ms;
-    font-weight: 600;
-    text-transform: uppercase;
-    opacity: 0;
   }
-
-  :hover::after {
-    bottom: 0;
-    opacity: 1;
+  @media (max-width: 768px) {
+    width: 90%;
   }
-
-  :active {
-    transform: scale(0.97);
-  }
-
-  /* :active::after {
-    content: "";
-    height: 10%;
-  } */
 `;
 
 export const CardMedia = styled.img`
-  width: 100%;
-  height: 60%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 export const CardContent = styled.div`
-  position: absolute;
+  text-align: start;
+  margin: 0 3%;
+  padding-bottom: 2%;
 `;
 
-export const Tiltle = styled.h3`
-  position: relative;
-  top: 190px;
+export const Tiltle = styled.h1`
+  font-size: 0.75rem;
+  margin: 1% 0;
+  color: #636363;
 `;
 
-export const Typography = styled.div``;
+export const Price = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.4rem;
+  font-weight: 600;
+  div{
+    font-size: 1.8rem;
+  }
+`;
+
+export const ProductTituloTextH2 = styled.h2`
+  text-align: center;
+  margin: 4% 0 1% 0;
+  letter-spacing: 3px;
+
+`;

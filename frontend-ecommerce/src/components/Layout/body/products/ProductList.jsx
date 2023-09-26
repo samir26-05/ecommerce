@@ -1,70 +1,68 @@
+import { useState, useEffect } from "react";
 import {
-  Div,
   ContainerPrincipal,
   ContainerCard,
   Card,
-  CardMedia
+  CardMedia,
+  Tiltle,
+  CardContent,
+  Price,
+  ProductTituloTextH2,
 } from "./StyledProductList";
-import { useState } from "react";
-import { data } from "../../../../data";
-import "../../../../car.css";
+import { GiShoppingBag } from "react-icons/gi";
+import { Form, Link } from "react-router-dom";
+import axios from "axios";
+import AddProduct from "../../../../utils";
 
-// eslint-disable-next-line react/prop-types
-export const ProductList = ({
-  allProducts,
-  setAllProducts,
-  countProducts,
-  setCountProducts,
-  total,
-  setTotal,
-}) => {
-  const [shoppingCarProducts, setShoppingCarProducts] = useState(
-    window.localStorage.getItem("productList")
-  );
 
-  const setLocalStorage = (value) => {
-    try {
-      setShoppingCarProducts(...shoppingCarProducts, value);
-      window.localStorage.setItem("productList", value);
-      console.log(window.localStorage.getItem("productList"));
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+export const ProductList = () => {
+  const [products, setProducts] = useState([]);
 
-  const onAddProduct = (product) => {
-    setLocalStorage(product);
-    if (allProducts.find((item) => item.id === product.id)) {
-      const products = allProducts.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      setTotal(total + product.price * product.quantity);
-      setCountProducts(countProducts + product.quantity);
-      return setAllProducts([...products]);
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await axios.get("http://localhost:3000/product/");
+        setProducts(response.data.result);
+      } catch (error) {
+        console.error("Error al obtener los productos:", error);
+      }
     }
 
-    setTotal(total + product.price * product.quantity);
-    setCountProducts(countProducts + product.quantity);
-    setAllProducts([...allProducts, product]);
-  };
+    // Llama a la función fetchProducts dentro del efecto
+    fetchProducts();
+  }, []);
+
 
   return (
-    <Div>
+    <>
+      <ProductTituloTextH2>
+      <h1 style={{ textAlign: "center", margin: "4% 0 1% 0", letterSpacing:"4px", fontWeight:"100"}}>
+        Productos Destacados
+        </h1>
+      </ProductTituloTextH2>
       <ContainerPrincipal>
-        {data.map((product) => (
-          <ContainerCard key={product.id}>
-            <Card onClick={() => onAddProduct(product)} >
-              <CardMedia src={product.img} alt={product.nameProduct} daata={product.nameProduct} />
-              {/* <CardContent>
-                <Tiltle>{product.nameProduct}</Tiltle>
-                <Typography>Ref 5403/171/800.</Typography>
-                <Typography>${product.price}</Typography>
-              </CardContent> */}
+        {products.slice(0, 8).map((product) => (
+          <ContainerCard key={product.product_id}>
+            <Card>
+              <div className="BoxImg">
+                <Link to={`/InfoProducts/${product.name}`}>
+                  <CardMedia src={product.img_video} alt={product.name} />
+                </Link>
+              </div>
+              <CardContent>
+                <Tiltle>{product.name}</Tiltle>
+                <Price>
+                  ${product.price}
+                  <AddProduct product={product}>
+                    <GiShoppingBag />
+                  </AddProduct>
+                </Price>
+              </CardContent>
             </Card>
           </ContainerCard>
         ))}
       </ContainerPrincipal>
-    </Div>
+    </>
   );
 };
 

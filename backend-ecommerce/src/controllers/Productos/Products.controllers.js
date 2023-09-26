@@ -12,7 +12,7 @@ export const GetProducts = async (req, res) => {
     const result = await productos.findAll({
       attributes: [
         "product_id",
-        "name",
+        "name", 
         "descripcion",
         "price",
         "stock",

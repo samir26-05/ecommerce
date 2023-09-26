@@ -1,46 +1,51 @@
-import {
-  MainDiv,
-  Colores,
-  BoxMain,
-  Section1,
-  Section2,
-  Video,
-  Title,
-  Reference,
-  Price,
-  TitleSize,
-  Sizes,
-  ButtonBuys,
-  Size,
-  ColorProducts,
-  Buys,
-} from "../infoProducts/styleProducts";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/rules-of-hooks */
+import { MainDiv, Colores, BoxMain, Section1, Section2, Image, Title, Reference, Price, TitleSize, Sizes, ButtonBuys, Size, ColorProducts, Buys, } from "./styleProducts";
 import Header from "../../components/Layout/header/Header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import AddProduct from "../../utils";
 
 const InfoProducts = () => {
-  const tallas = ["XS", "S", "M", "L", "XL"];
+  const { name } = useParams();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true)
+  const [userEnterUser, setUserEnterUser] = useState(false);
+  let navigate = useNavigate();
 
-  const Contenido = [
-    "https://static.bershka.net/4/photos2/2023/I/M/1/p/0000/000/058/0000000058_4_2_1.mp4",
-  ];
+  const verifyEnter = () => {
+    return true;
+  };
 
-  const Img = [
-    {
-      name: "hola1",
-      img: "https://static.bershka.net/4/photos2/2023/I/0/1/p/5986/335/432/60d0026656e8bf9c4ec7ac2dfb278caf-5986335432_2_4_0.jpg?imwidth=124&impolicy=bershka-itxhigh&imformat=generic",
-    },
-    {
-      name: "hola2",
-      img: "https://static.bershka.net/4/photos2/2023/I/0/1/p/5986/335/800/ae27735a8d56b45b6b2d7bc66027dd99-5986335800_2_4_0.jpg?imwidth=124&impolicy=bershka-itxhigh&imformat=generic",
-    },
-  ];
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      setLoading(false)
+    } else {
+      navigate('/')
+    }
 
-  const TitleProduct = "Falda denim midi confort";
+    // Llama a la función fetchProducts dentro del efecto
+    fetchProducts();
 
-  const ReferenceProduct = "Ref 1466/260/202";
+    const trueEnter = verifyEnter();
+    setUserEnterUser(trueEnter);
+    return () => {
+      setUserEnterUser(false);
+    };
+  }, []);   
+  
+  
+  async function fetchProducts() {
+    try {
+      const response = await axios.get("http://localhost:3000/product");
+      setProducts(response.data.result);
+      console.log(response.data.result);
+    } catch (error) {
+      console.error("Error al obtener los productos:", error);
+    }
+  }
 
-  const PriceProduct = "35,99 €";
 
   const [selectedSize, setSelectedSize] = useState(null);
   const handleSizeClick = (index) => {
@@ -51,25 +56,37 @@ const InfoProducts = () => {
     }
   };
 
+  const product = products.find(element => element.name === name);
+  if (!product) {
+    return <p>Producto no encontrado</p>;
+  }
+
   return (
     <MainDiv>
-      <Header />
+            {loading ? (
+        <>
+          <h1>Cargando......</h1>
+        </>
+      ) : ( <>
+      <Header isUsedUser={userEnterUser}/>
       <BoxMain>
         <Section1>
-          <Video loop autoPlay src={Contenido}></Video>
+          <Image src={product.img_video} alt={product.name}></Image>
         </Section1>
         <Section2>
-          <Title>{TitleProduct}</Title>
-          <Reference>{ReferenceProduct}</Reference>
-          <Price>{PriceProduct}</Price>
+          <Title>{product.name}</Title>
+          <Reference>Ref: {product.product_id}</Reference>
+          <Price>{product.price}</Price>
           <ColorProducts>
-            {Img.map((img, index) => (
-              <Colores key={index} src={img.img} alt={img.name} />
-            ))}
+           {/*  {product.color.map((img, index) => (
+              <Colores key={index} src={img.img_video} alt={img.name}></Colores>
+            ))} */}
+            [Colores]
           </ColorProducts>
+
           <TitleSize>Selecciona talla</TitleSize>
           <Sizes>
-            {tallas.map((talla, index) => (
+            {/* {product.size.map((talla, index) => (
               <Size
                 style={{
                   backgroundColor: selectedSize === index ? "black" : "white",
@@ -80,13 +97,17 @@ const InfoProducts = () => {
               >
                 {talla}
               </Size>
-            ))}
+            ))} */}
+            [Tallas]
           </Sizes>
-          <ButtonBuys>
-            <Buys>Añadir A La Cesta</Buys>
-          </ButtonBuys>
+          <AddProduct product={product}>
+            <ButtonBuys>
+              <Buys>Añadir A La Cesta</Buys>
+            </ButtonBuys>
+          </AddProduct>
         </Section2>
       </BoxMain>
+      </> )}
     </MainDiv>
   );
 };

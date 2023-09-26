@@ -1,4 +1,5 @@
 import { section } from "../../models/productos/section.js";
+
 export const GetSection = async (req, res) => {
   try {
     const Result = await section.findAll();
