@@ -30,11 +30,18 @@ export const ProductList = () => {
     fetchProducts();
   }, []);
 
+  const textStyle = {
+    textAlign: "center",
+    padding: "3.5% 0 0.5% 0",
+    margin: 0,
+    letterSpacing: "4px",
+    fontWeight: "350",
+    backgroundColor: "#fff",
+  };
+
   return (
     <>
-      <h1 style={{ textAlign: "center", margin: "4% 0 1% 0", letterSpacing:"4px", fontWeight:"100"}}>
-        Productos Destacados
-      </h1>
+      <h1 style={textStyle}>Productos Destacados</h1>
       <ContainerPrincipal>
         {products.slice(0, 8).map((product) => (
           <ContainerCard key={product.product_id}>
@@ -49,7 +56,7 @@ export const ProductList = () => {
                 <Price>
                   ${product.price}
                   <AddProduct product={product}>
-                    <GiShoppingBag/>
+                    <GiShoppingBag />
                   </AddProduct>
                 </Price>
               </CardContent>

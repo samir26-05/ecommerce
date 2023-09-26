@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Card, DivCategory, Img } from "./StyledCategory";
+import { Card, Img } from "./StyledCategory";
 
 // eslint-disable-next-line react/prop-types
 const CardCategory = ({ array }) => {
@@ -12,20 +12,14 @@ const CardCategory = ({ array }) => {
           key={index}
           style={{ textDecoration: "none" }}
         >
-          <DivCategory>
-            <Card key={index}>
-              <div>
-                <div className="img">
-                  <Img src={item.img} alt={item.name} />
-                </div>
-              </div>
-              <div className="kaka">
-                <div>
-                  <p className="CateText">{item.name}</p>
-                </div>
-              </div>
-            </Card>
-          </DivCategory>
+          <Card key={index}>
+            <div className="Img">
+              <Img src={item.img} alt={item.name} />
+            </div>
+            <div className="Text">
+              <p>{item.name}</p>
+            </div>
+          </Card>
         </Link>
       ))}
     </>

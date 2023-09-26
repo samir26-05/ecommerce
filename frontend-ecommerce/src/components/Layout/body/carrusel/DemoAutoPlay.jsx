@@ -13,7 +13,9 @@ const DemoAutoPlay = ({ vista }) => {
 
   const styles = {
     root: {
-      position: "relative",
+      position: "sticky",
+      top: "0",
+      zIndex: "-100",
     },
     slide: {
       padding: 15,

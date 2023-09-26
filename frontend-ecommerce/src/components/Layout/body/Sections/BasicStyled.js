@@ -6,7 +6,7 @@ export const FlexDirCol = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #f5f5f5;;
+  background-color: #f5f5f5;
 `;
 
 export const FlexRow = styled.div`
@@ -36,7 +36,7 @@ export const BasicImg = styled.img`
 export const Title = styled.div`
   text-align: center;
   width: 100%;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
   font-size: 2.5rem;
   text-decoration: none;
