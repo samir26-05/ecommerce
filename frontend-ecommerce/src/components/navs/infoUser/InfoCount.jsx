@@ -15,7 +15,6 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 /* COMPONENTS */
 import UpdatePass from "./UpdatePass";
-import UpdateEmail from "./UpdateEmail";
 import DataPersonal from "./DataPersonal";
 import axios from "axios";
 import { BiUserCircle } from "react-icons/bi";
@@ -38,8 +37,7 @@ export default function InfoCountUser() {
   const token = localStorage.getItem("accessToken");
   const userName = localStorage.getItem("username");
 
-//update 
-const [informationUpdate, setInformationUpdate] = useState("");
+  //update
 
   useEffect(() => {
     async function fetchOneClients() {
@@ -52,11 +50,9 @@ const [informationUpdate, setInformationUpdate] = useState("");
             },
           }
         );
-        setInformationUpdate(response.data);
         setOneClients(response.data);
       } catch (error) {
         setError(error);
-        console.log(error, "❤️❤️❤️");
       }
     }
 
@@ -71,24 +67,67 @@ const [informationUpdate, setInformationUpdate] = useState("");
 
   const [txtPassword, setTxtPassword] = useState({
     password: "",
-    newpassword: ""
-  })
- 
-  const updatePassword = async() => {
+    newpassword: "",
+  });
 
-    try {
-      
-    } catch (error) {
-      
-    }
+  //ViewProfile//
 
-  }
+  const [profile, setProfile] = useState({
+    nombre: "",
+    apellido: "",
+    Phone_number: "",
+    address: "",
+    city: "",
+    country: "",
+    postalcode: "",
+    state: "",
+  });
 
-  useEffect( () => {
+  const arrayProfile = {
+    Phone_number: profile?.Personal_information?.Phone_number,
+    address: profile?.Personal_information?.address,
+    apellido: profile?.Personal_information?.apellido,
+    city: profile?.Personal_information?.city,
+    country: profile?.Personal_information?.country,
+    nombre: profile?.Personal_information?.nombre,
+    postalcode: profile?.Personal_information?.postalcode,
+    state: profile?.Personal_information?.state,
+  };
 
+  useEffect(() => {
+    const viewProfile = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/user/name/${userName}`,
+          {
+            headers: {
+              accessToken: token,
+            },
+          }
+        );
+
+        setProfile(response.data);
+       
+      } catch (error) {
+        setError(error);
+        
+      }
+    };
+
+    viewProfile();
   }, []);
 
-  //username
+  // UpdateProfile//
+  const [updateProfile, setUpdateProfile] = useState({
+    nombre: "",
+    apellido: "",
+    Phone_number: "",
+    address: "",
+    city: "",
+    country: "",
+    postalcode: "",
+    state: "",
+  });
 
   return (
     <div style={{ width: "100%" }}>
@@ -222,23 +261,10 @@ const [informationUpdate, setInformationUpdate] = useState("");
                   número y una letra mayúscula, además de un mínimo de 8
                   caracteres.
                 </Typography>
-                <UpdatePass setTxtPassword={setTxtPassword} txtPassword={txtPassword}/>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2a-content"
-                id="panel2a-header"
-              >
-                <Typography>TU EMAIL</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Si quieres cambiar el mail y/o la contrseña asociados a tu
-                  cuenta completa los siguientes campos.
-                </Typography>
-                <UpdateEmail />
+                <UpdatePass
+                  setTxtPassword={setTxtPassword}
+                  txtPassword={txtPassword}
+                />
               </AccordionDetails>
             </Accordion>
             <Accordion>
@@ -257,8 +283,11 @@ const [informationUpdate, setInformationUpdate] = useState("");
                 <Typography>
                   Consulta y modifica tus datos personales. Datos de facturación
                 </Typography>
-                <DataPersonal 
-                name={userName} />
+                <DataPersonal
+                  arrayProfile={arrayProfile}
+                  updateProfile={updateProfile}
+                  setUpdateProfile={setUpdateProfile}
+                />
               </AccordionDetails>
             </Accordion>
           </>

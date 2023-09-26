@@ -1,39 +1,50 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { Card, CardContent } from "@mui/material";
-import { ContainerCard, Tiltle } from "../../components/Layout/body/products/StyledProductList";
+import {
+  DivCards,
+  ContainerCard,
+  Tiltle,
+  Card,
+  CardContent,
+  CardMedia,
+  Price,
+} from "./SectionsStyled";
 import { Link } from "react-router-dom";
-import { Price } from "../infoProducts/styleProducts";
 import AddProduct from "../../utils";
 import { GiShoppingBag } from "react-icons/gi";
-import { Imagen } from "./SectionsStyled";
 
 const ShowProducts = ({ products, currentPage, productsPerPage }) => {
   // Calcular el índice de inicio y fin en función de la página actual
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
-  const visibleProducts = products.slice(startIndex, endIndex);
+  // const visibleProducts = products.slice(startIndex, endIndex);
 
   return (
-    <>
-      {visibleProducts.map((item) => (
-        <ContainerCard key={item.id} style={{ width: "19.5%" }}>
+    <DivCards>
+      {products.map((item) => (
+        <ContainerCard key={item.id}>
           <Card>
-            <Link to={`/InfoProducts/${item.name}`}>
-              <Imagen src={item.img_video} alt={item.name} style={{ width: "100%", objectFit: "cover" }}/>
-            </Link>
+            <div className="BoxImg">
+              <Link
+                to={`/InfoProducts/${item.name}`}
+                style={{ textDecoration: "none" }}
+              >
+                <CardMedia src={item.img_video} alt={item.name} />
+              </Link>
+            </div>
             <CardContent>
               <Tiltle>{item.name}</Tiltle>
-              <Price style={{ justifyContent: "space-between", display: "flex" }}>
+              <Price>
                 ${item.price}
                 <AddProduct product={item}>
-                  <GiShoppingBag/>
+                  <GiShoppingBag />
                 </AddProduct>
               </Price>
             </CardContent>
           </Card>
         </ContainerCard>
       ))}
-    </>
+    </DivCards>
   );
 };
 

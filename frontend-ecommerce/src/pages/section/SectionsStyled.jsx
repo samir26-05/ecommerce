@@ -1,73 +1,60 @@
 import styled from "styled-components";
 
-export const Div = styled.div`
-  max-width: 744px;
-  width: 100vw;
-  height: 100%;
-  min-height: 80vh;
-  box-sizing: border-box;
+export const PageSections = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  background-color: white;
-  color: black;
-`;
-
-export const Div2 = styled.div`
-  /* Usamos min-height en lugar de height */
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  color: black;
-`;
-
-export const Imagen = styled.img`
-  width: 300px;
-  height: 450px;
-`;
-
-export const Img = styled.img`
-  width: 200px;
-  height: 200px;
-`;
-
-export const ContainerPrincipal = styled.div`
-  margin: 0 0 2% 0;
-  display: grid;
-  text-align: center;
-  grid-template-columns: repeat(4, minmax(25%, 1fr));
-  @media (max-width: 768px) {
+  .Tiltle {
+    width: 100%;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 100;
+    padding: 5% 0 1% 0;
+  }
+  .Category {
+    position: sticky;
+    top: 8%;
+    background-color: #fff;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    .panel {
+    }
+    .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+      color: #000;
+    }
+    .css-1aquho2-MuiTabs-indicator {
+      background-color: #000000;
+    }
   }
-  img {
-    max-width: 100%;
-  }
+`;
+
+export const Div = styled.div`
+  width: 100%;
+  min-height: 74vh;
+`;
+
+export const DivCards = styled.div`
+  width: 100%;
+  margin-bottom: 1%;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(5, 1fr);
 `;
 
 export const ContainerCard = styled.div`
-  border: 1px solid black;
   box-sizing: border-box;
-  margin: 10% auto;
-  width: 80%;
-  background-color: #fff;
-  @media (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  width: 100%;
 `;
 
 export const Card = styled.div`
   cursor: pointer;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.171);
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.171);
   user-select: none;
   font-weight: bolder;
   font-size: 1rem;
@@ -75,7 +62,6 @@ export const Card = styled.div`
   :hover {
     border: 1px solid black;
   }
-
   .BoxImg {
     height: 100%;
     text-align: center;
@@ -97,7 +83,8 @@ export const CardContent = styled.div`
 `;
 
 export const Tiltle = styled.h1`
-  font-size: 0.75rem;
+  font-size: 0.85rem;
+  margin: 1% 0;
   color: #636363;
 `;
 
@@ -105,4 +92,9 @@ export const Price = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 1.4rem;
+  font-weight: 600;
+  div {
+    font-size: 1.8rem;
+  }
 `;

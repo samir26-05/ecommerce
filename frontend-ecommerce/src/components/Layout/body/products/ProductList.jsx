@@ -36,7 +36,9 @@ export const ProductList = () => {
   return (
     <>
       <ProductTituloTextH2>
+      <h1 style={{ textAlign: "center", margin: "4% 0 1% 0", letterSpacing:"4px", fontWeight:"100"}}>
         Productos Destacados
+        </h1>
       </ProductTituloTextH2>
       <ContainerPrincipal>
         {products.slice(0, 8).map((product) => (

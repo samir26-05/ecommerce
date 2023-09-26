@@ -10,15 +10,14 @@ import {
   Section2,
   LoginBoxInput,
   BoxButton,
-} from "./LoginStyled";
-import { BoxLink, Redes } from "./RegisterStyled";
-
+} from "./loginstyled";
+import { BoxLink, Redes } from "./registerstyled";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const vista = ("login");
-  
+  const vista = "login";
+
   let navigate = useNavigate();
 
   const loginn = async (event) => {
@@ -38,7 +37,6 @@ const Login = () => {
         "role",
         jwt_decode(localStorage.getItem("accessToken")).role
       );
-
       navigate("/home");
     } catch (error) {
       console.error(error);
@@ -46,12 +44,10 @@ const Login = () => {
     }
   };
 
-
-
   return (
     <MainDiv>
       <Section1>
-        <DemoAutoPlay vista={vista}/>
+        <DemoAutoPlay vista={vista} />
       </Section1>
       <Section2>
         <LoginBox>
@@ -93,7 +89,7 @@ const Login = () => {
           <BoxLink>
             <p className="a1">
               ¿No tienes cuenta?
-              <Link to={'/register'}>
+              <Link to={"/register"}>
                 <a className="a2">¡Regístrate!</a>
               </Link>
             </p>

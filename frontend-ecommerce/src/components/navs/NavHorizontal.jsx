@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 /* MATERIAL UI */
 import { Button, Box } from "@mui/material";
 import Tab from "@mui/material/Tab";
@@ -24,7 +25,6 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import Swal from "sweetalert2";
 import { LiaDropbox } from "react-icons/lia";
 import DetailsOrder from "./orders/Details/DetailsOrder";
-
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -76,7 +76,9 @@ export default function NavHorizontal(props) {
 
   async function fetchOneClients() {
     try {
-      const response = await axios.get(`http://localhost:3000/user/name/${userName}`,{
+      const response = await axios.get(
+        `http://localhost:3000/user/name/${userName}`,
+        {
           headers: {
             accessToken: token,
           },
@@ -95,15 +97,21 @@ export default function NavHorizontal(props) {
 
   useEffect(() => {
     fetchOneClients();
-
   }, [userName]);
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box>
       {type === "buy" ? (
         <div>
-          <Box>
-            <h3 style={{ paddingButton: "50px", left: 570 }}> <HiOutlineShoppingBag style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS COMPRAS</h3>
+          <Box sx={{ width: "100%" }}>
+            <h3 style={{ textAlign: "center" }}>
+              {" "}
+              <HiOutlineShoppingBag
+                style={{ fontSize: "35px", marginTop: "-5px" }}
+              />{" "}
+              MIS COMPRAS
+            </h3>
             <Tabs
+              sx={{ width: "100%" }}
               value={value}
               onChange={handleChange}
               aria-label="basic tabs example"
@@ -123,12 +131,13 @@ export default function NavHorizontal(props) {
           <Div>
             <CustomTabPanel value={value} index={0}>
               <Img src={bgr} alt="" />
-              <h4>Aun no tienes compras online</h4>
-              <span>
-                Si no encuentras tu compra tal vez es porque hiciste el pedido
+              <h4 style={{ width: "100%" }}>Aun no tienes compras online</h4>
+              <span style={{ width: "100%" }}>
+                Si no encuentdras tu compra tal vez es porque hiciste el pedido
                 sin estar registrado.
               </span>
               <Button
+                sx={{ width: "100%" }}
                 variant="text"
                 className="whithoutOutline"
                 endIcon={<SendIcon />}
@@ -137,13 +146,13 @@ export default function NavHorizontal(props) {
               </Button>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-              <Img src={bgr} alt="" />
+              <Img sx={{ width: "100%" }} src={bgr} alt="" />
               <h4>Aún no tienes compras en tienda</h4>
               <span>
                 Pero puedes hacer tu pedido online ¡y te lo mandamos a casa!
               </span>
               <br />
-              <Link to={"/"}>
+              <Link to={"/home"}>
                 <Button
                   variant="contained"
                   className="whithoutOutline"
@@ -161,10 +170,18 @@ export default function NavHorizontal(props) {
 
       {type === "products" ? (
         <BoxProducts>
-          <h3 style={{ paddingButton: "50px", left: 570 }}> <LiaDropbox style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS PRODUCTOS</h3>
+          <h3 style={{ paddingButton: "50px", left: 570 }}>
+            {" "}
+            <LiaDropbox style={{ fontSize: "40px", marginTop: "-5px" }} /> MIS
+            PRODUCTOS
+          </h3>
           <Box>
-            <Tabs value={value} onChange={handleChange} style={{display:"flex", flexDirection:"row"}}>
-              <Tab 
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              style={{ display: "flex", flexDirection: "row" }}
+            >
+              <Tab
                 label="Crear producto"
                 {...a11yProps(0)}
                 className="whithoutOutline"
@@ -196,28 +213,23 @@ export default function NavHorizontal(props) {
         </BoxProducts>
       ) : (
         ""
-      )
-      }
+      )}
 
-      {
-        type === "clientes" ? (
-          <div>
-            <ShowClients />
-          </div>
-        ) : (
-          ""
-        )
-      }
+      {type === "clientes" ? (
+        <div>
+          <ShowClients />
+        </div>
+      ) : (
+        ""
+      )}
 
-      {
-        type === "provider" ? (
-          <div>
-            <CrudProvider />
-          </div>
-        ) : (
-          ""
-        )
-      }
-    </Box >
+      {type === "provider" ? (
+        <div>
+          <CrudProvider />
+        </div>
+      ) : (
+        ""
+      )}
+    </Box>
   );
 }
