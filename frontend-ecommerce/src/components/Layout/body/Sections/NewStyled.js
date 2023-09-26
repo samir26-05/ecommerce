@@ -4,9 +4,10 @@ export const Title = styled.div`
   width: 100%;
   text-align: center;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 1px;
-  margin-top: 2%;
+  padding-top: 1.5%;
+  background-color: #fff;
 `;
 
 export const NewsImg = styled.div`

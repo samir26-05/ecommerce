@@ -105,8 +105,30 @@ export default function Sections() {
     });
   };
 
+  const [ShadowColor, setShadowColor] = useState("#fff");
+  const [ScrollPosition, setScrollPosition] = useState(0);
+
+  const handleScroll = () => {
+    const position = window.scrollY;
+    setScrollPosition(position);
+
+    if (position > 100) {
+      setShadowColor("transparent");
+    } else {
+      setShadowColor("#fff");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <PageSections>
+    <PageSections ShadowColor={ShadowColor}>
       <Header isUsedUser={userEnterUser} />
       <h1 className="Tiltle">{page}</h1>
       {page === "Mujer" || page === "Hombre" ? (
