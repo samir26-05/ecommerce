@@ -19,7 +19,7 @@ export default function StockProducts() {
       name: values["name"],
       descripcion: values["descripcion"],
       price: parseFloat(values["price"]),
-      stock: parseFloat(values["stock"]),
+      stock: parseInt(values["stock"]),
       section: parseInt(values["section.id_section"]),
       size: values["size"],
     };
