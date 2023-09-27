@@ -57,6 +57,11 @@ export const Div = styled.div`
       width: 70%;
       a {
         color: black;
+        cursor: pointer;
+      }
+      a:hover {
+        text-decoration: underline;
+        color: black;
       }
     }
 

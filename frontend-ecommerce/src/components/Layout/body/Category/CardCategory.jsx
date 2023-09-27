@@ -14,10 +14,7 @@ const CardCategory = ({ array }) => {
             style={{ textDecoration: "none" }}
           >
             <div className="Img">
-              <img
-                src={item.img}
-                alt={item.name}
-              />
+              <img src={item.img} alt={item.name} />
             </div>
             <div className="Text">
               <p>{item.name}</p>
