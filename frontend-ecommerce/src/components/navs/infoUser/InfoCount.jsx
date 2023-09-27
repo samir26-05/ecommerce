@@ -153,7 +153,6 @@ export default function InfoCountUser() {
         "success"
       );
     } catch (error) {
-      console.log('❤️❤️❤️❤️❤️😒', error)
       console.error("Error al actualizar el avatar:", error);
 
       Swal.fire({
