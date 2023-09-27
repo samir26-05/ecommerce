@@ -5,7 +5,6 @@ import Camisas from "./ImgCategory/Camisas.jpg";
 import Jeans from "./ImgCategory/Jeans.jpg";
 import Sudaderas from "./ImgCategory/Sudaderas.jpg";
 import Zapatillas from "./ImgCategory/Zapatillas.jpg";
-import Accesorios from "./ImgCategory/Accesorios.jpg";
 
 export const Categories = [
   { name: "Camisetas", img: Camisetas },
@@ -13,7 +12,7 @@ export const Categories = [
   { name: "Sudaderas", img: Sudaderas },
   { name: "Pantalones", img: Jeans },
   { name: "Zapatos", img: Zapatillas },
-  { name: "Accesorios", img: Accesorios },
+  { name: "Accesorios", img: Camisetas },
 ];
 
 const IndexCategory = () => {
@@ -23,9 +22,7 @@ const IndexCategory = () => {
         <span>Categorias</span>
       </DivTitle>
       <ContainerH>
-        <div className="BoxH">
-          <CardCategory array={Categories} />
-        </div>
+        <CardCategory array={Categories} />
       </ContainerH>
     </ContainerFather>
   );

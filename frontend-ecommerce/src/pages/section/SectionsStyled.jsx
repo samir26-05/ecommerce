@@ -5,11 +5,13 @@ export const PageSections = styled.div`
   display: flex;
   flex-direction: column;
   .Tiltle {
+    background-color: #ffffff;
     width: 100%;
     text-align: center;
     letter-spacing: 3px;
     font-weight: 100;
     padding: 5% 0 1% 0;
+    margin: 0;
   }
   .Category {
     position: sticky;
@@ -34,9 +36,11 @@ export const PageSections = styled.div`
 export const Div = styled.div`
   width: 100%;
   min-height: 74vh;
+  background-color: #ffffff;
 `;
 
 export const DivCards = styled.div`
+  background-color: #ffffff;
   width: 100%;
   margin-bottom: 1%;
   display: grid;

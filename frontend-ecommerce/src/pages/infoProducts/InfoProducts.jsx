@@ -1,16 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { MainDiv, Colores, BoxMain, Section1, Section2, Image, Title, Reference, Price, TitleSize, Sizes, ButtonBuys, Size, ColorProducts, Buys, } from "./styleProducts";
+import {
+  MainDiv,
+  BoxMain,
+  Section1,
+  Section2,
+  Image,
+  Title,
+  Sizes,
+  ButtonBuys,
+  ColorProducts,
+  Buys,
+} from "./styleProducts";
 import Header from "../../components/Layout/header/Header";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AddProduct from "../../utils";
+import Loading from "../../components/loading/Loading";
 
 const InfoProducts = () => {
   const { name } = useParams();
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   const [userEnterUser, setUserEnterUser] = useState(false);
   let navigate = useNavigate();
 
@@ -20,9 +33,9 @@ const InfoProducts = () => {
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
-      setLoading(false)
+      setLoading(false);
     } else {
-      navigate('/')
+      navigate("/");
     }
 
     // Llama a la función fetchProducts dentro del efecto
@@ -33,9 +46,8 @@ const InfoProducts = () => {
     return () => {
       setUserEnterUser(false);
     };
-  }, []);   
-  
-  
+  }, []);
+
   async function fetchProducts() {
     try {
       const response = await axios.get("http://localhost:3000/product");
@@ -46,7 +58,6 @@ const InfoProducts = () => {
     }
   }
 
-
   const [selectedSize, setSelectedSize] = useState(null);
   const handleSizeClick = (index) => {
     if (selectedSize === index) {
@@ -56,59 +67,85 @@ const InfoProducts = () => {
     }
   };
 
-  const product = products.find(element => element.name === name);
+  const product = products.find((element) => element.name === name);
   if (!product) {
-    return <p>Producto no encontrado</p>;
+    return (
+      <>
+        <Loading />
+      </>
+    );
   }
 
   return (
-    <MainDiv>
-            {loading ? (
-        <>
-          <h1>Cargando......</h1>
-        </>
-      ) : ( <>
-      <Header isUsedUser={userEnterUser}/>
-      <BoxMain>
-        <Section1>
-          <Image src={product.img_video} alt={product.name}></Image>
-        </Section1>
-        <Section2>
-          <Title>{product.name}</Title>
-          <Reference>Ref: {product.product_id}</Reference>
-          <Price>{product.price}</Price>
-          <ColorProducts>
-           {/*  {product.color.map((img, index) => (
-              <Colores key={index} src={img.img_video} alt={img.name}></Colores>
-            ))} */}
-            [Colores]
-          </ColorProducts>
-
-          <TitleSize>Selecciona talla</TitleSize>
-          <Sizes>
-            {/* {product.size.map((talla, index) => (
-              <Size
-                style={{
-                  backgroundColor: selectedSize === index ? "black" : "white",
-                  color: selectedSize === index ? "white" : "black",
-                }}
-                onClick={() => handleSizeClick(index)}
-                key={index}
-              >
-                {talla}
-              </Size>
-            ))} */}
-            [Tallas]
-          </Sizes>
-          <AddProduct product={product}>
-            <ButtonBuys>
-              <Buys>Añadir A La Cesta</Buys>
-            </ButtonBuys>
-          </AddProduct>
-        </Section2>
-      </BoxMain>
-      </> )}
-    </MainDiv>
+    <div style={{ width: "100%", height: "100vh" }}>
+      {loading ? (
+        <Loading />
+      ) : (
+        <MainDiv>
+          <Header isUsedUser={userEnterUser} />
+          <BoxMain>
+            <Section1>
+              <Image src={product.img_video} alt={product.name}></Image>
+            </Section1>
+            <Section2>
+              <Title>
+                <div className="Tiltle">{product.name}</div>
+                <div className="Reference">Ref: {product.product_id}</div>
+                <div className="Price">$ {product.price}</div>
+              </Title>
+              <ColorProducts>
+                <p className="Tiltle">Selecciona un color:</p>
+                {/* {product.img_video.map((img, index) => (
+                  <div className="Colores" key={index}>
+                    <img src={img.img_video} alt={img.name} />
+                  </div>
+                ))} */}
+                <div className="ColoresBox">
+                  <div className="Colores">
+                    <img src={product.img_video} alt={product.name} />
+                  </div>
+                  <div className="Colores">
+                    <img src={product.img_video} alt={product.name} />
+                  </div>
+                  <div className="Colores">
+                    <img src={product.img_video} alt={product.name} />
+                  </div>
+                </div>
+              </ColorProducts>
+              <Sizes>
+                <p className="Tiltle">Selecciona una talla:</p>
+                {/* {product.Sizes.map((talla, index) => (
+                  <button
+                    className="Size"
+                    style={{
+                      backgroundColor:
+                        selectedSize === index ? "black" : "white",
+                      color: selectedSize === index ? "white" : "black",
+                    }}
+                    onClick={() => handleSizeClick(index)}
+                    key={index}
+                  >
+                    {talla}
+                  </button>
+                ))} */}
+                <div className="SizeBox">
+                  <button className="Size">S</button>
+                  <button className="Size">M</button>
+                  <button className="Size">L</button>
+                  <button className="Size">XL</button>
+                  <button className="Size">XXL</button>
+                </div>
+              </Sizes>
+              <AddProduct product={product}>
+                <ButtonBuys>
+                  <Buys>Añadir A La Cesta</Buys>
+                </ButtonBuys>
+              </AddProduct>
+            </Section2>
+          </BoxMain>
+        </MainDiv>
+      )}
+    </div>
   );
 };
 

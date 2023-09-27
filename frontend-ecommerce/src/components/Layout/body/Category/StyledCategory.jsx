@@ -25,34 +25,32 @@ export const ContainerH = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  .BoxH {
-    width: 70%;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 1 1fr;
-    grid-gap: 1%;
-    display: flex;
-    justify-content: center;
-    @media (max-width: 768px) {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: 3 1fr;
-      padding-bottom: 3%;
-    }
-  }
   @media (max-width: 768px) {
-    height: 105%;
-    padding-top: 5%;
+    height: 100%;
+  }
+`;
+
+export const DivCards = styled.div`
+  width: 70%;
+  height: 100%;
+  display: grid;
+  grid-gap: 1%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  @media (max-width: 768px) {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 2 1fr;
+    padding-bottom: 1.5%;
   }
 `;
 
 export const Card = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 100%;
-  color: black;
+  height: 100%;
   cursor: pointer;
   :hover {
     border: 1px solid black;
@@ -62,10 +60,16 @@ export const Card = styled.div`
     overflow: hidden;
     width: 100%;
     height: 90%;
+    img {
+      height: 100%;
+      transition: transform 900ms;
+      :hover {
+        transform: scale(1.2);
+      }
+    }
   }
 
   .Text {
-    overflow: hidden;
     width: 100%;
     height: 10%;
     p {
@@ -74,15 +78,5 @@ export const Card = styled.div`
       font-size: 1rem;
       padding-bottom: 5%;
     }
-  }
-`;
-
-export const Img = styled.img`
-  transition: transform 900ms;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  :hover {
-    transform: scale(1.2);
   }
 `;
