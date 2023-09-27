@@ -81,7 +81,7 @@ function Contacto() {
   return (
     <>
       <Title>Novedades que no te puedes perder</Title>
-      <Div>
+      <Div style={{backgroundColor:"#fff"}}>
         <div className="slide-container swiper">
           <div className="slide-content">
             <div className="card-wrapper swiper-wrapper">
