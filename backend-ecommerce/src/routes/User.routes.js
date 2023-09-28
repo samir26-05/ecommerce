@@ -5,7 +5,7 @@ import * as Personal from "../controllers/Login_Users/Personal_information.contr
 import * as Jwt from "../middlewares/AuthJwt.js";
 import { AvatarUploads } from "../middlewares/multer.js";
 
-const router = Router();
+const  router = Router();
 router.get('/name/:name',[Jwt.validatetoken],User.GetUsersName)
 router.post("/", User.CreateUser);
 router.post("/login", User.Login);

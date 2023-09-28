@@ -29,7 +29,7 @@ export const ContainerCard = styled.div`
 `;
 
 export const Card = styled.div`
-  cursor: pointer;
+
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -78,4 +78,11 @@ export const Price = styled.div`
   div{
     font-size: 1.8rem;
   }
+`;
+
+export const ProductTituloTextH2 = styled.h2`
+  text-align: center;
+  margin: 4% 0 1% 0;
+  letter-spacing: 3px;
+
 `;

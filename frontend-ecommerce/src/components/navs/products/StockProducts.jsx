@@ -19,23 +19,10 @@ export default function StockProducts() {
       name: values["name"],
       descripcion: values["descripcion"],
       price: parseFloat(values["price"]),
-      stock: parseFloat(values["stock"]),
+      stock: parseInt(values["stock"]),
       section: parseInt(values["section.id_section"]),
       size: values["size"],
     };
-
-    /*  console.log("Este es el value: "+values["name"]);
-    console.log("UpdatedData: ");
-    console.log(updatedData); */
-
-    /* const mirar = products
-mirar.forEach(objeto => {
-  const mirar2 = objeto["name"]
-  const propiedad1 = objeto.name
-  const propiedad2 = mirar2
- console.log("Esto es la propiedad 1: "+propiedad1);
-  console.log("Esto es la propiedad 2: "+propiedad2); 
-})*/
 
     try {
       //recopilar datos y enaviarlos por una solicitud http

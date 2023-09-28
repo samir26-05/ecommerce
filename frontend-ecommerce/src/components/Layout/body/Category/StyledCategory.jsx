@@ -5,6 +5,7 @@ export const ContainerFather = styled.div`
   width: 100%;
   background-color: #f5f5f5;
   box-sizing: border-box;
+ 
 `;
 
 export const DivTitle = styled.div`

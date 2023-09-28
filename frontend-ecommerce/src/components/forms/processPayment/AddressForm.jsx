@@ -134,6 +134,7 @@ export default function AddressForm() {
               name="Phone_number"
               label="# Contacto"
               onChange={handleInputChange}
+              value={oneClients?.Personal_information?.Phone_number}
               fullWidth
               autoComplete="shipping address-line2"
               variant="standard"

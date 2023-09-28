@@ -93,6 +93,8 @@ export default function Sections() {
     sectionProducts = products.filter(
       (product) => product.section.section === page
     );
+  } if (page === "Todxs") {
+      sectionProducts = products
   } else {
     categoryProducts = products.filter(
       (product) => product.category.category === page
@@ -145,7 +147,7 @@ export default function Sections() {
           >
             <Tab className="Productos" label="productos" index={0} onClick={scrollToTop} />
             {Categories.map((item, index) => (
-              <Tab label={item.name} key={index} onClick={scrollToTop} />
+              <Tab label={item.name} key={index} />
             ))}
           </Tabs>
         </div>

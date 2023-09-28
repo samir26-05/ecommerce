@@ -24,3 +24,8 @@ img {
     min-width: 320px; /* Ejemplo de tamaño mínimo */
   }
 }
+.hola{
+  animation:scale-up-center 0.4s; } 
+@keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }
+
+

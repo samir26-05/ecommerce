@@ -17,7 +17,7 @@ const ShowProducts = ({ products, currentPage, productsPerPage }) => {
   // Calcular el índice de inicio y fin en función de la página actual
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
-  const visibleProducts = products.slice(startIndex, endIndex);
+  // const visibleProducts = products.slice(startIndex, endIndex);
 
   return (
     <DivCards>
