@@ -1,11 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  .BoxCar {
-    @media (max-width: 768px) {
-      left: 1200%;
-    }
-  }
   width: 100%;
   height: 8%;
   z-index: 3;
@@ -24,6 +19,27 @@ export const Container = styled.div`
       : "0px 0px 3px 2px #0000003b"};
   position: ${({ isUsedUser, isUsedBody }) =>
     isUsedUser || isUsedBody ? "fixed" : "relative"};
+
+  @media (max-width: 768px) {
+    .css-d38xem-MuiTypography-root {
+      display: flex !important ;
+      font-size: 40px;
+    }
+    .css-1e945fz-MuiTypography-root {
+      display: flex !important ;
+      font-size: 40px;
+    }
+  }
+
+  .icon-user{
+    @media (max-width: 768px) {
+      position: relative;
+      right: -110%;
+      color: #fff;
+      width: 25px;
+      height: 25px;
+    }
+  }
 `;
 
 export const Cta = styled.button`

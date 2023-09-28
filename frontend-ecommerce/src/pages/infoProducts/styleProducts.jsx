@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Paper } from "@mui/material";
 
 export const MainDiv = styled.div`
   height: 100%;
@@ -11,17 +12,16 @@ export const BoxMain = styled.div`
   padding-top: 3.5%;
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr;
+  border: 1px solid #ff0000;
+  display: flex;
+  flex-direction: row;
 `;
 
 export const Section1 = styled.div`
-  width: 100%;
-  height: 69.2%;
+  width: 50%;
+  height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: auto;
 `;
 
 export const Image = styled.img`
@@ -32,8 +32,8 @@ export const Image = styled.img`
 `;
 
 export const Section2 = styled.div`
-  width: 100%;
-  height: 69.2%;
+  width: 50%;
+  height: 100%;
   box-sizing: border-box;
   display: grid;
   grid-column: 1fr;
@@ -224,3 +224,16 @@ export const Buys = styled.button`
 `;
 
 export const Favorites = styled.div``;
+
+export const ModalContent = styled(Paper)`
+  position: absolute;
+  overflow-y: auto;
+  width: 80%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  img {
+    width: 100%;
+  }
+`;
