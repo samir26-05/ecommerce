@@ -10,6 +10,12 @@ export const Header = styled.div`
     width: 40px;
     height: 40px;
     cursor: pointer;
+    @media (max-width: 768px) {
+      position: relative;
+      width: 35px;
+      height: 35px;
+      left: 30px;
+    }
   }
 
   .count-products {
@@ -24,6 +30,13 @@ export const Header = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+    @media (max-width: 768px) {
+      top: 55%;
+      left: 70%;
+      width: 25px;
+      height: 25px;
+      z-index: 100;
+    }
   }
 
   #contador-productos {
@@ -40,152 +53,164 @@ export const Header = styled.div`
     width: 400px;
     height: 60vh;
     overflow: auto;
+    @media (max-width: 768px) {
+      width: 300px;
+      height: 55vh;
+      top: 105%;
+      right: -150%;
+    }
   }
 
   .hidden-cart {
     display: none;
   }
 
-  .cart-product {
+  .Products {
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 7%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  }
-
-  .info-cart-product {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .info-cart-product > img {
-    object-fit: contain;
-    margin-right: 5%;
-    transition: all 0.8s;
-    cursor: pointer;
-  }
-
-  .info-cart-product > img:hover {
-    transform: scale(1.2);
-    transition: ease 0.8s;
-  }
-
-  .cantidad-producto-carrito {
-    color: #000000;
-    font-weight: 800;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .Infoon-product {
-    text-align: center;
-    display: flex;
-    align-items: center;
     flex-direction: column;
-    justify-content: center;
   }
 
-  .titulo-producto-carrito {
-    color: #000000;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    font-weight: 400;
+  .Product {
+    width: 100%;
   }
 
-  .precio-producto-carrito {
-    color: #000;
-    font-weight: 800;
-    margin-top: 3%;
-  }
-
-  .containerButtons {
-    width: 10%;
+  .infoProduct {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 5%;
+    border-bottom: #00000037 solid 1px;
+
+    .Imgn {
+      height: 100%;
+      width: 35%;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.8s;
+        cursor: pointer;
+      }
+
+      img:hover {
+        transform: scale(1.2);
+        transition: ease 0.8s;
+      }
+    }
+    .cantidad {
+      width: 10%;
+      display: grid;
+      align-content: center;
+      justify-content: center;
+
+      span {
+        color: #000000;
+        font-weight: 600;
+      }
+    }
+    .Infoon-product {
+      width: 70%;
+      color: #000000;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      text-align: center;
+      font-size: 1rem;
+
+      .link {
+        text-decoration: none;
+      }
+
+      .Tiltle {
+        width: 100%;
+        letter-spacing: 1px;
+      }
+
+      .Price {
+        width: 100%;
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      .Size {
+        width: 100%;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .Buttons {
+    width: 15%;
+    display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
   }
 
   .btnAdd {
-    background-color: transparent;
     border: none;
-  }
-
-  .iconAdd {
-    transform: scale(1.2);
-    transition: 0.2s linear;
-  }
-
-  .btnAdd:hover > .iconAdd {
-    transform: scale(1.7);
-  }
-
-  .btnAdd:hover > .iconAdd path {
-    color: rgb(7, 168, 55);
+    background: none;
+    .iconAdd {
+      transform: scale(1.2);
+      transition: 0.2s linear;
+    }
+    .iconAdd:hover {
+      transform: scale(1.4);
+    }
+    :hover > .iconAdd path {
+      color: rgb(7, 168, 55);
+    }
   }
 
   .btnDell {
-    background-color: transparent;
+    width: 100%;
     border: none;
-    position: relative;
-    bottom: 40%;
-  }
-
-  .iconDell {
-    transform: scale(1.2);
-    transition: 0.2s linear;
-  }
-
-  .btnDell:hover > .iconDell {
-    transform: scale(1.7);
-  }
-
-  .btnDell:hover > .iconDell path {
-    color: rgb(168, 7, 7);
+    background: none;
+    .iconDell {
+      transform: scale(1.2);
+      transition: 0.2s linear;
+    }
+    .iconDell:hover {
+      transform: scale(1.4);
+    }
+    :hover > .iconDell path {
+      color: rgb(168, 7, 7);
+    }
   }
 
   .btndele {
-    background-color: transparent;
+    width: 100%;
     border: none;
+    background: none;
+    .iconDele {
+      transform: scale(1.2);
+      transition: 0.2s linear;
+    }
+    .iconDele:hover {
+      transform: scale(1.4);
+    }
+    :hover > .iconDele path {
+      fill: rgb(168, 7, 7);
+    }
   }
 
-  .icon {
-    transform: scale(1.2);
-    transition: 0.2s linear;
-  }
-
-  .btndele:hover > .icon {
-    transform: scale(1.5);
-  }
-
-  .btndele:hover > .icon path {
-    fill: rgb(168, 7, 7);
-  }
-
-  .O {
-    outline: none !important;
-  }
-
-  .cart-total {
+  .Total {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 0;
-    gap: 10px;
-  }
-
-  .cart-total h3 {
-    color: #000;
-    font-size: 20px;
-    font-weight: 700;
-  }
-
-  .total-pagar {
-    color: #000;
-    font-size: 20px;
-    font-weight: 700;
+    flex-direction: row;
+    padding: 5%;
+    .Tiltle {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      h3 {
+        height: 100%;
+        color: #000;
+        font-size: 20px;
+        font-weight: 400;
+      }
+    }
   }
 
   .btns {
@@ -244,6 +269,9 @@ export const Header = styled.div`
     transform: translateY(-50%);
     transform-origin: center;
     transition: 0.3s linear;
+    @media (max-width: 768px) {
+      left: 10%;
+    }
   }
 
   .pa::before {
@@ -257,6 +285,9 @@ export const Header = styled.div`
     transform: translateY(-50%);
     transform-origin: center;
     transition: 0.3s linear;
+    @media (max-width: 768px) {
+      left: 25%;
+    }
   }
 
   .fancy .text {
@@ -324,5 +355,27 @@ export const Header = styled.div`
   .fancy:hover .bottom-key-2 {
     right: 0;
     width: 0;
+  }
+
+  .Vacio {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-weight: 100;
+    user-select: none;
+    .VacioImg {
+      width: 50%;
+    }
+    .Tiltle {
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      margin: 1%;
+    }
+    .Text {
+      text-align: center;
+    }
   }
 `;
