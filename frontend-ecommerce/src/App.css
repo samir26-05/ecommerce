@@ -16,3 +16,11 @@ body {
 img {
   max-width: 100%;
 }
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+    /* Establece un tamaño mínimo para el contenido principal */
+    min-width: 320px; /* Ejemplo de tamaño mínimo */
+  }
+}
