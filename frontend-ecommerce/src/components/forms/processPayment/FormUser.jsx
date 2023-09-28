@@ -10,10 +10,10 @@ import Review from './Review';
 
 const steps = ['Dirección de envío', 'Revise su orden'];
 
-function getStepContent(step) {
+function GetStepContent(step, handleForm) {
   switch (step) {
     case 0:
-      return <AddressForm />;
+      return <AddressForm onFormValid={handleForm}/>;
     case 1:
       /* return <PaymentForm />; */
       return <Review />;
@@ -24,10 +24,20 @@ function getStepContent(step) {
 }
 
 function FormUserPayment() {
+
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const handleFormValidChange = (isValid) => {
+    setIsFormValid(isValid);
+  };
+
+
   const [activeStep, setActiveStep] = useState(0);
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
+  const handleNext = (valid) => {
+    if (valid) {
+      setActiveStep(activeStep + 1);
+     }
   };
 
   const handleBack = () => {
@@ -82,7 +92,7 @@ function FormUserPayment() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {getStepContent(activeStep)}
+              {GetStepContent(activeStep, handleFormValidChange)}
               <Box sx={{ display: 'flex', justifyContent: 'flex-start', mt: 3 }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ ml: 1 }} style={{ backgroundColor: "black", color: "white", marginBottom:-40 }}>
@@ -93,9 +103,10 @@ function FormUserPayment() {
 
               <Button
                 variant=""
-                onClick={handleNext}
+                onClick={() => handleNext(isFormValid)}
                 sx={{ ml: 1 }}
-                style={{ backgroundColor: "black", color: "white", display: 'flex', marginLeft:390 }}
+                disabled={!isFormValid}
+                style={{ backgroundColor: isFormValid ? "black" : "grey", color: "white", display: isFormValid === false ? 'none' : 'flex', marginLeft:390 }}
               >
                 {activeStep === steps.length - 1 ? 
                 <div >

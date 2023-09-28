@@ -76,7 +76,7 @@ const RegisterLogin = () => {
             onSubmit={onSubmit}
             validationSchema={validationSchema}
           >
-            <Form>
+            <Form style={{gap:"2.5rem", display:"flex", flexDirection:"column"}}>
               <LoginBoxInput>
                 <Field name="nombre" required />
                 <Error>

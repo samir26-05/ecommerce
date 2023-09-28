@@ -139,10 +139,9 @@ export const LoginBoxInput = styled.div`
   position: relative;
   input {
     width: 100%;
-    padding: 15px 0;
+    padding: 15px 0 5px 0;
     font-size: 16px;
     color: #000000;
-    margin-bottom: 40px;
     border: none;
     border-bottom: 1px solid #000000;
     outline: none;
@@ -153,8 +152,8 @@ export const LoginBoxInput = styled.div`
     top: 0;
     left: 0;
     padding: 10px 0;
-    font-size: 20px;
-    color: #000000;
+    font-size: 18px;
+    color: #0000006b;
     pointer-events: none;
     transition: 0.2s;
   }
@@ -162,8 +161,8 @@ export const LoginBoxInput = styled.div`
   input:valid ~ label {
     top: -30px;
     left: 0;
-    color: #000000;
-    font-size: 15px;
+    color: #0000008b;
+    font-size: 14px;
   }
 `;
 
@@ -304,7 +303,6 @@ export const Redes = styled.div`
 
 export const Error = styled.div`
   position: relative;
-  bottom: 40px;
   font-size: 0.8rem;
 
   div {
