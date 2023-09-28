@@ -4,7 +4,6 @@ import { Facebook, Twitter, Instagram } from "@mui/icons-material";
 import { Div, SocialIcon, ModalContent } from "./FooterStyled";
 import QrWths from "../../../assets/Img/QrWhts.png";
 
-
 const Footer = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -14,6 +13,16 @@ const Footer = () => {
 
   const handleCloseModal = () => {
     setModalOpen(false);
+  };
+
+  const [modalOpenInfo, setModalOpenInfo] = useState(false);
+
+  const handleOpenModalInfo = () => {
+    setModalOpenInfo(true);
+  };
+
+  const handleCloseModalInfo = () => {
+    setModalOpenInfo(false);
   };
 
   return (
@@ -59,46 +68,59 @@ const Footer = () => {
               />
             </ModalContent>
           </Modal>
+          <Modal open={modalOpenInfo} onClose={handleCloseModalInfo}>
+            <ModalContent>
+              <Typography
+                variant="h6"
+                style={{
+                  color: "#000",
+                  textAlign: "center",
+                }}
+              >
+                Infomacion Relacinada
+              </Typography>
+            </ModalContent>
+          </Modal>
         </div>
         <div className="Information">
           <h4>Todo sobre la empresa</h4>
           <p className="Text">
-            <a href="">Pagos</a>
+            <a onClick={handleOpenModalInfo}>Pagos</a>
             <br />
-            <a href="">Envios</a>
+            <a onClick={handleOpenModalInfo}>Envios</a>
             <br />
-            <a href="">Devoluciones</a>
+            <a onClick={handleOpenModalInfo}>Devoluciones</a>
             <br />
-            <a href="">Solicitar factura</a>
+            <a onClick={handleOpenModalInfo}>Solicitar factura</a>
             <br />
-            <a href="">Compra Online</a>
+            <a onClick={handleOpenModalInfo}>Compra Online</a>
             <br />
           </p>
         </div>
         <div className="Information">
           <h4>Ayuda</h4>
           <p className="Text">
-            <a href="">Preguntas frecuentes</a>
+            <a onClick={handleOpenModalInfo}>Preguntas frecuentes</a>
             <br />
-            <a href="">Política de devoluciones</a>
+            <a onClick={handleOpenModalInfo}>Política de devoluciones</a>
             <br />
-            <a href="">Términos y condiciones</a>
+            <a onClick={handleOpenModalInfo}>Términos y condiciones</a>
           </p>
         </div>
         <div className="Information">
           <h4>Información Adicional</h4>
           <p className="Text">
-            <a href="">Información Adicional</a>
+            <a onClick={handleOpenModalInfo}>Información Adicional</a>
             <br />
-            <a href="">Categorías</a>
+            <a onClick={handleOpenModalInfo}>Categorías</a>
             <br />
-            <a href="">Tallas</a>
+            <a onClick={handleOpenModalInfo}>Tallas</a>
             <br />
-            <a href="">Puntos de Venta</a>
+            <a onClick={handleOpenModalInfo}>Puntos de Venta</a>
             <br />
-            <a href="">Prensa</a>
+            <a onClick={handleOpenModalInfo}>Prensa</a>
             <br />
-            <a href="">Trabaja con nosotros</a>
+            <a onClick={handleOpenModalInfo}>Trabaja con nosotros</a>
           </p>
         </div>
       </div>
@@ -117,8 +139,7 @@ const Footer = () => {
       </div>
       <div className="Copyright">
         <Typography variant="body2">
-          © {new Date().getFullYear()} KALARY. Todos los derechos
-          reservados.
+          © {new Date().getFullYear()} KALARY. Todos los derechos reservados.
         </Typography>
       </div>
     </Div>

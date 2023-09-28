@@ -57,6 +57,7 @@ export const CreateOrder = async (req, res) => {
       products: result.products, // Convierte la cadena JSON en objeto
       discount: result.discount,
       subtotal: result.subtotal,
+      iva: result.iva,
       total_value: result.total_value,
       id_state: result.id_state,
     });
@@ -95,6 +96,42 @@ export const GetOrderUser = async (req, res) => {
   }
 };
 
+export const GetOrderStatus = async(req, res) => {
+  try {
+    const {name} = req.params
+    const stateFound = await state.findOne({where: {state: name}})
+    const result = await Orden_compra.findAll({ where: { id_state: stateFound.id_state },
+      include: [
+        {
+          model: sequelize.model("state"),
+          attributes: ["state"],
+        },
+        {
+          model: sequelize.model("user"),
+          attributes: ["user"]
+        }
+      ]});
+    const parsedResults = result.map((item) => {
+      return {
+        id_order: item.id_order,
+        user_id: item.user.user,
+        products: JSON.parse(item.products), // Convierte la cadena JSON en objeto
+        discount: item.discount,
+        subtotal: item.subtotal,
+        total_value: item.total_value,
+        id_state: item.state.state,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
+      };
+    });
+
+    res.status(200).json(parsedResults);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+}
+
 export const CheckoutPago = async (req, res) => {
   try {
     const { UserId } = req;
@@ -116,9 +153,8 @@ export const CheckoutPago = async (req, res) => {
           },
           { where: { product_id: value.product_id } }
         );
-        console.log(FoundProduct);
       });
-      res.status(200).json({ message: "Producto Pagado con exito" });
+      res.status(200).json({ message: "El pago se hizo Exitoso" });
     }
   } catch (error) {
     console.log(error);

@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 /* MATERIAL UI */
-import { Avatar, Grid, ListItem, ListItemText} from "@mui/material";
+import { Avatar, Grid, ListItem, ListItemText } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 /* COMPONENTS */
@@ -8,7 +10,6 @@ import NavHorizontal from "./NavHorizontal";
 import InfoCountUser from "./infoUser/InfoCount";
 /* STYLES */
 import { FlexDirCol, Div, Box } from "./NavVerticalStyled";
-import { useNavigate } from "react-router-dom";
 
 import { LiaDropbox } from 'react-icons/lia';
 import { TbTruckDelivery } from 'react-icons/tb';
@@ -54,7 +55,10 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 export default function NavVertical() {
 
   const [value, setValue] = useState(0);
-
+  const [error, setError] = useState();
+  const [avatar, setAvatar] = useState({
+    avatar: "",
+  })
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -65,6 +69,28 @@ export default function NavVertical() {
     localStorage.removeItem("accessToken");
     navegate("/");
   };
+
+  const token = localStorage.getItem("accessToken")
+  const userName = localStorage.getItem("username")
+
+  useEffect(() => {
+    async function getAvatar() {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/user/name/${userName}`,
+          {
+            headers: {
+              accessToken: token,
+            },
+          }
+        );
+        setAvatar(response.data);
+      } catch (error) {
+        setError(error);
+      }
+    }
+    getAvatar()
+  }, []);
 
   return (
     <Box>
@@ -77,7 +103,7 @@ export default function NavVertical() {
                 <Avatar
                   className="Avatar"
                   alt={localStorage.getItem("username")}
-                  src="/static/images/avatar/1.jpg"
+                  src={avatar.avatar}
                 />
                 <ListItemText
                   className="ListItemText"
@@ -85,7 +111,7 @@ export default function NavVertical() {
                   secondary={localStorage.getItem("username")}
                 />
               </ListItem>
-              <ListItemText className="ListItemText" secondary="PANEL DE OPERACIONES" style={{marginTop:"30px", marginLeft:"0px"}}/>
+              <ListItemText className="ListItemText" secondary="PANEL DE OPERACIONES" style={{ marginTop: "30px", marginLeft: "0px" }} />
             </Grid>
             <Tab className="Tab" {...a11yProps(1)} label={
               <div>
@@ -125,7 +151,7 @@ export default function NavVertical() {
           </Tabs>
 
           <div className="TabPanels">
-          <TabPanel className="TabPanel" value={value} index={1}>
+            <TabPanel className="TabPanel" value={value} index={1}>
               <NavHorizontal className="NavHorizontal" type="order" />
             </TabPanel>
             <TabPanel className="TabPanel" value={value} index={2}>
@@ -143,7 +169,7 @@ export default function NavVertical() {
 
           </div>
         </Div>
-      ) : ( 
+      ) : (
         /* MENU CLIENTE */
         <Div>
           <Tabs className="Tabs" value={value} onChange={handleChange}>
@@ -152,7 +178,7 @@ export default function NavVertical() {
                 <Avatar
                   className="Avatar"
                   alt={localStorage.getItem("username")}
-                  src="/static/images/avatar/1.jpg"
+                  src={avatar.avatar}
                 />
                 <ListItemText
                   className="ListItemText"

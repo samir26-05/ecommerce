@@ -114,8 +114,7 @@ export const FormProduct = () => {
 
   const CreateProduct = async (event) => {
     event.preventDefault();
-    axios
-      .post("http://localhost:3000/product/create", formData, {
+    axios.post("http://localhost:3000/product/create", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           accessToken: token,
