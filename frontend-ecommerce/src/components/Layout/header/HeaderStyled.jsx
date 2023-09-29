@@ -75,14 +75,11 @@ export const Container = styled.div`
     justify-content: end;
     align-items: center;
     padding-right: 2%;
-    gap: 5%;
+    gap: 3%;
     height: 100%;
     width: 30%;
     @media (max-width: 768px) {
-      width: 30%;
-      gap: 0;
-      padding-left: 3%;
-      justify-content: start;
+      gap: 10%;
     }
   }
 `;
