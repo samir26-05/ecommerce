@@ -7,13 +7,11 @@ import {
   Tiltle,
   CardContent,
   Price,
-  ProductTituloTextH2,
 } from "./StyledProductList";
 import { GiShoppingBag } from "react-icons/gi";
-import { Form, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import AddProduct from "../../../../utils";
-
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);

@@ -38,11 +38,13 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
         existingProduct.quantity--;
       }
     } else {
-      updatedCart.push({ ...product, quantity: 1 });
+      alert("La cantidad mínima permitida es 1.");
+      // updatedCart.push({ ...product, quantity: 1 });
     }
 
     updateCart(updatedCart);
   };
+
   const onCleanCart = () => {
     updateCart([]);
   };
