@@ -59,6 +59,8 @@ export default function NavVertical() {
   const [avatar, setAvatar] = useState({
     avatar: "",
   })
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -77,7 +79,7 @@ export default function NavVertical() {
     async function getAvatar() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/user/name/${userName}`,
+          `${urlBackend}/user/name/${userName}`,
           {
             headers: {
               accessToken: token,

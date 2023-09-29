@@ -1,13 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  ContainerPrincipal,
-  ContainerCard,
-  Card,
-  CardMedia,
-  Tiltle,
-  CardContent,
-  Price,
-} from "./StyledProductList";
+import { ContainerPrincipal, ContainerCard, Card, CardMedia, Tiltle, CardContent, Price, } from "./StyledProductList";
 import { GiShoppingBag } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -15,18 +7,18 @@ import AddProduct from "../../../../utils";
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
-
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
+  
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await axios.get("http://localhost:3000/product/");
+        const response = await axios.get(`${urlBackend}/product/`);
         setProducts(response.data.result);
       } catch (error) {
         console.error("Error al obtener los productos:", error);
       }
     }
 
-    // Llama a la función fetchProducts dentro del efecto
     fetchProducts();
   }, []);
 

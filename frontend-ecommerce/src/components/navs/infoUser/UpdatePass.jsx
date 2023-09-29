@@ -1,10 +1,11 @@
-import React from "react";
 import { Button, TextField, Box } from "@mui/material";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 export default function UpdatePass({ txtPassword, setTxtPassword }) {
   
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
+
   const handleInputChange = (e) => {
     setTxtPassword({
       ...txtPassword,
@@ -24,7 +25,7 @@ export default function UpdatePass({ txtPassword, setTxtPassword }) {
   const updatePassword = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3000/user/password/update/`,
+        `${urlBackend}/user/password/update/`,
         txtPassword,
         {
           headers: {
