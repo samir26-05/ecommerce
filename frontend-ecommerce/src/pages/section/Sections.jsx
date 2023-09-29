@@ -146,7 +146,7 @@ export default function Sections() {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
           >
-            <Tab label="productos" index={0} />
+            <Tab className="Productos" label="productos" index={0} onClick={scrollToTop} />
             {Categories.map((item, index) => (
               <Tab label={item.name} key={index} />
             ))}

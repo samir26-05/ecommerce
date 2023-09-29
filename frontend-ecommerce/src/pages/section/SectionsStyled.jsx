@@ -12,6 +12,9 @@ export const PageSections = styled.div`
     font-weight: 100;
     padding: 5% 0 1% 0;
     margin: 0;
+    @media (max-width: 768px) {
+      padding: 20% 0 1% 0;
+  }
   }
   .Category {
     position: sticky;
@@ -22,13 +25,14 @@ export const PageSections = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    .panel {
-    }
     .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
       color: #000;
     }
     .css-1aquho2-MuiTabs-indicator {
       background-color: #000000;
+    }
+    @media (max-width: 768px) {
+      top: 8%;
     }
   }
 `;
@@ -46,6 +50,9 @@ export const DivCards = styled.div`
   display: grid;
   grid-gap: 10px;
   grid-template-columns: repeat(5, 1fr);
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 export const ContainerCard = styled.div`
@@ -73,7 +80,7 @@ export const Card = styled.div`
     text-align: center;
   }
   @media (max-width: 768px) {
-    width: 90%;
+    width: 100%;
   }
 `;
 

@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
+import {
+  BrowserRouter as Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 import Login from "./pages/Login/Login.jsx";
 import RegisterLogin from "./pages/Login/Register.jsx";
 import HomePage from "./pages/home/Home.jsx";
@@ -7,7 +12,6 @@ import Payment from "./pages/processPayment/Payment.jsx";
 import InfoProducts from "./pages/infoProducts/InfoProducts.jsx";
 import Sections from "./pages/section/Sections.jsx";
 import PageNotFound from "../src/components/PageNotFound/PageNotFound.jsx";
-import {  BubblyContainer } from "react-bubbly-transitions";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,7 +24,7 @@ const router = createBrowserRouter(
       <Route path="/infoProducts/:name" element={<InfoProducts />} />
       <Route path="/section/:page" element={<Sections />} />
       <Route path="*" element={<PageNotFound />} />
-    </Route> 
+    </Route>
   )
 );
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Header = styled.div`
+export const Car = styled.div`
   .container-icon {
     position: relative;
   }

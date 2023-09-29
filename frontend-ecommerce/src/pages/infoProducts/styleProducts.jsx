@@ -12,16 +12,21 @@ export const BoxMain = styled.div`
   padding-top: 3.5%;
   width: 100%;
   height: 100%;
-  border: 1px solid #ff0000;
   display: flex;
   flex-direction: row;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const Section1 = styled.div`
   width: 50%;
   height: 100%;
   display: flex;
-  overflow: auto;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 50%;
+  }
 `;
 
 export const Image = styled.img`
@@ -37,7 +42,11 @@ export const Section2 = styled.div`
   box-sizing: border-box;
   display: grid;
   grid-column: 1fr;
-  grid-template-rows: 6fr 5fr 5fr 5fr 5fr 5fr;
+  grid-template-rows: 6fr 5fr 5fr 5fr 5fr;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 50%;
+  }
 `;
 
 export const Title = styled.div`
@@ -55,6 +64,10 @@ export const Title = styled.div`
     font-size: 2.5rem;
     font-weight: 300;
     letter-spacing: 2px;
+    @media (max-width: 768px) {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   .Reference {
@@ -76,6 +89,9 @@ export const Title = styled.div`
     justify-content: flex-start;
     font-size: 1.2rem;
     font-weight: 600;
+    @media (max-width: 768px) {
+      margin: 1% 0;
+    }
   }
 `;
 
@@ -96,11 +112,18 @@ export const ColorProducts = styled.div`
     gap: 1%;
     width: 100%;
     height: 100%;
+    @media (max-width: 768px) {
+      gap: 3%;
+    }
   }
   .Colores {
     display: flex;
     width: 7%;
     height: 80%;
+    @media (max-width: 768px) {
+      margin: 1% 0;
+      width: 13%;
+    }
     img {
       width: 100%;
       height: 100%;
@@ -132,6 +155,10 @@ export const Sizes = styled.ul`
     flex-direction: row;
     gap: 1%;
     width: 100%;
+    @media (max-width: 768px) {
+      gap: 3%;
+      margin: 3% 0;
+    }
   }
   .Size {
     background-color: transparent;
@@ -235,5 +262,13 @@ export const ModalContent = styled(Paper)`
   transform: translate(-50%, -50%);
   img {
     width: 100%;
+    @media (max-width: 768px) {
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 70%;
   }
 `;
