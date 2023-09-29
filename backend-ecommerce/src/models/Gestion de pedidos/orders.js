@@ -13,8 +13,8 @@ export const Orden_compra = sequelize.define("order", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  products: {
-    type: DataTypes.JSON,
+  subtotal: {
+    type: DataTypes.DOUBLE,
     allowNull: false,
   },
   discount: {
@@ -25,11 +25,7 @@ export const Orden_compra = sequelize.define("order", {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-  subtotal: {
-    type: DataTypes.DOUBLE,
-    allowNull: false,
-  },
-  total_value: {
+  total: {
     type: DataTypes.DOUBLE,
     allowNull: false,
   },
@@ -38,6 +34,8 @@ export const Orden_compra = sequelize.define("order", {
     allowNull: false,
     defaultValue: 1,
   },
+},{
+  tableName: "order"
 });
 // relacion de ordenes a usuarios
 Orden_compra.belongsTo(User, {
