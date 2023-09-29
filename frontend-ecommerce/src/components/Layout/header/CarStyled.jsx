@@ -24,6 +24,7 @@ export const Car = styled.div`
     right: 83px;
     z-index: 10;
     transition: ease 0.5s;
+    cursor: pointer;
     span {
       width: 100%;
       height: 100%;

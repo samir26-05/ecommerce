@@ -66,6 +66,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
             : color,
           fontSize: "39px",
           paddingTop: "10%",
+          cursor: "pointer"
         }}
       />
       <div className="Count">
