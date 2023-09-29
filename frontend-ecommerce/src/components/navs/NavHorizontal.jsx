@@ -70,6 +70,8 @@ export default function NavHorizontal(props) {
     state: "",
   });
 
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -77,7 +79,7 @@ export default function NavHorizontal(props) {
   async function fetchOneClients() {
     try {
       const response = await axios.get(
-        `http://localhost:3000/user/name/${userName}`,
+        `${urlBackend}/user/name/${userName}`,
         {
           headers: {
             accessToken: token,

@@ -22,11 +22,12 @@ export default function DataPersonal({updateProfile, setUpdateProfile}) {
 
   const userName = localStorage.getItem("username");
   const token = localStorage.getItem("accessToken");
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
 
   const updateInfoPersonal = async () => {
     try {
      const response = await axios.put(
-        `http://localhost:3000/user/personal_information/${userName}`,
+        `${urlBackend}/user/personal_information/${userName}`,
         updateProfile,
         {
           headers: {

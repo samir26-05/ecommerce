@@ -31,13 +31,14 @@ export default function Review() {
 
   const token = localStorage.getItem("accessToken")
   const userName = localStorage.getItem("username");
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
   console.log(token)
 
   useEffect(() => {
     async function fetchOneClients() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/user/name/${userName}`,
+          `${urlBackend}/user/name/${userName}`,
           {
             headers: {
               accessToken: token,
