@@ -1,6 +1,6 @@
 import app from "./app.js";
 import { sequelize } from "./database.js";
-import "./models/Gestion de pedidos/orders.js";
+import "./models/Gestion de pedidos/order_detail.js";
 import { PORT } from "./config.js";
 async function main() {
   try {

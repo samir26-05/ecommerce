@@ -1,6 +1,6 @@
 import { Orden_compra } from "../../models/Gestion de pedidos/orders.js";
 import { productos } from "../../models/productos/productos.js";
-import { state } from "../../models/Gestion de pedidos/state.js";
+import { order_detail } from "../../models/Gestion de pedidos/order_detail.js";
 import { sequelize } from "../../database.js";
 export const GetOrder = async (req, res) => {
   try {
@@ -8,11 +8,11 @@ export const GetOrder = async (req, res) => {
       attributes: [
         "id_order",
         "user_id",
-        "products",
         "discount",
         "subtotal",
-        "total_value",
         "id_state",
+        "iva",
+        "total",
         "createdAt",
         "updatedAt",
       ],
@@ -25,16 +25,21 @@ export const GetOrder = async (req, res) => {
           model: sequelize.model("user"),
           attributes: ["user"],
         },
+        {
+          model: sequelize.model("order_detail"),
+          attributes: ["id_order","product_id","amount","valor"]
+        }
       ],
     });
     const parsedResults = result.map((item) => {
       return {
         id_order: item.id_order,
         user_id: item.user.user,
-        products: JSON.parse(item.products), // Convierte la cadena JSON en objeto
-        discount: item.discount,
+        products: item.order_details, // Convierte la cadena JSON en objeto
         subtotal: item.subtotal,
-        total_value: item.total_value,
+        discount: item.discount,
+        iva:item.iva,
+        total_value: item.total,
         id_state: item.state.state,
         createdAt: item.createdAt,
         updatedAt: item.updatedAt,
@@ -54,150 +59,33 @@ export const CreateOrder = async (req, res) => {
     const result = req.body;
     const NewOrder = await Orden_compra.create({
       user_id: UserId,
-      products: result.products, // Convierte la cadena JSON en objeto
-      discount: result.discount,
       subtotal: result.subtotal,
+      discount: result.discount, // Convierte la cadena JSON en objeto
       iva: result.iva,
-      total_value: result.total_value,
-      id_state: result.id_state,
+      total: result.total,
     });
-    res.status(200).json({ message: "Orden creada con exito", NewOrder });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error.message });
-  }
-};
-
-export const GetOrderUser = async (req, res) => {
-  try {
-    const { UserId } = req;
-    const result = await Orden_compra.findOne({ where: { user_id: UserId } });
-    if (!result) {
-      return res.status(404).json({ message: "Orden no encontrada" });
-    }
-    const estado = await state.findOne({
-      where: { id_state: result.id_state },
-    });
-    const GetProductId = {
-      id_order: UserId,
-      user_id: result.user,
-      products: JSON.parse(result.products), // Convierte la cadena JSON en objeto
-      discount: result.discount,
-      subtotal: result.subtotal,
-      total_value: result.total_value,
-      id_state: estado.state,
-      createdAt: result.createdAt,
-      updatedAt: result.updatedAt,
-    };
-    res.status(200).json(GetProductId);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error.message });
-  }
-};
-
-export const GetOrderStatus = async (req, res) => {
-  try {
-    const { name } = req.params;
-    const stateFound = await state.findOne({ where: { state: name } });
-    const result = await Orden_compra.findAll({
-      where: { id_state: stateFound.id_state },
-      include: [
-        {
-          model: sequelize.model("state"),
-          attributes: ["state"],
-        },
-        {
-          model: sequelize.model("user"),
-          attributes: ["user"],
-        },
-      ],
-    });
-    const parsedResults = result.map((item) => {
-      return {
-        id_order: item.id_order,
-        user_id: item.user.user,
-        products: JSON.parse(item.products), // Convierte la cadena JSON en objeto
-        discount: item.discount,
-        subtotal: item.subtotal,
-        total_value: item.total_value,
-        id_state: item.state.state,
-        createdAt: item.createdAt,
-        updatedAt: item.updatedAt,
-      };
-    });
-
-    res.status(200).json(parsedResults);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error.message });
-  }
-};
-
-export const CheckoutPago = async (req, res) => {
-  try {
-    const { UserId } = req;
-    const Order = await Orden_compra.findOne({ where: { user_id: UserId } });
-    if (Order.id_state === 2) {
-      Order.destroy();
-      return res
-        .status(200)
-        .json({ message: "Pedido borrado por rechazo del servidor" });
-    }
-    const Found = JSON.parse(Order.products);
-    if (Order.id_state === 3) {
-      const result = Found.map(async (value) => {
-        const FoundProduct = await productos.findByPk(value.product_id);
-        console.log(value.stock);
-        await productos.update(
-          {
-            stock: FoundProduct.stock - value.stock,
-          },
-          { where: { product_id: value.product_id } }
-        );
-      });
-      res.status(200).json({ message: "El pago se hizo Exitoso" });
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error.message });
-  }
-};
-
-export const GetOrderStatusUser = async (req, res) => {
-  try {
-    const { UserId } = req;
-    const { name } = req.params;
-    const result = await Orden_compra.findAll({
-      where: { 
-        user_id: UserId, 
-        id_state: 3 
-      },
-      include: [
-        {
-          model: sequelize.model("state"),
-          attributes: ["state"],
-        },
-        {
-          model: sequelize.model("user"),
-          attributes: ["user"],
-        },
-      ],
-    });
-    const parsedResults = result.map((item) => {
-      return {
-        id_order: item.id_order,
-        user_id: item.user.user,
-        products: JSON.parse(item.products), // Convierte la cadena JSON en objeto
-        discount: item.discount,
-        subtotal: item.subtotal,
-        total_value: item.total_value,
-        id_state: item.state.state,
-        createdAt: item.createdAt,
-        updatedAt: item.updatedAt,
-      };
-    });
-    res.status(200).json(parsedResults);
+    const Products = await Promise.all(
+      result.products.map(async(products)=>{
+        const {product_id,stock} =  products;
+        const price = await productos.findOne({where: {product_id: product_id}})
+        console.log(price)
+        if (stock > price.stock) {
+          return res.status(404).json({message:`El stock del producto con el ID ${product_id} es insuficiente`});
+        }
+        const NewOrderDetails = await order_detail.create({
+          id_order: NewOrder.id_order,
+          product_id,
+          amount: stock,
+          valor: stock*price.price
+        })
+        return NewOrderDetails;
+      })
+    )
+  res.status(200).json({
+    message: 'orden creada con exito',
+    orden: NewOrder,
+    detail_order: Products
+  })
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });

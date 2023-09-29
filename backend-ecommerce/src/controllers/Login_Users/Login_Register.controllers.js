@@ -159,7 +159,7 @@ export const UpdateAvatar = async (req, res) => {
     const { file } = req;
     const user = await User.findOne({ where: { user_id: UserId } });
     if (!user.avatar) {
-      const ruta = encodeURI(avatarfile + file.filename);
+      const ruta = encodeURI(AvatarUser + file.filename);
       user.avatar = ruta;
       user.save();
       return res
@@ -168,8 +168,8 @@ export const UpdateAvatar = async (req, res) => {
     }
     if (user.avatar) {
       const File = user.avatar.split("/").slice(3);
-      fs.unlinkSync(path.join(AvatarUser, File[3]));
-      const ruta = encodeURI(avatarfile + file.filename);
+      fs.unlinkSync(path.join(avatarfile, File[3]));
+      const ruta = encodeURI(AvatarUser + file.filename);
       user.avatar = ruta;
       user.save();
       return res
