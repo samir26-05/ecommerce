@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 /* MATERIAL UI */
 import { Button, Card, Box, Stepper, StepLabel, Step } from "@mui/material";
 import { CgLogOut } from "react-icons/cg";
@@ -30,6 +30,7 @@ export default function DetailsOrder({ order, seeOrder }) {
   const [table, setTable] = useState(seeOrder);
   const [products, setProducts] = useState([]);
   const [activeStep, setActiveStep] = useState(0);
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
 
   const handleShowTable = () => {
     setTable(!table);
@@ -39,7 +40,7 @@ export default function DetailsOrder({ order, seeOrder }) {
   const searchProducts = async () => {
     for (let i = 0; i < order.products.length; i++) {
       try {
-        const response = await axios.get(`http://localhost:3000/product/id/${order.products[i].product_id}`,{
+        const response = await axios.get(`${urlBackend}/product/id/${order.products[i].product_id}`,{
             headers: {
               accessToken: localStorage.getItem("accessToken"),
             },

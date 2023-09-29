@@ -25,6 +25,7 @@ const InfoProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userEnterUser, setUserEnterUser] = useState(false);
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
   let navigate = useNavigate();
 
   const verifyEnter = () => {
@@ -50,7 +51,7 @@ const InfoProducts = () => {
 
   async function fetchProducts() {
     try {
-      const response = await axios.get("http://localhost:3000/product");
+      const response = await axios.get(`${urlBackend}/product`);
       setProducts(response.data.result);
       console.log(response.data.result);
     } catch (error) {
