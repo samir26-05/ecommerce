@@ -204,7 +204,7 @@ export default function Review() {
           <input name="buyerEmail" type="hidden" value={localStorage.getItem("email")} />
           <input name="responseUrl" type="hidden" value="http://www.test.com/response" />
           <input name="confirmationUrl" type="hidden" value="http://localhost:5173/home" />
-          <Button name="Submit" type="submit" variant="" style={{ backgroundColor: "black", color: "white", marginLeft: "390px", marginTop: "50px" }} >
+          <Button name="Submit" type="submit" variant="" style={{ backgroundColor: "black", color: "white"}} >
             PAGAR
           </Button>
         </form>

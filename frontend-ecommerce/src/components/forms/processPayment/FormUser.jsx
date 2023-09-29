@@ -1,43 +1,51 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 /* MATERIAL UI */
-import { CssBaseline, AppBar, Box, Container, Paper, Stepper, Step, StepLabel, Button, Typography } from '@mui/material';
+import {
+  CssBaseline,
+  AppBar,
+  Box,
+  Container,
+  Paper,
+  Stepper,
+  Step,
+  StepLabel,
+  Button,
+  Typography,
+} from "@mui/material";
 /* COMPONENTS */
-import AddressForm from './AddressForm';
+import AddressForm from "./AddressForm";
 /* import PaymentForm from './PaymentForm'; */
-import Review from './Review';
+import Review from "./Review";
 
-
-const steps = ['Dirección de envío', 'Revise su orden'];
+const steps = ["Dirección de envío", "Revise su orden"];
 
 function GetStepContent(step, handleForm) {
   switch (step) {
     case 0:
-      return <AddressForm onFormValid={handleForm}/>;
+      return <AddressForm onFormValid={handleForm} />;
     case 1:
       /* return <PaymentForm />; */
       return <Review />;
-   
+
     default:
-      throw new Error('Paso desconocido');
+      throw new Error("Paso desconocido");
   }
 }
 
 function FormUserPayment() {
-
   const [isFormValid, setIsFormValid] = useState(false);
 
   const handleFormValidChange = (isValid) => {
     setIsFormValid(isValid);
   };
 
-
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = (valid) => {
     if (valid) {
       setActiveStep(activeStep + 1);
-     }
+    }
   };
 
   const handleBack = () => {
@@ -52,14 +60,17 @@ function FormUserPayment() {
         color="default"
         elevation={0}
         sx={{
-          position: 'relative',
+          position: "relative",
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
       >
         {/* Contenido de la barra de la aplicación si lo tienes */}
       </AppBar>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+        <Paper
+          variant="outlined"
+          sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
+        >
           <Typography component="h1" variant="h4" align="center">
             Formulario de pago
           </Typography>
@@ -76,10 +87,11 @@ function FormUserPayment() {
                 Gracias por su compra.
               </Typography>
               <Typography variant="subtitle1">
-                Su número de orden es #2001539.
-                Le hemos enviado por correo electrónico la confirmación de su pedido y le enviaremos una actualización cuando su pedido haya sido enviado.
+                Su número de orden es #2001539.a Le hemos enviado por correo
+                electrónico la confirmación de su pedido y le enviaremos una
+                actualización cuando su pedido haya sido enviado.
               </Typography>
-              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
                 <Button
                   variant=""
                   component={Link} // Utiliza el componente Link aquí
@@ -93,27 +105,42 @@ function FormUserPayment() {
           ) : (
             <React.Fragment>
               {GetStepContent(activeStep, handleFormValidChange)}
-              <Box sx={{ display: 'flex', justifyContent: 'flex-start', mt: 3 }}>
+              <Box
+                sx={{ display: "flex", justifyContent: "flex-start", mt: 3 }}
+              >
                 {activeStep !== 0 && (
-                  <Button onClick={handleBack} sx={{ ml: 1 }} style={{ backgroundColor: "black", color: "white", marginBottom:-40 }}>
+                  <Button
+                    onClick={handleBack}
+                    sx={{ ml: 1 }}
+                    style={{
+                      backgroundColor: "black",
+                      color: "white",
+                      marginBottom: -40,
+                    }}
+                  >
                     Atrás
                   </Button>
                 )}
               </Box>
 
-
-              <Button
-                variant=""
-                onClick={() => handleNext(isFormValid)}
-                sx={{ ml: 1 }}
-                disabled={!isFormValid}
-                style={{ backgroundColor: isFormValid ? "black" : "grey", color: "white", display: isFormValid === false ? 'none' : 'flex', marginLeft:390 }}
-              >
-                {activeStep === steps.length - 1 ? 
-                <div >
-                  <a href="https://biz.payulatam.com/B0f39fd66E753B3" style={{color: "white"}}>PAGAR</a>
-                </div> : 'Siguiente'}
-              </Button>
+              {activeStep === steps.length - 1 ? (
+                ""
+              ) : (
+                <Button
+                  variant=""
+                  onClick={() => handleNext(isFormValid)}
+                  sx={{ ml: 1 }}
+                  disabled={!isFormValid}
+                  style={{
+                    backgroundColor: isFormValid ? "black" : "grey",
+                    color: "white",
+                    display: isFormValid === false ? "none" : "flex",
+                    marginLeft: 390,
+                  }}
+                >
+                  Siguiente 
+                </Button>
+              )}
             </React.Fragment>
           )}
         </Paper>
