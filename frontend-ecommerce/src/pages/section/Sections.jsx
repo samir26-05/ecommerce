@@ -44,6 +44,7 @@ export default function Sections() {
   const [value, setValue] = React.useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 15;
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
 
   let navigate = useNavigate();
 
@@ -77,7 +78,7 @@ export default function Sections() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await axios.get("http://localhost:3000/product/");
+        const response = await axios.get(`${urlBackend}/product/`);
         setProducts(response.data.result);
         console.log(response.data.result);
       } catch (error) {

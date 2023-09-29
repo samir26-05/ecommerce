@@ -66,7 +66,7 @@ const Header = ({
       headerColor={headerColor}
       hovered={hovered}
     >
-      <Toolbar sx={{height:"100%"}}>
+      <Toolbar sx={{ height: "100%" }} className="header">
         <Typography
           className="Typography"
           variant="h2"
@@ -120,7 +120,6 @@ const Header = ({
                   isUsedBody={isUsedBody}
                   style={{
                     textDecoration: "none",
-
                     color:
                       isUsedUser || isUsedPayment
                         ? "#000"
@@ -136,37 +135,35 @@ const Header = ({
           ))}
         </Box>
 
-        
-          <div style={{display:"flex", alignItems:"center", gap:"25px"}}>
-            <Link
-              to="/user">
-              <a className="icon-user">
-                <BiUser
-                  style={{
-                    fontSize:"35px",
-                    fill:
-                      isUsedUser || isUsedPayment
-                        ? "#000"
-                        : hovered
-                        ? "#000"
-                        : textColor,
-                  }}
-                />
-              </a>
-            </Link>
-            <Carrito
-              allProducts={products}
-              setAllProducts={newProducts}
-              total={inTotal}
-              setTotal={newTotal}
-              countProducts={cantProducts}
-              setCountProducts={newCantProducts}
-              color={textColor}
-              hover={hovered}
-              pageUsed={isUsedUser}
-              pagePayment={isUsedPayment}
-            />
-          </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "25px" }}>
+          <Link to="/user">
+            <a className="icon-user">
+              <BiUser
+                style={{
+                  fontSize: "35px",
+                  fill:
+                    isUsedUser || isUsedPayment
+                      ? "#000"
+                      : hovered
+                      ? "#000"
+                      : textColor,
+                }}
+              />
+            </a>
+          </Link>
+          <Carrito
+            allProducts={products}
+            setAllProducts={newProducts}
+            total={inTotal}
+            setTotal={newTotal}
+            countProducts={cantProducts}
+            setCountProducts={newCantProducts}
+            color={textColor}
+            hover={hovered}
+            pageUsed={isUsedUser}
+            pagePayment={isUsedPayment}
+          />
+        </div>
       </Toolbar>
     </Container>
   );

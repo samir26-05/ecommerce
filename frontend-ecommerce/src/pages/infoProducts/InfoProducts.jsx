@@ -12,6 +12,7 @@ import {
   ButtonBuys,
   ColorProducts,
   Buys,
+  ModalContent,
 } from "./styleProducts";
 import Header from "../../components/Layout/header/Header";
 import { useState, useEffect } from "react";
@@ -19,12 +20,25 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AddProduct from "../../utils";
 import Loading from "../../components/loading/Loading";
+import { Modal } from "@mui/material";
 
 const InfoProducts = () => {
   const { name } = useParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userEnterUser, setUserEnterUser] = useState(false);
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
   let navigate = useNavigate();
 
   const verifyEnter = () => {
@@ -50,7 +64,7 @@ const InfoProducts = () => {
 
   async function fetchProducts() {
     try {
-      const response = await axios.get("http://localhost:3000/product");
+      const response = await axios.get(`${urlBackend}/product`);
       setProducts(response.data.result);
       console.log(response.data.result);
     } catch (error) {
@@ -81,40 +95,52 @@ const InfoProducts = () => {
       {loading ? (
         <Loading />
       ) : (
-        <MainDiv>
-          <Header isUsedUser={userEnterUser} />
-          <BoxMain>
-            <Section1>
-              <Image src={product.img_video} alt={product.name}></Image>
-            </Section1>
-            <Section2>
-              <Title>
-                <div className="Tiltle">{product.name}</div>
-                <div className="Reference">Ref: {product.product_id}</div>
-                <div className="Price">$ {product.price}</div>
-              </Title>
-              <ColorProducts>
-                <p className="Tiltle">Selecciona un color:</p>
-                {/* {product.img_video.map((img, index) => (
+        <>
+          <Modal open={modalOpen} onClose={handleCloseModal}>
+            <ModalContent>
+              <img src={product.img_video} alt={product.name} />
+            </ModalContent>
+          </Modal>
+          <MainDiv>
+            <Header isUsedUser={userEnterUser} />
+            <BoxMain>
+              <Section1>
+                <Image
+                  onClick={handleOpenModal}
+                  src={product.img_video}
+                  alt={product.name}
+                ></Image>
+              </Section1>
+              <Section2>
+                <Title>
+                  <div className="Tiltle">{product.name}</div>
+                  <div className="Reference">Ref: {product.product_id}</div>
+                  <div className="Price">$ {product.price}</div>
+                </Title>
+                <ColorProducts>
+                  <p className="Tiltle">Selecciona un color:</p>
+                  {/* {product.img_video.map((img, index) => (
                   <div className="Colores" key={index}>
                     <img src={img.img_video} alt={img.name} />
                   </div>
                 ))} */}
-                <div className="ColoresBox">
-                  <div className="Colores">
-                    <img src={product.img_video} alt={product.name} />
+                  <div className="ColoresBox">
+                    <div className="Colores">
+                      <img src={product.img_video} alt={product.name} />
+                    </div>
+                    <div className="Colores">
+                      <img src={product.img_video} alt={product.name} />
+                    </div>
+                    <div className="Colores">
+                      <img src={product.img_video} alt={product.name} />
+                    </div>
                   </div>
-                  <div className="Colores">
-                    <img src={product.img_video} alt={product.name} />
-                  </div>
-                  <div className="Colores">
-                    <img src={product.img_video} alt={product.name} />
-                  </div>
-                </div>
-              </ColorProducts>
-              <Sizes>
-                <p className="Tiltle">Selecciona una talla:</p>
-                {/* {product.Sizes.map((talla, index) => (
+                </ColorProducts>
+                <Sizes>
+                  <p className="Tiltle">
+                    Selecciona una talla: {product.size.size}{" "}
+                  </p>
+                  {/* {product.size.size.map((Size, index) => (
                   <button
                     className="Size"
                     style={{
@@ -125,25 +151,26 @@ const InfoProducts = () => {
                     onClick={() => handleSizeClick(index)}
                     key={index}
                   >
-                    {talla}
+                    {Size}
                   </button>
                 ))} */}
-                <div className="SizeBox">
-                  <button className="Size">S</button>
-                  <button className="Size">M</button>
-                  <button className="Size">L</button>
-                  <button className="Size">XL</button>
-                  <button className="Size">XXL</button>
-                </div>
-              </Sizes>
-              <AddProduct product={product}>
-                <ButtonBuys>
-                  <Buys>Añadir A La Cesta</Buys>
-                </ButtonBuys>
-              </AddProduct>
-            </Section2>
-          </BoxMain>
-        </MainDiv>
+                  <div className="SizeBox">
+                    <button className="Size">S</button>
+                    <button className="Size">M</button>
+                    <button className="Size">L</button>
+                    <button className="Size">XL</button>
+                    <button className="Size">XXL</button>
+                  </div>
+                </Sizes>
+                <AddProduct product={product}>
+                  <ButtonBuys>
+                    <Buys>Añadir A La Cesta</Buys>
+                  </ButtonBuys>
+                </AddProduct>
+              </Section2>
+            </BoxMain>
+          </MainDiv>
+        </>
       )}
     </div>
   );

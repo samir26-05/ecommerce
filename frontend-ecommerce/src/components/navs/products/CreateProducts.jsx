@@ -40,7 +40,7 @@ export const FormProduct = () => {
     async function fetchSections() {
       try {
         const response = await axios.get(
-          "http://localhost:3000/product/Section"
+          `${urlBackend}/product/Section`
         );
         setSections(response.data);
       } catch (error) {
@@ -51,7 +51,7 @@ export const FormProduct = () => {
     async function fetchCategories() {
       try {
         const response = await axios.get(
-          "http://localhost:3000/product/category"
+          `${urlBackend}/product/category`
         );
         setCategories(response.data);
       } catch (error) {
@@ -61,7 +61,7 @@ export const FormProduct = () => {
 
     async function fetchSizes() {
       try {
-        const response = await axios.get("http://localhost:3000/product/size");
+        const response = await axios.get(`${urlBackend}/product/size`);
         setSizes(response.data);
       } catch (error) {
         console.error("Error al obtener las tallas:", error);
@@ -70,7 +70,7 @@ export const FormProduct = () => {
 
     async function fetchBrands() {
       try {
-        const response = await axios.get("http://localhost:3000/product/brand");
+        const response = await axios.get(`${urlBackend}/product/brand`);
         setBrands(response.data);
       } catch (error) {
         console.error("Error al obtener las marcas:", error);
@@ -106,6 +106,7 @@ export const FormProduct = () => {
   };
 
   const token = localStorage.getItem("accessToken");
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
 
   const proper = Object(newProduct);
   const formData = new FormData();
@@ -114,7 +115,7 @@ export const FormProduct = () => {
 
   const CreateProduct = async (event) => {
     event.preventDefault();
-    axios.post("http://localhost:3000/product/create", formData, {
+    axios.post(`${urlBackend}/product/create`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           accessToken: token,

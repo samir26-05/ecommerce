@@ -23,6 +23,7 @@ export default function AddressForm() {
 
   const userName = localStorage.getItem("username");
   const token = localStorage.getItem("accessToken");
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
 
 
   const handleInputChange = (e) => {
@@ -42,7 +43,7 @@ export default function AddressForm() {
   const updateInfoPersonal = async () => {
     try {
       await axios.put(
-        `http://localhost:3000/user/personal_information/${userName}`,
+        `${urlBackend}/user/personal_information/${userName}`,
         oneClients,
         {
           headers: {
@@ -66,7 +67,7 @@ export default function AddressForm() {
     async function fetchOneClients() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/user/name/${userName}`,
+          `${urlBackend}/user/name/${userName}`,
           {
             headers: {
               accessToken: token,

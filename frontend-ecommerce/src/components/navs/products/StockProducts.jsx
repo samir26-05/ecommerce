@@ -12,7 +12,8 @@ export default function StockProducts() {
   const [error, setError] = useState(null); // Cambia 'null' por 'null' (sin comillas)
   const [tableData, setTableData] = useState(() => products);
   const [validationErrors, setValidationErrors] = useState({});
-
+  const urlBackend = import.meta.env.VITE_BACKEND_URL 
+  
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     //objeto para reconocer los values
     const updatedData = {
@@ -42,7 +43,7 @@ export default function StockProducts() {
       const productId = row.getValue("product_id");
 
       const response = await axios.put(
-        `http://localhost:3000/product/update/${productId}`,
+        `${urlBackend}/product/update/${productId}`,
         formData,
         {
           headers: {
@@ -86,7 +87,7 @@ export default function StockProducts() {
       //send api delete request here, then refetch or update local table data for re-render
       try {
         axios.delete(
-          `http://localhost:3000/product/delete/${row.getValue("product_id")}`,
+          `${urlBackend}/product/delete/${row.getValue("product_id")}`,
           {
             headers: {
               accessToken: localStorage.getItem("accessToken"),
@@ -176,7 +177,7 @@ export default function StockProducts() {
 
   async function fetchProducts() {
     try {
-      const response = await axios.get("http://localhost:3000/product/");
+      const response = await axios.get(`${urlBackend}/product/`);
       setProducts(response.data.result);
       // console.log(response.data.result);
       setLoading(false);

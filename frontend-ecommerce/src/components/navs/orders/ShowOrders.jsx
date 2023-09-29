@@ -18,10 +18,11 @@ const CrudOrders = () => {
   const [row, setRow] = useState([]);
   const [tableData, setTableData] = useState(() => orders);
   const [, setError] = useState();
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
 
   async function fetchOrders() {
     try {
-      const response = await axios.get(`http://localhost:3000/order`, {
+      const response = await axios.get(`${urlBackend}/order`, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },

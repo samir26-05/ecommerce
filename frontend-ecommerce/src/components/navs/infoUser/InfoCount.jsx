@@ -4,7 +4,7 @@ import { Button, Accordion, Typography, AccordionSummary, AccordionDetails, Card
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 /* COMPONENTS */
-import UpdatePass from "./UpdatePass";
+import UpdatePass   from "./UpdatePass";
 import DataPersonal from "./DataPersonal";
 import axios from "axios";
 import { BiPencil, BiUserCircle } from "react-icons/bi";
@@ -56,12 +56,13 @@ export default function InfoCountUser() {
 
   const token = localStorage.getItem("accessToken");
   const userName = localStorage.getItem("username");
-
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
+  
   useEffect(() => {
     async function fetchOneClients() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/user/name/${userName}`,
+          `${urlBackend}/user/name/${userName}`,
           {
             headers: {
               accessToken: token,
@@ -78,7 +79,7 @@ export default function InfoCountUser() {
     async function fetchAllOrders() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/order`,
+          `${urlBackend}/order`,
           {
             headers: {
               accessToken: token,
@@ -96,7 +97,7 @@ export default function InfoCountUser() {
         const ordersByStateData = {};
         for (const stateName of states) {
           const response = await axios.get(
-            `http://localhost:3000/order/status/${stateName}`,
+            `${urlBackend}/order/status/${stateName}`,
             {
               headers: {
                 accessToken: token,
@@ -138,7 +139,7 @@ export default function InfoCountUser() {
 
     try {
       const response = await axios.patch(
-        "http://localhost:3000/user/avatar", formData,
+        `${urlBackend}/user/avatar`, formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",

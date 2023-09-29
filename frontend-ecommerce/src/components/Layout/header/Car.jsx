@@ -81,47 +81,45 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
         >
           {allProducts.length ? (
             <>
-              <div>
+              <div className="Products">
                 {allProducts.map((product) => (
-                  <div className="cart-product" key={product.product_id}>
+                  <div className="Product" key={product.product_id}>
                     {" "}
                     {/* Aqui se cambió key={product.id} para quitar los errores de key*/}
-                    <Link
-                      to={`/InfoProducts/${product.name}`}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <div className="info-cart-product">
-                        <img
-                          src={product.img_video}
-                          alt=""
-                          style={{ width: 100, height: 120 }}
-                        />
-                        <span className="cantidad-producto-carrito">
-                          {product.quantity}
-                        </span>
-
-                        <div className="Infoon-product">
-                          <p className="titulo-producto-carrito">
-                            {product.name}
-                          </p>
-                          <span className="precio-producto-carrito">
-                            $ {product.price.toFixed()}
-                          </span>
-                        </div>
+                    <div className="infoProduct">
+                      <div className="Imgn">
+                        <Link to={`/InfoProducts/${product.name}`}>
+                          <img src={product.img_video} alt={product.name} />
+                        </Link>
                       </div>
-                    </Link>
-                    <div className="Infoon-product containerButtons">
-                      <div className="containeraddanddell">
+                      <div className="cantidad">
+                        <span>{product.quantity}</span>
+                      </div>
+                      <div className="Infoon-product">
+                        <Link
+                          to={`/InfoProducts/${product.name}`}
+                          className="link"
+                        >
+                          <p className="Tiltle">{product.name}</p>
+                          <span className="Size">
+                            Talla: {product.size.size}
+                          </span>
+                        </Link>
+                        <span className="Price">
+                          $ {product.price.toFixed()}
+                        </span>
+                      </div>
+                      <div className="Buttons">
                         <AddProduct product={product}>
-                          <button className="btnAdd O">
+                          <button className="btnAdd">
                             <MdAdd
                               className="iconAdd"
                               id="Fill"
-                              size={"14px"}
+                              size={"14.5px"}
                             />
                           </button>
                         </AddProduct>
-                        <button className="btnDell O">
+                        <button className="btnDell">
                           <AiOutlineMinus
                             className="iconDell"
                             onClick={() =>
@@ -133,31 +131,31 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                             size={"14px"}
                           />
                         </button>
+                        <button className="btndele">
+                          <svg
+                            viewBox="0 0 15 17.5"
+                            height="15"
+                            width="12.5"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="iconDele"
+                            onClick={() => onDeleteProduct(product)}
+                          >
+                            <path
+                              transform="translate(-2.5 -1.25)"
+                              d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
+                              id="Fill"
+                            ></path>
+                          </svg>
+                        </button>
                       </div>
-                      <button className="btndele O">
-                        <svg
-                          viewBox="0 0 15 17.5"
-                          height="15"
-                          width="12.5"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon"
-                          onClick={() => onDeleteProduct(product)}
-                        >
-                          <path
-                            transform="translate(-2.5 -1.25)"
-                            d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
-                            id="Fill"
-                          ></path>
-                        </svg>
-                      </button>
                     </div>
                   </div>
                 ))}
               </div>
-
-              <div className="cart-total">
-                <h3>Total:</h3>
-                <span className="total-pagar">${total.toFixed()}</span>
+              <div className="Total">
+                <div className="Tiltle">
+                  <h3>Total: ${total.toFixed()}</h3>
+                </div>
               </div>
               <div className="btns">
                 <Link to={"/payment"} style={{ textDecoration: "none" }}>
@@ -175,27 +173,19 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                   <span className="bottom-key-2"></span>
                 </button>
               </div>
-              <img src="" alt="" />
             </>
           ) : (
             <>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  textAlign: "center",
-                  marginTop: "150px",
-                }}
-              >
-                <img src={cesta} alt="" style={{ width: 200 }} />
-                <h3 className="cart-empty">El carrito está vacío</h3>
-                <h4 className="vacio">
+              <div className="Vacio">
+                <img src={cesta} alt="Img Cesta" className="VacioImg" />
+                <p className="Tiltle">El carrito está vacío</p>
+                <p className="Text">
                   Aún no tienes compras en nuestra tienda
-                </h4>
-                <span className="vacio">
-                  Pero puedes ver el catalogo ¡y te lo llevamos a casa!
-                </span>
+                  <br />
+                  <span>
+                    Pero puedes ver el catalogo ¡y te lo llevamos a casa!
+                  </span>
+                </p>
                 <br />
               </div>
             </>
