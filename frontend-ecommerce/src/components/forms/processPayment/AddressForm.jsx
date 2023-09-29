@@ -142,7 +142,7 @@ export default function AddressForm({ onFormValid }) {
               </Grid>
               <Grid item xs={12}>
                 <LoginBoxInput>
-                  <Field name="Phone_number" required />
+                  <Field name="Phone_number" required autofocus = 'focus'/>
                   <Error>
                     <ErrorMessage name="Phone_number" component="div" />
                   </Error>
