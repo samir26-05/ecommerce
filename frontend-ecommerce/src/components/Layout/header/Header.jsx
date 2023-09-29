@@ -112,6 +112,18 @@ const Header = ({
         ))}
       </div>
       <div className="BoxUser">
+        <Carrito
+          allProducts={products}
+          setAllProducts={newProducts}
+          total={inTotal}
+          setTotal={newTotal}
+          countProducts={cantProducts}
+          setCountProducts={newCantProducts}
+          color={textColor}
+          hover={hovered}
+          pageUsed={isUsedUser}
+          pagePayment={isUsedPayment}
+        />
         <a>
           <Link to="/user">
             <BiUser
@@ -127,18 +139,6 @@ const Header = ({
             />
           </Link>
         </a>
-        <Carrito
-          allProducts={products}
-          setAllProducts={newProducts}
-          total={inTotal}
-          setTotal={newTotal}
-          countProducts={cantProducts}
-          setCountProducts={newCantProducts}
-          color={textColor}
-          hover={hovered}
-          pageUsed={isUsedUser}
-          pagePayment={isUsedPayment}
-        />
       </div>
     </Container>
   );

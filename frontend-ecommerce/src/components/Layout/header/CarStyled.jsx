@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
-export const Header = styled.div`
-  .container-icon {
-    position: relative;
-  }
-
+export const Car = styled.div`
   .icon-cart,
   .icon-user {
     width: 40px;
@@ -18,37 +14,35 @@ export const Header = styled.div`
     }
   }
 
-  .count-products {
-    position: absolute;
-    top: 55%;
-    right: 0;
+  .Count {
     background-color: #000;
-    color: #fff;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    position: fixed;
+    top: 40px;
+    right: 83px;
+    z-index: 10;
+    span {
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      bottom: 2px;
+      font-size: 90%;
+      user-select: none;
+    }
     @media (max-width: 768px) {
-      top: 55%;
-      left: 70%;
-      width: 25px;
-      height: 25px;
-      z-index: 100;
+      right: 48px;
     }
   }
 
-  #contador-productos {
-    color: #fff;
-  }
-
-  .container-cart-products {
+  .BoxProducts {
     position: absolute;
-    top: 95%;
-    right: 90%;
+    left: 73%;
+    top: 69%;
     background-color: #ffffff;
-    z-index: 1;
+    z-index: 5;
     box-shadow: 0 0px 5px rgba(0, 0, 0, 0.39);
     width: 400px;
     height: 60vh;
@@ -56,12 +50,12 @@ export const Header = styled.div`
     @media (max-width: 768px) {
       width: 300px;
       height: 55vh;
-      top: 105%;
-      right: -150%;
+      top: 55px;
+      left: 53px;
     }
   }
 
-  .hidden-cart {
+  .ProductsOff {
     display: none;
   }
 
