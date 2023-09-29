@@ -15,12 +15,11 @@ const CreateProduct = z.object({
     price: z.number().nullable(),
     category_id: z.number().nullable(),
     id_section: z.number().nullable(),
-    stock: z.number().nullable(),
+    stock: z.number().nullable()
 })
 
 export function ValidRegisterProduct(object) {
     const result = CreateProduct.safeParseAsync(object);
     return result;
   }
-  
 
