@@ -1,27 +1,19 @@
 import multer from "multer";
 
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, '//jesus-afanador/uploads');
-    },
-    filename: function (req, file, cb) {
-      cb(null, `${Date.now()}-${file.originalname}`);
-    },
-    public: true,
-  }),
+const storageConfig = (destination) => multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, destination);
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+  public: true,
 });
-export const uploads = upload.single('file')
 
-const avatar = multer({
-  storage: multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, '//jesus-afanador/uploads/icon');
-    },
-    filename: function (req, file, cb) {
-      cb(null, `${Date.now()}-${file.originalname}`);
-    },
-    public: true,
-  }),
-});
-export const AvatarUploads = avatar.single('file')
+const createMulterUpload = (destination, fieldName) => {
+  const storage = storageConfig(destination);
+  return multer({ storage }).single(fieldName);
+};
+
+export const uploads = createMulterUpload('src/uploads', 'file');
+export const AvatarUploads = createMulterUpload('src/uploads/icon', 'file');

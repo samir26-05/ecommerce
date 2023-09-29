@@ -2,7 +2,7 @@ import { productos } from "../../models/productos/productos.js";
 import { sequelize } from "../../database.js";
 import { ValidRegisterProduct } from "../../schemas/productos/CreateProduct.js";
 import { ValidRegisterUpdate } from "../../schemas/productos/UpdateProduct.js";
-import { ipFileServer, urlArchivos } from "../../libs/constas.js";
+import { urlArchivos, Archivos } from "../../libs/constas.js";
 import { category } from "../../models/productos/categoria.js";
 import fs from "fs";
 import path from "path";
@@ -65,7 +65,7 @@ export const CreateProduct = async (req, res) => {
     if (validationResult.success) {
       const NewProduct = await productos.create({
         ...validationResult.data,
-        img_video: `${ipFileServer}${file.filename}`,
+        img_video: `${Archivos}${file.filename}`,
       });
       res
         .status(200)
@@ -101,10 +101,9 @@ export const UpdateProduct = async (req, res) => {
       if (ProductFound.img_video) {
         // Eliminar la imagen anterior
         const File = ProductFound.img_video.split("/").slice(3);
-        console.log(path.join(urlArchivos, File[2]));
         fs.unlinkSync(path.join(urlArchivos, File[2]));
       }
-      const ruta = encodeURI(ipFileServer + file.filename);
+      const ruta = encodeURI(Archivos + file.filename);
       // Actualizar la URL de la nueva imagen
       const NewUpdate = productos.update(
         {
