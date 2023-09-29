@@ -35,8 +35,12 @@ const ShowProducts = ({ products, currentPage, productsPerPage }) => {
             <CardContent>
               <Tiltle>{item.name}</Tiltle>
               <Price>
-                ${item.price}
-                <AddProduct product={item}>
+                {item.price.toLocaleString("es-CO", {
+                  style: "currency",
+                  currency: "COP",
+                  minimumFractionDigits: 0,
+                })}
+                <AddProduct product={item} stock={item.stock}>
                   <GiShoppingBag />
                 </AddProduct>
               </Price>

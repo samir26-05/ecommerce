@@ -23,7 +23,10 @@ export const Car = styled.div`
     top: 40px;
     right: 83px;
     z-index: 10;
+    transition: ease 0.5s;
     span {
+      width: 100%;
+      height: 100%;
       color: #fff;
       display: flex;
       justify-content: center;
@@ -31,6 +34,10 @@ export const Car = styled.div`
       bottom: 2px;
       font-size: 90%;
       user-select: none;
+      :hover {
+        bottom: 1px;
+        transform: scale(0.8);
+      }
     }
     @media (max-width: 768px) {
       right: 48px;

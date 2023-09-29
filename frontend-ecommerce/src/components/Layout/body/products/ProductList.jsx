@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { ContainerPrincipal, ContainerCard, Card, CardMedia, Tiltle, CardContent, Price, } from "./StyledProductList";
+import {
+  ContainerPrincipal,
+  ContainerCard,
+  Card,
+  CardMedia,
+  Tiltle,
+  CardContent,
+  Price,
+} from "./StyledProductList";
 import { GiShoppingBag } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -7,8 +15,8 @@ import AddProduct from "../../../../utils";
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const urlBackend = import.meta.env.VITE_BACKEND_URL
-  
+  const urlBackend = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     async function fetchProducts() {
       try {
@@ -46,8 +54,12 @@ export const ProductList = () => {
               <CardContent>
                 <Tiltle>{product.name}</Tiltle>
                 <Price>
-                  ${product.price}
-                  <AddProduct product={product}>
+                  {product.price.toLocaleString("es-CO", {
+                    style: "currency",
+                    currency: "COP",
+                    minimumFractionDigits: 0,
+                  })}
+                  <AddProduct product={product} stock={product.stock}>
                     <GiShoppingBag />
                   </AddProduct>
                 </Price>

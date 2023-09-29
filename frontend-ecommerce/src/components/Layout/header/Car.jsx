@@ -18,7 +18,10 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
     ? cart.reduce((count, product) => count + product.quantity, 0)
     : 0;
   const total = Array.isArray(cart)
-    ? cart.reduce((total, product) => product.price * product.quantity, 0)
+    ? cart.reduce(
+        (total, product) => total + product.price * product.quantity,
+        0
+      )
     : 0;
 
   const onDeleteProduct = (product) => {
@@ -93,10 +96,10 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                         <p className="Tiltle">{product.name}</p>
                         <span className="Size">Talla: {product.size.size}</span>
                       </Link>
-                      <span className="Price">$ {product.price.toFixed()}</span>
+                      <span className="Price">$ {product.price}</span>
                     </div>
                     <div className="Buttons">
-                      <AddProduct product={product}>
+                      <AddProduct product={product} stock={product.stock}>
                         <button className="btnAdd">
                           <MdAdd
                             className="iconAdd"
@@ -140,7 +143,14 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
             </div>
             <div className="Total">
               <div className="Tiltle">
-                <h3>Total: ${total.toFixed()}</h3>
+                <h3>
+                  Total:{" "}
+                  {total.toLocaleString("es-CO", {
+                    style: "currency",
+                    currency: "COP",
+                    minimumFractionDigits: 0,
+                  })}
+                </h3>
               </div>
             </div>
             <div className="btns">

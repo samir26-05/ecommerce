@@ -38,7 +38,7 @@ const InfoProducts = () => {
     setModalOpen(false);
   };
 
-  const urlBackend = import.meta.env.VITE_BACKEND_URL
+  const urlBackend = import.meta.env.VITE_BACKEND_URL;
   let navigate = useNavigate();
 
   const verifyEnter = () => {
@@ -115,7 +115,13 @@ const InfoProducts = () => {
                 <Title>
                   <div className="Tiltle">{product.name}</div>
                   <div className="Reference">Ref: {product.product_id}</div>
-                  <div className="Price">$ {product.price}</div>
+                  <div className="Price">
+                    {product.price.toLocaleString("es-CO", {
+                      style: "currency",
+                      currency: "COP",
+                      minimumFractionDigits: 0,
+                    })}
+                  </div>
                 </Title>
                 <ColorProducts>
                   <p className="Tiltle">Selecciona un color:</p>
@@ -162,7 +168,7 @@ const InfoProducts = () => {
                     <button className="Size">XXL</button>
                   </div>
                 </Sizes>
-                <AddProduct product={product}>
+                <AddProduct product={product} stock={product.stock}>
                   <ButtonBuys>
                     <Buys>Añadir A La Cesta</Buys>
                   </ButtonBuys>
