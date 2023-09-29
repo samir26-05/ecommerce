@@ -148,7 +148,7 @@ export default function Sections() {
           >
             <Tab className="Productos" label="productos" index={0} onClick={scrollToTop} />
             {Categories.map((item, index) => (
-              <Tab label={item.name} key={index} />
+              <Tab label={item.name} key={index} onClick={scrollToTop}/>
             ))}
           </Tabs>
         </div>
