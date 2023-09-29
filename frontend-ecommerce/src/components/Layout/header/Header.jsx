@@ -1,15 +1,12 @@
 /* eslint-disable react/prop-types */
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { Container, Cta, Span } from "./HeaderStyled";
-import { BiUser } from "react-icons/bi";
 import { Carrito } from "./Car";
+import { BiUser } from "react-icons/bi";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const pages = ["Inicio", "Mujer", "Hombre", /* "Todxs" */];
+export const pages = ["Inicio", "Mujer", "Hombre" /* "Todxs" */];
 
 const Header = ({
   products,
@@ -66,105 +63,83 @@ const Header = ({
       headerColor={headerColor}
       hovered={hovered}
     >
-      <Toolbar sx={{ height: "100%" }} className="header">
-        <Typography
-          className="Typography"
-          variant="h2"
-          noWrap
-          component="a"
+      <div className="BoxTiltle">
+        <a
           href="/home"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          sx={{
-            mr: 1,
-            display: { xs: "none", md: "flex" },
-            color: isUsedUser || isUsedPayment ? "#000" : "#fff" && textColor,
-            letterSpacing: ".8rem",
-            fontWeight: 700,
-            "&:hover": {
-              color: "#000",
-              textDecoration: "none",
-            },
+          style={{
+            color:
+              isUsedUser || isUsedPayment ? "#000000" : "#000000" && textColor,
           }}
         >
           KALARY
-        </Typography>
-
-        <Box
-          sx={{
-            flexGrow: 1,
-            display: { xs: "none", md: "flex" },
-            margin: "0 1%",
-          }}
-        >
-          {pages.map((page) => (
-            <Link
-              to={page === "Inicio" ? "/home" : `/section/${page}`}
-              key={page}
-              onClick={handleCloseNavMenu}
-              style={{
-                margin: "0 1%",
-                textDecoration: "none",
-                color:
-                  isUsedUser || isUsedPayment
-                    ? "#000"
-                    : hovered
-                    ? "#000"
-                    : textColor,
-              }}
-            >
-              <Cta>
-                <Span
-                  className="span"
-                  textColor={textColor}
-                  isUsedBody={isUsedBody}
-                  style={{
-                    textDecoration: "none",
-                    color:
-                      isUsedUser || isUsedPayment
-                        ? "#000"
-                        : hovered
-                        ? "#000"
-                        : textColor,
-                  }}
-                >
-                  {page}
-                </Span>
-              </Cta>
-            </Link>
-          ))}
-        </Box>
-
-        <div style={{ display: "flex", alignItems: "center", gap: "25px" }}>
-          <Link to="/user">
-            <a className="icon-user">
-              <BiUser
+        </a>
+      </div>
+      <div className="BoxNav">
+        {pages.map((page) => (
+          <Link
+            to={page === "Inicio" ? "/home" : `/section/${page}`}
+            key={page}
+            onClick={handleCloseNavMenu}
+            style={{
+              color:
+                isUsedUser || isUsedPayment
+                  ? "#000"
+                  : hovered
+                  ? "#000"
+                  : textColor,
+            }}
+          >
+            <Cta>
+              <Span
+                className="span"
+                textColor={textColor}
+                isUsedBody={isUsedBody}
                 style={{
-                  fontSize: "35px",
-                  fill:
+                  color:
                     isUsedUser || isUsedPayment
                       ? "#000"
                       : hovered
                       ? "#000"
                       : textColor,
                 }}
-              />
-            </a>
+              >
+                {page}
+              </Span>
+            </Cta>
           </Link>
-          <Carrito
-            allProducts={products}
-            setAllProducts={newProducts}
-            total={inTotal}
-            setTotal={newTotal}
-            countProducts={cantProducts}
-            setCountProducts={newCantProducts}
-            color={textColor}
-            hover={hovered}
-            pageUsed={isUsedUser}
-            pagePayment={isUsedPayment}
-          />
-        </div>
-      </Toolbar>
+        ))}
+      </div>
+      <div className="BoxUser">
+        <a>
+          <Link to="/user">
+            <BiUser
+              style={{
+                fill:
+                  isUsedUser || isUsedPayment
+                    ? "#000"
+                    : hovered
+                    ? "#000"
+                    : textColor,
+                fontSize: "30px",
+              }}
+            />
+          </Link>
+        </a>
+        <Carrito
+          allProducts={products}
+          setAllProducts={newProducts}
+          total={inTotal}
+          setTotal={newTotal}
+          countProducts={cantProducts}
+          setCountProducts={newCantProducts}
+          color={textColor}
+          hover={hovered}
+          pageUsed={isUsedUser}
+          pagePayment={isUsedPayment}
+        />
+      </div>
     </Container>
   );
 };

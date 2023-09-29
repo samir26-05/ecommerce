@@ -5,7 +5,7 @@ import cesta from "../../../assets/Img/cesta.png";
 import { useCart } from "../body/products/CardContext";
 import { MdAdd } from "react-icons/Md";
 import { AiOutlineMinus } from "react-icons/Ai";
-import { Header } from "./CarStyled";
+import { Car } from "./CarStyled";
 import AddProduct from "../../../utils";
 
 export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
@@ -47,7 +47,7 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
   };
 
   return (
-    <Header>
+    <Car>
       <div className="container-icon">
         <div onClick={() => setActive(!active)}>
           <svg
@@ -192,6 +192,6 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
           )}
         </div>
       </div>
-    </Header>
+    </Car>
   );
 };

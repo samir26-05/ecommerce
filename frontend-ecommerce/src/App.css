@@ -17,15 +17,8 @@ img {
   max-width: 100%;
 }
 
-@media (max-width: 768px) {
-  body {
-    font-size: 14px;
-    /* Establece un tamaño mínimo para el contenido principal */
-    min-width: 320px; /* Ejemplo de tamaño mínimo */
-  }
-}
-.hola{
+/* .hola{
   animation:scale-up-center 0.4s; } 
-@keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }
+@keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} } */
 
 
