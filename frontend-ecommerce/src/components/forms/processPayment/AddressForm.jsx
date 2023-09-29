@@ -27,7 +27,7 @@ export default function AddressForm({ onFormValid }) {
 
   const userName = localStorage.getItem("username");
   const token = localStorage.getItem("accessToken");
-  const urlBackend = import.meta.env.VITE_BACKEND_URL
+  const urlBackend = import.meta.env.VITE_BACKEND_URL;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target; // Desestructuramos el nombre y el valor del objeto evento
@@ -37,8 +37,7 @@ export default function AddressForm({ onFormValid }) {
     }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     updateInfoPersonal(oneClients);
   };
 
@@ -86,14 +85,16 @@ export default function AddressForm({ onFormValid }) {
   }, [userName]);
 
   const validationSchema = Yup.object().shape({
-    Phone_number: Yup.string().required("Debes ingresar un Número de teléfono *"),
+    Phone_number: Yup.string().required(
+      "Debes ingresar un Número de teléfono *"
+    ),
     address: Yup.string().required("Debes ingresar una dirección *"),
     city: Yup.string().required("Debes ingresar la cuidad de envío *"),
     country: Yup.string().required("Debes ingresar el país de envío *"),
     postalcode: Yup.string().required("Debes ingresar código postal *"),
     state: Yup.string().required("Debes ingresar una contraseña *"),
   });
-  
+
   const initialValues = {
     Phone_number: "",
     address: "",
@@ -142,7 +143,7 @@ export default function AddressForm({ onFormValid }) {
               </Grid>
               <Grid item xs={12}>
                 <LoginBoxInput>
-                  <Field name="Phone_number" required autofocus = 'focus'/>
+                  <Field name="Phone_number" required autofocus="focus" />
                   <Error>
                     <ErrorMessage name="Phone_number" component="div" />
                   </Error>
