@@ -1,6 +1,4 @@
 import {
-  BrowserRouter as Router,
-  Routes,
   Route,
   createBrowserRouter,
   createRoutesFromElements,
@@ -14,7 +12,6 @@ import Payment from "./pages/processPayment/Payment.jsx";
 import InfoProducts from "./pages/infoProducts/InfoProducts.jsx";
 import Sections from "./pages/section/Sections.jsx";
 import PageNotFound from "../src/components/PageNotFound/PageNotFound.jsx";
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>

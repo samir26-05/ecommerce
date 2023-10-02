@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
 export const Car = styled.div`
+  height: 100%;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   .icon-cart,
   .icon-user {
     width: 40px;
@@ -16,31 +21,24 @@ export const Car = styled.div`
 
   .Count {
     background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 .1%;
     border-radius: 100%;
-    width: 20px;
-    height: 20px;
-    position: fixed;
-    top: 40px;
-    right: 83px;
-    z-index: 10;
-    transition: ease 0.5s;
+    width: auto;
+    height: 28%;
+    position: absolute;
+    top: 58%;
+    margin-left: 1%;
+    overflow: hidden;
+    cursor: pointer;
     span {
-      width: 100%;
-      height: 100%;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      position: relative;
-      bottom: 2px;
-      font-size: 90%;
+      color: #ffffff;
       user-select: none;
-      :hover {
-        bottom: 1px;
-        transform: scale(0.8);
-      }
     }
     @media (max-width: 768px) {
-      right: 48px;
+      margin-left: 5%;
     }
   }
 

@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Container, Cta, Span } from "./HeaderStyled";
-import { Carrito } from "./Car";
 import { BiUser } from "react-icons/bi";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import CarBuys from "./Car";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const pages = ["Inicio", "Mujer", "Hombre" /* "Todxs" */];
@@ -36,8 +36,6 @@ const Header = ({
   const handleScroll = () => {
     const position = window.scrollY;
     setScrollPosition(position);
-
-    // Cambiar el color del header según la posición del scroll
     if (position > 100) {
       setHeaderColor("#fff");
       setTextColor("#000");
@@ -112,7 +110,7 @@ const Header = ({
         ))}
       </div>
       <div className="BoxUser">
-        <Carrito
+        <CarBuys
           allProducts={products}
           setAllProducts={newProducts}
           total={inTotal}
