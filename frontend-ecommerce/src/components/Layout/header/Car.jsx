@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import cesta from "../../../assets/Img/cesta.png";
 import { useCart } from "../body/products/CardContext";
 import { MdAdd } from "react-icons/Md";
-import { PiHandbag } from "react-icons/pi";
+import { LiaShoppingBagSolid } from "react-icons/lia";
 import { AiOutlineMinus } from "react-icons/Ai";
 import { Car } from "./CarStyled";
 import AddProduct from "../../../utils";
 
-export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
+const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
   const [active, setActive] = useState(false);
   const { cart, updateCart } = useCart();
 
@@ -54,23 +54,25 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
 
   return (
     <Car>
-      <PiHandbag
-        onClick={() => setActive(!active)}
-        style={{
-          fill: hover
-            ? "#000"
-            : "#fff" && pageUsed
-            ? "#000"
-            : color && pagePayment
-            ? "#000"
-            : color,
-          fontSize: "39px",
-          paddingTop: "10%",
-          cursor: "pointer"
-        }}
-      />
-      <div className="Count">
-        <span>{countProducts}</span>
+      <div>
+        <LiaShoppingBagSolid
+          onClick={() => setActive(!active)}
+          style={{
+            fill: hover
+              ? "#000"
+              : "#fff" && pageUsed
+              ? "#000"
+              : color && pagePayment
+              ? "#000"
+              : color,
+            fontSize: "39px",
+            paddingTop: "10%",
+            cursor: "pointer",
+          }}
+        />
+        <div className="Count">
+          <span>{countProducts}</span>
+        </div>
       </div>
       <div className={`BoxProducts ${active ? "" : "ProductsOff"}`}>
         {allProducts.length ? (
@@ -97,7 +99,13 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                         <p className="Tiltle">{product.name}</p>
                         <span className="Size">Talla: {product.size.size}</span>
                       </Link>
-                      <span className="Price">$ {product.price}</span>
+                      <span className="Price">
+                        {product.price.toLocaleString("es-CO", {
+                          style: "currency",
+                          currency: "COP",
+                          minimumFractionDigits: 0,
+                        })}
+                      </span>
                     </div>
                     <div className="Buttons">
                       <AddProduct product={product} stock={product.stock}>
@@ -191,3 +199,5 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
     </Car>
   );
 };
+
+export default CarBuys;

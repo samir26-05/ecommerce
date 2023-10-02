@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { Card, DivCards } from "./StyledCategory";
 
-// eslint-disable-next-line react/prop-types
 const CardCategory = ({ array }) => {
   return (
     <DivCards>

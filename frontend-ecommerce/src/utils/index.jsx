@@ -1,6 +1,8 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 import { useCart } from "../components/Layout/body/products/CardContext";
 import Swal from "sweetalert2";
+
 const AddProduct = ({ product, children, stock }) => {
   const { cart, updateCart } = useCart();
 

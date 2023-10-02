@@ -15,7 +15,6 @@ import { PageSections, Div } from "./SectionsStyled.jsx";
 import { FlexDirCol } from "../../components/StyledMain.jsx";
 import ShowProducts from "./ShowProducts.jsx";
 import FilterSections from "./FilterSections.jsx";
-import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay.jsx";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,7 +43,7 @@ export default function Sections() {
   const [value, setValue] = React.useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 15;
-  const urlBackend = import.meta.env.VITE_BACKEND_URL
+  const urlBackend = import.meta.env.VITE_BACKEND_URL;
 
   let navigate = useNavigate();
 
@@ -94,8 +93,9 @@ export default function Sections() {
     sectionProducts = products.filter(
       (product) => product.section.section === page
     );
-  } if (page === "Todxs") {
-      sectionProducts = products
+  }
+  if (page === "Todxs") {
+    sectionProducts = products;
   } else {
     categoryProducts = products.filter(
       (product) => product.category.category === page
@@ -131,6 +131,10 @@ export default function Sections() {
     };
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <PageSections ShadowColor={ShadowColor}>
       <Header isUsedUser={userEnterUser} />
@@ -146,9 +150,14 @@ export default function Sections() {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
           >
-            <Tab className="Productos" label="productos" index={0} onClick={scrollToTop} />
+            <Tab
+              className="Productos"
+              label="productos"
+              index={0}
+              onClick={scrollToTop}
+            />
             {Categories.map((item, index) => (
-              <Tab label={item.name} key={index} onClick={scrollToTop}/>
+              <Tab label={item.name} key={index} onClick={scrollToTop} />
             ))}
           </Tabs>
         </div>
