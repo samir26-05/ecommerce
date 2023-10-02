@@ -41,6 +41,7 @@ export const Div = styled.div`
   width: 100%;
   min-height: 74vh;
   background-color: #ffffff;
+  padding: 1% 10% 2% 10%;
 `;
 
 export const DivCards = styled.div`
@@ -58,6 +59,7 @@ export const DivCards = styled.div`
 export const ContainerCard = styled.div`
   box-sizing: border-box;
   width: 100%;
+  background-color: #ffffff;
 `;
 
 export const Card = styled.div`
