@@ -1,10 +1,10 @@
 import { Button, TextField, Box } from "@mui/material";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 export default function UpdatePass({ txtPassword, setTxtPassword }) {
-  
-  const urlBackend = import.meta.env.VITE_BACKEND_URL
+  const urlBackend = import.meta.env.VITE_BACKEND_URL;
 
   const handleInputChange = (e) => {
     setTxtPassword({
@@ -15,12 +15,19 @@ export default function UpdatePass({ txtPassword, setTxtPassword }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    updatePassword(txtPassword);
+    if (txtPassword.newpassword === txtPassword.confirmPassword) {
+      updatePassword(txtPassword);
+    } else {
+      Swal.fire("Error", "Las contraseñas no coinciden", "error");
+    }
   };
-
-  const handleDelete = () =>{
-    setTxtPassword("")
-  }
+  const handleDelete = () => {
+    setTxtPassword({
+      password: "",
+      newpassword: "",
+      confirmPassword: "",
+    });
+  };
 
   const updatePassword = async () => {
     try {
@@ -35,8 +42,7 @@ export default function UpdatePass({ txtPassword, setTxtPassword }) {
       );
       const successMessage = response.data;
       Swal.fire("CAMBIO EXITOSO!", successMessage, "success");
-      handleDelete()
-
+      handleDelete(); // Llamar a handleDelete después de un cambio exitoso
     } catch (error) {
       const messageError = error.response.data.message;
       Swal.fire(messageError, error, "error");
@@ -60,18 +66,28 @@ export default function UpdatePass({ txtPassword, setTxtPassword }) {
           label="Tu contraseña"
           name="password"
           onChange={handleInputChange}
-          type= 'password'
+          type="password"
           required
+          value={txtPassword.password}
         />
         <TextField
           id="outlined-multiline-flexible"
           label="Nueva contraseña"
           name="newpassword"
           onChange={handleInputChange}
-          type= 'password'
+          type="password"
           required
+          value={txtPassword.newpassword}
         />
-        {/* <TextField id="outlined-multiline-flexible" label="Confirmar nueva contraseña" multiline maxRows={4} required/> */}
+        <TextField
+          id="outlined-multiline-flexible"
+          label="Confirmar nueva contraseña"
+          name="confirmPassword"
+          onChange={handleInputChange}
+          type="password"
+          required
+          value={txtPassword.confirmPassword}
+        />
       </div>
       <div>
         <Button
