@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 // Importa el paquete swiper/bundle ## npm install swiper npm install react react-dom
-import { useEffect /* useState */ } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import Swiper from "swiper/bundle";
 import "./NewStyled.css";
 import { Div, NewsImg, Title } from "./NewStyled";
-// import * as SliderImg from '../../../../assets/Img/indexSlider';
 import Slider1_1 from "../../../../assets/Img/Slider1.1-min.jpg";
 import Slider1_2 from "../../../../assets/Img/Slider1.2-min.jpg";
 import Slider2_1 from "../../../../assets/Img/Slider2.1-min.jpg";
@@ -78,11 +80,26 @@ const sliderData = [
   },
 ];
 
+const Contacto = () => {
+  const [products, setProducts] = useState([]);
+  const urlBackend = import.meta.env.VITE_BACKEND_URL;
 
-function Contacto() {
+  // useEffect(() => {
+  //   async function fetchProducts() {
+  //     try {
+  //       const response = await axios.get(`${urlBackend}/product/`);
+  //       setProducts(response.data.result);
+  //     } catch (error) {
+  //       console.error("Error al obtener los productos:", error);
+  //     }
+  //   }
+
+  //   fetchProducts();
+  // }, []);
+
   useEffect(() => {
     const swiper = new Swiper(".slide-content", {
-      slidesPerView: 5,
+      slidesPerView: 10,
       spaceBetween: 8,
       loop: true,
       centerSlide: true,
@@ -114,7 +131,7 @@ function Contacto() {
         },
         950: {
           slidesPerView: 5,
-        },
+        }
       },
     });
 
@@ -126,7 +143,7 @@ function Contacto() {
   return (
     <>
       <Title>Novedades que no te puedes perder</Title>
-      <Div style={{ backgroundColor: "#fff" }}>
+      <Div style={{ backgroundColor: "#ffffff" }}>
         <div className="slide-container swiper">
           <div className="slide-content">
             <div className="card-wrapper swiper-wrapper">
