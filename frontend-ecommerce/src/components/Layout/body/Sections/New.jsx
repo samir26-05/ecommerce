@@ -78,6 +78,7 @@ const sliderData = [
   },
 ];
 
+
 function Contacto() {
   useEffect(() => {
     const swiper = new Swiper(".slide-content", {
