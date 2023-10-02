@@ -6,6 +6,16 @@ export const Car = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .svgIcon {
+    width: 6%;
+    left: 70%;
+    position: absolute;
+    path {
+      fill: #ffffff;
+    }
+  }
+
   .icon-cart,
   .icon-user {
     width: 40px;
@@ -24,9 +34,9 @@ export const Car = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 .1%;
+    padding: 0 0.1%;
     border-radius: 100%;
-    width: auto;
+    min-width: 20px;
     height: 28%;
     position: absolute;
     top: 58%;
