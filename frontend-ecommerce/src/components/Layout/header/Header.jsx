@@ -122,7 +122,7 @@ const Header = ({
           pageUsed={isUsedUser}
           pagePayment={isUsedPayment}
         />
-        <a>
+        <div className="IconUser">
           <Link to="/user">
             <BiUser
               style={{
@@ -133,10 +133,12 @@ const Header = ({
                     ? "#000"
                     : textColor,
                 fontSize: "30px",
+                position: "relative",
+                top: "3px",
               }}
             />
           </Link>
-        </a>
+        </div>
       </div>
     </Container>
   );

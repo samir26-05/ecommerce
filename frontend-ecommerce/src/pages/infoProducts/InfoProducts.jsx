@@ -25,6 +25,7 @@ import { Modal } from "@mui/material";
 const InfoProducts = () => {
   const { name } = useParams();
   const [products, setProducts] = useState([]);
+  const [sizes, setSizes] = useState(["XS", "S", "M", "L", "XL"]);
   const [loading, setLoading] = useState(true);
   const [userEnterUser, setUserEnterUser] = useState(false);
 
@@ -52,8 +53,8 @@ const InfoProducts = () => {
       navigate("/");
     }
 
-    // Llama a la función fetchProducts dentro del efecto
     fetchProducts();
+    fetchSize();
 
     const trueEnter = verifyEnter();
     setUserEnterUser(trueEnter);
@@ -69,6 +70,16 @@ const InfoProducts = () => {
       console.log(response.data.result);
     } catch (error) {
       console.error("Error al obtener los productos:", error);
+    }
+  }
+
+  async function fetchSize() {
+    try {
+      const response = await axios.get(`${urlBackend}product/size`);
+      setSizes(response.data.result);
+      console.log(response.data.result);
+    } catch (error) {
+      console.error("Error al obtener las tallas:", error);
     }
   }
 
@@ -142,32 +153,27 @@ const InfoProducts = () => {
                     </div>
                   </div>
                 </ColorProducts>
-                <Sizes>
-                  <p className="Tiltle">
-                    Selecciona una talla: {product.size.size}{" "}
-                  </p>
-                  {/* {product.size.size.map((Size, index) => (
-                  <button
-                    className="Size"
-                    style={{
-                      backgroundColor:
-                        selectedSize === index ? "black" : "white",
-                      color: selectedSize === index ? "white" : "black",
-                    }}
-                    onClick={() => handleSizeClick(index)}
-                    key={index}
-                  >
-                    {Size}
-                  </button>
-                ))} */}
-                  <div className="SizeBox">
-                    <button className="Size">S</button>
-                    <button className="Size">M</button>
-                    <button className="Size">L</button>
-                    <button className="Size">XL</button>
-                    <button className="Size">XXL</button>
-                  </div>
-                </Sizes>
+                {sizes.length > 0 && (
+                  <Sizes>
+                    <p className="Tiltle">Selecciona una talla:</p>
+                    <div className="SizeBox">
+                      {sizes.map((Size, index) => (
+                        <button
+                          className="Size"
+                          style={{
+                            backgroundColor:
+                              selectedSize === index ? "black" : "white",
+                            color: selectedSize === index ? "white" : "black",
+                          }}
+                          onClick={() => handleSizeClick(index)}
+                          key={index}
+                        >
+                          {Size}
+                        </button>
+                      ))}
+                    </div>
+                  </Sizes>
+                )}
                 <AddProduct product={product} stock={product.stock}>
                   <ButtonBuys>
                     <Buys>Añadir A La Cesta</Buys>
