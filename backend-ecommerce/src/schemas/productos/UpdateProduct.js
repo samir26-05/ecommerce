@@ -3,6 +3,7 @@ import z from "zod";
 const UpdateProduct = z.object({
     name: z.string().optional(),
     sizes_id: z.number().optional(),
+    shoe_size_id: z.number().optional(),
     descripcion: z.string().optional(),
     id_brands: z.number().optional(),
     price: z.number().optional(),
