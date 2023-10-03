@@ -30,7 +30,7 @@ export default function DetailsOrder({ order, seeOrder }) {
   const [table, setTable] = useState(seeOrder);
   const [products, setProducts] = useState([]);
   const [activeStep, setActiveStep] = useState(0);
-  const urlBackend = import.meta.env.VITE_BACKEND_URL
+  const urlBackend = import.meta.env.VITE_BACKEND_URL;
 
   const handleShowTable = () => {
     setTable(!table);
@@ -38,26 +38,27 @@ export default function DetailsOrder({ order, seeOrder }) {
   };
 
   useEffect(() => {
-  const searchProducts = async () => {
-    for (let i = 0; i < order.products.length; i++) {
-      try {
-        const response = await axios.get(`${urlBackend}/product/id/${order.products[i].product_id}`,{
-            headers: {
-              accessToken: localStorage.getItem("accessToken"),
-            },
-          }
-        );
-        setProducts([...products, response.data])
-      } catch (error) {
-        console.log(error);
+    const searchProducts = async () => {
+      for (const i in order.products) {
+        try {
+          const response = await axios.get(`${urlBackend}/product/id/${order.products[i].product_id}`,
+            {
+              headers: {
+                accessToken: localStorage.getItem("accessToken"),
+              },
+            }
+          );
+          
+          setProducts([...products, response.data]);
+        } catch (error) {
+          console.log(error);
+        }
       }
-    }
-  };
+    };
 
-  searchProducts(products)
-}, [])
-console.log(products,'products');
-
+    searchProducts(products);
+  }, []);
+  console.log(products, "products");
   return (
     <div style={{ width: "100%" }}>
       {table ? (

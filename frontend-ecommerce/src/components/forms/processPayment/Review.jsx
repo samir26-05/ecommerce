@@ -70,7 +70,7 @@ export default function Review() {
 
   const apiKey = '4Vj8eK4rloUd272L48hsrarnUA';// defecto
   const merchantId = '508029';// defecto
-  const referenceCode = '00012345678901234455';
+  const referenceCode = 1212212;
   const amount = subtotal;
   const currency = 'COP';// defecto
 
@@ -222,7 +222,7 @@ export default function Review() {
           <input name="merchantId" type="hidden" value="508029" />
           <input name="accountId" type="hidden" value="512321" />
           <input name="description" type="hidden" value="PAGOS ECOMMERCE KALARY" />
-          <input name="referenceCode" type="hidden" value="00012345678901234455" />
+          <input name="referenceCode" type="hidden" value={referenceCode} />
           <input name="amount" type="hidden" value={subtotal} />
           <input name="tax" type="hidden" value="0" />
           <input name="taxReturnBase" type="hidden" value="0" />
@@ -230,8 +230,8 @@ export default function Review() {
           <input name="signature" type="hidden" value={hash} />
           <input name="test" type="hidden" value="0" />
           <input name="buyerEmail" type="hidden" value={localStorage.getItem("email")} />
-          <input name="responseUrl" type="hidden" value="http://www.test.com/response" />
-          <input name="confirmationUrl" type="hidden" value="http://localhost:5173/home" />
+          <input name="responseUrl" type="hidden" value="http://localhost:5173/home" />
+          <input name="confirmationUrl" type="hidden" value="https://740a-186-147-59-58.ngrok.io/order/webhook" />
           <Button name="Submit" type="submit" onClick={() => createOrder()} variant="" style={{ backgroundColor: "black", color: "white"}} >
             PAGAR
           </Button>
