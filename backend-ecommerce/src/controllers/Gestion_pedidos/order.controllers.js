@@ -98,8 +98,22 @@ export const CreateOrder = async (req, res) => {
 export const webhook = async (req, res) => {
   const result =  req.body;
   console.log(result);
-  if (result.cc_holder == "APPROVED"){
-    
+  const orden = await Orden_compra.findOne({where: {reference: result.reference_sale}})
+  if (!result.cc_holder == "APPROVED" || orden.id_state == 1){    
+    orden.id_state = 3;
+    orden.save();
+    const product = await order_detail.findAll({where: {id_order: orden.id_order}})
+    const updateStock = product.map(async (value) => {
+    const productFound = await productos.findByPk(value.product_id)
+    await productos.update({
+      stock: productFound.stock - value.amount,
+    },{where: {product_id: value.product_id}})
+    })
+  return res.status(200).send("Pago Exitoso")
+  }else if (result.cc_holder != "APPROVED" || orden.id_state == 1){
+    orden.id_state = 2;
+    orden.save()
+    return res.status(400).send("Pago rechazado")
   }
-  res.send("webhook")
+  return res.status(200).send("Pago pendiente")
 }

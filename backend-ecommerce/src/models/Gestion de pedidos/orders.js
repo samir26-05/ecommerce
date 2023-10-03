@@ -35,7 +35,7 @@ export const Orden_compra = sequelize.define("order", {
     defaultValue: 1,
   },
   reference: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(250),
     allowNull: false,
   }
 },{
