@@ -2,8 +2,6 @@ import { Orden_compra } from "../../models/Gestion de pedidos/orders.js";
 import { productos } from "../../models/productos/productos.js";
 import { order_detail } from "../../models/Gestion de pedidos/order_detail.js";
 import { sequelize } from "../../database.js";
-import { Router } from "express";
-const router = Router()
 
 export const GetOrder = async (req, res) => {
   try {
@@ -16,6 +14,7 @@ export const GetOrder = async (req, res) => {
         "id_state",
         "iva",
         "total",
+        "reference",
         "createdAt",
         "updatedAt",
       ],
@@ -44,6 +43,7 @@ export const GetOrder = async (req, res) => {
         iva:item.iva,
         total_value: item.total,
         id_state: item.state.state,
+        reference: item.reference,
         createdAt: item.createdAt,
         updatedAt: item.updatedAt,
       };
@@ -66,6 +66,7 @@ export const CreateOrder = async (req, res) => {
       discount: result.discount, // Convierte la cadena JSON en objeto
       iva: result.iva,
       total: result.total,
+      reference: result.reference
     });
     const Products = await Promise.all(
       result.products.map(async(products)=>{
@@ -94,18 +95,11 @@ export const CreateOrder = async (req, res) => {
   }
 };
 
-const OrderSuccess = async (req ,res) => {
-  try {
-    console.log("hola como estas")
-  } catch (error) {
-    
-  }
-}
-
 export const webhook = async (req, res) => {
   const result =  req.body;
+  console.log(result);
   if (result.cc_holder == "APPROVED"){
-    await OrderSuccess   
+    
   }
   res.send("webhook")
 }
