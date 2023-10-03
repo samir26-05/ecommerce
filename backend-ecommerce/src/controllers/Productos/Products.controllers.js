@@ -34,6 +34,10 @@ export const GetProducts = async (req, res) => {
         {
           model: sequelize.model("section"),
         },
+        {
+          model: sequelize.model("shoe_size"),
+          attributes: ["shoe_size_name"]
+        }
       ],
     });
     if (!result) {

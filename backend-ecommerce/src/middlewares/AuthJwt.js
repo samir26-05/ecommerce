@@ -8,7 +8,6 @@ export const validatetoken = async (req,res,next) => {
 
     try {
         const validtoken = jwt.verify(accessToken,SECRET)
-        console.log(validatetoken)
         req.Username = validtoken.username
         req.UserId = validtoken.id;
         req.rol = validtoken.role 
