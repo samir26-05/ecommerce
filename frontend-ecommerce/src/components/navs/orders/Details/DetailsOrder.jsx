@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 /* MATERIAL UI */
 import { Button, Card, Box, Stepper, StepLabel, Step } from "@mui/material";
 import { CgLogOut } from "react-icons/cg";
@@ -37,6 +37,7 @@ export default function DetailsOrder({ order, seeOrder }) {
     console.log(table);
   };
 
+  useEffect(() => {
   const searchProducts = async () => {
     for (let i = 0; i < order.products.length; i++) {
       try {
@@ -47,16 +48,15 @@ export default function DetailsOrder({ order, seeOrder }) {
           }
         );
         setProducts([...products, response.data])
-        console.log(products);
       } catch (error) {
         console.log(error);
       }
     }
   };
 
-  if (seeOrder) {
-    searchProducts()
-  }
+  searchProducts(products)
+}, [])
+console.log(products,'products');
 
   return (
     <div style={{ width: "100%" }}>
