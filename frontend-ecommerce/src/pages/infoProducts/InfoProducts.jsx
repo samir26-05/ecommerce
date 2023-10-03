@@ -153,11 +153,11 @@ const InfoProducts = () => {
                     </div>
                   </div>
                 </ColorProducts>
-                {sizes.length > 0 && (
+                {/* {sizes.length > 0 && (
                   <Sizes>
                     <p className="Tiltle">Selecciona una talla:</p>
                     <div className="SizeBox">
-                      {sizes.map((Size, index) => (
+                      {product.Size_id.map((Size, index) => (
                         <button
                           className="Size"
                           style={{
@@ -173,7 +173,7 @@ const InfoProducts = () => {
                       ))}
                     </div>
                   </Sizes>
-                )}
+                )} */}
                 <AddProduct product={product} stock={product.stock}>
                   <ButtonBuys>
                     <Buys>Añadir A La Cesta</Buys>

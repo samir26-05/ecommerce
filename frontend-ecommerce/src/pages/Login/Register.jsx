@@ -34,14 +34,35 @@ const RegisterLogin = () => {
       .post(`${urlBackend}/user`, data)
       .then((response) => {
         const successMessage = response.data.message;
-        Swal.fire("REGISTRO EXITOSO!", successMessage, "success");
+        Swal.fire({
+          icon: "success",
+          title: "Registro Exitoso",
+          text: successMessage,
+          confirmButtonColor: "#000000",
+          iconColor: "#09ff00",
+          color: "#000",
+        });
         navigate("/");
       })
       .catch((error) => {
         const messageError1 = error.response.data.error[0].message;
         const messageError2 = error.response.data.error[0].message;
-        Swal.fire(messageError1, error, "error");
-        Swal.fire(messageError2, error, "error");
+        Swal.fire({
+          icon: "error",
+          title: messageError1,
+          confirmButtonColor: "#000000",
+          iconColor: "#ff0000",
+          color: "#000",
+          timer: 2000,
+        });
+        Swal.fire({
+          icon: "error",
+          title: messageError2,
+          confirmButtonColor: "#000000",
+          iconColor: "#ff0000",
+          color: "#000",
+          timer: 2000,
+        });
       });
   };
 

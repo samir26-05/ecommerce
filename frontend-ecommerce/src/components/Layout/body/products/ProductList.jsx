@@ -30,7 +30,7 @@ export const ProductList = () => {
 
     fetchProducts();
   }, []);
-
+  console.log(products);
   const textStyle = {
     textAlign: "center",
     padding: "3.5% 0 0.5% 0",
