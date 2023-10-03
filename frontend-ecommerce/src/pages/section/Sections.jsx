@@ -170,7 +170,8 @@ export default function Sections() {
             products={
               page === "Hombre" || page === "Mujer"
                 ? sectionProducts
-                : categoryProducts
+                : page === "Todxs" ?
+                products : categoryProducts
             }
             currentPage={currentPage}
             productsPerPage={productsPerPage}
