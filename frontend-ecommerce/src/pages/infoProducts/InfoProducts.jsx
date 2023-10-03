@@ -25,7 +25,7 @@ import { Modal } from "@mui/material";
 const InfoProducts = () => {
   const { name } = useParams();
   const [products, setProducts] = useState([]);
-  const [sizes, setSizes] = useState(["XS", "S", "M", "L", "XL"]);
+  const [sizes, setSizes] = useState([" ", " ", " "," "," "]);
   const [loading, setLoading] = useState(true);
   const [userEnterUser, setUserEnterUser] = useState(false);
 
@@ -63,7 +63,7 @@ const InfoProducts = () => {
     };
   }, []);
 
-  async function fetchProducts() {
+  const fetchProducts = async () => {
     try {
       const response = await axios.get(`${urlBackend}/product`);
       setProducts(response.data.result);
@@ -71,17 +71,17 @@ const InfoProducts = () => {
     } catch (error) {
       console.error("Error al obtener los productos:", error);
     }
-  }
+  };
 
-  async function fetchSize() {
+  const fetchSize = async () => {
     try {
-      const response = await axios.get(`${urlBackend}product/size`);
+      const response = await axios.get(`${urlBackend}/size`);
       setSizes(response.data.result);
       console.log(response.data.result);
     } catch (error) {
       console.error("Error al obtener las tallas:", error);
     }
-  }
+  };
 
   const [selectedSize, setSelectedSize] = useState(null);
   const handleSizeClick = (index) => {
