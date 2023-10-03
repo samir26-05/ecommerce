@@ -1,22 +1,21 @@
-import { DataTypes } from "sequelize";
 import { sequelize } from "../../database.js";
-
-export const talla = sequelize.define(
-  "size",
+import { DataTypes } from "sequelize";
+export const shoe_size = sequelize.define(
+  "shoe_size",
   {
-    sizes_id: {
+    shoe_size_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-      allownull: false,
+      allowNull: false,
     },
-    size: {
+    shoe_size_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
-    tableName: "size",
+    tableName: "shoe_size",
     timestamps: false,
   }
 );

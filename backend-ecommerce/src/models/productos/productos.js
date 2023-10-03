@@ -4,6 +4,7 @@ import { talla } from "./talla.js";
 import { marca } from "./brands.js";
 import { category } from "./categoria.js";
 import { section } from "./section.js";
+import { shoe_size } from "./shoe_size.js";
 export const productos = sequelize.define("product", {
   product_id: {
     type: DataTypes.INTEGER,
@@ -16,7 +17,11 @@ export const productos = sequelize.define("product", {
   },
   sizes_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
+  },
+  shoe_size_id: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
   },
   descripcion: {
     type: DataTypes.STRING,
@@ -80,4 +85,10 @@ productos.belongsTo(section,{
 })
 section.hasMany(productos,{
   foreignKey: "id_section",
+})
+productos.belongsTo(shoe_size,{
+  foreignKey: "shoe_size_id",
+})
+shoe_size.hasMany(productos,{
+  foreignKey: "shoe_size_id",
 })

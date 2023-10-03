@@ -62,6 +62,8 @@ export const CreateProduct = async (req, res) => {
         .status(400)
         .json({ error: JSON.parse(validationResult.error.message) });
     }
+    const talla = validationResult.sizes_id
+    console.log(talla)
     if (validationResult.success) {
       const NewProduct = await productos.create({
         ...validationResult.data,

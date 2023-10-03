@@ -5,6 +5,7 @@ import * as Category from "../controllers/Productos/category.controllers.js";
 import * as Section from "../controllers/Productos/Section.controllers.js";
 import * as size from "../controllers/Productos/size.controllers.js";
 import * as Product from "../controllers/Productos/Products.controllers.js";
+import * as shoe_size from "../controllers/Productos/shoe_size.controllers.js";
 import { uploads } from "../middlewares/multer.js";
 const router = Router();
 
@@ -29,4 +30,6 @@ router.get("/Section", Section.GetSection);
 // Routas de Tallas
 router.get("/size", size.Getsize);
 
+// Routas de tallas de zapatos
+router.get("/shoe_size",shoe_size.Getsize)
 export default router;
