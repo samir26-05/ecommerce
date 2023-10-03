@@ -81,6 +81,10 @@ export const Container = styled.div`
     @media (max-width: 768px) {
       gap: 10%;
     }
+    .IconUser{
+      background-color: #000;
+      width: 100%;
+    }
   }
 `;
 

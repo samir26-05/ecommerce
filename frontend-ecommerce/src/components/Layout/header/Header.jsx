@@ -122,9 +122,10 @@ const Header = ({
           pageUsed={isUsedUser}
           pagePayment={isUsedPayment}
         />
-        <a>
-          <Link to="/user">
+        <Link to="/user" style={{}}>
+          <div>
             <BiUser
+              className="IconUser"
               style={{
                 fill:
                   isUsedUser || isUsedPayment
@@ -132,11 +133,10 @@ const Header = ({
                     : hovered
                     ? "#000"
                     : textColor,
-                fontSize: "30px",
               }}
             />
-          </Link>
-        </a>
+          </div>
+        </Link>
       </div>
     </Container>
   );
