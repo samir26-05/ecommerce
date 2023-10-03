@@ -9,7 +9,8 @@ const CreateProduct = z.object({
         }
         return true;
     },{message: "este nombre ya lo tiene otro producto"}).nullable(),
-    sizes_id: z.number().nullable(),
+    sizes_id: z.number().optional(),
+    shoe_size_id: z.number().optional(),
     descripcion: z.string().nullable(),
     id_brands: z.number().nullable(),
     price: z.number().nullable(),

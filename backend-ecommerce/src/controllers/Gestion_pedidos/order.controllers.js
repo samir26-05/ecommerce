@@ -91,3 +91,19 @@ export const CreateOrder = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const OrderSuccess = async (req ,res) => {
+  try {
+    console.log("hola como estas")
+  } catch (error) {
+    
+  }
+}
+
+export const webhook = (req, res) => {
+  const result =  req.body;
+  if (result.cc_holder == "APPROVED"){
+
+  }
+  res.send("webhook")
+}
