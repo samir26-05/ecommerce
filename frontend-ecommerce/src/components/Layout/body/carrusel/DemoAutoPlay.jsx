@@ -1,10 +1,9 @@
 import { useState } from "react";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
-import BlackSuit from "../../../../assets/Img/blacksuit.jpg";
 import damaNegro from "../../../../assets/Img/damaNegro.jpg";
 import ropaNegro from "../../../../assets/Img/ropaNegro.jpg";
-
+import SliderImg1 from "../../../../assets/Img/SliderImg1.jpg";
 // eslint-disable-next-line react/prop-types
 const DemoAutoPlay = ({ vista }) => {
   const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -13,28 +12,36 @@ const DemoAutoPlay = ({ vista }) => {
 
   const styles = {
     root: {
-      position: "relative",
+      position: "sticky",
+      top: "0",
+      zIndex: "-100",
     },
     slide: {
       padding: 15,
       minHeight: minHeight,
       minWidth: 591,
       color: "#000000",
+      transition: "ease 2.5s",
     },
+    // slide1: {
+    //   backgroundImage: `url(${BlackSuit})`,
+    //   backgroundSize: "cover",
+    //   backgroundPosition: "center center",
+    // },
     slide1: {
-      backgroundImage: `url(${BlackSuit})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center center",
-    },
-    slide2: {
       backgroundImage: `url(${damaNegro})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
     },
-    slide3: {
+    slide2: {
       backgroundImage: `url(${ropaNegro})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
+    },
+    slide3: {
+      backgroundImage: `url(${SliderImg1})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center center",
     },
   };
 
@@ -49,6 +56,7 @@ const DemoAutoPlay = ({ vista }) => {
     <div style={styles.root}>
       <AutoPlaySwipeableViews
         index={index}
+        interval={5000}
         onChangeIndex={handleChangeIndex}
         enableMouseEvents
       >

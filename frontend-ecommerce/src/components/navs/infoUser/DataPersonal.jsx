@@ -1,38 +1,74 @@
 /* MATERIAL UI */
 import Box from '@mui/material/Box';
-import { Button, TextField, FormControlLabel, Radio } from '@mui/material';
+import { Button, TextField } from '@mui/material';
+import Swal from "sweetalert2";
+import axios from 'axios';
 
-export default function DataPersonal() {
+export default function DataPersonal({updateProfile, setUpdateProfile}) {
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target; 
+    setUpdateProfile((datosPrevios) => ({
+      ...datosPrevios,
+      [name]: value,
+    }));
+  };
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    updateInfoPersonal(updateProfile);
+  };
+
+  const userName = localStorage.getItem("username");
+  const token = localStorage.getItem("accessToken");
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
+
+  const updateInfoPersonal = async () => {
+    try {
+     const response = await axios.put(
+        `${urlBackend}/user/personal_information/${userName}`,
+        updateProfile,
+        {
+          headers: {
+            accessToken: token,
+          },
+        }
+      )
+
+      const successMessage = response.data.message;
+      Swal.fire("CAMBIO EXITOSO!", successMessage, "success");
+
+    } catch (error) {
+     
+      console.log("Error al actualizar los datos:", error);
+    }
+  };
+  
+
   return (
     <Box
       component="form"
       sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch', top: '20px' },
       }}
-      noValidate
       autoComplete="off"
+      onSubmit={handleSubmit}
     >
       <div>
-        <TextField id="outlined-multiline-flexible" label="Nombre*" multiline maxRows={3} />
-        <TextField id="outlined-multiline-flexible" label="Apellidos*" multiline maxRows={3} />
-        <TextField id="outlined-multiline-flexible" label="Direccion*" multiline maxRows={3} />
-        <TextField id="outlined-multiline-flexible" label="Completa tu direccion" multiline maxRows={3} />
+        <TextField id="outlined-multiline-flexible" label="Nombre" onChange={handleInputChange} name='nombre'/>
+        <TextField id="outlined-multiline-flexible" label="Apellido" name='apellido' onChange={handleInputChange} />
+        <TextField id="outlined-multiline-flexible" label="Direccion" name='address' onChange={handleInputChange} />
+        <TextField id="outlined-multiline-flexible" label="Ciudad" name='city' onChange={handleInputChange} />
       </div>
       <div>
-        <TextField id="outlined-multiline-flexible" label="Cod. Postal*" multiline maxRows={3} />
-        <TextField id="outlined-multiline-flexible" label="Departamento*" multiline maxRows={3} />
-        <TextField id="outlined-multiline-flexible" label="Municipio*" multiline maxRows={3} />
-        <TextField id="outlined-multiline-flexible" label="Region*" multiline maxRows={3} />
+        <TextField id="outlined-multiline-flexible" label="Pais" name='country' onChange={handleInputChange} />
+        <TextField id="outlined-multiline-flexible" label="Estado" name='state' onChange={handleInputChange} />
+        <TextField id="outlined-multiline-flexible" label="Codigo Postal" name='postalcode' onChange={handleInputChange} />
+        <TextField id="outlined-multiline-flexible" label="# Contacto" name='Phone_number' onChange={handleInputChange} />
       </div>
       <div>
-        <TextField id="outlined-multiline-flexible" label="Telefono movil*" multiline maxRows={3} />
-        <TextField id="outlined-multiline-flexible" label="No. Documento*" multiline maxRows={3} />
-        <FormControlLabel value="Hombre" control={<Radio />} label="Hombre" sx={{marginTop:4}} maxRows={3}/>
-        <FormControlLabel value="Mujer" control={<Radio />} label="Mujer" sx={{marginTop:4}} maxRows={3}/>
-        <TextField id="outlined-multiline-flexible" label="Fecha de nacimiento*" multiline maxRows={3} />
-      </div>
-      <div>
-        <Button variant="contained" style={{ backgroundColor: "black", marginTop: "45px", marginLeft: 430 }}>CAMBIAR</Button>
+        <Button type="submit" variant="contained"  style={{ backgroundColor: "black", marginTop: "45px", marginLeft: 430 }}>CAMBIAR</Button>
       </div>
     </Box>
   );

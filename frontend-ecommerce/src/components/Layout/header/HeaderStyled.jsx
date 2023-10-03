@@ -1,15 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  .BoxCar {
-    @media (max-width: 768px) {
-      left: 1200%;
-    }
-  }
   width: 100%;
   height: 8%;
-  z-index: 3;
   transition: all 0.2s ease-in-out;
+  z-index: 100;
+  display: flex;
+  align-items: center;
   background-color: ${({ isUsedUser, isUsedPayment, hovered, headerColor }) =>
     isUsedUser || isUsedPayment
       ? "#ffffff"
@@ -24,6 +21,73 @@ export const Container = styled.div`
       : "0px 0px 3px 2px #0000003b"};
   position: ${({ isUsedUser, isUsedBody }) =>
     isUsedUser || isUsedBody ? "fixed" : "relative"};
+
+  .BoxTiltle {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 2%;
+    height: 100%;
+    width: 20%;
+    a {
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      font-size: 3.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      letter-spacing: 0.8rem;
+      font-weight: 700;
+      :hover {
+        color: #000 !important;
+        text-decoration: none;
+      }
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+      }
+    }
+    /* @media (max-width: 768px) {
+      display: none;
+    } */
+    @media (max-width: 768px) {
+      width: 70%;
+    }
+  }
+
+  .BoxNav {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 2.5%;
+    height: 100%;
+    width: 50%;
+    /* @media (max-width: 768px) {
+      width: 50%;
+      padding-left: 5%;
+      gap: 10%;
+    } */
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .BoxUser {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 2%;
+    height: 100%;
+    width: 30%;
+    @media (max-width: 768px) {
+      gap: 10%;
+    }
+    .IconUser {
+      height: 100%;
+      width: 10%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 `;
 
 export const Cta = styled.button`
@@ -32,9 +96,6 @@ export const Cta = styled.button`
   :hover .span:after {
     transform: scaleX(1);
     transform-origin: bottom left;
-  }
-  :focus {
-    outline: none;
   }
 `;
 
@@ -48,14 +109,13 @@ export const Span = styled.span`
   :after {
     content: "";
     position: absolute;
-    width: 97%;
+    width: 95%;
     transform: scaleX(0);
-    height: 2px;
+    height: 6%;
     bottom: 0;
     left: 0;
+    transition: transform 0.25s ease-out;
     background-color: ${({ isUsedBody, textColor }) =>
       isUsedBody ? textColor : "#000"};
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
   }
 `;

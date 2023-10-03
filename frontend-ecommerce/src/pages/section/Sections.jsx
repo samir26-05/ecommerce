@@ -43,6 +43,7 @@ export default function Sections() {
   const [value, setValue] = React.useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 15;
+  const urlBackend = import.meta.env.VITE_BACKEND_URL;
 
   let navigate = useNavigate();
 
@@ -76,7 +77,7 @@ export default function Sections() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await axios.get("http://localhost:3000/product/");
+        const response = await axios.get(`${urlBackend}/product/`);
         setProducts(response.data.result);
         console.log(response.data.result);
       } catch (error) {
@@ -92,17 +93,52 @@ export default function Sections() {
     sectionProducts = products.filter(
       (product) => product.section.section === page
     );
-  } if (page === "Todxs") {
-      sectionProducts = products
+  }
+  if (page === "Todxs") {
+    sectionProducts = products;
   } else {
     categoryProducts = products.filter(
       (product) => product.category.category === page
     );
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const [ShadowColor, setShadowColor] = useState("#fff");
+  const [ScrollPosition, setScrollPosition] = useState(0);
+
+  const handleScroll = () => {
+    const position = window.scrollY;
+    setScrollPosition(position);
+
+    if (position > 100) {
+      setShadowColor("transparent");
+    } else {
+      setShadowColor("#fff");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <PageSections>
+    <PageSections ShadowColor={ShadowColor}>
       <Header isUsedUser={userEnterUser} />
+      {/* <DemoAutoPlay></DemoAutoPlay> */}
       <h1 className="Tiltle">{page}</h1>
       {page === "Mujer" || page === "Hombre" ? (
         <div className="Category">
@@ -114,9 +150,14 @@ export default function Sections() {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
           >
-            <Tab label="productos" index={0} />
+            <Tab
+              className="Productos"
+              label="productos"
+              index={0}
+              onClick={scrollToTop}
+            />
             {Categories.map((item, index) => (
-              <Tab label={item.name} key={index} />
+              <Tab label={item.name} key={index} onClick={scrollToTop} />
             ))}
           </Tabs>
         </div>
@@ -129,7 +170,8 @@ export default function Sections() {
             products={
               page === "Hombre" || page === "Mujer"
                 ? sectionProducts
-                : categoryProducts
+                : page === "Todxs" ?
+                products : categoryProducts
             }
             currentPage={currentPage}
             productsPerPage={productsPerPage}

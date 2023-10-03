@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import cesta from "../../../assets/Img/cesta.png";
 import { useCart } from "../body/products/CardContext";
 import { MdAdd } from "react-icons/Md";
+import { LiaShoppingBagSolid } from "react-icons/lia";
 import { AiOutlineMinus } from "react-icons/Ai";
-import { Header } from "./CarStyled";
+import { Car } from "./CarStyled";
 import AddProduct from "../../../utils";
 
-export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
+const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
   const [active, setActive] = useState(false);
   const { cart, updateCart } = useCart();
 
@@ -17,7 +18,10 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
     ? cart.reduce((count, product) => count + product.quantity, 0)
     : 0;
   const total = Array.isArray(cart)
-    ? cart.reduce((total, product) => product.price * product.quantity, 0)
+    ? cart.reduce(
+        (total, product) => total + product.price * product.quantity,
+        0
+      )
     : 0;
 
   const onDeleteProduct = (product) => {
@@ -37,110 +41,101 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
         existingProduct.quantity--;
       }
     } else {
-      updatedCart.push({ ...product, quantity: 1 });
+      alert("La cantidad mínima permitida es 1.");
+      // updatedCart.push({ ...product, quantity: 1 });
     }
 
     updateCart(updatedCart);
   };
+
   const onCleanCart = () => {
     updateCart([]);
   };
 
   return (
-    <Header>
-      <div className="container-icon">
-        <div onClick={() => setActive(!active)}>
-          <svg
-            className="icon-cart"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke={
-              hover
-                ? "#000"
-                : "#fff" && pageUsed
-                ? "#000"
-                : color && pagePayment
-                ? "#000"
-                : color
-            }
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-            />
-          </svg>
-          <div className="count-products">
-            <span id="contador-productos">{countProducts}</span>
-          </div>
+    <Car>
+      <div>
+        <LiaShoppingBagSolid
+          onClick={() => setActive(!active)}
+          style={{
+            fill: hover
+              ? "#000"
+              : "#fff" && pageUsed
+              ? "#000"
+              : color && pagePayment
+              ? "#000"
+              : color,
+            fontSize: "39px",
+            paddingTop: "10%",
+            cursor: "pointer",
+          }}
+        />
+        <div className="Count">
+          <span>{countProducts}</span>
         </div>
-        <div
-          className={`container-cart-products ${active ? "" : "hidden-cart"}`}
-        >
-          {allProducts.length ? (
-            <>
-              <div>
-                {allProducts.map((product) => (
-                  <div className="cart-product" key={product.product_id}>
-                    {" "}
-                    {/* Aqui se cambió key={product.id} para quitar los errores de key*/}
-                    <Link
-                      to={`/InfoProducts/${product.name}`}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <div className="info-cart-product">
-                        <img
-                          src={product.img_video}
-                          alt=""
-                          style={{ width: 100, height: 120 }}
-                        />
-                        <span className="cantidad-producto-carrito">
-                          {product.quantity}
-                        </span>
-
-                        <div className="Infoon-product">
-                          <p className="titulo-producto-carrito">
-                            {product.name}
-                          </p>
-                          <span className="precio-producto-carrito">
-                            $ {product.price.toFixed()}
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                    <div className="Infoon-product containerButtons">
-                      <div className="containeraddanddell">
-                        <AddProduct product={product}>
-                          <button className="btnAdd O">
-                            <MdAdd
-                              className="iconAdd"
-                              id="Fill"
-                              size={"14px"}
-                            />
-                          </button>
-                        </AddProduct>
-                        <button className="btnDell O">
-                          <AiOutlineMinus
-                            className="iconDell"
-                            onClick={() =>
-                              product.quantity === 1
-                                ? onDeleteProduct(product)
-                                : onDellProduct(product)
-                            }
+      </div>
+      <div className={`BoxProducts ${active ? "" : "ProductsOff"}`}>
+        {allProducts.length ? (
+          <>
+            <div className="Products">
+              {allProducts.map((product) => (
+                <div className="Product" key={product.product_id}>
+                  {" "}
+                  {/* Aqui se cambió key={product.id} para quitar los errores de key*/}
+                  <div className="infoProduct">
+                    <div className="Imgn">
+                      <Link to={`/InfoProducts/${product.name}`}>
+                        <img src={product.img_video} alt={product.name} />
+                      </Link>
+                    </div>
+                    <div className="cantidad">
+                      <span>{product.quantity}</span>
+                    </div>
+                    <div className="Infoon-product">
+                      <Link
+                        to={`/InfoProducts/${product.name}`}
+                        className="link"
+                      >
+                        <p className="Tiltle">{product.name}</p>
+                        <span className="Size">Talla: {product.size.size}</span>
+                      </Link>
+                      <span className="Price">
+                        {product.price.toLocaleString("es-CO", {
+                          style: "currency",
+                          currency: "COP",
+                          minimumFractionDigits: 0,
+                        })}
+                      </span>
+                    </div>
+                    <div className="Buttons">
+                      <AddProduct product={product} stock={product.stock}>
+                        <button className="btnAdd">
+                          <MdAdd
+                            className="iconAdd"
                             id="Fill"
-                            size={"14px"}
+                            size={"14.5px"}
                           />
                         </button>
-                      </div>
-                      <button className="btndele O">
+                      </AddProduct>
+                      <button className="btnDell">
+                        <AiOutlineMinus
+                          className="iconDell"
+                          onClick={() =>
+                            product.quantity === 1
+                              ? onDeleteProduct(product)
+                              : onDellProduct(product)
+                          }
+                          id="Fill"
+                          size={"14px"}
+                        />
+                      </button>
+                      <button className="btndele">
                         <svg
                           viewBox="0 0 15 17.5"
                           height="15"
                           width="12.5"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="icon"
+                          className="iconDele"
                           onClick={() => onDeleteProduct(product)}
                         >
                           <path
@@ -152,56 +147,60 @@ export const Carrito = ({ hover, pageUsed, pagePayment, color }) => {
                       </button>
                     </div>
                   </div>
-                ))}
+                </div>
+              ))}
+            </div>
+            <div className="Total">
+              <div className="Tiltle">
+                <h3>
+                  Total:{" "}
+                  {total.toLocaleString("es-CO", {
+                    style: "currency",
+                    currency: "COP",
+                    minimumFractionDigits: 0,
+                  })}
+                </h3>
               </div>
-
-              <div className="cart-total">
-                <h3>Total:</h3>
-                <span className="total-pagar">${total.toFixed()}</span>
-              </div>
-              <div className="btns">
-                <Link to={"/payment"} style={{ textDecoration: "none" }}>
-                  <button className="fancy pa">
-                    <span className="top-key"></span>
-                    <span className="text">Pagar</span>
-                    <span className="bottom-key-1"></span>
-                    <span className="bottom-key-2"></span>
-                  </button>
-                </Link>
-                <button className="fancy" onClick={onCleanCart}>
+            </div>
+            <div className="btns">
+              <Link to={"/payment"} style={{ textDecoration: "none" }}>
+                <button className="fancy pa">
                   <span className="top-key"></span>
-                  <span className="text">Vaciar Carrito</span>
+                  <span className="text">Pagar</span>
                   <span className="bottom-key-1"></span>
                   <span className="bottom-key-2"></span>
+                  <svg className="svgIcon" viewBox="0 0 576 512">
+                    <path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path>
+                  </svg>
                 </button>
-              </div>
-              <img src="" alt="" />
-            </>
-          ) : (
-            <>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  textAlign: "center",
-                  marginTop: "150px",
-                }}
-              >
-                <img src={cesta} alt="" style={{ width: 200 }} />
-                <h3 className="cart-empty">El carrito está vacío</h3>
-                <h4 className="vacio">
-                  Aún no tienes compras en nuestra tienda
-                </h4>
-                <span className="vacio">
+              </Link>
+              <button className="fancy" onClick={onCleanCart}>
+                <span className="top-key"></span>
+                <span className="text">Vaciar Carrito</span>
+                <span className="bottom-key-1"></span>
+                <span className="bottom-key-2"></span>
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="Vacio">
+              <img src={cesta} alt="Img Cesta" className="VacioImg" />
+              <p className="Tiltle">El carrito está vacío</p>
+              <p className="Text">
+                Aún no tienes compras en nuestra tienda
+                <br />
+                <span>
                   Pero puedes ver el catalogo ¡y te lo llevamos a casa!
                 </span>
-                <br />
-              </div>
-            </>
-          )}
-        </div>
+              </p>
+              <br />
+            </div>
+          </>
+        )}
       </div>
-    </Header>
+    </Car>
   );
 };
+
+export default CarBuys;

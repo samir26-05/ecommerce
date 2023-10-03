@@ -12,12 +12,13 @@ export default function ShowClients() {
 
   const [tableData, setTableData] = useState(() => clients);
   const [validationErrors, setValidationErrors] = useState({});
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
 
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     if (!Object.keys(validationErrors).length) {
       try {
         const response = await axios.put(
-          `http://localhost:3000/user/personal_information/id/${row.getValue("user_id")}`,
+          `${urlBackend}/user/personal_information/id/${row.getValue("user_id")}`,
           {
             nombre: values["Personal_information.nombre"],
             apellido: values["Personal_information.apellido"],
@@ -59,7 +60,7 @@ export default function ShowClients() {
     }
     //send api delete request here, then refetch or update local table data for re-render
     try {
-      axios.delete(`http://localhost:3000/user/delete/${row.getValue("user_id")}`, {
+      axios.delete(`${urlBackend}/user/delete/${row.getValue("user_id")}`, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -71,7 +72,6 @@ export default function ShowClients() {
       setError(error);
     }
   },
-
     [tableData]
   );
 
@@ -156,7 +156,7 @@ export default function ShowClients() {
 
   async function fetchClients() {
     try {
-      const response = await axios.get("http://localhost:3000/user/User", {
+      const response = await axios.get(`${urlBackend}/user/User`, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },

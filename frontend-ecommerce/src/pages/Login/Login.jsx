@@ -17,17 +17,18 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const vista = "login";
-
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
+  
   let navigate = useNavigate();
+
 
   const loginn = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/user/login", {
+      const response = await axios.post(`${urlBackend}/user/login`, {
         email: email,
         password: password,
       });
-      console.log(response);
       localStorage.setItem("accessToken", response.data);
       localStorage.setItem(
         "username",
@@ -39,7 +40,6 @@ const Login = () => {
       );
       navigate("/home");
     } catch (error) {
-      console.error(error);
       alert(error.response.data.message);
     }
   };

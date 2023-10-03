@@ -5,26 +5,34 @@ export const PageSections = styled.div`
   display: flex;
   flex-direction: column;
   .Tiltle {
+    background-color: #ffffff;
     width: 100%;
     text-align: center;
     letter-spacing: 3px;
     font-weight: 100;
     padding: 5% 0 1% 0;
+    margin: 0;
+    @media (max-width: 768px) {
+      padding: 20% 0 1% 0;
+  }
   }
   .Category {
     position: sticky;
-    top: 8%;
-    background-color: #fff;
+    top: 8.1%;
+    background-color: #ffffff;
+    box-shadow: ${({ ShadowColor }) =>
+      ShadowColor !== "#fff" ? "0px 0px 3px 2px #0000003b" : "none"};
     width: 100%;
     display: flex;
     justify-content: center;
-    .panel {
-    }
     .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
       color: #000;
     }
     .css-1aquho2-MuiTabs-indicator {
       background-color: #000000;
+    }
+    @media (max-width: 768px) {
+      top: 8%;
     }
   }
 `;
@@ -32,19 +40,26 @@ export const PageSections = styled.div`
 export const Div = styled.div`
   width: 100%;
   min-height: 74vh;
+  background-color: #ffffff;
+  padding: 1% 10% 2% 10%;
 `;
 
 export const DivCards = styled.div`
+  background-color: #ffffff;
   width: 100%;
   margin-bottom: 1%;
   display: grid;
   grid-gap: 10px;
   grid-template-columns: repeat(5, 1fr);
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 export const ContainerCard = styled.div`
   box-sizing: border-box;
   width: 100%;
+  background-color: #ffffff;
 `;
 
 export const Card = styled.div`
@@ -67,7 +82,7 @@ export const Card = styled.div`
     text-align: center;
   }
   @media (max-width: 768px) {
-    width: 90%;
+    width: 100%;
   }
 `;
 

@@ -1,7 +1,9 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 import { useCart } from "../components/Layout/body/products/CardContext";
+import Swal from "sweetalert2";
 
-const AddProduct = ({ product, children }) => {
+const AddProduct = ({ product, children, stock }) => {
   const { cart, updateCart } = useCart();
 
   const onAddProduct = (product) => {
@@ -11,12 +13,34 @@ const AddProduct = ({ product, children }) => {
     );
 
     if (existingProduct) {
-      existingProduct.quantity++;
+      if (existingProduct.quantity < stock) {
+        existingProduct.quantity++;
+        updateCart(updatedCart);
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Cantidad de producto no disponible.",
+          confirmButtonColor: "#000",
+          iconColor: "red",
+          color: "#000",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+      }
     } else {
-      updatedCart.push({ ...product, quantity: 1 });
+      if (stock > 0) {
+        updatedCart.push({ ...product, quantity: 1 });
+        updateCart(updatedCart);
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Cantidad de producto no disponible.",
+          confirmButtonColor: "#000",
+          iconColor: "red",
+          color: "#000",
+        });
+      }
     }
-
-    updateCart(updatedCart);
   };
 
   return (

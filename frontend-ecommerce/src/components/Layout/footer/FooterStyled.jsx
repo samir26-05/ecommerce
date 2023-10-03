@@ -4,6 +4,7 @@ import { Paper } from "@mui/material";
 export const Div = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: #fff;
   width: 100%;
   .Content {
     height: 80%;
@@ -55,6 +56,11 @@ export const Div = styled.div`
       text-align: start;
       width: 70%;
       a {
+        color: black;
+        cursor: pointer;
+      }
+      a:hover {
+        text-decoration: underline;
         color: black;
       }
     }

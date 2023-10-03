@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import {
   ContainerPrincipal,
@@ -7,39 +8,41 @@ import {
   Tiltle,
   CardContent,
   Price,
-  ProductTituloTextH2,
 } from "./StyledProductList";
 import { GiShoppingBag } from "react-icons/gi";
-import { Form, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import AddProduct from "../../../../utils";
 
-
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const urlBackend = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await axios.get("http://localhost:3000/product/");
+        const response = await axios.get(`${urlBackend}/product/`);
         setProducts(response.data.result);
       } catch (error) {
         console.error("Error al obtener los productos:", error);
       }
     }
 
-    // Llama a la función fetchProducts dentro del efecto
     fetchProducts();
   }, []);
 
+  const textStyle = {
+    textAlign: "center",
+    padding: "3.5% 0 0.5% 0",
+    margin: 0,
+    letterSpacing: "4px",
+    fontWeight: "350",
+    backgroundColor: "#fff",
+  };
 
   return (
     <>
-      <ProductTituloTextH2>
-      <h1 style={{ textAlign: "center", margin: "4% 0 1% 0", letterSpacing:"4px", fontWeight:"100"}}>
-        Productos Destacados
-        </h1>
-      </ProductTituloTextH2>
+      <h1 style={textStyle}>Productos Destacados</h1>
       <ContainerPrincipal>
         {products.slice(0, 8).map((product) => (
           <ContainerCard key={product.product_id}>
@@ -52,8 +55,12 @@ export const ProductList = () => {
               <CardContent>
                 <Tiltle>{product.name}</Tiltle>
                 <Price>
-                  ${product.price}
-                  <AddProduct product={product}>
+                  {product.price.toLocaleString("es-CO", {
+                    style: "currency",
+                    currency: "COP",
+                    minimumFractionDigits: 0,
+                  })}
+                  <AddProduct product={product} stock={product.stock}>
                     <GiShoppingBag />
                   </AddProduct>
                 </Price>

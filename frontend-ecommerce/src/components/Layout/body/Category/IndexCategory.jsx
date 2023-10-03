@@ -12,18 +12,17 @@ export const Categories = [
   { name: "Sudaderas", img: Sudaderas },
   { name: "Pantalones", img: Jeans },
   { name: "Zapatos", img: Zapatillas },
+  { name: "Accesorios", img: Camisetas },
 ];
 
 const IndexCategory = () => {
   return (
     <ContainerFather>
       <DivTitle>
-        <h2>Categorias</h2>
+        <span>Categorias</span>
       </DivTitle>
       <ContainerH>
-        <div className="BoxH">
-          <CardCategory array={Categories} />
-        </div>
+        <CardCategory array={Categories} />
       </ContainerH>
     </ContainerFather>
   );

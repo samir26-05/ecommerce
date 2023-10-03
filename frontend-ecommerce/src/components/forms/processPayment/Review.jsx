@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 /* MATERIAL UI */
 import Typography from '@mui/material/Typography';
-import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
@@ -12,7 +11,6 @@ import CryptoJS from 'crypto-js'
 import axios from "axios";
 /* COMPONENTS */
 import { useCart } from '../../Layout/body/products/CardContext';
-import TotalSummary from '../../navs/orders/Details/TotalSummary';
 
 
 export default function Review() {
@@ -31,13 +29,13 @@ export default function Review() {
 
   const token = localStorage.getItem("accessToken")
   const userName = localStorage.getItem("username");
-  console.log(token)
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
 
   useEffect(() => {
     async function fetchOneClients() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/user/name/${userName}`,
+          `${urlBackend}/user/name/${userName}`,
           {
             headers: {
               accessToken: token,
@@ -45,7 +43,6 @@ export default function Review() {
           }
         );
         setOneClients(response.data);
-        console.log(response.data, "❤️❤️❤️")
       } catch (error) {
         setError(error);
         Swal.fire({
@@ -82,7 +79,39 @@ export default function Review() {
 
   // Creamos el hash MD5
   const hash = CryptoJS.MD5(textToHash).toString();
-  console.log(hash);
+  
+  const createOrder = async () => {
+    try {
+      //Crear un nuevo array de objetos con el id y la cantidad del pedido
+      const productOrder = products.map(producto => ({
+        product_id: producto.product_id,
+        stock: producto.quantity,
+      }));
+      console.log(productOrder, 'asd');
+      await axios.post(`${urlBackend}/order/create`,
+        {
+          subtotal: subtotal,
+          discount: descuento,
+          iva: iva,
+          total: valorTotal,
+          products: productOrder
+        },
+        {
+          headers: {
+            accessToken: localStorage.getItem("accessToken")
+          }
+        }
+      )
+      // localStorage.removeItem("cart") //Limpiar carrito
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ocurrió un error al intentar crear la orden",
+      });
+      console.error(error);
+    }
+  }
 
 
   return (
@@ -203,7 +232,7 @@ export default function Review() {
           <input name="buyerEmail" type="hidden" value={localStorage.getItem("email")} />
           <input name="responseUrl" type="hidden" value="http://www.test.com/response" />
           <input name="confirmationUrl" type="hidden" value="http://localhost:5173/home" />
-          <Button name="Submit" type="submit" variant="" style={{ backgroundColor: "black", color: "white", marginLeft: "390px", marginTop: "50px" }} >
+          <Button name="Submit" type="submit" onClick={() => createOrder()} variant="" style={{ backgroundColor: "black", color: "white"}} >
             PAGAR
           </Button>
         </form>
