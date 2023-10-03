@@ -2,6 +2,7 @@ import { Orden_compra } from "../../models/Gestion de pedidos/orders.js";
 import { productos } from "../../models/productos/productos.js";
 import { order_detail } from "../../models/Gestion de pedidos/order_detail.js";
 import { sequelize } from "../../database.js";
+
 export const GetOrder = async (req, res) => {
   try {
     const result = await Orden_compra.findAll({
@@ -13,6 +14,7 @@ export const GetOrder = async (req, res) => {
         "id_state",
         "iva",
         "total",
+        "reference",
         "createdAt",
         "updatedAt",
       ],
@@ -41,6 +43,7 @@ export const GetOrder = async (req, res) => {
         iva:item.iva,
         total_value: item.total,
         id_state: item.state.state,
+        reference: item.reference,
         createdAt: item.createdAt,
         updatedAt: item.updatedAt,
       };
@@ -63,12 +66,12 @@ export const CreateOrder = async (req, res) => {
       discount: result.discount, // Convierte la cadena JSON en objeto
       iva: result.iva,
       total: result.total,
+      reference: result.reference
     });
     const Products = await Promise.all(
       result.products.map(async(products)=>{
         const {product_id,stock} =  products;
         const price = await productos.findOne({where: {product_id: product_id}})
-        console.log(price)
         if (stock > price.stock) {
           return res.status(404).json({message:`El stock del producto con el ID ${product_id} es insuficiente`});
         }
@@ -92,18 +95,11 @@ export const CreateOrder = async (req, res) => {
   }
 };
 
-export const OrderSuccess = async (req ,res) => {
-  try {
-    console.log("hola como estas")
-  } catch (error) {
-    
-  }
-}
-
-export const webhook = (req, res) => {
+export const webhook = async (req, res) => {
   const result =  req.body;
+  console.log(result);
   if (result.cc_holder == "APPROVED"){
-
+    
   }
   res.send("webhook")
 }
