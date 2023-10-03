@@ -7,6 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 import Swal from 'sweetalert2'
 import { Box, Button } from "@mui/material";
+import { v4 as uuidv4 } from 'uuid';
 import CryptoJS from 'crypto-js'
 import axios from "axios";
 /* COMPONENTS */
@@ -70,7 +71,7 @@ export default function Review() {
 
   const apiKey = '4Vj8eK4rloUd272L48hsrarnUA';// defecto
   const merchantId = '508029';// defecto
-  const referenceCode = '00012345678901234455';
+  const referenceCode = uuidv4();
   const amount = subtotal;
   const currency = 'COP';// defecto
 
@@ -83,18 +84,20 @@ export default function Review() {
   const createOrder = async () => {
     try {
       //Crear un nuevo array de objetos con el id y la cantidad del pedido
+      console.log(referenceCode, 'referencia');
       const productOrder = products.map(producto => ({
         product_id: producto.product_id,
         stock: producto.quantity,
       }));
       console.log(productOrder, 'asd');
-      await axios.post(`${urlBackend}/order/create`,
+      await axios.post(`https://e910-186-147-59-58.ngrok.io/order/webhook/order/create`,
         {
           subtotal: subtotal,
           discount: descuento,
           iva: iva,
           total: valorTotal,
-          products: productOrder
+          products: productOrder,
+          reference: referenceCode
         },
         {
           headers: {
@@ -222,7 +225,7 @@ export default function Review() {
           <input name="merchantId" type="hidden" value="508029" />
           <input name="accountId" type="hidden" value="512321" />
           <input name="description" type="hidden" value="PAGOS ECOMMERCE KALARY" />
-          <input name="referenceCode" type="hidden" value="00012345678901234455" />
+          <input name="referenceCode" type="hidden" value={referenceCode} />
           <input name="amount" type="hidden" value={subtotal} />
           <input name="tax" type="hidden" value="0" />
           <input name="taxReturnBase" type="hidden" value="0" />
@@ -230,8 +233,8 @@ export default function Review() {
           <input name="signature" type="hidden" value={hash} />
           <input name="test" type="hidden" value="0" />
           <input name="buyerEmail" type="hidden" value={localStorage.getItem("email")} />
-          <input name="responseUrl" type="hidden" value="http://www.test.com/response" />
-          <input name="confirmationUrl" type="hidden" value="http://localhost:5173/home" />
+          <input name="responseUrl" type="hidden" value="http://localhost:5173/home" />
+          <input name="confirmationUrl" type="hidden" value="https://e910-186-147-59-58.ngrok.io/order/webhook" />
           <Button name="Submit" type="submit" onClick={() => createOrder()} variant="" style={{ backgroundColor: "black", color: "white"}} >
             PAGAR
           </Button>
