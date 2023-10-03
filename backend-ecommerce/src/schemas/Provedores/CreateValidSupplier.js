@@ -8,7 +8,7 @@ const SchemaCreateProvedor = z.object({
             return false;
         }
         return true;
-    },{message: 'este Nombre de proveedor ya esta en el sistema'}),
+    },{message: 'Nombre de proveedor ya registrado en el sistema'}),
     PhoneNumber: z.string().nullable().refine((value) => {
         // Eliminar espacios en blanco y otros caracteres no numéricos
         if (!/^\d{10}$/.test(value)){

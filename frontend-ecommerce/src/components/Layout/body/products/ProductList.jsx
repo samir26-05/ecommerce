@@ -21,7 +21,7 @@ export const ProductList = () => {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await axios.get(`${urlBackend}/product/`);
+        const response = await axios.get(`${urlBackend}/product`);
         setProducts(response.data.result);
       } catch (error) {
         console.error("Error al obtener los productos:", error);
