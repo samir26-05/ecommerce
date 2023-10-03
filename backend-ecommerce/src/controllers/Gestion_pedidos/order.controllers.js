@@ -72,9 +72,6 @@ export const CreateOrder = async (req, res) => {
       result.products.map(async(products)=>{
         const {product_id,stock} =  products;
         const price = await productos.findOne({where: {product_id: product_id}})
-        if (stock > price.stock) {
-          return res.status(404).json({message:`El stock del producto con el ID ${product_id} es insuficiente`});
-        }
         const NewOrderDetails = await order_detail.create({
           id_order: NewOrder.id_order,
           product_id,
@@ -84,14 +81,14 @@ export const CreateOrder = async (req, res) => {
         return NewOrderDetails;
       })
     )
-  res.status(200).json({
+  return res.status(200).json({
     message: 'orden creada con exito',
     orden: NewOrder,
     detail_order: Products
   })
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: error.message });
+  return res.status(500).json({ error: error.message });
   }
 };
 
@@ -99,7 +96,7 @@ export const webhook = async (req, res) => {
   const result =  req.body;
   console.log(result);
   const orden = await Orden_compra.findOne({where: {reference: result.reference_sale}})
-  if (!result.cc_holder == "APPROVED" || orden.id_state == 1){    
+  if (!result.cc_holder === "APPROVED" && orden.id_state == 1){    
     orden.id_state = 3;
     orden.save();
     const product = await order_detail.findAll({where: {id_order: orden.id_order}})
@@ -110,7 +107,7 @@ export const webhook = async (req, res) => {
     },{where: {product_id: value.product_id}})
     })
   return res.status(200).send("Pago Exitoso")
-  }else if (result.cc_holder != "APPROVED" || orden.id_state == 1){
+  }else if (result.cc_holder !== "APPROVED" ){
     orden.id_state = 2;
     orden.save()
     return res.status(400).send("Pago rechazado")
