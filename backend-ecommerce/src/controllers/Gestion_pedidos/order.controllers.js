@@ -2,6 +2,9 @@ import { Orden_compra } from "../../models/Gestion de pedidos/orders.js";
 import { productos } from "../../models/productos/productos.js";
 import { order_detail } from "../../models/Gestion de pedidos/order_detail.js";
 import { sequelize } from "../../database.js";
+import { Router } from "express";
+const router = Router()
+
 export const GetOrder = async (req, res) => {
   try {
     const result = await Orden_compra.findAll({
@@ -68,7 +71,6 @@ export const CreateOrder = async (req, res) => {
       result.products.map(async(products)=>{
         const {product_id,stock} =  products;
         const price = await productos.findOne({where: {product_id: product_id}})
-        console.log(price)
         if (stock > price.stock) {
           return res.status(404).json({message:`El stock del producto con el ID ${product_id} es insuficiente`});
         }
@@ -92,7 +94,7 @@ export const CreateOrder = async (req, res) => {
   }
 };
 
-export const OrderSuccess = async (req ,res) => {
+const OrderSuccess = async (req ,res) => {
   try {
     console.log("hola como estas")
   } catch (error) {
@@ -100,10 +102,10 @@ export const OrderSuccess = async (req ,res) => {
   }
 }
 
-export const webhook = (req, res) => {
+export const webhook = async (req, res) => {
   const result =  req.body;
   if (result.cc_holder == "APPROVED"){
-
+    await OrderSuccess   
   }
   res.send("webhook")
 }
