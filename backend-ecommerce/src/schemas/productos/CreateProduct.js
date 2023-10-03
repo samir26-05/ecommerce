@@ -8,7 +8,7 @@ const CreateProduct = z.object({
             return false;
         }
         return true;
-    },{message: "este nombre ya lo tiene otro producto"}).nullable(),
+    },{message: "Nombre de producto repetido"}).nullable(),
     sizes_id: z.number().optional(),
     shoe_size_id: z.number().optional(),
     descripcion: z.string().nullable(),
