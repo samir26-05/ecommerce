@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
@@ -41,7 +38,9 @@ export default function Sections() {
   const [userEnterUser, setUserEnterUser] = useState(false);
   const [loading, setLoading] = useState(true);
   const [value, setValue] = React.useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPageProductos, setCurrentPageProductos] = useState(1);
+  const [currentPageHombre, setCurrentPageHombre] = useState(1);
+  const [currentPageMujer, setCurrentPageMujer] = useState(1);
   const productsPerPage = 15;
   const urlBackend = import.meta.env.VITE_BACKEND_URL;
 
@@ -49,10 +48,6 @@ export default function Sections() {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const handlePageChange = (event, newPage) => {
-    setCurrentPage(newPage);
   };
 
   const verifyEnter = () => {
@@ -87,15 +82,20 @@ export default function Sections() {
     fetchProducts();
   }, []);
 
-  let sectionProducts;
+  let sectionProductsHombre;
+  let sectionProductsMujer;
   let categoryProducts;
   if (page === "Hombre" || page === "Mujer") {
-    sectionProducts = products.filter(
-      (product) => product.section.section === page
+    sectionProductsHombre = products.filter(
+      (product) => product.section.section === "Hombre"
+    );
+    sectionProductsMujer = products.filter(
+      (product) => product.section.section === "Mujer"
     );
   }
   if (page === "Todxs") {
-    sectionProducts = products;
+    sectionProductsHombre = products;
+    sectionProductsMujer = products;
   } else {
     categoryProducts = products.filter(
       (product) => product.category.category === page
@@ -135,10 +135,24 @@ export default function Sections() {
     window.scrollTo(0, 0);
   }, []);
 
+  // Función para manejar el cambio de página para la categoría "PRODUCTOS"
+  const handlePageChangeProductos = (event, newPage) => {
+    setCurrentPageProductos(newPage);
+  };
+
+  // Función para manejar el cambio de página para la categoría "Hombre"
+  const handlePageChangeHombre = (event, newPage) => {
+    setCurrentPageHombre(newPage);
+  };
+
+  // Función para manejar el cambio de página para la categoría "Mujer"
+  const handlePageChangeMujer = (event, newPage) => {
+    setCurrentPageMujer(newPage);
+  };
+
   return (
     <PageSections ShadowColor={ShadowColor}>
       <Header isUsedUser={userEnterUser} />
-      {/* <DemoAutoPlay></DemoAutoPlay> */}
       <h1 className="Tiltle">{page}</h1>
       {page === "Mujer" || page === "Hombre" ? (
         <div className="Category">
@@ -169,38 +183,79 @@ export default function Sections() {
           <ShowProducts
             products={
               page === "Hombre" || page === "Mujer"
-                ? sectionProducts
-                : page === "Todxs" ?
-                products : categoryProducts
+                ? page === "Hombre"
+                  ? sectionProductsHombre.slice(
+                      (currentPageHombre - 1) * productsPerPage,
+                      currentPageHombre * productsPerPage
+                    )
+                  : sectionProductsMujer.slice(
+                      (currentPageMujer - 1) * productsPerPage,
+                      currentPageMujer * productsPerPage
+                    )
+                : page === "Todxs"
+                ? products.slice(
+                    (currentPageProductos - 1) * productsPerPage,
+                    currentPageProductos * productsPerPage
+                  )
+                : categoryProducts.slice(
+                    (currentPageProductos - 1) * productsPerPage,
+                    currentPageProductos * productsPerPage
+                  )
             }
-            currentPage={currentPage}
+            currentPage={
+              page === "Hombre"
+                ? currentPageHombre
+                : page === "Mujer"
+                ? currentPageMujer
+                : currentPageProductos
+            }
             productsPerPage={productsPerPage}
           />
-          {/* {sectionProducts.length > productsPerPage && (
+          {/* Paginación para la categoría "PRODUCTOS" */}
+          {page === "Todxs" && (
             <Pagination
-              count={Math.ceil(sectionProducts.length / productsPerPage)}
-              page={currentPage}
-              onChange={handlePageChange}
+              count={Math.ceil(products.length / productsPerPage)}
+              page={currentPageProductos}
+              onChange={              handlePageChangeProductos}
+              variant="outlined"
+              shape="rounded"
             />
-          )} */}
+          )}
+
+          {/* Paginación para la categoría "Hombre" */}
+          {page === "Hombre" && (
+            <Pagination
+              count={Math.ceil(sectionProductsHombre.length / productsPerPage)}
+              page={currentPageHombre}
+              onChange={handlePageChangeHombre}
+              variant="outlined"
+              shape="rounded"
+            />
+          )}
+
+          {/* Paginación para la categoría "Mujer" */}
+          {page === "Mujer" && (
+            <Pagination
+              count={Math.ceil(sectionProductsMujer.length / productsPerPage)}
+              page={currentPageMujer}
+              onChange={handlePageChangeMujer}
+              variant="outlined"
+              shape="rounded"
+            />
+          )}
         </CustomTabPanel>
         {Categories.map((item, index) => (
           <CustomTabPanel value={value} index={index + 1} key={index}>
             {page === "Mujer" || page === "Hombre" ? (
               <FilterSections
                 category={item.name}
-                sectionProducts={sectionProducts}
+                sectionProducts={
+                  page === "Hombre" ? sectionProductsHombre : sectionProductsMujer
+                }
               />
             ) : (
               <ShowProducts products={products} />
             )}
-            {/* {sectionProducts.length > productsPerPage && (
-              <Pagination
-                count={Math.ceil(sectionProducts.length / productsPerPage)}
-                page={currentPage}
-                onChange={handlePageChange}
-              />
-            )} */}
           </CustomTabPanel>
         ))}
       </Div>
@@ -208,3 +263,4 @@ export default function Sections() {
     </PageSections>
   );
 }
+
