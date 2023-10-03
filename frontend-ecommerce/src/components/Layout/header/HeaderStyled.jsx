@@ -75,15 +75,17 @@ export const Container = styled.div`
     justify-content: end;
     align-items: center;
     padding-right: 2%;
-    gap: 3%;
     height: 100%;
     width: 30%;
     @media (max-width: 768px) {
       gap: 10%;
     }
-    .IconUser{
-      background-color: #000;
-      width: 100%;
+    .IconUser {
+      height: 100%;
+      width: 10%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 `;

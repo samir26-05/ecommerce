@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Car = styled.div`
   height: 100%;
   width: 15%;
-  border: 1px solid #000;
   display: flex;
   align-items: center;
   justify-content: center;
