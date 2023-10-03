@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import CarBuys from "./Car";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const pages = ["Inicio", "Mujer", "Hombre" /* "Todxs" */];
+export const pages = ["Inicio", "Mujer", "Hombre", "Todxs"];
 
 const Header = ({
   products,
