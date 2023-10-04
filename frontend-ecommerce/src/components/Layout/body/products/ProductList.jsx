@@ -12,7 +12,6 @@ import {
 import { GiShoppingBag } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import AddProduct from "../../../../utils";
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -21,7 +20,7 @@ export const ProductList = () => {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await axios.get(`${urlBackend}/product/`);
+        const response = await axios.get(`${urlBackend}/product`);
         setProducts(response.data.result);
       } catch (error) {
         console.error("Error al obtener los productos:", error);
@@ -30,7 +29,6 @@ export const ProductList = () => {
 
     fetchProducts();
   }, []);
-
   const textStyle = {
     textAlign: "center",
     padding: "3.5% 0 0.5% 0",
@@ -60,9 +58,9 @@ export const ProductList = () => {
                     currency: "COP",
                     minimumFractionDigits: 0,
                   })}
-                  <AddProduct product={product} stock={product.stock}>
+                  <Link to={`/InfoProducts/${product.name}`}>
                     <GiShoppingBag />
-                  </AddProduct>
+                  </Link>
                 </Price>
               </CardContent>
             </Card>

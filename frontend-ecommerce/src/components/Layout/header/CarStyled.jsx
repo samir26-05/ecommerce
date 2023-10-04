@@ -47,15 +47,12 @@ export const Car = styled.div`
       color: #ffffff;
       user-select: none;
     }
-    @media (max-width: 768px) {
-      margin-left: 5%;
-    }
   }
 
   .BoxProducts {
     position: absolute;
-    left: 72%;
-    top: 69%;
+    left: 71.6%;
+    top: 72%;
     background-color: #ffffff;
     z-index: 5;
     box-shadow: 0 0px 5px rgba(0, 0, 0, 0.39);
@@ -65,8 +62,8 @@ export const Car = styled.div`
     @media (max-width: 768px) {
       width: 300px;
       height: 55vh;
-      top: 55px;
-      left: 53px;
+      top: 87%;
+      left: 27.5%;
     }
   }
 

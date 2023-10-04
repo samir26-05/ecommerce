@@ -15,7 +15,7 @@ const RegisterValidator = z.object({
       },
       {
         message:
-          "¡Nombre de Usuario Ya Registrado, Intenta Cambiarlo!",
+          "Nombre de usuario ya registrado, Intenta cambiarlo",
       }
     ),
   nombre: z.string().nullable(),
@@ -32,7 +32,7 @@ const RegisterValidator = z.object({
         }
         return true;
       },
-      { message: "¡Email Ya Registrado, Intenta Cambiarlo!" }
+      { message: "Email ya registrado, Intenta cambiarlo" }
     ),
   role_id: z.number().optional(),
 });

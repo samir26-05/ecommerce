@@ -26,6 +26,6 @@ export const isAdmin = async (req, res, next) => {
     if(roles.rol === 'Admin'){
         next()
     }else{
-        return res.status(403).json({message: 'se nesecitan permisos de administrador'})
+        return res.status(403).json({message: 'Nesecita permisos de administrador'})
     }
 }

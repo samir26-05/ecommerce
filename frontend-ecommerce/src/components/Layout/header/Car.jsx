@@ -42,7 +42,6 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
       }
     } else {
       alert("La cantidad mínima permitida es 1.");
-      // updatedCart.push({ ...product, quantity: 1 });
     }
 
     updateCart(updatedCart);
@@ -108,7 +107,11 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                       </span>
                     </div>
                     <div className="Buttons">
-                      <AddProduct product={product} stock={product.stock}>
+                      <AddProduct
+                        product={product}
+                        stock={product.stock}
+                        selectedSize={true}
+                      >
                         <button className="btnAdd">
                           <MdAdd
                             className="iconAdd"

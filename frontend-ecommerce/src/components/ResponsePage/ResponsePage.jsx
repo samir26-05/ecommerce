@@ -53,6 +53,7 @@ const Response = () => {
       referencePol
     ) {
       const fetchOrder = async () => {
+        console.log(referenceCode);
         const response = await axios.get(
           `${urlBackend}/order/reference/${referenceCode}`,
           {
@@ -99,6 +100,9 @@ const Response = () => {
 
   // VARIABLES DE ESTILO  
   const textPrimary = {fontWeight:"600", fontSize:"1rem", width:"fit-content"}
+  // const temp = order.filter((order) => order.id_order === 18)
+  const titles = ["Ref.", "Descripción", "Cantidad", "Precio unitario", "Precio Total"]
+  // console.log(temp, 'index');
 
   return (
     <ContainerP>
@@ -151,7 +155,7 @@ const Response = () => {
 
             {/* DATOS DEL CLIENTE */}
 
-          <FlexDirCol style={{alignItems:"flex-start", gap:"10px", width:"100%"}}>
+          {/* <FlexDirCol style={{alignItems:"flex-start", gap:"10px", width:"100%"}}>
             <h4>Datos del cliente</h4>
             <FlexRow style={{gap:"10px"}}>
               <Typography style={textPrimary}>Nombre: </Typography>
@@ -173,17 +177,16 @@ const Response = () => {
               <Typography style={textPrimary}>Correo: </Typography>
               <Typography style={{borderBottom:"1px solid #0000004b", width:"100%"}}>{oneClients.email}</Typography>
             </FlexRow>
-          </FlexDirCol>
+          </FlexDirCol> */}
         </FlexRow>
 
-        <div style={{width:"90%", border:"1px solid #000"}}>
-          <FlexRow style={{justifyContent:"space-around",}}>
-            <h5 style={{fontWeight:"700"}}>Ref.</h5>
-            <h5 style={{fontWeight:"700"}}>Descripción</h5>
-            <h5 style={{fontWeight:"700"}}>Cantidad</h5>
-            <h5 style={{fontWeight:"700"}}>Precio unitario</h5>
-            <h5 style={{fontWeight:"700"}}>Precio Total</h5>
+        <div style={{width:"90%"}}>
+          <FlexRow style={{justifyContent:"space-around", border:"1px solid #000"}}>
+            {titles.map((item, index) => (
+              <h5 key={index} style={{fontWeight:"700", borderLeft:"1px solid #000", lineHeight:"40px", margin:"0", textAlign:"center", width:"200px"}}>{item}</h5>
+            ))}
           </FlexRow>
+          
 
         </div>
 
