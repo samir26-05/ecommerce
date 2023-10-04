@@ -13,6 +13,8 @@ export const GetOrder = async (req, res) => {
         "subtotal",
         "id_state",
         "iva",
+        "method",
+        "shipment",
         "total",
         "reference",
         "createdAt",
@@ -53,6 +55,8 @@ export const GetOrder = async (req, res) => {
         subtotal: item.subtotal,
         discount: item.discount,
         iva: item.iva,
+        metodo: item.method,
+        envio: item.shipment,
         total_value: item.total,
         id_state: item.state.state,
         reference: item.reference,
@@ -76,6 +80,7 @@ export const CreateOrder = async (req, res) => {
       subtotal: result.subtotal,
       discount: result.discount, // Convierte la cadena JSON en objeto
       iva: result.iva,
+      shipment: result.shipment,
       total: result.total,
       reference: result.reference,
     });
@@ -100,17 +105,20 @@ export const CreateOrder = async (req, res) => {
       detail_order: Products,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ error: error.message });
   }
 };
 
 export const webhook = async (req, res) => {
   const result = req.body;
+  console.log(result)
   const orden = await Orden_compra.findOne({
     where: { reference: result.reference_sale },
   });
   if (result.cc_holder === "APPROVED" && orden.id_state == 1) {
     orden.id_state = 3;
+    orden.method = result.payment_method_name
     orden.save();
     const product = await order_detail.findAll({
       where: { id_order: orden.id_order },
@@ -185,6 +193,8 @@ export const GetUsername = async (req, res) => {
         subtotal: item.subtotal,
         discount: item.discount,
         iva: item.iva,
+        metodo: item.method,
+        envio: item.shipment,
         total_value: item.total,
         id_state: item.state.state,
         reference: item.reference,
@@ -248,13 +258,15 @@ export const Orden_reference = async (req,res) => {
         };
       }), // Convierte la cadena JSON en objeto
       subtotal: item.subtotal,
-      discount: item.discount,
-      iva: item.iva,
-      total_value: item.total,
-      id_state: item.state.state,
-      reference: item.reference,
-      createdAt: item.createdAt,
-      updatedAt: item.updatedAt,
+        discount: item.discount,
+        iva: item.iva,
+        metodo: item.method,
+        envio: item.shipment,
+        total_value: item.total,
+        id_state: item.state.state,
+        reference: item.reference,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
     };
   });
 res.status(200).json(parsedResults)

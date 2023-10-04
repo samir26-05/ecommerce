@@ -25,6 +25,14 @@ export const Orden_compra = sequelize.define("order", {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
+  method :{
+    type: DataTypes.STRING(50),
+    allowNull: true,
+  },
+  shipment: {
+    type: DataTypes.DOUBLE,
+    allowNull: true,
+  },
   total: {
     type: DataTypes.DOUBLE,
     allowNull: false,
