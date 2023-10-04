@@ -102,7 +102,7 @@ const CrudOrders = () => {
         }),
       },
       {
-        accessorKey: "paymentMethod",
+        accessorKey: "metodo",
         header: "Método de pago",
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
           ...cell,
