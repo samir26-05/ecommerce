@@ -106,14 +106,12 @@ export const CreateOrder = async (req, res) => {
       detail_order: Products,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ error: error.message });
   }
 };
 
 export const webhook = async (req, res) => {
   const result = req.body;
-  console.log(result)
   const orden = await Orden_compra.findOne({
     where: { reference: result.reference_sale },
   });
@@ -296,7 +294,6 @@ export const GetOrderStatus = async (req, res) => {
     console.log(result);
     res.status(200).json(result)
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error: error.message})
   }
 }
