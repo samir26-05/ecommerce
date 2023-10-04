@@ -1,15 +1,17 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ContainerP, } from "../PageNotFound/StylePageNotFound";
 import axios from "axios";
 import { FlexDirCol, FlexRow } from "../StyledMain";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Swal from "sweetalert2";
 
 const Response = () => {
   const navigate = useNavigate();
   const [order, setOrder] = useState();
+  const [products, setProducts] = useState();
+  const [deliveryDate, setDeliveryDate] = useState();
   const [transactionDate, setTransactionDate] = useState();
   const [numOrder, setNumOrder] = useState();
   const [oneClients, setOneClients] = useState();
@@ -53,7 +55,7 @@ const Response = () => {
       referencePol
     ) {
       const fetchOrder = async () => {
-        console.log(referenceCode);
+
         const response = await axios.get(
           `${urlBackend}/order/reference/${referenceCode}`,
           {
@@ -63,7 +65,7 @@ const Response = () => {
           }
         );
         setOrder(response.data);
-        console.log(response.data, 'orden');
+        setProducts(response.data.products);
       };
 
       fetchOrder();
@@ -78,7 +80,6 @@ const Response = () => {
             }
           );
           setOneClients(response.data);
-          console.log(response.data);
         } catch (error) {
           Swal.fire({
             icon: 'error',
@@ -87,7 +88,21 @@ const Response = () => {
           })
         }
       }
-  
+
+      const getDeliveryDate = (date) => {
+        const processingDate = new Date(date);
+        processingDate.setDate(processingDate.getDate() + 4);
+
+        const newYear = processingDate.getFullYear();
+        const newMonth = String(processingDate.getMonth() + 1).padStart(2, '0'); 
+        const newDay = String(processingDate.getDate()).padStart(2, '0');
+        
+        
+        const newDeliveryDate = `${newYear}-${newMonth}-${newDay}`;
+        setDeliveryDate(newDeliveryDate);
+      }
+
+      getDeliveryDate(processingDate)
       fetchOneClients();
 
 
@@ -100,9 +115,10 @@ const Response = () => {
 
   // VARIABLES DE ESTILO  
   const textPrimary = {fontWeight:"600", fontSize:"1rem", width:"fit-content"}
-  // const temp = order.filter((order) => order.id_order === 18)
-  const titles = ["Ref.", "Descripción", "Cantidad", "Precio unitario", "Precio Total"]
-  // console.log(temp, 'index');
+  const maps = {fontWeight:"700", borderLeft:"1px solid #000", lineHeight:"40px", margin:"0", textAlign:"center", width:"200px",}
+  const maps1 = {fontWeight:"500", borderLeft:"1px solid #000", lineHeight:"40px", margin:"0", textAlign:"center", width:"200px",}
+
+  const titles = ["Descripción", "Cantidad", "Precio unitario", "Precio Total"]
 
   return (
     <ContainerP>
@@ -155,7 +171,7 @@ const Response = () => {
 
             {/* DATOS DEL CLIENTE */}
 
-          {/* <FlexDirCol style={{alignItems:"flex-start", gap:"10px", width:"100%"}}>
+          <FlexDirCol style={{alignItems:"flex-start", gap:"10px", width:"100%"}}>
             <h4>Datos del cliente</h4>
             <FlexRow style={{gap:"10px"}}>
               <Typography style={textPrimary}>Nombre: </Typography>
@@ -163,33 +179,81 @@ const Response = () => {
             </FlexRow>
             <FlexRow style={{gap:"10px"}}>
               <Typography style={textPrimary}>Dirección: </Typography>
-              <Typography style={{borderBottom:"1px solid #0000004b", width:"100%"}}>{oneClients.Personal_information.address}</Typography>
+              <Typography style={{borderBottom:"1px solid #0000004b", width:"100%"}}>{oneClients?.Personal_information.address}</Typography>
             </FlexRow>
             <FlexRow style={{gap:"10px"}}>
               <Typography style={textPrimary}>ZIP: </Typography>
-              <Typography style={{borderBottom:"1px solid #0000004b", width:"100%"}}>{oneClients.Personal_information.postalcode}</Typography>
+              <Typography style={{borderBottom:"1px solid #0000004b", width:"100%"}}>{oneClients?.Personal_information.postalcode}</Typography>
             </FlexRow>
             <FlexRow style={{gap:"10px"}}>
               <Typography style={textPrimary}>Teléfono: </Typography>
-              <Typography style={{borderBottom:"1px solid #0000004b", width:"100%"}}>{oneClients.Personal_information.Phone_number}</Typography>
+              <Typography style={{borderBottom:"1px solid #0000004b", width:"100%"}}>{oneClients?.Personal_information.Phone_number}</Typography>
             </FlexRow>
             <FlexRow style={{gap:"10px"}}>
               <Typography style={textPrimary}>Correo: </Typography>
-              <Typography style={{borderBottom:"1px solid #0000004b", width:"100%"}}>{oneClients.email}</Typography>
+              <Typography style={{borderBottom:"1px solid #0000004b", width:"100%"}}>{oneClients?.email}</Typography>
             </FlexRow>
-          </FlexDirCol> */}
+          </FlexDirCol>
         </FlexRow>
 
         <div style={{width:"90%"}}>
-          <FlexRow style={{justifyContent:"space-around", border:"1px solid #000"}}>
+          <FlexRow style={{justifyContent:"space-between", border:"1px solid #000"}}>
             {titles.map((item, index) => (
-              <h5 key={index} style={{fontWeight:"700", borderLeft:"1px solid #000", lineHeight:"40px", margin:"0", textAlign:"center", width:"200px"}}>{item}</h5>
+              <h5 key={index} style={maps}>{item}</h5>
             ))}
           </FlexRow>
           
-
+          {products?.map((item, index) => (
+            <FlexRow key={index} style={{justifyContent:"space-between", border:"1px solid #000"}}>
+              <h5 style={maps1}>{item.producto}</h5>
+              <h5 style={maps1}>{item.cantidad}</h5>
+              <h5 style={maps1}>{item.valor_unitario}</h5>
+              <h5 style={maps1}>{item.valor}</h5>
+            </FlexRow>
+          ))}
         </div>
 
+        <div style={{width:"90%"}}>
+          <FlexRow style={{justifyContent:"space-between", border:"1px solid #000"}}>
+            <Typography style={maps}>Total Pedido</Typography>
+            <Typography style={maps}>${order?.total_value}</Typography>
+          </FlexRow>
+          {order?.discount > 0 ? 
+            <FlexRow style={{justifyContent:"space-between", border:"1px solid #000"}}>
+              <Typography style={maps}>Descuento total</Typography>
+              <Typography style={maps}>${order?.discount}</Typography>
+            </FlexRow>
+          :
+          ''}
+          <FlexRow style={{justifyContent:"space-between", border:"1px solid #000"}}>
+            <Typography style={maps}>Gastos de envío</Typography>
+            <Typography style={maps}>${order?.envio}</Typography>
+          </FlexRow>
+          <FlexRow style={{justifyContent:"space-between", border:"1px solid #000"}}>
+            <Typography style={maps}>Total a pagar</Typography>
+            <p style={maps1}>${order?.total_value - order?.discount}</p>
+          </FlexRow>
+        </div>
+        
+        <FlexRow style={{justifyContent:"space-between"}}>
+          <FlexDirCol style={{width:"100%"}}></FlexDirCol>
+          <FlexDirCol style={{alignItems:"flex-start", gap:"10px", width:"100%"}}>
+            <FlexRow style={{gap:"10px"}}>
+              <Typography style={textPrimary}>Dirección de entrega: </Typography>
+              <Typography sx={{pl:"20px"}} style={{borderBottom:"1px solid #0000004b", width:"50%"}}>{oneClients?.Personal_information.address}</Typography>
+            </FlexRow>
+            <FlexRow style={{gap:"10px"}}>
+              <Typography style={textPrimary}>Fecha de entrega estimada: </Typography>
+              <Typography sx={{pl:"20px"}} style={{borderBottom:"1px solid #0000004b", width:"43%"}}>{deliveryDate}</Typography>
+            </FlexRow>
+          </FlexDirCol>
+        </FlexRow>
+
+        <Link to={'/home'}>
+          <Button style={{backgroundColor:"#000", color:"#fff", padding:".8rem"}}>
+            Back to home
+          </Button>
+        </Link>
       </FlexDirCol>
     </ContainerP>
   );
