@@ -209,7 +209,7 @@ export const GetUsername = async (req, res) => {
 
 export const Orden_reference = async (req,res) => {
   try {
-  const refe = req.params
+  const {refe} = req.params
   const result = await Orden_compra.findOne({
     where : {reference: refe},
     attributes: [
@@ -219,6 +219,8 @@ export const Orden_reference = async (req,res) => {
       "subtotal",
       "id_state",
       "iva",
+      "method",
+      "shipment",
       "total",
       "reference",
       "createdAt",
@@ -238,16 +240,16 @@ export const Orden_reference = async (req,res) => {
         attributes: ["id_order", "product_id", "amount", "valor"],
       },
     ],
-  });
-  const result2 =await Promise.all(result[0].order_details.map(async(item)=> {
+  })
+  const orderDetails = Object.values(result.order_details);
+  const result2 =await Promise.all(orderDetails.map(async(item)=> {
     const ProductFound = await productos.findOne({where: {product_id: item.product_id}})
     return ProductFound
   })) 
-  const parsedResults = result.map((item) => {
-    return {
-      id_order: item.id_order,
-      user_id: item.user.user,
-      products:item.order_details.map((detail) => {
+  const parsedResults = {
+      id_order: result.id_order,
+      user_id: result.user.user,
+      products:orderDetails.map((detail) => {
         return {
           producto: result2[0].name,
           valor_unitario: result2[0].price,
@@ -256,18 +258,17 @@ export const Orden_reference = async (req,res) => {
           img: result2[0].img_video
         };
       }), // Convierte la cadena JSON en objeto
-      subtotal: item.subtotal,
-        discount: item.discount,
-        iva: item.iva,
-        metodo: item.method,
-        envio: item.shipment,
-        total_value: item.total,
-        id_state: item.state.state,
-        reference: item.reference,
-        createdAt: item.createdAt,
-        updatedAt: item.updatedAt,
+      subtotal: result.subtotal,
+        discount: result.discount,
+        iva: result.iva,
+        metodo: result.method,
+        envio: result.shipment,
+        total_value: result.total,
+        id_state: result.state.state,
+        reference: result.reference,
+        createdAt: result.createdAt,
+        updatedAt: result.updatedAt,
     };
-  });
 res.status(200).json(parsedResults)
 } catch (error) {
   res.status(500).json({error: error.message});
@@ -291,7 +292,6 @@ export const GetOrderStatus = async (req, res) => {
         },
       ],
     });
-    console.log(result);
     res.status(200).json(result)
   } catch (error) {
     res.status(500).json({ error: error.message})
