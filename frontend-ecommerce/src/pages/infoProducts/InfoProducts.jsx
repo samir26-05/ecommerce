@@ -25,7 +25,11 @@ import { Modal } from "@mui/material";
 const InfoProducts = () => {
   const { name } = useParams();
   const [products, setProducts] = useState([]);
-  const [sizes, setSizes] = useState([" ", " ", " "," "," "]);
+  const [sizes, setSizes] = useState(["S", "X", "XL", "M", "XXL"]);
+  const [sizesShoe, setSizesShoe] = useState("36", "38", "40", "41", "42");
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [sizeSelected, setSizeSelected] = useState(false); // Nuevo estado
+
   const [loading, setLoading] = useState(true);
   const [userEnterUser, setUserEnterUser] = useState(false);
 
@@ -54,7 +58,6 @@ const InfoProducts = () => {
     }
 
     fetchProducts();
-    fetchSize();
 
     const trueEnter = verifyEnter();
     setUserEnterUser(trueEnter);
@@ -73,23 +76,9 @@ const InfoProducts = () => {
     }
   };
 
-  const fetchSize = async () => {
-    try {
-      const response = await axios.get(`${urlBackend}/size`);
-      setSizes(response.data.result);
-      console.log(response.data.result);
-    } catch (error) {
-      console.error("Error al obtener las tallas:", error);
-    }
-  };
-
-  const [selectedSize, setSelectedSize] = useState(null);
   const handleSizeClick = (index) => {
-    if (selectedSize === index) {
-      setSelectedSize(null);
-    } else {
-      setSelectedSize(index);
-    }
+    setSelectedSize(index);
+    setSizeSelected(true);
   };
 
   const product = products.find((element) => element.name === name);
@@ -100,6 +89,7 @@ const InfoProducts = () => {
       </>
     );
   }
+  const category = product.category.category.toLowerCase();
 
   return (
     <div style={{ width: "100%", height: "100vh" }}>
@@ -153,11 +143,11 @@ const InfoProducts = () => {
                     </div>
                   </div>
                 </ColorProducts>
-                {/* {sizes.length > 0 && (
+                {category != "zapatos" ? (
                   <Sizes>
                     <p className="Tiltle">Selecciona una talla:</p>
                     <div className="SizeBox">
-                      {product.Size_id.map((Size, index) => (
+                      {sizes.map((Size, index) => (
                         <button
                           className="Size"
                           style={{
@@ -173,10 +163,34 @@ const InfoProducts = () => {
                       ))}
                     </div>
                   </Sizes>
-                )} */}
-                <AddProduct product={product} stock={product.stock}>
+                ) : (
+                  <Sizes>
+                    <p className="Tiltle">Selecciona una talla:</p>
+                    <div className="SizeBox">
+                      {sizesShoe.map((Size, index) => (
+                        <button
+                          className="Size"
+                          style={{
+                            backgroundColor:
+                              selectedSize === index ? "black" : "white",
+                            color: selectedSize === index ? "white" : "black",
+                          }}
+                          onClick={() => handleSizeClick(index)}
+                          key={index}
+                        >
+                          {Size}
+                        </button>
+                      ))}
+                    </div>
+                  </Sizes>
+                )}
+                <AddProduct
+                  product={product}
+                  stock={product.stock}
+                  size={sizes[selectedSize]}
+                >
                   <ButtonBuys>
-                    <Buys>Añadir A La Cesta</Buys>
+                    <Buys>Añadir al Carrito</Buys>
                   </ButtonBuys>
                 </AddProduct>
               </Section2>

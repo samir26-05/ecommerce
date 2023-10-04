@@ -27,10 +27,9 @@ export const ProductList = () => {
         console.error("Error al obtener los productos:", error);
       }
     }
-
+    
     fetchProducts();
   }, []);
-  console.log(products);
   const textStyle = {
     textAlign: "center",
     padding: "3.5% 0 0.5% 0",
