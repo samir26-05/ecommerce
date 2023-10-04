@@ -1,17 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 /* MATERIAL UI */
-import { Button, Accordion, Typography, AccordionSummary, AccordionDetails, Card, ListItem, Avatar, ListItemText, } from "@mui/material";
+import {
+  Button,
+  Accordion,
+  Typography,
+  AccordionSummary,
+  AccordionDetails,
+  Card,
+  ListItem,
+  Avatar,
+  ListItemText,
+} from "@mui/material";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 /* COMPONENTS */
-import UpdatePass   from "./UpdatePass";
+import UpdatePass from "./UpdatePass";
 import DataPersonal from "./DataPersonal";
 import axios from "axios";
 import { BiPencil, BiUserCircle } from "react-icons/bi";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
-const states = ['Exitoso', 'Pendiente', 'Rechazado']
-
+const states = ["Exitoso", "Pendiente", "Rechazado"];
 
 export default function InfoCountUser() {
   const [oneClients, setOneClients] = useState({
@@ -50,14 +62,13 @@ export default function InfoCountUser() {
   const [showAccordions, setShowAccordions] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState("");
-  const [allOrders, setAllOrders] = useState([])
+  const [allOrders, setAllOrders] = useState([]);
   const [ordersByState, setOrdersByState] = useState([]);
-
 
   const token = localStorage.getItem("accessToken");
   const userName = localStorage.getItem("username");
-  const urlBackend = import.meta.env.VITE_BACKEND_URL
-  
+  const urlBackend = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     async function fetchOneClients() {
       try {
@@ -78,14 +89,11 @@ export default function InfoCountUser() {
 
     async function fetchAllOrders() {
       try {
-        const response = await axios.get(
-          `${urlBackend}/order`,
-          {
-            headers: {
-              accessToken: token,
-            },
-          }
-        );
+        const response = await axios.get(`${urlBackend}/order`, {
+          headers: {
+            accessToken: token,
+          },
+        });
         setAllOrders(response.data);
       } catch (error) {
         setError(error);
@@ -113,11 +121,9 @@ export default function InfoCountUser() {
     }
 
     fetchOneClients();
-    fetchAllOrders()
+    fetchAllOrders();
     fetchOrdersByState();
   }, [token]);
-
-
 
   const handleUpdateProfileClick = () => {
     setShowAccordions(true);
@@ -139,7 +145,8 @@ export default function InfoCountUser() {
 
     try {
       const response = await axios.patch(
-        `${urlBackend}/user/avatar`, formData,
+        `${urlBackend}/user/avatar`,
+        formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -148,18 +155,25 @@ export default function InfoCountUser() {
         }
       );
       setAvatarUrl(response.data);
-      Swal.fire(
-        "BIEN HECHO!",
-        "Foto de perfil actualizado con exito!",
-        "success"
-      );
+      Swal.fire({
+        icon: "success",
+        title: "Foto de perfil actualizada con exito!",
+        iconColor: "#09ff00",
+        color: "#000",
+        showConfirmButton: false,
+        confirmButtonColor: "#000",
+        timer: 1000,
+      });
     } catch (error) {
       console.error("Error al actualizar el avatar:", error);
-
       Swal.fire({
         icon: "error",
-        title: "Oops...",
-        text: "Ocurrió un error al intentar actualizar la foto de perfil!",
+        title: "Ocurrió un error al intentar actualizar la foto de perfil!",
+        iconColor: "#ff0000",
+        color: "#000",
+        showConfirmButton: false,
+        confirmButtonColor: "#000",
+        timer: 1000,
       });
     }
   };
@@ -257,9 +271,7 @@ export default function InfoCountUser() {
             <ListItem className="ListItem">
               <ListItemText
                 primary={
-                  <Typography variant="h4">
-                    {allOrders.length}
-                  </Typography>
+                  <Typography variant="h4">{allOrders.length}</Typography>
                 }
                 secondary="Todos mis pedidos"
               />

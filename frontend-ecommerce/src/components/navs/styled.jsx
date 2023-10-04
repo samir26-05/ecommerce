@@ -4,7 +4,7 @@ export const Div = styled.div`
     max-width: 744px;
     width: 100vw;
     height: 100%;
-    min-height: 80vh;
+    min-height: 80vh; 
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

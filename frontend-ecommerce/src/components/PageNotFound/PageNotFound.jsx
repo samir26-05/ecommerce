@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { ContainerP, ContainerH, ImgDiv, TxtH3, TxtH1, ImgSvg, DivTxt } from "./StylePageNotFound";
 /* import ImgPageNotFound from "../../assets/Img/Page Not Found/Warning.png"; */
@@ -16,8 +17,6 @@ const PageNotFound = () => {
             <a href="/home">Back to home</a>{" "}
             </TxtH3>
         </DivTxt>
-        
-        
       </ContainerH>
     </ContainerP>
   );

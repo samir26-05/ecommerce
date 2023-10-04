@@ -7,7 +7,7 @@ export const Boxx = styled.div`
 
 export const BoxProducts = styled.div`
   .MuiTabs-flexContainer,
-  .css-heg063-MuiTabs-flexContainer {
+  .css-heg063-MuiTabs-flexContainer { 
     display: flex !important;
     flex-direction: row !important;
   }

@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 /* MATERIAL UI */
-import { Button, Box } from "@mui/material";
+import { Button, Box } from "@mui/material"; 
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import SendIcon from "@mui/icons-material/Send";
@@ -93,6 +93,11 @@ export default function NavHorizontal(props) {
         icon: "error",
         title: "Oops...",
         text: "Ocurrió un error al intentar almacenar la información!",
+        iconColor: "#ff0000",
+        color: "#000",
+        showConfirmButton: false,
+        confirmButtonColor: "#000",
+        timer: 1000,
       });
     }
   }
