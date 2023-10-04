@@ -67,7 +67,6 @@ export const CreateProduct = async (req, res) => {
         .json({ error: JSON.parse(validationResult.error.message) });
     }
     const talla = validationResult.sizes_id
-    console.log(talla)
     if (validationResult.success) {
       const NewProduct = await productos.create({
         ...validationResult.data,
@@ -79,7 +78,6 @@ export const CreateProduct = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
-    console.log(error);
   }
 };
 
@@ -146,7 +144,6 @@ export const UpdateProduct = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
-    console.log(error);
   }
 };
 
@@ -226,7 +223,6 @@ export const GetProductSectionCategory = async(req, res) => {
     }
     res.status(200).json(result)
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error: error.message });
   }
 };

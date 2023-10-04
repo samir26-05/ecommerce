@@ -33,16 +33,23 @@ export const GetOrder = async (req, res) => {
         },
       ],
     });
-    const result2 = result[0].order_details.map(async(item)=> {
+    const result2 =await Promise.all(result[0].order_details.map(async(item)=> {
       const ProductFound = await productos.findOne({where: {product_id: item.product_id}})
-      console.log(ProductFound)
-    }) 
-    console.log(result2)
+      return ProductFound
+    })) 
     const parsedResults = result.map((item) => {
       return {
         id_order: item.id_order,
         user_id: item.user.user,
-        products: item.order_details, // Convierte la cadena JSON en objeto
+        products:item.order_details.map((detail) => {
+          return {
+            producto: result2[0].name,
+            valor_unitario: result2[0].price,
+            cantidad: detail.amount,
+            valor: detail.valor,
+            img: result2[0].img_video
+          };
+        }), // Convierte la cadena JSON en objeto
         subtotal: item.subtotal,
         discount: item.discount,
         iva: item.iva,
@@ -56,7 +63,6 @@ export const GetOrder = async (req, res) => {
 
     res.status(200).json(parsedResults);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error: error.message });
   }
 };
@@ -100,7 +106,6 @@ export const CreateOrder = async (req, res) => {
 
 export const webhook = async (req, res) => {
   const result = req.body;
-  console.log(result);
   const orden = await Orden_compra.findOne({
     where: { reference: result.reference_sale },
   });
@@ -131,18 +136,129 @@ export const webhook = async (req, res) => {
 export const GetUsername = async (req, res) => {
   try {
     const user = req.UserId;
-    const Order = await Orden_compra.findAll({
-      where: { user_id: user },
+    const result = await Orden_compra.findAll({
+      where : {user_id: user},
+      attributes: [
+        "id_order",
+        "user_id",
+        "discount",
+        "subtotal",
+        "id_state",
+        "iva",
+        "total",
+        "reference",
+        "createdAt",
+        "updatedAt",
+      ],
       include: [
         {
+          model: sequelize.model("state"),
+          attributes: ["state"],
+        },
+        {
+          model: sequelize.model("user"),
+          attributes: ["user"],
+        },
+        {
           model: sequelize.model("order_detail"),
-          attributes: ["product_id","amount","valor"],
+          attributes: ["id_order", "product_id", "amount", "valor"],
         },
       ],
     });
-  res.status(200).json(Order)
+    const result2 =await Promise.all(result[0].order_details.map(async(item)=> {
+      const ProductFound = await productos.findOne({where: {product_id: item.product_id}})
+      return ProductFound
+    })) 
+    const parsedResults = result.map((item) => {
+      return {
+        id_order: item.id_order,
+        user_id: item.user.user,
+        products:item.order_details.map((detail) => {
+          return {
+            producto: result2[0].name,
+            valor_unitario: result2[0].price,
+            cantidad: detail.amount,
+            valor: detail.valor,
+            img: result2[0].img_video
+          };
+        }), // Convierte la cadena JSON en objeto
+        subtotal: item.subtotal,
+        discount: item.discount,
+        iva: item.iva,
+        total_value: item.total,
+        id_state: item.state.state,
+        reference: item.reference,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
+      };
+    });
+  res.status(200).json(parsedResults)
   } catch (error) {
-    console.log(error);
     res.status(500).json({error: error.message});
   }
+};
+
+export const Orden_reference = async (req,res) => {
+  try {
+  const refe = req.params
+  const result = await Orden_compra.findAll({
+    where : {reference: refe},
+    attributes: [
+      "id_order",
+      "user_id",
+      "discount",
+      "subtotal",
+      "id_state",
+      "iva",
+      "total",
+      "reference",
+      "createdAt",
+      "updatedAt",
+    ],
+    include: [
+      {
+        model: sequelize.model("state"),
+        attributes: ["state"],
+      },
+      {
+        model: sequelize.model("user"),
+        attributes: ["user"],
+      },
+      {
+        model: sequelize.model("order_detail"),
+        attributes: ["id_order", "product_id", "amount", "valor"],
+      },
+    ],
+  });
+  const result2 =await Promise.all(result[0].order_details.map(async(item)=> {
+    const ProductFound = await productos.findOne({where: {product_id: item.product_id}})
+    return ProductFound
+  })) 
+  const parsedResults = result.map((item) => {
+    return {
+      id_order: item.id_order,
+      user_id: item.user.user,
+      products:item.order_details.map((detail) => {
+        return {
+          producto: result2[0].name,
+          valor_unitario: result2[0].price,
+          cantidad: detail.amount,
+          valor: detail.valor,
+          img: result2[0].img_video
+        };
+      }), // Convierte la cadena JSON en objeto
+      subtotal: item.subtotal,
+      discount: item.discount,
+      iva: item.iva,
+      total_value: item.total,
+      id_state: item.state.state,
+      reference: item.reference,
+      createdAt: item.createdAt,
+      updatedAt: item.updatedAt,
+    };
+  });
+res.status(200).json(parsedResults)
+} catch (error) {
+  res.status(500).json({error: error.message});
+}
 };
