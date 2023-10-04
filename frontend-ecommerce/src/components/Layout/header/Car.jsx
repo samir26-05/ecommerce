@@ -51,7 +51,6 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
     updateCart([]);
   };
 
-  console.log(allProducts.category);
   return (
     <Car>
       <div>
@@ -99,11 +98,11 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                         <p className="Tiltle">{product.name}</p>
                         {/* {product.category.category !== "zapatos" ? (
                           <span className="Size">
-                            Talla: {product.size.size}
+                            Talla: {selectedSize}
                           </span>
                         ) : (
                           <span className="Size">
-                            Talla: {product.shoe_size.shoe_size_name}
+                           Talla: {selectedSize}
                           </span>
                         )} */}
                       </Link>
@@ -119,7 +118,7 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                       <AddProduct
                         product={product}
                         stock={product.stock}
-                        size={product.size}
+                        selectedSize={true}
                       >
                         <button className="btnAdd">
                           <MdAdd

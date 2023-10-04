@@ -21,12 +21,13 @@ import axios from "axios";
 import AddProduct from "../../utils";
 import Loading from "../../components/loading/Loading";
 import { Modal } from "@mui/material";
+import Swal from "sweetalert2";
 
 const InfoProducts = () => {
   const { name } = useParams();
   const [products, setProducts] = useState([]);
   const [sizes, setSizes] = useState(["S", "X", "XL", "M", "XXL"]);
-  const [sizesShoe, setSizesShoe] = useState("36", "38", "40", "41", "42");
+  const [sizesShoe, setSizesShoe] = useState(["36", "38", "40", "41", "42"]);
   const [selectedSize, setSelectedSize] = useState(null);
   const [sizeSelected, setSizeSelected] = useState(false); // Nuevo estado
 
@@ -90,6 +91,17 @@ const InfoProducts = () => {
     );
   }
   const category = product.category.category.toLowerCase();
+
+  const seleSize = () => {
+    return Swal.fire({
+      icon: "error",
+      title: "Por favor, selecciona una talla antes de agregar al carrito.",
+      iconColor: "#ff0000",
+      color: "#000",
+      showConfirmButton: false,
+      timer: 1000,
+    });
+  };
 
   return (
     <div style={{ width: "100%", height: "100vh" }}>
@@ -187,7 +199,7 @@ const InfoProducts = () => {
                 <AddProduct
                   product={product}
                   stock={product.stock}
-                  size={sizes[selectedSize]}
+                  selectedSize={sizes[selectedSize]}
                 >
                   <ButtonBuys>
                     <Buys>Añadir al Carrito</Buys>
