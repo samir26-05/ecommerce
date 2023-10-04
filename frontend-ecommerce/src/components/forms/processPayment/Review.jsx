@@ -31,6 +31,7 @@ export default function Review() {
   const token = localStorage.getItem("accessToken")
   const userName = localStorage.getItem("username");
   const urlBackend = import.meta.env.VITE_BACKEND_URL
+  const urlFrontend = import.meta.env.VITE_FRONTEND_URL
 
   useEffect(() => {
     async function fetchOneClients() {
@@ -69,8 +70,8 @@ export default function Review() {
   const valorTotal = subTotal2 + iva - descuento
 
 
-  const apiKey = '4Vj8eK4rloUd272L48hsrarnUA';// defecto
-  const merchantId = '508029';// defecto
+  const apiKey = import.meta.env.ApiKey; // Llave de la api de payU
+  const merchantId = import.meta.env.merchantId; // id del merchant de la tienda
   const referenceCode = uuidv4();
   const amount = subtotal;
   const currency = 'COP';// defecto
@@ -90,7 +91,7 @@ export default function Review() {
         stock: producto.quantity,
       }));
       console.log(productOrder, 'asd');
-      await axios.post(`https://e910-186-147-59-58.ngrok.io/order/webhook/order/create`,
+      await axios.post(`${urlBackend}/order/create`,
         {
           subtotal: subtotal,
           discount: descuento,
@@ -105,7 +106,7 @@ export default function Review() {
           }
         }
       )
-      // localStorage.removeItem("cart") //Limpiar carrito
+      localStorage.removeItem("cart") //Limpiar carrito
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -158,8 +159,8 @@ export default function Review() {
         <Grid item xs={0} sm={4}>
           <ListItem sx={{ py: 1, px: 8 }}>
             <ListItemText primary="IMPORTE" />
-          </ListItem>
-        </Grid>
+            </ListItem>
+          </Grid>
       </Grid>
 
 
@@ -220,8 +221,8 @@ export default function Review() {
 
       </Grid>
 
-      <div>
-        <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+      <div style={{width:"100%", }}>
+        <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/" style={{display:"flex", justifyContent:"flex-end"}}>
           <input name="merchantId" type="hidden" value="508029" />
           <input name="accountId" type="hidden" value="512321" />
           <input name="description" type="hidden" value="PAGOS ECOMMERCE KALARY" />
@@ -233,9 +234,9 @@ export default function Review() {
           <input name="signature" type="hidden" value={hash} />
           <input name="test" type="hidden" value="0" />
           <input name="buyerEmail" type="hidden" value={localStorage.getItem("email")} />
-          <input name="responseUrl" type="hidden" value="http://localhost:5173/home" />
+          <input name="responseUrl" type="hidden" value={`${urlFrontend}/response`} />
           <input name="confirmationUrl" type="hidden" value="https://e910-186-147-59-58.ngrok.io/order/webhook" />
-          <Button name="Submit" type="submit" onClick={() => createOrder()} variant="" style={{ backgroundColor: "black", color: "white"}} >
+          <Button name="Submit" type="submit" onClick={() => createOrder()} variant="" style={{ backgroundColor: "black", color: "white", position:"absolute", marginTop:"25px"}} >
             PAGAR
           </Button>
         </form>

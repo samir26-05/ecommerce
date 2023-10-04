@@ -39,26 +39,33 @@ export default function DetailsOrder({ order, seeOrder }) {
 
   useEffect(() => {
     const searchProducts = async () => {
-      for (const i in order.products) {
-        try {
-          const response = await axios.get(`${urlBackend}/product/id/${order.products[i].product_id}`,
+      console.log(order.products[1].product_id, "id");
+      try {
+        const fetchedProducts = []; // Array temporal para almacenar los productos
+
+        for (let i = 0; i < order.products.product_id; i++) {
+          const response = await axios.get(
+            `${urlBackend}/product/id/${order.products[i].product_id}`,
             {
               headers: {
                 accessToken: localStorage.getItem("accessToken"),
               },
             }
           );
-          
-          setProducts([...products, response.data]);
-        } catch (error) {
-          console.log(error);
+          fetchedProducts.push(response.data);
         }
+
+        // Después de completar el bucle, actualiza el estado una sola vez
+        setProducts([...products, ...fetchedProducts]);
+        console.log(products, "products");
+      } catch (error) {
+        console.log(error);
       }
     };
 
-    searchProducts(products);
+    searchProducts(); // No es necesario pasar 'products' como argumento
   }, []);
-  console.log(products, "products");
+
   return (
     <div style={{ width: "100%" }}>
       {table ? (
