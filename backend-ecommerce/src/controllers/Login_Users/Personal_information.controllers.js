@@ -24,7 +24,6 @@ export const UpdatePersonalInformation = async (req, res) => {
     );
     return res.json({ message: "Se Actualizaron los datos", User: name });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ error: error.message });
     
   }
@@ -51,7 +50,6 @@ export const UpdatePersonalInformationId = async (req, res) => {
     );
     return res.json({ message: "Se Actualizaron los datos", User: id });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ error: error.message });
     
   }

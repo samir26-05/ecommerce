@@ -38,7 +38,6 @@ export const CreateUser = async (req, res) => {
       .json({ message: "Usuario creado con exito", Usuario: NewUsers });
   } catch (error) {
     res.status(500).json({ error: error.message });
-    console.log(error);
   }
 };
 
@@ -53,7 +52,6 @@ export const DeleteUser = async (req, res) => {
     res.status(200).json({ message: "Usuario eliminado Exitosamente" });
   } catch (error) {
     res.status(404).json({ error: error.message });
-    console.log(error);
   }
 };
 
@@ -86,7 +84,6 @@ export const Login = async (req, res) => {
     return res.status(200).json(accessToken);
   } catch (error) {
     res.status(500).json({ message: error.message });
-    console.log(error);
   }
 };
 
@@ -177,7 +174,6 @@ export const UpdateAvatar = async (req, res) => {
         .json({ message: "Foto de perfil actualizada con exito" });
     }
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ error: error.message });
   }
 };
