@@ -12,7 +12,6 @@ import {
 import { GiShoppingBag } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import AddProduct from "../../../../utils";
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -30,7 +29,6 @@ export const ProductList = () => {
 
     fetchProducts();
   }, []);
-  console.log(products);
   const textStyle = {
     textAlign: "center",
     padding: "3.5% 0 0.5% 0",
@@ -60,9 +58,9 @@ export const ProductList = () => {
                     currency: "COP",
                     minimumFractionDigits: 0,
                   })}
-                  <AddProduct product={product} stock={product.stock}>
+                  <Link to={`/InfoProducts/${product.name}`}>
                     <GiShoppingBag />
-                  </AddProduct>
+                  </Link>
                 </Price>
               </CardContent>
             </Card>

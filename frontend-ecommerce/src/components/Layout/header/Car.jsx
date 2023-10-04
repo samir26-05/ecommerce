@@ -42,7 +42,6 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
       }
     } else {
       alert("La cantidad mínima permitida es 1.");
-      // updatedCart.push({ ...product, quantity: 1 });
     }
 
     updateCart(updatedCart);
@@ -97,13 +96,13 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                         className="link"
                       >
                         <p className="Tiltle">{product.name}</p>
-                        {/* {product.size.size ? (
+                        {/* {product.category.category !== "zapatos" ? (
                           <span className="Size">
-                            Talla: {product.size.size}
+                            Talla: {selectedSize}
                           </span>
                         ) : (
                           <span className="Size">
-                            Talla: {product.size.size}
+                           Talla: {selectedSize}
                           </span>
                         )} */}
                       </Link>
@@ -116,7 +115,11 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                       </span>
                     </div>
                     <div className="Buttons">
-                      <AddProduct product={product} stock={product.stock}>
+                      <AddProduct
+                        product={product}
+                        stock={product.stock}
+                        selectedSize={true}
+                      >
                         <button className="btnAdd">
                           <MdAdd
                             className="iconAdd"

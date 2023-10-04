@@ -119,7 +119,7 @@ export const ColorProducts = styled.div`
   .Colores {
     display: flex;
     width: 7%;
-    height: 80%;
+    height: 70%;
     @media (max-width: 768px) {
       margin: 1% 0;
       width: 13%;
@@ -172,7 +172,11 @@ export const Sizes = styled.ul`
     font-weight: 300;
     cursor: pointer;
     font-size: 1rem;
+    box-shadow: 0px 0px 1px #00000044;
     :hover {
+      border: 1.5px solid #000000;
+    }
+    :focus {
       border: 1.5px solid #000000;
     }
   }

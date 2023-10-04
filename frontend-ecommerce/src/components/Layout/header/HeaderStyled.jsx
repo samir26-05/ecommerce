@@ -78,7 +78,7 @@ export const Container = styled.div`
     height: 100%;
     width: 30%;
     @media (max-width: 768px) {
-      gap: 10%;
+      gap: 25%;
     }
     .IconUser {
       height: 100%;

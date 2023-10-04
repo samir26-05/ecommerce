@@ -3,11 +3,10 @@ import * as Order from "../controllers/Gestion_pedidos/order.controllers.js";
 import * as Jwt from "../middlewares/AuthJwt.js";
 const router = Router()
 
-router.get('/',Jwt.validatetoken,Order.GetOrder)
+router.get('/',[Jwt.validatetoken,Jwt.isAdmin],Order.GetOrder)
 router.post('/create',Jwt.validatetoken,Order.CreateOrder)
 router.post('/webhook',Order.webhook)
 router.get('/user',Jwt.validatetoken, Order.GetUsername)
-// router.get('/chekout',Jwt.validatetoken,Order.CheckoutPago)
-// router.get('/status/:name',Jwt.validatetoken,Order.GetOrderStatus)
-// router.get('/user/:name/statu',Jwt.validatetoken,Order.GetOrderStatusUser)
+router.get('/reference/:refe',Jwt.validatetoken, Order.Orden_reference)
+router.get('/status/:name',Jwt.validatetoken, Order.GetOrderStatus)
 export default router
