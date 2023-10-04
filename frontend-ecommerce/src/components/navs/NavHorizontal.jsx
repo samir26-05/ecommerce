@@ -9,6 +9,9 @@ import { Button, Box } from "@mui/material";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import SendIcon from "@mui/icons-material/Send";
+import { MaterialReactTable } from "material-react-table";
+
+
 /* COMPONENETS */
 import StockProducts from "../navs/products/StockProducts";
 import { FormProduct } from "../navs/products/CreateProducts";
@@ -70,22 +73,19 @@ export default function NavHorizontal(props) {
     state: "",
   });
 
-  const urlBackend = import.meta.env.VITE_BACKEND_URL
-  
+  const urlBackend = import.meta.env.VITE_BACKEND_URL;
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   async function fetchOneClients() {
     try {
-      const response = await axios.get(
-        `${urlBackend}/user/name/${userName}`,
-        {
-          headers: {
-            accessToken: token,
-          },
-        }
-      );
+      const response = await axios.get(`${urlBackend}/user/name/${userName}`, {
+        headers: {
+          accessToken: token,
+        },
+      });
       setOneClients(response.data);
     } catch (error) {
       setError(error);
@@ -101,29 +101,23 @@ export default function NavHorizontal(props) {
     fetchOneClients();
   }, [userName]);
 
-
-
+  const [orders, setOrders] = useState([]);
 
   const fecthShopping = async () => {
-
     try {
-      const response = await axios.get(`${urlBackend}/order/user`, 
-      {
+      const response = await axios.get(`${urlBackend}/order/user`, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
-      }
-      );
-     
-      console.log(response.data);
-    } catch (error) {
-      
-    }
-  }
+      });
+      setOrders(response.data);
+      console.log(orders);
+    } catch (error) {}
+  };
 
-useEffect(() => {
-  fecthShopping()
-},[])
+  useEffect(() => {
+    fecthShopping();
+  }, []);
   return (
     <Box>
       {type === "buy" ? (
@@ -154,41 +148,81 @@ useEffect(() => {
               />
             </Tabs>
           </Box>
-          <Div>
-            <CustomTabPanel value={value} index={0}>
-              <Img src={bgr} alt="" />
-              <h4 style={{ width: "100%" }}>Aun no tienes compras online</h4>
-              <span style={{ width: "100%" }}>
-                Si no encuentdras tu compra tal vez es porque hiciste el pedido
-                sin estar registrado.
-              </span>
-              <Button
-                sx={{ width: "100%" }}
-                variant="text"
-                className="whithoutOutline"
-                endIcon={<SendIcon />}
-              >
-                Encontrar pedido
-              </Button>
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
-              <Img sx={{ width: "100%" }} src={bgr} alt="" />
-              <h4>Aún no tienes compras en tienda</h4>
-              <span>
-                Pero puedes hacer tu pedido online ¡y te lo mandamos a casa!
-              </span>
-              <br />
-              <Link to={"/home"}>
+          {orders.length ? (
+            <>
+              <Div>
+                <CustomTabPanel value={value} index={0}>
+                  {/* {orders.map((order, index) => (
+                  <div key={index}>
+                    <h2>Pedido {order.id_order}</h2>
+                    <p>ID de Usuario: {order.user_id}</p>
+                    <p>Subtotal: {order.subtotal}</p>
+                    <ul>
+                      {order.products.map((product, productIndex) => (
+                        <li key={productIndex}>
+                          <h3>Producto {productIndex + 1}</h3>
+                          <p>Nombre del producto: {product.producto}</p>
+                          <p>Valor unitario: {product.valor_unitario}</p>
+                          <p>Cantidad: {product.cantidad}</p>
+                          <p>Valor total: {product.valor}</p>
+                          <img
+                            src={product.img}
+                            alt={`Imagen de ${product.producto}`}
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))} */}
+                  
+                    <MaterialReactTable
+                      columns={columns}
+                      data={rows}
+                      
+                    />
+                </CustomTabPanel>
+                <CustomTabPanel value={value} index={1}>
+                  <h2>awdawd</h2>
+                </CustomTabPanel>
+              </Div>
+            </>
+          ) : (
+            <Div>
+              <CustomTabPanel value={value} index={0}>
+                <Img src={bgr} alt="" />
+                <h4 style={{ width: "100%" }}>Aun no tienes compras online</h4>
+                <span style={{ width: "100%" }}>
+                  Si no encuentdras tu compra tal vez es porque hiciste el
+                  pedido sin estar registrado.
+                </span>
                 <Button
-                  variant="contained"
+                  sx={{ width: "100%" }}
+                  variant="text"
                   className="whithoutOutline"
-                  style={{ backgroundColor: "black" }}
+                  endIcon={<SendIcon />}
                 >
-                  Compra online
+                  Encontrar pedido
                 </Button>
-              </Link>
-            </CustomTabPanel>
-          </Div>
+              </CustomTabPanel>
+              <CustomTabPanel value={value} index={1}>
+                <Img sx={{ width: "100%" }} src={bgr} alt="" />
+                <h4>Aún no tienes compras en tienda</h4>
+                <span>
+                  Pero puedes hacer tu pedido online ¡y te lo mandamos a casa!
+                </span>
+                <br />
+                <Link to={"/home"}>
+                  <Button
+                    variant="contained"
+                    className="whithoutOutline"
+                    style={{ backgroundColor: "black" }}
+                  >
+                    Compra online
+                  </Button>
+                </Link>
+              </CustomTabPanel>
+            </Div>
+          )}
         </div>
       ) : (
         ""
@@ -259,3 +293,39 @@ useEffect(() => {
     </Box>
   );
 }
+
+const columns = [
+  {
+    accessorKey: "firstName",
+    header: "First name",
+    enableEditing: false, //disable editing on this column
+    enableSorting: false,
+    size: 80,
+  },
+  {
+    accessorKey: "lastName",
+    header: "Last name",
+    enableEditing: false, //disable editing on this column
+    enableSorting: false,
+    size: 80,
+  },
+  {
+    accessorKey: "age",
+    header: "Age",
+    enableEditing: false, //disable editing on this column
+    enableSorting: false,
+    size: 80,
+  },
+];
+
+const rows = [
+  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
+  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
+  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
+  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
+  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
+  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
+  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
+  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
+  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+];

@@ -90,7 +90,7 @@ export default function Review() {
         stock: producto.quantity,
       }));
       console.log(productOrder, 'asd');
-      await axios.post(`https://e910-186-147-59-58.ngrok.io/order/webhook/order/create`,
+      await axios.post(`http://localhost:3000/order/create`,
         {
           subtotal: subtotal,
           discount: descuento,
@@ -234,7 +234,7 @@ export default function Review() {
           <input name="test" type="hidden" value="0" />
           <input name="buyerEmail" type="hidden" value={localStorage.getItem("email")} />
           <input name="responseUrl" type="hidden" value="http://localhost:5173/home" />
-          <input name="confirmationUrl" type="hidden" value="https://e910-186-147-59-58.ngrok.io/order/webhook" />
+          <input name="confirmationUrl" type="hidden" value="https://3bf7-186-147-59-58.ngrok.io/order/webhook" />
           <Button name="Submit" type="submit" onClick={() => createOrder()} variant="" style={{ backgroundColor: "black", color: "white"}} >
             PAGAR
           </Button>

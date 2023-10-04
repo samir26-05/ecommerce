@@ -214,7 +214,7 @@ export default function NavVertical() {
             </TabPanel>
             <TabPanel className="TabPanel" value={value} index={2}>
               <InfoCountUser />
-            </TabPanel>
+            </TabPanel> 
           </div>
         </Div>
       )}
