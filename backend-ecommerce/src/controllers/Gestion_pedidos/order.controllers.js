@@ -29,10 +29,15 @@ export const GetOrder = async (req, res) => {
         },
         {
           model: sequelize.model("order_detail"),
-          attributes: ["id_order","product_id","amount","valor"]
-        }
+          attributes: ["id_order", "product_id", "amount", "valor"],
+        },
       ],
     });
+    const result2 = result[0].order_details.map(async(item)=> {
+      const ProductFound = await productos.findOne({where: {product_id: item.product_id}})
+      console.log(ProductFound)
+    }) 
+    console.log(result2)
     const parsedResults = result.map((item) => {
       return {
         id_order: item.id_order,
@@ -40,7 +45,7 @@ export const GetOrder = async (req, res) => {
         products: item.order_details, // Convierte la cadena JSON en objeto
         subtotal: item.subtotal,
         discount: item.discount,
-        iva:item.iva,
+        iva: item.iva,
         total_value: item.total,
         id_state: item.state.state,
         reference: item.reference,
@@ -66,51 +71,78 @@ export const CreateOrder = async (req, res) => {
       discount: result.discount, // Convierte la cadena JSON en objeto
       iva: result.iva,
       total: result.total,
-      reference: result.reference
+      reference: result.reference,
     });
     const Products = await Promise.all(
-      result.products.map(async(products)=>{
-        const {product_id,stock} =  products;
-        const price = await productos.findOne({where: {product_id: product_id}})
+      result.products.map(async (products) => {
+        const { product_id, stock } = products;
+        const price = await productos.findOne({
+          where: { product_id: product_id },
+        });
         const NewOrderDetails = await order_detail.create({
           id_order: NewOrder.id_order,
           product_id,
           amount: stock,
-          valor: stock*price.price
-        })
+          valor: stock * price.price,
+        });
         return NewOrderDetails;
       })
-    )
-  return res.status(200).json({
-    message: 'orden creada con exito',
-    orden: NewOrder,
-    detail_order: Products
-  })
+    );
+    return res.status(200).json({
+      message: "orden creada con exito",
+      orden: NewOrder,
+      detail_order: Products,
+    });
   } catch (error) {
-    console.log(error);
-  return res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
 export const webhook = async (req, res) => {
-  const result =  req.body;
+  const result = req.body;
   console.log(result);
-  const orden = await Orden_compra.findOne({where: {reference: result.reference_sale}})
-  if (!result.cc_holder === "APPROVED" && orden.id_state == 1){    
+  const orden = await Orden_compra.findOne({
+    where: { reference: result.reference_sale },
+  });
+  if (result.cc_holder === "APPROVED" && orden.id_state == 1) {
     orden.id_state = 3;
     orden.save();
-    const product = await order_detail.findAll({where: {id_order: orden.id_order}})
+    const product = await order_detail.findAll({
+      where: { id_order: orden.id_order },
+    });
     const updateStock = product.map(async (value) => {
-    const productFound = await productos.findByPk(value.product_id)
-    await productos.update({
-      stock: productFound.stock - value.amount,
-    },{where: {product_id: value.product_id}})
-    })
-  return res.status(200).send("Pago Exitoso")
-  }else if (result.cc_holder !== "APPROVED" ){
+      const productFound = await productos.findByPk(value.product_id);
+      await productos.update(
+        {
+          stock: productFound.stock - value.amount,
+        },
+        { where: { product_id: value.product_id } }
+      );
+    });
+    return res.status(200).send("Pago Exitoso");
+  } else if (result.cc_holder !== "APPROVED") {
     orden.id_state = 2;
-    orden.save()
-    return res.status(400).send("Pago rechazado")
+    orden.save();
+    return res.status(400).send("Pago rechazado");
   }
-  return res.status(200).send("Pago pendiente")
-}
+  return res.status(200).send("Pago pendiente");
+};
+
+export const GetUsername = async (req, res) => {
+  try {
+    const user = req.UserId;
+    const Order = await Orden_compra.findAll({
+      where: { user_id: user },
+      include: [
+        {
+          model: sequelize.model("order_detail"),
+          attributes: ["product_id","amount","valor"],
+        },
+      ],
+    });
+  res.status(200).json(Order)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({error: error.message});
+  }
+};
