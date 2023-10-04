@@ -32,6 +32,8 @@ export default function Review() {
   const userName = localStorage.getItem("username");
   const urlBackend = import.meta.env.VITE_BACKEND_URL
   const urlFrontend = import.meta.env.VITE_FRONTEND_URL
+  const apiKey = import.meta.env.VITE_APIKEY; // Llave de la api de payU
+  const merchantId = import.meta.env.VITE_MERCHANTID;
 
   useEffect(() => {
     async function fetchOneClients() {
@@ -70,8 +72,6 @@ export default function Review() {
   const valorTotal = subTotal2 + iva - descuento
 
 
-  const apiKey = import.meta.env.ApiKey; // Llave de la api de payU
-  const merchantId = import.meta.env.merchantId; // id del merchant de la tienda
   const referenceCode = uuidv4();
   const amount = subtotal;
   const currency = 'COP';// defecto
@@ -85,12 +85,11 @@ export default function Review() {
   const createOrder = async () => {
     try {
       //Crear un nuevo array de objetos con el id y la cantidad del pedido
-      console.log(referenceCode, 'referencia');
       const productOrder = products.map(producto => ({
         product_id: producto.product_id,
         stock: producto.quantity,
       }));
-      console.log(productOrder, 'asd');
+      
       await axios.post(`${urlBackend}/order/create`,
         {
           subtotal: subtotal,

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 /* MATERIAL UI */
@@ -34,36 +35,29 @@ export default function DetailsOrder({ order, seeOrder }) {
 
   const handleShowTable = () => {
     setTable(!table);
-    console.log(table);
+  };
+
+  const searchProducts = async () => {
+    try {
+      let fetchedProducts = []
+      for (let i = 0; i < order.products.length; i++) {
+        const response = await axios.get(`${urlBackend}/product/id/${order.products[i].product_id}`, {
+            headers: {
+              accessToken: localStorage.getItem("accessToken"),
+            },
+          }
+        );
+        console.log(order.products[i].product_id, 'aaaaaaaaaaaaaaa');
+        fetchedProducts.push(response.data);
+      }
+      setProducts(fetchedProducts)
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    const searchProducts = async () => {
-      console.log(order.products[1].product_id, "id");
-      try {
-        const fetchedProducts = []; // Array temporal para almacenar los productos
-
-        for (let i = 0; i < order.products.product_id; i++) {
-          const response = await axios.get(
-            `${urlBackend}/product/id/${order.products[i].product_id}`,
-            {
-              headers: {
-                accessToken: localStorage.getItem("accessToken"),
-              },
-            }
-          );
-          fetchedProducts.push(response.data);
-        }
-
-        // Después de completar el bucle, actualiza el estado una sola vez
-        setProducts([...products, ...fetchedProducts]);
-        console.log(products, "products");
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    searchProducts(); // No es necesario pasar 'products' como argumento
+    searchProducts();
   }, []);
 
   return (
@@ -124,7 +118,7 @@ export default function DetailsOrder({ order, seeOrder }) {
                 width: "100%",
               }}
             >
-              <TableDetailsProducts />
+              <TableDetailsProducts products={products} />
               <Box
                 sx={{
                   marginBottom: 10,

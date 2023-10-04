@@ -1,12 +1,14 @@
+/* eslint-disable react/prop-types */
 import { useMemo } from 'react';
 import { MaterialReactTable } from 'material-react-table';
 
-const TableDetailsProducts = () => {
+const TableDetailsProducts = ({products}) => {
+  console.log(products,'tabla');
     //should be memoized or stable
     const columns = useMemo(
       () => [
         {
-          accessorKey: 'img', //access nested data with dot notation
+          accessorKey: 'img_video', //access nested data with dot notation
           header: 'Producto',
           size: 200,
         },
@@ -29,7 +31,7 @@ const TableDetailsProducts = () => {
       [],
     );
   
-    return <MaterialReactTable columns={columns} data={{}} />;
+    return <MaterialReactTable columns={columns} data={products} />;
   };
   
   export default TableDetailsProducts;
