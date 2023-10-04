@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import {
@@ -40,9 +41,9 @@ const ShowProducts = ({ products, currentPage, productsPerPage }) => {
                   currency: "COP",
                   minimumFractionDigits: 0,
                 })}
-                <AddProduct product={item} stock={item.stock}>
+                <Link to={`/InfoProducts/${item.name}`}>
                   <GiShoppingBag />
-                </AddProduct>
+                </Link>
               </Price>
             </CardContent>
           </Card>

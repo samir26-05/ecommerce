@@ -13,7 +13,7 @@ const AddProduct = ({ product, children, stock, selectedSize }) => {
         title: "Producto agregado con éxito",
         iconColor: "#09ff00",
         color: "#000",
-        showConfirmButton: true,
+        showConfirmButton: false,
         confirmButtonColor: "#000",
         timer: 1000,
       });
@@ -57,9 +57,9 @@ const AddProduct = ({ product, children, stock, selectedSize }) => {
         title: "Por favor, selecciona una talla antes de agregar al carrito.",
         iconColor: "#ff0000",
         color: "#000",
-        showConfirmButton: true,
+        showConfirmButton: false,
         confirmButtonColor: "#000",
-        timer: 1000,
+        timer: 500,
       });
     }
   };

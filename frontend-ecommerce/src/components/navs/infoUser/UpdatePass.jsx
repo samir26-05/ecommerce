@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import { Button, TextField, Box } from "@mui/material";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useState } from "react";
 
 export default function UpdatePass({ txtPassword, setTxtPassword }) {
   const urlBackend = import.meta.env.VITE_BACKEND_URL;
@@ -18,7 +18,15 @@ export default function UpdatePass({ txtPassword, setTxtPassword }) {
     if (txtPassword.newpassword === txtPassword.confirmPassword) {
       updatePassword(txtPassword);
     } else {
-      Swal.fire("Error", "Las contraseñas no coinciden", "error");
+      Swal.fire({
+        icon: "error",
+        title: "Las contraseñas no coinciden",
+        iconColor: "#ff0000",
+        color: "#000",
+        showConfirmButton: false,
+        confirmButtonColor: "#000",
+        timer: 1000,
+      });
     }
   };
   const handleDelete = () => {
@@ -41,11 +49,29 @@ export default function UpdatePass({ txtPassword, setTxtPassword }) {
         }
       );
       const successMessage = response.data;
-      Swal.fire("CAMBIO EXITOSO!", successMessage, "success");
+      Swal.fire({
+        icon: "success",
+        title: "Cambio Exitoso!",
+        text: successMessage,
+        iconColor: "#09ff00",
+        color: "#000",
+        showConfirmButton: false,
+        confirmButtonColor: "#000",
+        timer: 1000,
+      });
       handleDelete(); // Llamar a handleDelete después de un cambio exitoso
     } catch (error) {
       const messageError = error.response.data.message;
-      Swal.fire(messageError, error, "error");
+      Swal.fire({
+        icon: "error",
+        title: messageError,
+        text: error,
+        iconColor: "#ff0000",
+        color: "#000",
+        showConfirmButton: false,
+        confirmButtonColor: "#000",
+        timer: 1000,
+      });
     }
   };
 
