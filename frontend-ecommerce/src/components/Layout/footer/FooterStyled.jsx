@@ -16,7 +16,7 @@ export const Div = styled.div`
     }
   }
   .Networks {
-    height: 10%;
+    height: 50%;
     width: 100%;
     div {
       display: flex;
@@ -25,7 +25,7 @@ export const Div = styled.div`
     }
   }
   .Copyright {
-    height: 10%;
+    height: 50%;
     width: 100%;
     display: flex;
     justify-content: center;

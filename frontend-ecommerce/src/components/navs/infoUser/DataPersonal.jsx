@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* MATERIAL UI */
 import Box from '@mui/material/Box';
 import { Button, TextField } from '@mui/material';
@@ -37,7 +38,16 @@ export default function DataPersonal({updateProfile, setUpdateProfile}) {
       )
 
       const successMessage = response.data.message;
-      Swal.fire("CAMBIO EXITOSO!", successMessage, "success");
+      Swal.fire({
+        icon: "success",
+        title: "Cambio Exitoso!",
+        text: successMessage,
+        iconColor: "#09ff00",
+        color: "#000",
+        showConfirmButton: false,
+        confirmButtonColor: "#000",
+        timer: 1000,
+      });
 
     } catch (error) {
      

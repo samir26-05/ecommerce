@@ -33,8 +33,12 @@ const CrudOrders = () => {
         setError(error);
         Swal.fire({
           icon: "error",
-          title: "Oops...",
-          text: "Ocurrió un error al intentar obtener la información!",
+          title: "Ocurrió un error al intentar obtener la información!",
+          iconColor: "#ff0000",
+          color: "#000000",
+          showConfirmButton: false,
+          confirmButtonColor: "#000",
+          timer: 1000,  
         });
       }
     };
