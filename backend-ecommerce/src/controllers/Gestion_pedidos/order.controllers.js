@@ -33,6 +33,11 @@ export const GetOrder = async (req, res) => {
         },
       ],
     });
+    const result2 = result[0].order_details.map(async(item)=> {
+      const ProductFound = await productos.findOne({where: {product_id: item.product_id}})
+      console.log(ProductFound)
+    }) 
+    console.log(result2)
     const parsedResults = result.map((item) => {
       return {
         id_order: item.id_order,
@@ -137,6 +142,7 @@ export const GetUsername = async (req, res) => {
     });
   res.status(200).json(Order)
   } catch (error) {
+    console.log(error);
     res.status(500).json({error: error.message});
   }
 };
