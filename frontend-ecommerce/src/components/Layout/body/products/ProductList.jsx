@@ -21,16 +21,15 @@ export const ProductList = () => {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await axios.get(`${urlBackend}/product/`);
+        const response = await axios.get(`${urlBackend}/product`);
         setProducts(response.data.result);
       } catch (error) {
         console.error("Error al obtener los productos:", error);
       }
     }
-
+    
     fetchProducts();
   }, []);
-
   const textStyle = {
     textAlign: "center",
     padding: "3.5% 0 0.5% 0",

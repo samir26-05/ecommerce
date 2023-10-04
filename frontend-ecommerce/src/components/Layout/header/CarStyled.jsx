@@ -54,8 +54,8 @@ export const Car = styled.div`
 
   .BoxProducts {
     position: absolute;
-    left: 72%;
-    top: 69%;
+    left: 71.6%;
+    top: 72%;
     background-color: #ffffff;
     z-index: 5;
     box-shadow: 0 0px 5px rgba(0, 0, 0, 0.39);

@@ -35,7 +35,7 @@ export const CreateUser = async (req, res) => {
     );
     res
       .status(200)
-      .json({ message: "usuario creado con exito", Usuario: NewUsers });
+      .json({ message: "Usuario creado con exito", Usuario: NewUsers });
   } catch (error) {
     res.status(500).json({ error: error.message });
     console.log(error);
@@ -64,14 +64,14 @@ export const Login = async (req, res) => {
       where: { email },
     });
     if (!Existemail) {
-      return res.status(404).json({ message: "!!Email No Encontrado¡¡" });
+      return res.status(404).json({ message: "Email no encontrado" });
     }
 
     const PasswordCorrect = await compare(password, Existemail.password);
     if (!PasswordCorrect) {
       return res
         .status(404)
-        .json({ message: "!!Combinacion De Email Y Constraseña Incorrecta¡¡" });
+        .json({ message: "Combinacion de email y constraseña incorrecta" });
     }
     const rol = await Roles.findOne({
       where: { role_id: Existemail.role_id },
@@ -164,7 +164,7 @@ export const UpdateAvatar = async (req, res) => {
       user.save();
       return res
         .status(200)
-        .json({ message: "foto de perfil añadida con exito" });
+        .json({ message: "Foto de perfil añadida con exito" });
     }
     if (user.avatar) {
       const File = user.avatar.split("/").slice(3);
@@ -174,7 +174,7 @@ export const UpdateAvatar = async (req, res) => {
       user.save();
       return res
         .status(200)
-        .json({ message: "foto de perfil actualizada con exito" });
+        .json({ message: "Foto de perfil actualizada con exito" });
     }
   } catch (error) {
     console.log(error);

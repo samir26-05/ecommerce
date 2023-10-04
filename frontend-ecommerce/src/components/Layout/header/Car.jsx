@@ -42,7 +42,6 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
       }
     } else {
       alert("La cantidad mínima permitida es 1.");
-      // updatedCart.push({ ...product, quantity: 1 });
     }
 
     updateCart(updatedCart);
@@ -52,6 +51,7 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
     updateCart([]);
   };
 
+  console.log(allProducts.category);
   return (
     <Car>
       <div>
@@ -97,7 +97,15 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                         className="link"
                       >
                         <p className="Tiltle">{product.name}</p>
-                        <span className="Size">Talla: {product.size.size}</span>
+                        {/* {product.category.category !== "zapatos" ? (
+                          <span className="Size">
+                            Talla: {product.size.size}
+                          </span>
+                        ) : (
+                          <span className="Size">
+                            Talla: {product.shoe_size.shoe_size_name}
+                          </span>
+                        )} */}
                       </Link>
                       <span className="Price">
                         {product.price.toLocaleString("es-CO", {
@@ -108,7 +116,11 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                       </span>
                     </div>
                     <div className="Buttons">
-                      <AddProduct product={product} stock={product.stock}>
+                      <AddProduct
+                        product={product}
+                        stock={product.stock}
+                        size={product.size}
+                      >
                         <button className="btnAdd">
                           <MdAdd
                             className="iconAdd"
