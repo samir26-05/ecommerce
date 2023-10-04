@@ -8,4 +8,5 @@ router.post('/create',Jwt.validatetoken,Order.CreateOrder)
 router.post('/webhook',Order.webhook)
 router.get('/user',Jwt.validatetoken, Order.GetUsername)
 router.get('/reference/:refe',Jwt.validatetoken, Order.GetUsername)
+router.get('/status/:name',Jwt.validatetoken, Order.GetOrderStatus)
 export default router

@@ -2,6 +2,7 @@ import { Orden_compra } from "../../models/Gestion de pedidos/orders.js";
 import { productos } from "../../models/productos/productos.js";
 import { order_detail } from "../../models/Gestion de pedidos/order_detail.js";
 import { sequelize } from "../../database.js";
+import { state } from "../../models/Gestion de pedidos/state.js";
 
 export const GetOrder = async (req, res) => {
   try {
@@ -211,7 +212,7 @@ export const GetUsername = async (req, res) => {
 export const Orden_reference = async (req,res) => {
   try {
   const refe = req.params
-  const result = await Orden_compra.findAll({
+  const result = await Orden_compra.findOne({
     where : {reference: refe},
     attributes: [
       "id_order",
@@ -274,3 +275,29 @@ res.status(200).json(parsedResults)
   res.status(500).json({error: error.message});
 }
 };
+
+export const GetOrderStatus = async (req, res) => {
+  try {
+    const { name } = req.params;
+    const stateFound = await state.findOne({ where: { state: name } });
+    const result = await Orden_compra.findAll({
+      where: { id_state: stateFound.id_state },
+      include: [
+        {
+          model: sequelize.model("state"),
+          attributes: ["state"],
+        },
+        {
+          model: sequelize.model("user"),
+          attributes: ["user"],
+        },
+      ],
+    });
+    console.log(result);
+    res.status(200).json(result)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message})
+  }
+}
+
