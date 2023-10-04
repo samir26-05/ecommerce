@@ -97,7 +97,7 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                         className="link"
                       >
                         <p className="Tiltle">{product.name}</p>
-                        {product.size.size ? (
+                        {/* {product.size.size ? (
                           <span className="Size">
                             Talla: {product.size.size}
                           </span>
@@ -105,7 +105,7 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                           <span className="Size">
                             Talla: {product.size.size}
                           </span>
-                        )}
+                        )} */}
                       </Link>
                       <span className="Price">
                         {product.price.toLocaleString("es-CO", {

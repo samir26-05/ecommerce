@@ -100,6 +100,30 @@ export default function NavHorizontal(props) {
   useEffect(() => {
     fetchOneClients();
   }, [userName]);
+
+
+
+
+  const fecthShopping = async () => {
+
+    try {
+      const response = await axios.get(`${urlBackend}/order/user`, 
+      {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      }
+      );
+     
+      console.log(response.data);
+    } catch (error) {
+      
+    }
+  }
+
+useEffect(() => {
+  fecthShopping()
+},[])
   return (
     <Box>
       {type === "buy" ? (
