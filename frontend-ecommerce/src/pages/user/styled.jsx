@@ -5,6 +5,6 @@ export const Div = styled.div`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: #ff0000;
     color: black;
 `

@@ -9,7 +9,6 @@ import FooterUser from "../../components/Layout/footer/FooterUser";
 import { Div, BoxUser } from "./UserPageStyled";
 import Loading from "../../components/loading/Loading";
 
-
 const UserPage = () => {
   const [userEnterUser, setUserEnterUser] = useState(true);
   const [loading, setLoading] = useState(true);
