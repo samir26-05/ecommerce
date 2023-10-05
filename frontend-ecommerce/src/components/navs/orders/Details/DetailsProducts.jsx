@@ -1,42 +1,35 @@
-import { useEffect, useMemo, useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useMemo } from 'react';
 import { MaterialReactTable } from 'material-react-table';
 
-const TableDetailsProducts = () => {
-  const urlBackend = import.meta.env.VITE_BACKEND_URL
-  const [details, setDetails] = useState([])
-    const rowTable = async() =>{
-
-      const response = await axios.get(`${urlBackend}/order/user`)
-      setDetails(response.data)
-
-      console.log(details);
-    }
-
-    
-    useEffect(() => {
-      rowTable()
-    }, [])
-    
+const TableDetailsProducts = ({products}) => {
     //should be memoized or stable
     const columns = useMemo(
       () => [
         {
           accessorKey: 'img', //access nested data with dot notation
-          header: 'Producto',
-          size: 200,
+          header: 'Imagen',
+          Cell: ({ renderedCellValue }) => (
+            <img src={renderedCellValue} alt="" style={{ width: "50px" }} />
+          ),
         },
         {
-          accessorKey: 'name',
+          accessorKey: 'producto',
           header: 'Nombre',
           size: 250,
         },
         {
-          accessorKey: 'description', //normal accessorKey
-          header: 'Descripcion',
+          accessorKey: 'valor_unitario',
+          header: 'Valor Unitario',
           size: 200,
         },
         {
-          accessorKey: 'quantity',
+          accessorKey: 'valor',
+          header: 'Valor Total',
+          size: 200,
+        },
+        {
+          accessorKey: 'cantidad',
           header: 'Cantidad',
           size: 150,
         }
@@ -44,7 +37,7 @@ const TableDetailsProducts = () => {
       [],
     );
   
-    return <MaterialReactTable columns={columns} data={{}} />;
+    return <MaterialReactTable columns={columns} data={products} />;
   };
   
   export default TableDetailsProducts;
