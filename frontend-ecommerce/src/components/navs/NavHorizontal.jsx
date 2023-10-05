@@ -1,16 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 /* MATERIAL UI */
-import { Button, Box } from "@mui/material"; 
+import {
+  Button,
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import SendIcon from "@mui/icons-material/Send";
 import { MaterialReactTable } from "material-react-table";
-
 
 /* COMPONENETS */
 import StockProducts from "../navs/products/StockProducts";
@@ -107,7 +116,7 @@ export default function NavHorizontal(props) {
   }, [userName]);
 
   const [orders, setOrders] = useState([]);
-
+  console.log(orders);
   const fecthShopping = async () => {
     try {
       const response = await axios.get(`${urlBackend}/order/user`, {
@@ -116,7 +125,6 @@ export default function NavHorizontal(props) {
         },
       });
       setOrders(response.data);
-      console.log(orders);
     } catch (error) {}
   };
 
@@ -157,35 +165,57 @@ export default function NavHorizontal(props) {
             <>
               <Div>
                 <CustomTabPanel value={value} index={0}>
-                  {/* {orders.map((order, index) => (
-                  <div key={index}>
-                    <h2>Pedido {order.id_order}</h2>
-                    <p>ID de Usuario: {order.user_id}</p>
-                    <p>Subtotal: {order.subtotal}</p>
-                    <ul>
-                      {order.products.map((product, productIndex) => (
-                        <li key={productIndex}>
-                          <h3>Producto {productIndex + 1}</h3>
-                          <p>Nombre del producto: {product.producto}</p>
-                          <p>Valor unitario: {product.valor_unitario}</p>
-                          <p>Cantidad: {product.cantidad}</p>
-                          <p>Valor total: {product.valor}</p>
-                          <img
-                            src={product.img}
-                            alt={`Imagen de ${product.producto}`}
-                          />
-                        </li>
-                      ))}
-                    </ul>
+                  <div>
+                    <TableContainer component={Paper}>
+                      <Table>
+                        <TableHead>
+                          <TableRow>
+                            <TableCell>Pedido ID</TableCell>
+                            <TableCell>ID de Usuario</TableCell>
+                            <TableCell>Subtotal</TableCell>
+                            <TableCell>Producto</TableCell>
+                            <TableCell>Valor unitario</TableCell>
+                            <TableCell>Cantidad</TableCell>
+                            <TableCell>Valor total</TableCell>
+                            <TableCell>Estado</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {orders.map((order, index) => (
+                            <TableRow key={index}>
+                              <TableCell>{order.id_order}</TableCell>
+                              <TableCell>{order.user_id}</TableCell>
+                              <TableCell>{order.subtotal}</TableCell>
+                              {order.products.map((product, productIndex) => (
+                                <React.Fragment key={productIndex}>
+                                  {productIndex === 0 ? (
+                                    <TableCell>{product.producto}</TableCell>
+                                  ) : null}
+                                  {productIndex === 0 ? (
+                                    <TableCell>
+                                      {product.valor_unitario}
+                                    </TableCell>
+                                  ) : null}
+                                  {productIndex === 0 ? (
+                                    <TableCell>{product.cantidad}</TableCell>
+                                  ) : null}
+                                  {productIndex === 0 ? (
+                                    <TableCell>{product.valor}</TableCell>
+                                  ) : null}
+                                </React.Fragment>
+                              )
+                              
+                              )}
+                              <TableCell>{order.id_state}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
                   </div>
-                ))} */}
-                  
-                    <MaterialReactTable
-                      columns={columns}
-                      data={rows}
-                      
-                    />
                 </CustomTabPanel>
+
+
                 <CustomTabPanel value={value} index={1}>
                   <h2>awdawd</h2>
                 </CustomTabPanel>
