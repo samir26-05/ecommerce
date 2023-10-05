@@ -100,14 +100,12 @@ export default function Review() {
 
   const createOrder = async () => {
     try {
-      // Crear un nuevo array de objetos con el id y la cantidad del pedido
-      const productOrder = products.map((producto) => ({
+      const productOrder = products.map(producto => ({
         product_id: producto.product_id,
         stock: producto.quantity,
       }));
-      console.log(productOrder, "asd");
-      await axios.post(
-        `${urlBackend}/order/webhook/order/create`,
+      
+      await axios.post(`${urlBackend}/order/create`,
         {
           subtotal: subtotal,
           discount: descuento,
@@ -122,8 +120,8 @@ export default function Review() {
             accessToken: localStorage.getItem("accessToken"),
           },
         }
-      );
-      localStorage.removeItem("cart"); // Limpiar carrito
+      )
+      localStorage.removeItem("cart") //Limpiar carrito
     } catch (error) {
       Swal.fire({
         icon: "error",
