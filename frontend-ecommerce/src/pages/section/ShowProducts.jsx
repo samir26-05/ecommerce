@@ -11,7 +11,7 @@ import {
   Price,
 } from "./SectionsStyled";
 import { Link } from "react-router-dom";
-import AddProduct from "../../utils";
+import AddProduct from "../../utils/addCar";  
 import { GiShoppingBag } from "react-icons/gi";
 
 const ShowProducts = ({ products, currentPage, productsPerPage }) => {

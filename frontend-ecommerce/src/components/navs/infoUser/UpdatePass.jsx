@@ -65,7 +65,6 @@ export default function UpdatePass({ txtPassword, setTxtPassword }) {
       Swal.fire({
         icon: "error",
         title: messageError,
-        text: error,
         iconColor: "#ff0000",
         color: "#000",
         showConfirmButton: false,

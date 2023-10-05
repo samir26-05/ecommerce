@@ -155,15 +155,7 @@ export default function InfoCountUser() {
         }
       );
       setAvatarUrl(response.data);
-      Swal.fire({
-        icon: "success",
-        title: "Foto de perfil actualizada con exito!",
-        iconColor: "#09ff00",
-        color: "#000",
-        showConfirmButton: false,
-        confirmButtonColor: "#000",
-        timer: 1000,
-      });
+      window.location.reload();
     } catch (error) {
       console.error("Error al actualizar el avatar:", error);
       Swal.fire({
