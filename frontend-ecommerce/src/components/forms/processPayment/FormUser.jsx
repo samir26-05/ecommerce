@@ -60,18 +60,18 @@ const FormUserPayment = () => {
         <div>
           {GetStepContent(activeStep, handleFormValidChange)}
           {activeStep !== 0 && (
-            <Button
-              onClick={handleBack}
-              style={{
-                backgroundColor: "black",
-                color: "white",
-                position: "absolute",
-                left: "40%",
-                top: "89.3%",
-              }}
-            >
-              Atrás
-            </Button>
+            <div style={{position:"relative"}}>
+              <Button
+                onClick={handleBack}
+                style={{
+                  backgroundColor: "black",
+                  color: "white",
+                  position: "absolute",
+                  bottom:"10%",
+                }}>
+                Atrás
+              </Button>
+            </div> 
           )}
           <div
             style={{
