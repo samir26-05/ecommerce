@@ -10,7 +10,6 @@ import { GiCardboardBox, GiCheckboxTree } from "react-icons/gi";
 import TotalSummary from "./TotalSummary";
 import TableDetailsProducts from "./DetailsProducts";
 import CrudOrders from "../ShowOrders";
-import axios from "axios";
 
 const steps = ["DESPACHO", "EN CAMINO", "RECIBIDO"];
 
@@ -28,37 +27,13 @@ function getStepIcon(step) {
 }
 
 export default function DetailsOrder({ order, seeOrder }) {
+  console.log(order);
   const [table, setTable] = useState(seeOrder);
-  const [products, setProducts] = useState([]);
   const [activeStep, setActiveStep] = useState(0);
-  const urlBackend = import.meta.env.VITE_BACKEND_URL;
 
   const handleShowTable = () => {
     setTable(!table);
   };
-
-  const searchProducts = async () => {
-    try {
-      let fetchedProducts = []
-      for (let i = 0; i < order.products.length; i++) {
-        const response = await axios.get(`${urlBackend}/product/id/${order.products[i].product_id}`, {
-            headers: {
-              accessToken: localStorage.getItem("accessToken"),
-            },
-          }
-        );
-        console.log(order.products[i].product_id, 'aaaaaaaaaaaaaaa');
-        fetchedProducts.push(response.data);
-      }
-      setProducts(fetchedProducts)
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    searchProducts();
-  }, []);
 
   return (
     <div style={{ width: "100%" }}>
@@ -118,7 +93,7 @@ export default function DetailsOrder({ order, seeOrder }) {
                 width: "100%",
               }}
             >
-              <TableDetailsProducts products={products} />
+              <TableDetailsProducts products={order.products} />
               <Box
                 sx={{
                   marginBottom: 10,
@@ -128,18 +103,7 @@ export default function DetailsOrder({ order, seeOrder }) {
                   width: "40%",
                 }}
               >
-                <TotalSummary />
-                <Card
-                  sx={{
-                    display: "flex",
-                    width: "100%",
-                    marginBottom: 5,
-                    justifyContent: "space-between",
-                    padding: "20px 0px 20px 0px",
-                  }}
-                >
-                  AQUI VA LA INFORMACION DE EL DOMICILIO DEL PEDIDO
-                </Card>
+                <TotalSummary order={order}/>
               </Box>
             </Box>
           </div>

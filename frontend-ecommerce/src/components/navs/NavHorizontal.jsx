@@ -116,7 +116,6 @@ export default function NavHorizontal(props) {
   }, [userName]);
 
   const [orders, setOrders] = useState([]);
-  console.log(orders);
   const fecthShopping = async () => {
     try {
       const response = await axios.get(`${urlBackend}/order/user`, {
