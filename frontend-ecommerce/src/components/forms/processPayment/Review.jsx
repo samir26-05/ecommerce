@@ -65,8 +65,9 @@ export default function Review() {
   const totalCantidadProductos = products.reduce((total, product) => total + product.quantity, 0);
   const isTotalMayor6 = totalCantidadProductos > 6;
   const descuento = isTotalMayor6 ? products.reduce((total, product) => total + product.price * product.quantity, 0) * 0.1 : 0;
+  const shipment = 4000  //Envío
 
-  const subtotal = products.reduce((total, product) => total + product.price * product.quantity, 0);
+  const subtotal = products.reduce((total, product) => total + product.price * product.quantity + shipment, 0);
   const iva = subtotal * 0.19;
   const subTotal2 = subtotal - iva
   const valorTotal = subTotal2 + iva - descuento
@@ -95,6 +96,7 @@ export default function Review() {
           subtotal: subtotal,
           discount: descuento,
           iva: iva,
+          shipment: shipment,
           total: valorTotal,
           products: productOrder,
           reference: referenceCode
@@ -187,8 +189,9 @@ export default function Review() {
       {/* TOTALES */}
       <Grid item xs={6} sm={12} sx={{ px: 2, flexDirection: "row", display: "flex", border: "solid 1px gray", justifyContent: "space-around", alignItems: "center", fontWeight: "bold", height: "auto" }}>
         <Box>
-          <Typography >  SubTotal: ------------------------------------- </Typography>
-          <Typography >  Iva (19%): ------------------------------------ </Typography>
+          <Typography>  SubTotal: ------------------------------------- </Typography>
+          <Typography>  Iva (19%): ------------------------------------ </Typography>
+          <Typography>  Gasto de envío: ----------------------------- </Typography>
           <ListItem sx={{ py: 1, px: 0 }}>
             <Typography variant="subtitle1" sx={{ flexDirection: "row", display: "flex" }}>
               {isTotalMayor6 && (
@@ -201,8 +204,9 @@ export default function Review() {
           <Typography style={{ fontWeight: "bold" }}>Total a pagar: ------------------------------</Typography>
         </Box>
         <Box>
-          <Typography > $ {subTotal2} </Typography>
-          <Typography > $ {iva} </Typography>
+          <Typography> $ {subTotal2} </Typography>
+          <Typography> $ {iva} </Typography>
+          <Typography> $ {shipment} </Typography>
           <ListItem sx={{ py: 1, px: 0 }}>
             <Typography variant="subtitle1" sx={{ flexDirection: "row", display: "flex" }}>
               {isTotalMayor6 && (

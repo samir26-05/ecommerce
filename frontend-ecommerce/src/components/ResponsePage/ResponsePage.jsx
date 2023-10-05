@@ -2,9 +2,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ContainerP, } from "../PageNotFound/StylePageNotFound";
-import axios from "axios";
 import { FlexDirCol, FlexRow } from "../StyledMain";
 import { Button, Typography } from "@mui/material";
+import { BsDownload } from "react-icons/bs"
+import { PDFDocument, rgb } from 'pdf-lib';
+import axios from "axios";
 import Swal from "sweetalert2";
 
 const Response = () => {
@@ -110,6 +112,59 @@ const Response = () => {
       navigate("/home");
     }
   }, []);
+
+  const createPDF = async (order, clients) => {
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([800, 800]);
+    const font = page.drawText("")
+  
+    // Organiza los datos como deseas en el PDF
+    const content = `
+      ORDEN DE COMPRA
+
+      Fecha: ${transactionDate}
+      N° de orden: ${numOrder}
+
+
+      Datos del proveedor
+      Nombre: ${searchParams.get("merchant_name")}
+      NIT: ${searchParams.get("merchantId")}
+      Dirección: ${searchParams.get("merchant_address")}
+      Teléfono: ${searchParams.get("telephone")}
+      Correo electrónico: KALARY@wowdesarrollos.com
+
+
+      Datos del cliente
+      Nombre: ${localStorage.getItem("username")}
+      Dirección: ${clients?.Personal_information.address}
+      ZIP: ${clients?.Personal_information.postalcode}
+      Teléfono: ${clients?.Personal_information.Phone_number}
+      Correo electrónico: ${clients?.email}
+
+
+      
+      
+    `;
+  
+    page.drawText(content, {
+      x: 50,
+      y: 750,
+      size: 14,
+      font: font,
+      color: rgb(0, 0, 0),
+    });
+  
+    const pdfBytes = await pdfDoc.save();
+    const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+    const a = document.createElement('a');
+    a.href = pdfUrl;
+    a.download = `Orden de compra Kalary ${numOrder}.pdf`;  
+    a.click();  
+    URL.revokeObjectURL(pdfUrl);
+  };
+
+
   const searchParams = new URLSearchParams(window.location.search);
 
 
@@ -165,7 +220,7 @@ const Response = () => {
             </FlexRow>
             <FlexRow style={{gap:"10px"}}>
               <Typography style={textPrimary}>Correo: </Typography>
-              <Typography style={{borderBottom:"1px solid #0000004b", width:"100%"}}>(Correo electrónico)</Typography>
+              <Typography style={{borderBottom:"1px solid #0000004b", width:"100%"}}>KALARY@wowdesarrollos.com</Typography>
             </FlexRow>
           </FlexDirCol>
 
@@ -216,7 +271,7 @@ const Response = () => {
         <div style={{width:"90%"}}>
           <FlexRow style={{justifyContent:"space-between", border:"1px solid #000"}}>
             <Typography style={maps}>Total Pedido</Typography>
-            <Typography style={maps}>${order?.total_value}</Typography>
+            <Typography style={maps}>${order?.total_value - order?.envio}</Typography>
           </FlexRow>
           {order?.discount > 0 ? 
             <FlexRow style={{justifyContent:"space-between", border:"1px solid #000"}}>
@@ -249,11 +304,18 @@ const Response = () => {
           </FlexDirCol>
         </FlexRow>
 
-        <Link to={'/home'}>
-          <Button style={{backgroundColor:"#000", color:"#fff", padding:".8rem"}}>
-            Back to home
+        <FlexRow style={{justifyContent:"center", gap:"20px"}}>
+          <Link to={'/home'}>
+            <Button style={{backgroundColor:"#000", color:"#fff", padding:".8rem"}}>
+              Back to home
+            </Button>
+          </Link>
+
+          <Button onClick={() => createPDF(order, oneClients)} style={{ height:"50px", backgroundColor:"#000", color:"#fff", gap:"20px", padding:"0 1rem" }}>
+            <BsDownload style={{fill:"#fff", fontSize:"1.2rem"}}/>
+            Descargar PDF
           </Button>
-        </Link>
+        </FlexRow>
       </FlexDirCol>
     </ContainerP>
   );
