@@ -19,8 +19,8 @@ export const Container = styled.div`
         ? "0px 0px 3px 2px #0000003b"
         : "0px 0px 0px 0px"
       : "0px 0px 3px 2px #0000003b"};
-  position: ${({ isUsedUser, isUsedBody }) =>
-    isUsedUser || isUsedBody ? "fixed" : "relative"};
+  position: ${({ isUsedUser, isUsedBody, isUsedPayment }) =>
+    isUsedUser || isUsedBody || isUsedPayment ? "fixed" : "relative"};
 
   .BoxTiltle {
     display: flex;
