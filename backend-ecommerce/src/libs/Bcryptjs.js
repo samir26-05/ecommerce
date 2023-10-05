@@ -6,7 +6,6 @@ export async function encryptPassword(plaintextPassword) {
     const hash = await bcrypt.hash(plaintextPassword, salt);
     return hash;
   } catch (error) {
-    console.error('Error encriptando la contraseña:', error);
     throw error;
   }
 }
