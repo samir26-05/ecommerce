@@ -4,6 +4,7 @@ import z from "zod";
 const RegisterValidator = z.object({
   user: z
     .string()
+    .trim()
     .nullable()
     .refine(
       async (value) => {
@@ -14,12 +15,44 @@ const RegisterValidator = z.object({
         return true;
       },
       {
-        message:
-          "Nombre de usuario ya registrado, Intenta cambiarlo",
+        message: "Nombre de usuario ya registrado, Intenta cambiarlo",
       }
+    )
+    .refine(
+      async (values) => {
+        if (values.length < 1 || values === "") {
+          return false;
+        }
+        return true;
+      },
+      { message: "no puede quedar en blanco el campo" }
     ),
-  nombre: z.string().nullable(),
-  apellido: z.string().nullable(),
+  nombre: z
+    .string()
+    .trim()
+    .nullable()
+    .refine(
+      async (values) => {
+        if (values.length < 1 || values === "") {
+          return false;
+        }
+        return true;
+      },
+      { message: "no puede quedar en blanco el campo" }
+    ),
+  apellido: z
+    .string()
+    .trim()
+    .nullable()
+    .refine(
+      async (values) => {
+        if (values.length < 1 || values === "") {
+          return false;
+        }
+        return true;
+      },
+      { message: "no puede quedar en blanco el campo" }
+    ),
   email: z
     .string()
     .email()

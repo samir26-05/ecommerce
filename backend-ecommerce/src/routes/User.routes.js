@@ -19,6 +19,5 @@ router.put("/password/update",Jwt.validatetoken,Auth.UpdatePassword)
 
 // routas de datos personales
 router.put("/personal_information/:name",[Jwt.validatetoken],Personal.UpdatePersonalInformation);
-router.put("/personal_information/id/:id",[Jwt.validatetoken],Personal.UpdatePersonalInformationId)
 
 export default router;
