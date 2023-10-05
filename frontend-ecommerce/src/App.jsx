@@ -12,6 +12,7 @@ import Payment from "./pages/processPayment/Payment.jsx";
 import InfoProducts from "./pages/infoProducts/InfoProducts.jsx";
 import Sections from "./pages/section/Sections.jsx";
 import PageNotFound from "../src/components/PageNotFound/PageNotFound.jsx";
+import Response from "./components/ResponsePage/ResponsePage.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
       <Route path="/payment" element={<Payment />} />
       <Route path="/infoProducts/:name" element={<InfoProducts />} />
       <Route path="/section/:page" element={<Sections />} />
+      <Route path="/response" element={<Response />} />
       <Route path="*" element={<PageNotFound />} />
     </Route>
   )

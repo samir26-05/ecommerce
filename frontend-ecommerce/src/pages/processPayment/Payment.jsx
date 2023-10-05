@@ -25,6 +25,13 @@ const UserPage = () => {
       navigate('/')
     }
 
+    //No acceder a payment si no tiene productos en el carrito
+    if (localStorage.getItem("cart")) {
+      setLoading(false)
+    } else {
+      navigate('/home')
+    }
+
     const trueEnter = verifyEnter();
     setUserEnter(trueEnter);
 

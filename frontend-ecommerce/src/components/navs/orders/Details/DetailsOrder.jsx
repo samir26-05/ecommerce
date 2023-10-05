@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 /* MATERIAL UI */
@@ -34,31 +35,31 @@ export default function DetailsOrder({ order, seeOrder }) {
 
   const handleShowTable = () => {
     setTable(!table);
-    console.log(table);
+  };
+
+  const searchProducts = async () => {
+    try {
+      let fetchedProducts = []
+      for (let i = 0; i < order.products.length; i++) {
+        const response = await axios.get(`${urlBackend}/product/id/${order.products[i].product_id}`, {
+            headers: {
+              accessToken: localStorage.getItem("accessToken"),
+            },
+          }
+        );
+        console.log(order.products[i].product_id, 'aaaaaaaaaaaaaaa');
+        fetchedProducts.push(response.data);
+      }
+      setProducts(fetchedProducts)
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    const searchProducts = async () => {
-      for (const i in order.products) {
-        try {
-          const response = await axios.get(`${urlBackend}/product/id/${order.products[i].product_id}`,
-            {
-              headers: {
-                accessToken: localStorage.getItem("accessToken"),
-              },
-            }
-          );
-          
-          setProducts([...products, response.data]);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    };
-
-    searchProducts(products);
+    searchProducts();
   }, []);
-  console.log(products, "products");
+
   return (
     <div style={{ width: "100%" }}>
       {table ? (
@@ -117,7 +118,7 @@ export default function DetailsOrder({ order, seeOrder }) {
                 width: "100%",
               }}
             >
-              <TableDetailsProducts />
+              <TableDetailsProducts products={products} />
               <Box
                 sx={{
                   marginBottom: 10,

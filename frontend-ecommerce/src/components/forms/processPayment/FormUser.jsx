@@ -111,11 +111,10 @@ function FormUserPayment() {
                 {activeStep !== 0 && (
                   <Button
                     onClick={handleBack}
-                    sx={{ ml: 1 }}
                     style={{
                       backgroundColor: "black",
                       color: "white",
-                      marginBottom: -40,
+                      padding: ".4rem .8rem"
                     }}
                   >
                     Atrás

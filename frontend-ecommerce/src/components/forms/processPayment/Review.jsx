@@ -9,7 +9,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 import Swal from "sweetalert2";
 import { Box, Button } from "@mui/material";
-// import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import CryptoJS from "crypto-js";
 import axios from "axios";
 /* COMPONENTS */
@@ -30,7 +30,10 @@ export default function Review() {
 
   const token = localStorage.getItem("accessToken");
   const userName = localStorage.getItem("username");
-  const urlBackend = import.meta.env.VITE_BACKEND_URL;
+  const urlBackend = import.meta.env.VITE_BACKEND_URL
+  const urlFrontend = import.meta.env.VITE_FRONTEND_URL
+  const apiKey = import.meta.env.VITE_APIKEY; // Llave de la api de payU
+  const merchantId = import.meta.env.VITE_MERCHANTID;
 
   useEffect(() => {
     async function fetchOneClients() {
@@ -69,23 +72,14 @@ export default function Review() {
     0
   );
   const isTotalMayor6 = totalCantidadProductos > 6;
-  const descuento = isTotalMayor6
-    ? products.reduce(
-        (total, product) => total + product.price * product.quantity,
-        0
-      ) * 0.1
-    : 0;
+  const descuento = isTotalMayor6 ? products.reduce((total, product) => total + product.price * product.quantity, 0) * 0.1 : 0;
+  const shipment = 4000  //Envío
 
-  const subtotal = products.reduce(
-    (total, product) => total + product.price * product.quantity,
-    0
-  );
+  const subtotal = products.reduce((total, product) => total + product.price * product.quantity + shipment, 0);
   const iva = subtotal * 0.19;
   const subTotal2 = subtotal - iva;
   const valorTotal = subTotal2 + iva - descuento;
 
-  const apiKey = "4Vj8eK4rloUd272L48hsrarnUA"; // defecto
-  const merchantId = "508029"; // defecto
   const referenceCode = uuidv4();
   const amount = subtotal;
   const currency = "COP"; // defecto
@@ -99,17 +93,23 @@ export default function Review() {
   const createOrder = async () => {
     try {
       //Crear un nuevo array de objetos con el id y la cantidad del pedido
-      console.log(referenceCode, "referencia");
-      const productOrder = products.map((producto) => ({
+      const productOrder = products.map(producto => ({
         product_id: producto.product_id,
         stock: producto.quantity,
       }));
+<<<<<<<<< Temporary merge branch 1
       console.log(productOrder, 'asd');
-      await axios.post(`https://e910-186-147-59-58.ngrok.io/order/webhook/order/create`,
+      await axios.post(`http://localhost:3000/order/create`,
+=========
+      console.log(productOrder, "asd");
+      await axios.post(
+        `${urlBackend}/order/webhook/order/create`,
+>>>>>>>>> Temporary merge branch 2
         {
           subtotal: subtotal,
           discount: descuento,
           iva: iva,
+          shipment: shipment,
           total: valorTotal,
           products: productOrder,
           reference: referenceCode,
@@ -119,8 +119,8 @@ export default function Review() {
             accessToken: localStorage.getItem("accessToken"),
           },
         }
-      );
-      // localStorage.removeItem("cart") //Limpiar carrito
+      )
+      localStorage.removeItem("cart") //Limpiar carrito
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -205,8 +205,8 @@ export default function Review() {
         <Grid item xs={0} sm={4}>
           <ListItem sx={{ py: 1, px: 8 }}>
             <ListItemText primary="IMPORTE" />
-          </ListItem>
-        </Grid>
+            </ListItem>
+          </Grid>
       </Grid>
 
       <Grid container spacing={1} sx={{ padding: "0px 0px 25px 0px" }}>
@@ -247,14 +247,9 @@ export default function Review() {
         }}
       >
         <Box>
-          <Typography>
-            {" "}
-            SubTotal: -------------------------------------{" "}
-          </Typography>
-          <Typography>
-            {" "}
-            Iva (19%): ------------------------------------{" "}
-          </Typography>
+          <Typography>  SubTotal: ------------------------------------- </Typography>
+          <Typography>  Iva (19%): ------------------------------------ </Typography>
+          <Typography>  Gasto de envío: ----------------------------- </Typography>
           <ListItem sx={{ py: 1, px: 0 }}>
             <Typography
               variant="subtitle1"
@@ -276,6 +271,7 @@ export default function Review() {
         <Box>
           <Typography> $ {subTotal2} </Typography>
           <Typography> $ {iva} </Typography>
+          <Typography> $ {shipment} </Typography>
           <ListItem sx={{ py: 1, px: 0 }}>
             <Typography
               variant="subtitle1"
@@ -293,11 +289,8 @@ export default function Review() {
         </Box>
       </Grid>
 
-      <div>
-        <form
-          method="post"
-          action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/"
-        >
+      <div style={{width:"100%", }}>
+        <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/" style={{display:"flex", justifyContent:"flex-end"}}>
           <input name="merchantId" type="hidden" value="508029" />
           <input name="accountId" type="hidden" value="512321" />
           <input
@@ -314,8 +307,32 @@ export default function Review() {
           <input name="test" type="hidden" value="0" />
           <input name="buyerEmail" type="hidden" value={localStorage.getItem("email")} />
           <input name="responseUrl" type="hidden" value="http://localhost:5173/home" />
-          <input name="confirmationUrl" type="hidden" value="https://e910-186-147-59-58.ngrok.io/order/webhook" />
+          <input name="confirmationUrl" type="hidden" value="https://3bf7-186-147-59-58.ngrok.io/order/webhook" />
           <Button name="Submit" type="submit" onClick={() => createOrder()} variant="" style={{ backgroundColor: "black", color: "white"}} >
+=========
+          <input
+            name="buyerEmail"
+            type="hidden"
+            value={localStorage.getItem("email")}
+          />
+          <input
+            name="responseUrl"
+            type="hidden"
+            value="http://localhost:5173/home"
+          />
+          <input
+            name="confirmationUrl"
+            type="hidden"
+            value="https://e910-186-147-59-58.ngrok.io/order/webhook"
+          />
+          <Button
+            name="Submit"
+            type="submit"
+            onClick={() => createOrder()}
+            variant=""
+            style={{ backgroundColor: "black", color: "white" }}
+          >
+>>>>>>>>> Temporary merge branch 2
             PAGAR
           </Button>
         </form>
