@@ -13,9 +13,9 @@ import {
   BoxLink,
   Redes,
   Error,
-} from "./registerstyled";
+} from "./registerStyled";
 import Swal from "sweetalert2";
-const urlBackend = import.meta.env.VITE_BACKEND_URL
+const urlBackend = import.meta.env.VITE_BACKEND_URL;
 
 const RegisterLogin = () => {
   const vista = "register";
@@ -39,6 +39,8 @@ const RegisterLogin = () => {
           title: "Registro Exitoso",
           text: successMessage,
           confirmButtonColor: "#000000",
+          showConfirmButton: false,
+          timer: 1000,
           iconColor: "#09ff00",
           color: "#000",
         });
@@ -54,6 +56,7 @@ const RegisterLogin = () => {
           iconColor: "#ff0000",
           color: "#000",
           timer: 2000,
+          showConfirmButton: false,
         });
         Swal.fire({
           icon: "error",
@@ -62,6 +65,7 @@ const RegisterLogin = () => {
           iconColor: "#ff0000",
           color: "#000",
           timer: 2000,
+          showConfirmButton: false,
         });
       });
   };
@@ -98,7 +102,13 @@ const RegisterLogin = () => {
             onSubmit={onSubmit}
             validationSchema={validationSchema}
           >
-            <Form style={{gap:"2.5rem", display:"flex", flexDirection:"column"}}>
+            <Form
+              style={{
+                gap: "2.5rem",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <LoginBoxInput>
                 <Field name="nombre" required />
                 <Error>

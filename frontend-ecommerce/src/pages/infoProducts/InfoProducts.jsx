@@ -18,7 +18,7 @@ import Header from "../../components/Layout/header/Header";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import AddProduct from "../../utils";
+import AddProduct from "../../utils/addCar";
 import Loading from "../../components/loading/Loading";
 import { Modal } from "@mui/material";
 import Swal from "sweetalert2";

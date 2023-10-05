@@ -44,6 +44,7 @@ const Response = () => {
     //---------------------------       CONDICIONALES PARA VALIDAR LA ENTRADA A LA PÁGINA DE RESPUESTA       -------------------------------------
 
     if (
+      lapTransactionState === 'APPROVED' &&
       referenceCode.match(uuidPattern) &&
       merchantId &&
       merchantAddress &&
@@ -51,7 +52,6 @@ const Response = () => {
       telephone &&
       merchantUrl &&
       transactionState &&
-      lapTransactionState &&
       message &&
       processingDate &&
       referencePol

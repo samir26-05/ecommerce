@@ -11,16 +11,20 @@ import {
   LoginBoxInput,
   BoxButton,
 } from "./loginstyled";
-import { BoxLink, Redes } from "./registerstyled";
+import { BoxLink, Redes } from "./registerStyled";
+// import { GoogleLogin } from "react-google-login"; //
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const vista = "login";
-  const urlBackend = import.meta.env.VITE_BACKEND_URL
-  
+  const urlBackend = import.meta.env.VITE_BACKEND_URL;
+
   let navigate = useNavigate();
 
+  // const responseGoogle = (response) => {
+  //   console.log(response);
+  // }
 
   const loginn = async (event) => {
     event.preventDefault();
@@ -94,6 +98,15 @@ const Login = () => {
               </Link>
             </p>
           </BoxLink>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            {/* <GoogleLogin
+              clientId="923014850827-7skheqr3b2siv04379qmc9kavgie3g99.apps.googleusercontent.com"
+              buttonText="Login"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={"single_host_origin"}
+            /> */}
+          </div>
           <Redes>
             <ul className="socail-media">
               <li>
