@@ -126,7 +126,9 @@ export default function NavHorizontal(props) {
         },
       });
       setOrders(response.data);
-    } catch (error) {}
+    } catch (error) {
+      alert(error.response.data.message)
+    }
   };
 
   useEffect(() => {
@@ -214,7 +216,7 @@ export default function NavHorizontal(props) {
                 </CustomTabPanel>
 
                 <CustomTabPanel value={value} index={1}>
-                  <h2>awdawd</h2>
+                  
                 </CustomTabPanel>
               </Div>
             </>
