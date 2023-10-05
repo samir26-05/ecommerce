@@ -48,7 +48,7 @@ export default function UpdatePass({ txtPassword, setTxtPassword }) {
           },
         }
       );
-      const successMessage = response.data;
+      const successMessage = response.data.message;
       Swal.fire({
         icon: "success",
         title: "Cambio Exitoso!",
@@ -57,7 +57,7 @@ export default function UpdatePass({ txtPassword, setTxtPassword }) {
         color: "#000",
         showConfirmButton: false,
         confirmButtonColor: "#000",
-        timer: 1000,
+        timer: 2000,
       });
       handleDelete(); // Llamar a handleDelete después de un cambio exitoso
     } catch (error) {
