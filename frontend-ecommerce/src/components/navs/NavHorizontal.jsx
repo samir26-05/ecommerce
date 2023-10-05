@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 /* MATERIAL UI */
@@ -117,6 +117,7 @@ export default function NavHorizontal(props) {
 
   const [orders, setOrders] = useState([]);
   console.log(orders);
+
   const fecthShopping = async () => {
     try {
       const response = await axios.get(`${urlBackend}/order/user`, {
@@ -130,7 +131,50 @@ export default function NavHorizontal(props) {
 
   useEffect(() => {
     fecthShopping();
+   
   }, []);
+
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: 'id_order', //access nested data with dot notation
+        header: 'Pedido',
+        size: 150,
+      },
+      {
+        accessorKey: 'user_id',
+        header: 'Usuarios',
+        size: 150,
+      },
+      {
+        accessorKey: 'updatedAt',
+        header: 'Fecha de creación',
+        size: 150,
+      },
+      {
+        accessorKey: "subtotal", //normal accessorKey
+        header: 'Subtotal',
+        size: 200,
+      },
+      {
+        accessorKey: 'total_value', //normal accessorKey
+        header: 'Total',
+        size: 200,
+      },
+      {
+        accessorKey: 'a', //normal accessorKey
+        header: 'Metódo de pago',
+        size: 200,
+      },
+      {
+        accessorKey: 'id_state',
+        header: 'Estado del producto',
+        size: 150,
+      },
+    ],
+    [],
+  );
+  
   return (
     <Box>
       {type === "buy" ? (
@@ -165,56 +209,9 @@ export default function NavHorizontal(props) {
             <>
               <Div>
                 <CustomTabPanel value={value} index={0}>
-                  <div>
-                    <TableContainer component={Paper}>
-                      <Table>
-                        <TableHead>
-                          <TableRow>
-                            <TableCell>Pedido ID</TableCell>
-                            <TableCell>ID de Usuario</TableCell>
-                            <TableCell>Subtotal</TableCell>
-                            <TableCell>Producto</TableCell>
-                            <TableCell>Valor unitario</TableCell>
-                            <TableCell>Cantidad</TableCell>
-                            <TableCell>Valor total</TableCell>
-                            <TableCell>Estado</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {orders.map((order, index) => (
-                            <TableRow key={index}>
-                              <TableCell>{order.id_order}</TableCell>
-                              <TableCell>{order.user_id}</TableCell>
-                              <TableCell>{order.subtotal}</TableCell>
-                              {order.products.map((product, productIndex) => (
-                                <React.Fragment key={productIndex}>
-                                  {productIndex === 0 ? (
-                                    <TableCell>{product.producto}</TableCell>
-                                  ) : null}
-                                  {productIndex === 0 ? (
-                                    <TableCell>
-                                      {product.valor_unitario}
-                                    </TableCell>
-                                  ) : null}
-                                  {productIndex === 0 ? (
-                                    <TableCell>{product.cantidad}</TableCell>
-                                  ) : null}
-                                  {productIndex === 0 ? (
-                                    <TableCell>{product.valor}</TableCell>
-                                  ) : null}
-                                </React.Fragment>
-                              )
-                              
-                              )}
-                              <TableCell>{order.id_state}</TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  </div>
+                
+                  <MaterialReactTable columns={columns} data={orders} />
                 </CustomTabPanel>
-
 
                 <CustomTabPanel value={value} index={1}>
                   <h2>awdawd</h2>
