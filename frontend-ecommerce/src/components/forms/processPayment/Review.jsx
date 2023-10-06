@@ -414,7 +414,7 @@ export default function Review() {
 
       <div style={{ display: "flex", justifyContent: "end", padding: "5% 5% 0 0", width: "100%",}}>
         <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
-          <input name="merchantId" type="hidden" value={`${merchantId}`} />
+          <input name="merchantId" type="hidden" value={merchantId} />
           <input name="accountId" type="hidden" value="512321" />
           <input name="description" type="hidden" value="PAGOS ECOMMERCE KALARY"/>
           <input name="referenceCode" type="hidden" value={referenceCode} />
