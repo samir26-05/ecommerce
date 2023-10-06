@@ -6,6 +6,7 @@ import axios from "axios";
 import { MaterialReactTable } from "material-react-table";
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
+import Swal from "sweetalert2";
 
 export default function StockProducts() {
   const [products, setProducts] = useState([]);
@@ -53,9 +54,18 @@ export default function StockProducts() {
             accessToken: localStorage.getItem("accessToken"),
           },
         }
-      );
-      alert("Producto actualizado con éxito:", response.data);
-
+      );      
+      /* const successMessage = response.data.message; */
+        Swal.fire({
+          icon: "success",
+          title: "Producto actualizado con éxito",
+          iconColor: "#09ff00",
+          color: "#000",
+          showConfirmButton: false,
+          confirmButtonColor: "#000",
+          timer: 1000,
+        });
+      
       //cerrar modal
       exitEditingMode();
     } catch (error) {
@@ -191,7 +201,7 @@ export default function StockProducts() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      fetchProducts();
+      fetchProducts(); 
     }, 1000);
 
     return () => clearInterval(interval);
@@ -259,3 +269,4 @@ export default function StockProducts() {
     </div>
   );
 }
+

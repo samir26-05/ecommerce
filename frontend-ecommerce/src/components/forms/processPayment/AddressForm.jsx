@@ -195,20 +195,21 @@ export default function AddressForm({ onFormValid }) {
             </Grid>
             {onFormValid(isValid)}
           </Grid>
-          <Button
-            variant=""
-            type="submit"
-            sx={{ ml: 1 }}
-            style={{
-              backgroundColor: isValid ? "black" : "grey",
-              color: "white",
-              position: "absolute",
-              top: "74.15%",
-            }}
-            disabled={!isValid}
-          >
-            Guardar Cambios
-          </Button>
+          <div style={{position:"relative"}}>
+            <Button
+              variant=""
+              type="submit"
+              sx={{ mt: "10%"}}
+              style={{
+                backgroundColor: isValid ? "black" : "grey",
+                color: "white",
+                position: "absolute",
+              }}
+              disabled={!isValid}
+            >
+              Guardar Cambios
+            </Button>
+          </div>  
         </Form>
       )}
     </Formik>
