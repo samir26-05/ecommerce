@@ -126,7 +126,7 @@ export default function NavHorizontal(props) {
       });
       setOrders(response.data);
     } catch (error) {
-      alert(error.response.data.message)
+      return
     }
   };
 
