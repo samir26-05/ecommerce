@@ -1,12 +1,15 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode"
 /* COMPONENTS */
+import Loading from "../../components/loading/Loading"
 import Header from "../../components/Layout/header/Header";
-import Footer from "../../components/Layout/footer/Footer";
 import FormUserPayment from '../../components/forms/processPayment/FormUser'
+import FooterUser from "../../components/Layout/footer/FooterUser";
 /* STYLED */
-import { Div } from "./styled";
+import { Div } from "./paymentStyled";
 
 const UserPage = () => {
   const [userEnter, setUserEnter] = useState(false);
@@ -25,6 +28,13 @@ const UserPage = () => {
       navigate('/')
     }
 
+    //No acceder a payment si no tiene productos en el carrito
+    if (localStorage.getItem("cart")) {
+      setLoading(false)
+    } else {
+      navigate('/home')
+    }
+
     const trueEnter = verifyEnter();
     setUserEnter(trueEnter);
 
@@ -37,13 +47,13 @@ const UserPage = () => {
     <Div>
       {loading ? (
         <>
-          <h1>Cargando......</h1>
+          <Loading/>
         </>
       ) : (
         <>
-          <Header isUsedPayment={userEnter} />
+          <Header isUsedPayment={UserPage} />
           <FormUserPayment />
-          <Footer />
+          <FooterUser />
         </>
       )}
     </Div>

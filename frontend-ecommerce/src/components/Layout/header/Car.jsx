@@ -7,7 +7,7 @@ import { MdAdd } from "react-icons/Md";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import { AiOutlineMinus } from "react-icons/Ai";
 import { Car } from "./CarStyled";
-import AddProduct from "../../../utils";
+import AddProduct from "../../../utils/addCar";
 
 const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
   const [active, setActive] = useState(false);
@@ -96,15 +96,7 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                         className="link"
                       >
                         <p className="Tiltle">{product.name}</p>
-                        {/* {product.category.category !== "zapatos" ? (
-                          <span className="Size">
-                            Talla: {selectedSize}
-                          </span>
-                        ) : (
-                          <span className="Size">
-                           Talla: {selectedSize}
-                          </span>
-                        )} */}
+                        {/* <span className="Size">Talla: {product.size.size}</span> */}
                       </Link>
                       <span className="Price">
                         {product.price.toLocaleString("es-CO", {

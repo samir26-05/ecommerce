@@ -54,7 +54,7 @@ export const Car = styled.div`
     left: 71.6%;
     top: 72%;
     background-color: #ffffff;
-    z-index: 5;
+    z-index: 100;
     box-shadow: 0 0px 5px rgba(0, 0, 0, 0.39);
     width: 400px;
     height: 60vh;

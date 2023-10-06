@@ -1,14 +1,27 @@
+/* eslint-disable no-empty */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 /* MATERIAL UI */
-import { Button, Box } from "@mui/material"; 
+import {
+  Button,
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import SendIcon from "@mui/icons-material/Send";
+import { MaterialReactTable } from "material-react-table";
+
 /* COMPONENETS */
 import StockProducts from "../navs/products/StockProducts";
 import { FormProduct } from "../navs/products/CreateProducts";
@@ -70,22 +83,19 @@ export default function NavHorizontal(props) {
     state: "",
   });
 
-  const urlBackend = import.meta.env.VITE_BACKEND_URL
-  
+  const urlBackend = import.meta.env.VITE_BACKEND_URL;
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   async function fetchOneClients() {
     try {
-      const response = await axios.get(
-        `${urlBackend}/user/name/${userName}`,
-        {
-          headers: {
-            accessToken: token,
-          },
-        }
-      );
+      const response = await axios.get(`${urlBackend}/user/name/${userName}`, {
+        headers: {
+          accessToken: token,
+        },
+      });
       setOneClients(response.data);
     } catch (error) {
       setError(error);
@@ -105,6 +115,65 @@ export default function NavHorizontal(props) {
   useEffect(() => {
     fetchOneClients();
   }, [userName]);
+
+  const [orders, setOrders] = useState([]);
+  const fecthShopping = async () => {
+    try {
+      const response = await axios.get(`${urlBackend}/order/user`, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      });
+      setOrders(response.data);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fecthShopping();
+   
+  }, []);
+
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: 'id_order', //access nested data with dot notation
+        header: 'Pedido',
+        size: 150,
+      },
+      {
+        accessorKey: 'user_id',
+        header: 'Usuarios',
+        size: 150,
+      },
+      {
+        accessorKey: 'updatedAt',
+        header: 'Fecha de creación',
+        size: 150,
+      },
+      {
+        accessorKey: "subtotal", //normal accessorKey
+        header: 'Subtotal',
+        size: 200,
+      },
+      {
+        accessorKey: 'total_value', //normal accessorKey
+        header: 'Total',
+        size: 200,
+      },
+      {
+        accessorKey: 'a', //normal accessorKey
+        header: 'Metódo de pago',
+        size: 200,
+      },
+      {
+        accessorKey: 'id_state',
+        header: 'Estado del producto',
+        size: 150,
+      },
+    ],
+    [],
+  );
+  
   return (
     <Box>
       {type === "buy" ? (
@@ -135,41 +204,56 @@ export default function NavHorizontal(props) {
               />
             </Tabs>
           </Box>
-          <Div>
-            <CustomTabPanel value={value} index={0}>
-              <Img src={bgr} alt="" />
-              <h4 style={{ width: "100%" }}>Aun no tienes compras online</h4>
-              <span style={{ width: "100%" }}>
-                Si no encuentdras tu compra tal vez es porque hiciste el pedido
-                sin estar registrado.
-              </span>
-              <Button
-                sx={{ width: "100%" }}
-                variant="text"
-                className="whithoutOutline"
-                endIcon={<SendIcon />}
-              >
-                Encontrar pedido
-              </Button>
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
-              <Img sx={{ width: "100%" }} src={bgr} alt="" />
-              <h4>Aún no tienes compras en tienda</h4>
-              <span>
-                Pero puedes hacer tu pedido online ¡y te lo mandamos a casa!
-              </span>
-              <br />
-              <Link to={"/home"}>
+          {orders.length ? (
+            <>
+              <Div>
+                <CustomTabPanel value={value} index={0}>
+                
+                  <MaterialReactTable columns={columns} data={orders} />
+                </CustomTabPanel>
+
+                <CustomTabPanel value={value} index={1}>
+                  <h2>awdawd</h2>
+                </CustomTabPanel>
+              </Div>
+            </>
+          ) : (
+            <Div>
+              <CustomTabPanel value={value} index={0}>
+                <Img src={bgr} alt="" />
+                <h4 style={{ width: "100%" }}>Aun no tienes compras online</h4>
+                <span style={{ width: "100%" }}>
+                  Si no encuentdras tu compra tal vez es porque hiciste el
+                  pedido sin estar registrado.
+                </span>
                 <Button
-                  variant="contained"
+                  sx={{ width: "100%" }}
+                  variant="text"
                   className="whithoutOutline"
-                  style={{ backgroundColor: "black" }}
+                  endIcon={<SendIcon />}
                 >
-                  Compra online
+                  Encontrar pedido
                 </Button>
-              </Link>
-            </CustomTabPanel>
-          </Div>
+              </CustomTabPanel>
+              <CustomTabPanel value={value} index={1}>
+                <Img sx={{ width: "100%" }} src={bgr} alt="" />
+                <h4>Aún no tienes compras en tienda</h4>
+                <span>
+                  Pero puedes hacer tu pedido online ¡y te lo mandamos a casa!
+                </span>
+                <br />
+                <Link to={"/home"}>
+                  <Button
+                    variant="contained"
+                    className="whithoutOutline"
+                    style={{ backgroundColor: "black" }}
+                  >
+                    Compra online
+                  </Button>
+                </Link>
+              </CustomTabPanel>
+            </Div>
+          )}
         </div>
       ) : (
         ""

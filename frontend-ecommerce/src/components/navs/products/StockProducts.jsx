@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState, useEffect, useCallback, useMemo } from "react";
@@ -14,6 +15,7 @@ export default function StockProducts() {
   const [validationErrors, setValidationErrors] = useState({});
   const urlBackend = import.meta.env.VITE_BACKEND_URL 
   
+
   const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
     //objeto para reconocer los values
     const updatedData = {
@@ -21,10 +23,11 @@ export default function StockProducts() {
       descripcion: values["descripcion"],
       price: parseFloat(values["price"]),
       stock: parseInt(values["stock"]),
-      section: parseInt(values["section.id_section"]),
-      size: values["size"],
+      section: values["section.section"],
+      size: values["size.size"],
     };
 
+    console.log(updatedData);
     try {
       //recopilar datos y enaviarlos por una solicitud http
       const formData = new FormData();
@@ -33,8 +36,8 @@ export default function StockProducts() {
       formData.append("descripcion", updatedData.descripcion);
       formData.append("price", updatedData.price);
       formData.append("stock", updatedData.stock);
-      formData.append("section", updatedData.section);
-      formData.append("size", updatedData.size);
+      formData.append("section.section", updatedData.section);
+      formData.append("size.size", updatedData.size);
 
       console.log("Esto es un formData: ");
       console.log(formData);
@@ -149,7 +152,7 @@ export default function StockProducts() {
         }),
       },
       {
-        accessorKey: "section.id_section",
+        accessorKey: "section.section",
         header: "Sección",
         size: 80,
         muiTableBodyCellEditTextFieldProps: ({ cell }) => ({
