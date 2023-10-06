@@ -157,7 +157,7 @@ export default function Sections() {
     <PageSections ShadowColor={ShadowColor}>
       <Header isUsedUser={userEnterUser} />
       <h1 className="Tiltle">{page}</h1>
-      {page === "Mujer" || page === "Hombre" ? (
+      {page === "Mujer" || page === "Hombre" || page === "Todxs" ? (
         <div className="Category">
           <Tabs
             className="panel"

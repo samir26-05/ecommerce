@@ -412,25 +412,11 @@ export default function Review() {
         </div>
       </Grid>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "end",
-          padding: "5% 5% 0 0",
-          width: "100%",
-        }}
-      >
-        <form
-          method="post"
-          action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/"
-        >
-          <input name="merchantId" type="hidden" value="508029" />
+      <div style={{ display: "flex", justifyContent: "end", padding: "5% 5% 0 0", width: "100%",}}>
+        <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
+          <input name="merchantId" type="hidden" value={`${merchantId}`} />
           <input name="accountId" type="hidden" value="512321" />
-          <input
-            name="description"
-            type="hidden"
-            value="PAGOS ECOMMERCE KALARY"
-          />
+          <input name="description" type="hidden" value="PAGOS ECOMMERCE KALARY"/>
           <input name="referenceCode" type="hidden" value={referenceCode} />
           <input name="amount" type="hidden" value={subtotal} />
           <input name="tax" type="hidden" value="0" />
@@ -438,28 +424,10 @@ export default function Review() {
           <input name="currency" type="hidden" value="COP" />
           <input name="signature" type="hidden" value={hash} />
           <input name="test" type="hidden" value="0" />
-          <input
-            name="buyerEmail"
-            type="hidden"
-            value={localStorage.getItem("email")}
-          />
-          <input
-            name="responseUrl"
-            type="hidden"
-            value="http://localhost:5173/home"
-          />
-          <input
-            name="confirmationUrl"
-            type="hidden"
-            value="https://3bf7-186-147-59-58.ngrok.io/order/webhook"
-          />
-          <Button
-            name="Submit"
-            type="submit"
-            onClick={() => createOrder()}
-            variant=""
-            style={{ backgroundColor: "black", color: "white" }}
-          >
+          <input name="buyerEmail" type="hidden" value={localStorage.getItem("email")}/>
+          <input name="responseUrl" type="hidden" value={`${urlFrontend}/response`}/>
+          <input name="confirmationUrl" type="hidden" value="https://3bf7-186-147-59-58.ngrok.io/order/webhook"/>
+          <Button name="Submit" type="submit" onClick={() => createOrder()} variant="" style={{ backgroundColor: "black", color: "white" }}>
             PAGAR
           </Button>
         </form>
