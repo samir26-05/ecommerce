@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useCart } from "../components/Layout/body/products/CardContext";
 import Swal from "sweetalert2";
 
@@ -22,7 +23,6 @@ const AddProduct = ({ product, children, stock, selectedSize }) => {
       );
 
       if (existingProductIndex !== -1) {
-        // Producto con la misma talla ya existe, incrementa la cantidad
         if (updatedCart[existingProductIndex].quantity < stock) {
           updatedCart[existingProductIndex].quantity++;
           updateCart(updatedCart);
@@ -38,7 +38,6 @@ const AddProduct = ({ product, children, stock, selectedSize }) => {
           });
         }
       } else {
-        // Producto con la misma talla no existe, agrégalo como un nuevo producto
         if (stock > 0) {
           updatedCart.push({ ...product, quantity: 1, size: selectedSize });
           updateCart(updatedCart);

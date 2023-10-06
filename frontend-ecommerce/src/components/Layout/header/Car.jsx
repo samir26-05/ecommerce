@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import cesta from "../../../assets/Img/cesta.png";
 import { useCart } from "../body/products/CardContext";
@@ -49,7 +48,14 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
 
   const onCleanCart = () => {
     updateCart([]);
+    window.location.reload();
   };
+
+  useEffect(() => {
+    if (cart.length === 0) {
+      setActive(false);
+    }
+  }, [cart]);
 
   return (
     <Car>
