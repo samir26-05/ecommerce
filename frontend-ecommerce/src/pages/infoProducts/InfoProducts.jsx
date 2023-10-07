@@ -99,6 +99,7 @@ const InfoProducts = () => {
     });
   };
 
+  console.log(product)
   return (
     <div style={{ width: "100%", height: "100vh" }}>
       {
@@ -133,10 +134,10 @@ const InfoProducts = () => {
                     <Sizes>
                       <p className="Tiltle">Selecciona una talla:</p>
                       <div className="SizeBox">
-                        {Object.keys(product.shoe_size).map((Size, index) => (
+                        {Object.keys(product.shoe_size).map((SizeShoe, index) => (
                           <button className="Size" onClick={() => handleSizeClick(index)} key={index}
                             style={{ backgroundColor: selectedSize === index ? "black" : "white", color: selectedSize === index ? "white" : "black", }}>
-                            {product.shoe_size[Size]}
+                            {product.shoe_size[SizeShoe]}
                           </button>
                         ))}
                       </div>
@@ -146,10 +147,10 @@ const InfoProducts = () => {
                     : <Sizes>
                       <p className="Tiltle">Selecciona una talla:</p>
                       <div className="SizeBox">
-                        {Object.keys(product.size).map((SizeShoe, index) => (
+                        {Object.keys(product.size).map((Size, index) => (
                           <button className="Size" onClick={() => handleSizeClick(index)} key={index}
                             style={{ backgroundColor: selectedSize === index ? "black" : "white", color: selectedSize === index ? "white" : "black", }}>
-                            {SizeShoe[index].toUpperCase()}
+                            {product.size[Size].toUpperCase()}
                           </button>
                         ))}
                       </div>
