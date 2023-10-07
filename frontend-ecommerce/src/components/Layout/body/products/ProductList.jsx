@@ -50,19 +50,19 @@ export const ProductList = () => {
                   <CardMedia src={product.img_video} alt={product.name} />
                 </Link>
               </div>
-              <CardContent>
-                <Tiltle>{product.name}</Tiltle>
-                <Price>
-                  {product.price.toLocaleString("es-CO", {
-                    style: "currency",
-                    currency: "COP",
-                    minimumFractionDigits: 0,
-                  })}
-                  <Link to={`/InfoProducts/${product.name}`}>
+              <Link to={`/InfoProducts/${product.name}`} style={{ textDecoration: "none" }}>
+                <CardContent>
+                  <Tiltle>{product.name}</Tiltle>
+                  <Price>
+                    {product.price.toLocaleString("es-CO", {
+                      style: "currency",
+                      currency: "COP",
+                      minimumFractionDigits: 0,
+                    })}
                     <GiShoppingBag />
-                  </Link>
-                </Price>
-              </CardContent>
+                  </Price>
+                </CardContent>
+              </Link>
             </Card>
           </ContainerCard>
         ))}
