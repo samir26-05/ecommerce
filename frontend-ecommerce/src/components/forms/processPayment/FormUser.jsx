@@ -45,7 +45,7 @@ const FormUserPayment = () => {
   };
 
   return (
-    <Container component="main" maxWidth="sm" sx={{ my: { xs: 3, md: 6.8 } }}>
+    <Container component="main" maxWidth="sm" sx={{ my: { xs: 3, md: 6.8 }, pt: 10 }}>
       <Paper variant="outlined" sx={{ p: { md: 5 } }}>
         <Typography component="center" variant="h4">
           Formulario de pago
