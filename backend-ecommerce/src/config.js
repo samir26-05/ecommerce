@@ -8,3 +8,4 @@ export const HOST = process.env.HOST
 export const PASSWORD = process.env.DATABASE_PASSWORD 
 export const SECRET = process.env.SECRET_KEY 
 export const BACKEND_URL = process.env.BACKEND_URL 
+export const PORT_DB = process.env.PORT_DB

@@ -1,6 +1,7 @@
 import morgan from "morgan";
 import cors from "cors";
-import express, { static as FileServer } from "express";
+import express from 'express';
+const { static: FileServer } = express;
 import RouteUser from "./routes/User.routes.js";
 import RouterProduct from "./routes/Product.routes.js";
 import RouterSupllier from "./routes/Supplier.routes.js";
