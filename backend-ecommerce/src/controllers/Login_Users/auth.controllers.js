@@ -11,12 +11,20 @@ export const UpdatePassword = async (req, res) => {
   try {
     const { UserId } = req;
     const { password, newpassword } = req.body;
+    const validPassword = password.trim()
+    const validNewPassword = newpassword.trim()
+    if(validPassword.length < 1 || validPassword === ""){
+      return res.status(404).send("Invalid password")
+    }
+    if(validNewPassword.length < 1 || validNewPassword === ""){
+      return res.status(404).send("Invalid new password")
+    }
     const result = await User.findOne({ where: { user_id: UserId } });
-    const PasswordSuccess = await compare(password, result.password);
+    const PasswordSuccess = await compare(validPassword, result.password);
     if (!PasswordSuccess) {
       return res.status(401).json({ message: "Contraseña incorrecta" });
     }
-    const encrypt = await encryptPassword(newpassword);
+    const encrypt = await encryptPassword(validNewPassword);
     result.password = encrypt;
     result.save();
     res.status(200).json({ message: "la Contraseña se cambio correctamente" });

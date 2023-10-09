@@ -244,18 +244,24 @@ export const Orden_reference = async (req,res) => {
   const orderDetails = Object.values(result.order_details);
   const result2 =await Promise.all(orderDetails.map(async(item)=> {
     const ProductFound = await productos.findOne({where: {product_id: item.product_id}})
-    return ProductFound
+    return {
+      name: ProductFound.name,
+      valor_unitario:ProductFound.price,
+      cantidad:item.amount,
+      valor:item.valor,
+      img: ProductFound.img_video
+    }
   })) 
   const parsedResults = {
       id_order: result.id_order,
       user_id: result.user.user,
-      products:orderDetails.map((detail) => {
+      products:result2.map((detail) => {
         return {
-          producto: result2[0].name,
-          valor_unitario: result2[0].price,
-          cantidad: detail.amount,
+          producto: detail.name,
+          valor_unitario: detail.valor_unitario,
+          cantidad: detail.cantidad,
           valor: detail.valor,
-          img: result2[0].img_video
+          img: detail.img
         };
       }), // Convierte la cadena JSON en objeto
       subtotal: result.subtotal,
