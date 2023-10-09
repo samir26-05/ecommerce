@@ -74,11 +74,11 @@ export default function Review() {
   const isTotalMayor6 = totalCantidadProductos > 6;
   const descuento = isTotalMayor6
     ? products.reduce(
-        (total, product) => total + product.price * product.quantity,
-        0
-      ) * 0.1
+      (total, product) => total + product.price * product.quantity,
+      0
+    ) * 0.1
     : 0;
-  const shipment = 4000; // Envío
+  const shipment = 8000; // Envío
 
   const subtotal = products.reduce(
     (total, product) => total + product.price * product.quantity + shipment,
@@ -104,7 +104,7 @@ export default function Review() {
         product_id: producto.product_id,
         stock: producto.quantity,
       }));
-      
+
       await axios.post(`${urlBackend}/order/create`,
         {
           subtotal: subtotal,
@@ -136,6 +136,8 @@ export default function Review() {
       console.error(error);
     }
   };
+
+  console.log(products);
 
   return (
     <>
@@ -245,7 +247,7 @@ export default function Review() {
       <Grid container spacing={0}>
         {products.map((product) => {
           const totalPrice = product.price * product.quantity;
-
+          const sizeX = product.category.category.toLowerCase() === "zapatos" ? `Talla: ${product.shoe_size.shoe_size_name} X ${product.quantity}` : product.category.category.toLowerCase() === "accesorios" ? `X ${product.quantity}` : `Talla: ${product.size} X ${product.quantity}`
           return (
             <ListItem
               key={product.name}
@@ -259,7 +261,7 @@ export default function Review() {
                 <ListItem>
                   <ListItemText
                     primary={product.name}
-                    secondary={`x ${product.quantity}`}
+                    secondary={sizeX}
                   />
                 </ListItem>
               </Grid>
@@ -412,11 +414,11 @@ export default function Review() {
         </div>
       </Grid>
 
-      <div style={{ display: "flex", justifyContent: "end", padding: "5% 5% 0 0", width: "100%",}}>
+      <div style={{ display: "flex", justifyContent: "end", padding: "5% 5% 0 0", width: "100%", }}>
         <form method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/">
           <input name="merchantId" type="hidden" value={merchantId} />
           <input name="accountId" type="hidden" value="512321" />
-          <input name="description" type="hidden" value="PAGOS ECOMMERCE KALARY"/>
+          <input name="description" type="hidden" value="PAGOS ECOMMERCE KALARY" />
           <input name="referenceCode" type="hidden" value={referenceCode} />
           <input name="amount" type="hidden" value={subtotal} />
           <input name="tax" type="hidden" value="0" />
@@ -424,9 +426,9 @@ export default function Review() {
           <input name="currency" type="hidden" value="COP" />
           <input name="signature" type="hidden" value={hash} />
           <input name="test" type="hidden" value="0" />
-          <input name="buyerEmail" type="hidden" value={localStorage.getItem("email")}/>
-          <input name="responseUrl" type="hidden" value={`${urlFrontend}/response`}/>
-          <input name="confirmationUrl" type="hidden" value="https://3bf7-186-147-59-58.ngrok.io/order/webhook"/>
+          <input name="buyerEmail" type="hidden" value={localStorage.getItem("email")} />
+          <input name="responseUrl" type="hidden" value={`${urlFrontend}/response`} />
+          <input name="confirmationUrl" type="hidden" value="https://3bf7-186-147-59-58.ngrok.io/order/webhook" />
           <Button name="Submit" type="submit" onClick={() => createOrder()} variant="" style={{ backgroundColor: "black", color: "white" }}>
             PAGAR
           </Button>
