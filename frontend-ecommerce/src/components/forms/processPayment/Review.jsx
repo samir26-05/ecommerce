@@ -137,8 +137,6 @@ export default function Review() {
     }
   };
 
-  console.log(products);
-
   return (
     <>
       <Grid container>
