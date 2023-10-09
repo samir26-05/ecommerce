@@ -44,13 +44,11 @@ export const ProductList = () => {
       <ContainerPrincipal>
         {products.slice(0, 8).map((product) => (
           <ContainerCard key={product.product_id}>
-            <Card>
-              <div className="BoxImg">
-                <Link to={`/InfoProducts/${product.name}`}>
+            <Link to={`/InfoProducts/${product.name}`} style={{ textDecoration: "none" }}>
+              <Card>
+                <div className="BoxImg">
                   <CardMedia src={product.img_video} alt={product.name} />
-                </Link>
-              </div>
-              <Link to={`/InfoProducts/${product.name}`} style={{ textDecoration: "none" }}>
+                </div>
                 <CardContent>
                   <Tiltle>{product.name}</Tiltle>
                   <Price>
@@ -62,8 +60,8 @@ export const ProductList = () => {
                     <GiShoppingBag />
                   </Price>
                 </CardContent>
-              </Link>
-            </Card>
+              </Card>
+            </Link>
           </ContainerCard>
         ))}
       </ContainerPrincipal>

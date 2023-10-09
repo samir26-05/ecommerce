@@ -68,6 +68,7 @@ const FormUserPayment = () => {
                   color: "white",
                   position: "absolute",
                   bottom:"10%",
+                  left:"8%",
                 }}>
                 Atrás
               </Button>
