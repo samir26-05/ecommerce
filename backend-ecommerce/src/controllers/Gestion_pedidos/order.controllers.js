@@ -36,21 +36,25 @@ export const GetOrder = async (req, res) => {
         },
       ],
     });
-    const result2 =await Promise.all(result[0].order_details.map(async(item)=> {
-      const ProductFound = await productos.findOne({where: {product_id: item.product_id}})
-      return ProductFound
-    })) 
+    const result2 = await Promise.all(
+      result[0].order_details.map(async (item) => {
+        const ProductFound = await productos.findOne({
+          where: { product_id: item.product_id },
+        });
+        return ProductFound;
+      })
+    );
     const parsedResults = result.map((item) => {
       return {
         id_order: item.id_order,
         user_id: item.user.user,
-        products:item.order_details.map((detail) => {
+        products: item.order_details.map((detail) => {
           return {
             producto: result2[0].name,
             valor_unitario: result2[0].price,
             cantidad: detail.amount,
             valor: detail.valor,
-            img: result2[0].img_video
+            img: result2[0].img_video,
           };
         }), // Convierte la cadena JSON en objeto
         subtotal: item.subtotal,
@@ -117,7 +121,7 @@ export const webhook = async (req, res) => {
   });
   if (result.cc_holder === "APPROVED" && orden.id_state == 1) {
     orden.id_state = 3;
-    orden.method = result.payment_method_name
+    orden.method = result.payment_method_name;
     orden.save();
     const product = await order_detail.findAll({
       where: { id_order: orden.id_order },
@@ -143,8 +147,8 @@ export const webhook = async (req, res) => {
 export const GetUsername = async (req, res) => {
   try {
     const user = req.UserId;
-    const result = await Orden_compra.findAll({
-      where : {user_id: user},
+    const result = await Orden_compra.findOne({
+      where: { user_id: user },
       attributes: [
         "id_order",
         "user_id",
@@ -152,6 +156,8 @@ export const GetUsername = async (req, res) => {
         "subtotal",
         "id_state",
         "iva",
+        "method",
+        "shipment",
         "total",
         "reference",
         "createdAt",
@@ -172,119 +178,126 @@ export const GetUsername = async (req, res) => {
         },
       ],
     });
-    const result2 =await Promise.all(result[0].order_details.map(async(item)=> {
-      const ProductFound = await productos.findOne({where: {product_id: item.product_id}})
-      return {
-        name: ProductFound.name,
-        valor_unitario:ProductFound.price,
-        cantidad:item.amount,
-        valor:item.valor,
-        img: ProductFound.img_video
-      }
-    })) 
-    const parsedResults = result.map((item) => {
-      return {
-        id_order: item.id_order,
-        user_id: item.user.user,
-        products:item.result2.map((detail) => {
-          return {
-            producto: detail.name,
-            valor_unitario: detail.valor_unitario,
-            cantidad: detail.cantidad,
-            valor: detail.valor,
-            img: detail.img
-          };
-        }), // Convierte la cadena JSON en objeto
-        subtotal: item.subtotal,
-        discount: item.discount,
-        iva: item.iva,
-        metodo: item.method,
-        envio: item.shipment,
-        total_value: item.total,
-        id_state: item.state.state,
-        reference: item.reference,
-        createdAt: item.createdAt,
-        updatedAt: item.updatedAt,
-      };
-    });
-  res.status(200).json(parsedResults)
-  } catch (error) {
-    res.status(500).json({error: error.message});
-  }
-};
-
-export const Orden_reference = async (req,res) => {
-  try {
-  const {refe} = req.params
-  const result = await Orden_compra.findOne({
-    where : {reference: refe},
-    attributes: [
-      "id_order",
-      "user_id",
-      "discount",
-      "subtotal",
-      "id_state",
-      "iva",
-      "method",
-      "shipment",
-      "total",
-      "reference",
-      "createdAt",
-      "updatedAt",
-    ],
-    include: [
-      {
-        model: sequelize.model("state"),
-        attributes: ["state"],
-      },
-      {
-        model: sequelize.model("user"),
-        attributes: ["user"],
-      },
-      {
-        model: sequelize.model("order_detail"),
-        attributes: ["id_order", "product_id", "amount", "valor"],
-      },
-    ],
-  })
-  const orderDetails = Object.values(result.order_details);
-  const result2 =await Promise.all(orderDetails.map(async(item)=> {
-    const ProductFound = await productos.findOne({where: {product_id: item.product_id}})
-    return {
-      name: ProductFound.name,
-      valor_unitario:ProductFound.price,
-      cantidad:item.amount,
-      valor:item.valor,
-      img: ProductFound.img_video
-    }
-  })) 
-  const parsedResults = {
+    const orderDetails = Object.values(result.order_details);
+    const result2 = await Promise.all(
+      orderDetails.map(async (item) => {
+        const ProductFound = await productos.findOne({
+          where: { product_id: item.product_id },
+        });
+        return {
+          name: ProductFound.name,
+          valor_unitario: ProductFound.price,
+          cantidad: item.amount,
+          valor: item.valor,
+          img: ProductFound.img_video,
+        };
+      })
+    );
+    const parsedResults = {
       id_order: result.id_order,
       user_id: result.user.user,
-      products:result2.map((detail) => {
+      products: result2.map((detail) => {
         return {
           producto: detail.name,
           valor_unitario: detail.valor_unitario,
           cantidad: detail.cantidad,
           valor: detail.valor,
-          img: detail.img
+          img: detail.img,
         };
       }), // Convierte la cadena JSON en objeto
       subtotal: result.subtotal,
-        discount: result.discount,
-        iva: result.iva,
-        metodo: result.method,
-        envio: result.shipment,
-        total_value: result.total,
-        id_state: result.state.state,
-        reference: result.reference,
-        createdAt: result.createdAt,
-        updatedAt: result.updatedAt,
+      discount: result.discount,
+      iva: result.iva,
+      metodo: result.method,
+      envio: result.shipment,
+      total_value: result.total,
+      id_state: result.state.state,
+      reference: result.reference,
+      createdAt: result.createdAt,
+      updatedAt: result.updatedAt,
     };
-res.status(200).json(parsedResults)
-} catch (error) {
-  res.status(500).json({error: error.message});
-}
+    res.status(200).json(parsedResults);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const Orden_reference = async (req, res) => {
+  try {
+    const { refe } = req.params;
+    const result = await Orden_compra.findOne({
+      where: { reference: refe },
+      attributes: [
+        "id_order",
+        "user_id",
+        "discount",
+        "subtotal",
+        "id_state",
+        "iva",
+        "method",
+        "shipment",
+        "total",
+        "reference",
+        "createdAt",
+        "updatedAt",
+      ],
+      include: [
+        {
+          model: sequelize.model("state"),
+          attributes: ["state"],
+        },
+        {
+          model: sequelize.model("user"),
+          attributes: ["user"],
+        },
+        {
+          model: sequelize.model("order_detail"),
+          attributes: ["id_order", "product_id", "amount", "valor"],
+        },
+      ],
+    });
+    const orderDetails = Object.values(result.order_details);
+    const result2 = await Promise.all(
+      orderDetails.map(async (item) => {
+        const ProductFound = await productos.findOne({
+          where: { product_id: item.product_id },
+        });
+        return {
+          name: ProductFound.name,
+          valor_unitario: ProductFound.price,
+          cantidad: item.amount,
+          valor: item.valor,
+          img: ProductFound.img_video,
+        };
+      })
+    );
+    const parsedResults = {
+      id_order: result.id_order,
+      user_id: result.user.user,
+      products: result2.map((detail) => {
+        return {
+          producto: detail.name,
+          valor_unitario: detail.valor_unitario,
+          cantidad: detail.cantidad,
+          valor: detail.valor,
+          img: detail.img,
+        };
+      }), // Convierte la cadena JSON en objeto
+      subtotal: result.subtotal,
+      discount: result.discount,
+      iva: result.iva,
+      metodo: result.method,
+      envio: result.shipment,
+      total_value: result.total,
+      id_state: result.state.state,
+      reference: result.reference,
+      createdAt: result.createdAt,
+      updatedAt: result.updatedAt,
+    };
+    res.status(200).json(parsedResults);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
 export const GetOrderStatus = async (req, res) => {
@@ -304,9 +317,8 @@ export const GetOrderStatus = async (req, res) => {
         },
       ],
     });
-    res.status(200).json(result)
+    res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ error: error.message})
+    res.status(500).json({ error: error.message });
   }
-}
-
+};
