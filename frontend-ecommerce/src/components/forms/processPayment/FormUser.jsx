@@ -41,7 +41,8 @@ const FormUserPayment = () => {
   };
 
   const handleBack = () => {
-    setActiveStep(activeStep - 1);
+    window.location.reload();
+    /* Recargar la página para reiniciar el componente */
   };
 
   return (
