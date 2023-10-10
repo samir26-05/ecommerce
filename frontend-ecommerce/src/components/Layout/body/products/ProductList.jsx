@@ -44,26 +44,24 @@ export const ProductList = () => {
       <ContainerPrincipal>
         {products.slice(0, 8).map((product) => (
           <ContainerCard key={product.product_id}>
-            <Card>
-              <div className="BoxImg">
-                <Link to={`/InfoProducts/${product.name}`}>
+            <Link to={`/InfoProducts/${product.name}`} style={{ textDecoration: "none" }}>
+              <Card>
+                <div className="BoxImg">
                   <CardMedia src={product.img_video} alt={product.name} />
-                </Link>
-              </div>
-              <CardContent>
-                <Tiltle>{product.name}</Tiltle>
-                <Price>
-                  {product.price.toLocaleString("es-CO", {
-                    style: "currency",
-                    currency: "COP",
-                    minimumFractionDigits: 0,
-                  })}
-                  <Link to={`/InfoProducts/${product.name}`}>
+                </div>
+                <CardContent>
+                  <Tiltle>{product.name}</Tiltle>
+                  <Price>
+                    {product.price.toLocaleString("es-CO", {
+                      style: "currency",
+                      currency: "COP",
+                      minimumFractionDigits: 0,
+                    })}
                     <GiShoppingBag />
-                  </Link>
-                </Price>
-              </CardContent>
-            </Card>
+                  </Price>
+                </CardContent>
+              </Card>
+            </Link>
           </ContainerCard>
         ))}
       </ContainerPrincipal>

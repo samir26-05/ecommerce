@@ -19,9 +19,9 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
     : 0;
   const total = Array.isArray(cart)
     ? cart.reduce(
-        (total, product) => total + product.price * product.quantity,
-        0
-      )
+      (total, product) => total + product.price * product.quantity,
+      0
+    )
     : 0;
 
   const onDeleteProduct = (product) => {
@@ -60,10 +60,10 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
             fill: hover
               ? "#000"
               : "#fff" && pageUsed
-              ? "#000"
-              : color && pagePayment
-              ? "#000"
-              : color,
+                ? "#000"
+                : color && pagePayment
+                  ? "#000"
+                  : color,
             fontSize: "39px",
             paddingTop: "10%",
             cursor: "pointer",
@@ -91,12 +91,10 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                       <span>{product.quantity}</span>
                     </div>
                     <div className="Infoon-product">
-                      <Link
-                        to={`/InfoProducts/${product.name}`}
-                        className="link"
-                      >
+                      <Link to={`/InfoProducts/${product.name}`} className="link">
                         <p className="Tiltle">{product.name}</p>
-                        {/* <span className="Size">Talla: {product.size.size}</span> */}
+                        {!product.size ? null : (product.category.category.toLowerCase() === "zapatos") ? <span className="Size">Talla: {product.shoe_size.shoe_size_name}</span> :
+                          <span className="Size">Talla: {product.size}</span>}
                       </Link>
                       <span className="Price">
                         {product.price.toLocaleString("es-CO", {

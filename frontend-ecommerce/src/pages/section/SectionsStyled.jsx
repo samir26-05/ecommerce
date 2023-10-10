@@ -17,8 +17,9 @@ export const PageSections = styled.div`
   }
   }
   .Category {
+    z-index: 100;
     position: sticky;
-    top: 8.1%;
+    top: 7.9%;
     background-color: #ffffff;
     box-shadow: ${({ ShadowColor }) =>
       ShadowColor !== "#fff" ? "0px 0px 3px 2px #0000003b" : "none"};

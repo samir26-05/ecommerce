@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 100%;
   height: 8%;
   transition: all 0.2s ease-in-out;
-  z-index: 100;
+  z-index: 200;
   display: flex;
   align-items: center;
   background-color: ${({ isUsedUser, isUsedPayment, hovered, headerColor }) =>

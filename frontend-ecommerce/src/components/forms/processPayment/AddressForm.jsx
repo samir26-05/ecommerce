@@ -59,9 +59,23 @@ export default function AddressForm({ onFormValid }) {
       [name]: value,
     }));
   };
-  const handleSubmit = () => {
-    updateInfoPersonal(oneClients);
+  const handleSubmit = (values) => {
+    // Actualiza el estado oneClients con los nuevos valores del formulario
+    setOneClients({
+      ...oneClients,
+      Phone_number: values.Phone_number,
+      address: values.address,
+      city: values.city,
+      country: values.country,
+      postalcode: values.postalcode,
+      state: values.state,
+    });
+
+
+    updateInfoPersonal(oneClients)
+    console.log(oneClients);
   };
+
   const updateInfoPersonal = async () => {
     try {
       await axios.put(

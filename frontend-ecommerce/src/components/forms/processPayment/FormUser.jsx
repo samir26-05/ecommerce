@@ -41,11 +41,12 @@ const FormUserPayment = () => {
   };
 
   const handleBack = () => {
-    setActiveStep(activeStep - 1);
+    window.location.reload();
+    /* Recargar la página para reiniciar el componente */
   };
 
   return (
-    <Container component="main" maxWidth="sm" sx={{ my: { xs: 3, md: 6.8 } }}>
+    <Container component="main" maxWidth="sm" sx={{ my: { xs: 3, md: 6.8 }, pt: 10 }}>
       <Paper variant="outlined" sx={{ p: { md: 5 } }}>
         <Typography component="center" variant="h4">
           Formulario de pago
@@ -68,6 +69,7 @@ const FormUserPayment = () => {
                   color: "white",
                   position: "absolute",
                   bottom:"10%",
+                  left:"8%",
                 }}>
                 Atrás
               </Button>

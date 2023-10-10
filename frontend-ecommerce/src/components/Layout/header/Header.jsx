@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 import CarBuys from "./Car";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const pages = ["Inicio", "Mujer", "Hombre", "Todxs"];
+export const pages = ["Inicio", "Mujer", "Hombre",
+  // "Todxs"
+];
 
 const Header = ({
   products,
@@ -19,7 +21,7 @@ const Header = ({
   isUsedPayment,
   isUsedBody,
 }) => {
-  const handleCloseNavMenu = () => {};
+  const handleCloseNavMenu = () => { };
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -85,8 +87,8 @@ const Header = ({
                 isUsedUser || isUsedPayment
                   ? "#000"
                   : hovered
-                  ? "#000"
-                  : textColor,
+                    ? "#000"
+                    : textColor,
             }}
           >
             <Cta>
@@ -99,8 +101,8 @@ const Header = ({
                     isUsedUser || isUsedPayment
                       ? "#000"
                       : hovered
-                      ? "#000"
-                      : textColor,
+                        ? "#000"
+                        : textColor,
                 }}
               >
                 {page}
@@ -130,8 +132,8 @@ const Header = ({
                   isUsedUser || isUsedPayment
                     ? "#000"
                     : hovered
-                    ? "#000"
-                    : textColor,
+                      ? "#000"
+                      : textColor,
                 fontSize: "30px",
                 position: "relative",
                 top: "3px",

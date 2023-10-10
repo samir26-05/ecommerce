@@ -1,11 +1,13 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react/prop-types */
 import { useCart } from "../components/Layout/body/products/CardContext";
 import Swal from "sweetalert2";
 
-const AddProduct = ({ product, children, stock, selectedSize }) => {
+const AddProduct = ({ product, children, stock, selectedSize, category }) => {
   const { cart, updateCart } = useCart();
 
   const onAddProduct = (product) => {
-    if (selectedSize) {
+    if (category === "accesorios" || selectedSize) {
       Swal.fire({
         icon: "success",
         title: "Producto agregado con éxito",
@@ -16,15 +18,13 @@ const AddProduct = ({ product, children, stock, selectedSize }) => {
         timer: 1000,
       });
       const updatedCart = Array.isArray(cart) ? [...cart] : [];
-      const existingProductIndex = updatedCart.findIndex(
-        (item) =>
-          item.product_id === product.product_id && item.size === selectedSize
+      const existingProduct = updatedCart.find(
+        (item) => item.product_id === product.product_id
       );
 
-      if (existingProductIndex !== -1) {
-        // Producto con la misma talla ya existe, incrementa la cantidad
-        if (updatedCart[existingProductIndex].quantity < stock) {
-          updatedCart[existingProductIndex].quantity++;
+      if (existingProduct) {
+        if (existingProduct.quantity < stock) {
+          existingProduct.quantity++;
           updateCart(updatedCart);
         } else {
           Swal.fire({
@@ -38,7 +38,6 @@ const AddProduct = ({ product, children, stock, selectedSize }) => {
           });
         }
       } else {
-        // Producto con la misma talla no existe, agrégalo como un nuevo producto
         if (stock > 0) {
           updatedCart.push({ ...product, quantity: 1, size: selectedSize });
           updateCart(updatedCart);
