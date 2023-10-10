@@ -15,7 +15,11 @@ export const CreateUser = async (req, res) => {
     if (result.error) {
       return res.status(400).json({ error: JSON.parse(result.error.message) });
     }
-    const Encrypt = await encryptPassword(req.body.password);
+    const validPassword = req.body.password.trim()
+    if(validPassword.length < 1 || validPassword === ""){
+      return res.status(400).send('Invalid password')
+    }
+    const Encrypt = await encryptPassword(validPassword);
     const NewUsers = await User.create({
       user: result.data.user,
       email: result.data.email,

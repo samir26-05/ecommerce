@@ -28,29 +28,3 @@ export const UpdatePersonalInformation = async (req, res) => {
     
   }
 };
-
-export const UpdatePersonalInformationId = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const UserFound = await User.findOne({where: {user_id: id}})
-    if(!UserFound){
-        return res.status(404).json({message: 'Usuario no encontrado'})
-    }
-    const result = await ValidUpdatePersonal(req.body);
-    if (result.error) {
-      return res.status(404).json({ error: JSON.parse(result.error.message) });
-    }
-    const NewUpdate = Personal_information.update(
-      {
-        ...result.data,
-      },
-      {
-        where: { user_id: id },
-      }
-    );
-    return res.json({ message: "Se Actualizaron los datos", User: id });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-    
-  }
-};
