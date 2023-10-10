@@ -6,6 +6,7 @@ import axios from "axios";
 import { MaterialReactTable } from "material-react-table";
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
+import { RxReload } from "react-icons/rx"
 import Swal from "sweetalert2";
 
 export default function StockProducts() {
@@ -28,7 +29,6 @@ export default function StockProducts() {
       size: values["size.size"],
     };
 
-    console.log(updatedData);
     try {
       //recopilar datos y enaviarlos por una solicitud http
       const formData = new FormData();
@@ -68,6 +68,9 @@ export default function StockProducts() {
       
       //cerrar modal
       exitEditingMode();
+      setTimeout(() => {
+        fetchProducts()
+      }, 1000);
     } catch (error) {
       console.error("Error en la solicitud:", error);
 
@@ -110,6 +113,9 @@ export default function StockProducts() {
         );
         tableData.splice(row.index, 1);
         setTableData([...tableData]);
+        setTimeout(() => {
+          fetchProducts()
+        }, 1000);
       } catch (error) {
         setError(error);
         console.log("Error al obtener los productos:", error);
@@ -118,6 +124,10 @@ export default function StockProducts() {
 
     [tableData]
   );
+
+  const handleReload = () => {
+    fetchProducts()
+  }
 
   const columns = useMemo(
     () => [
@@ -200,12 +210,7 @@ export default function StockProducts() {
   }
 
   useEffect(() => {
-    const interval = setInterval(() => {
       fetchProducts(); 
-    }, 1000);
-
-    return () => clearInterval(interval);
-    // Llama a la función fetchProducts dentro del efecto
   }, []);
 
   return (
@@ -250,7 +255,11 @@ export default function StockProducts() {
             )}
             renderTopToolbarCustomActions={() => (
               <>
-                <div></div>
+                <Tooltip arrow placement="bottom" title="Reload">
+                  <IconButton onClick={() => handleReload()}>
+                    <RxReload/>
+                  </IconButton>
+                </Tooltip>
                 <Typography
                   style={{
                     fontSize: "1.2rem",

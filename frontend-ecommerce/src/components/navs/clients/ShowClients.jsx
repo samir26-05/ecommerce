@@ -5,6 +5,7 @@ import { useCallback, useMemo } from "react";
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import { PiUserList } from "react-icons/pi";
+import { RxReload } from "react-icons/rx";
 
 export default function ShowClients() {
   const [clients, setClients] = useState([]);
@@ -41,6 +42,7 @@ export default function ShowClients() {
           setTableData([...tableData]);
           exitEditingMode();
         }
+        fetchClients();
       } catch (error) {
         setError(error);
       }
@@ -68,12 +70,19 @@ export default function ShowClients() {
       });
       tableData.splice(row.index, 1);
       setTableData([...tableData]);
+      setTimeout(() => {
+        fetchClients();
+      }, 1000);
     } catch (error) {
       setError(error);
     }
   },
     [tableData]
   );
+
+  const handleReload = () => {
+    fetchClients();
+  }
 
   const columns = useMemo(
     () => [
@@ -171,12 +180,6 @@ export default function ShowClients() {
   useEffect(() => {
     fetchClients();
 
-    const interval = setInterval(() => {
-      fetchClients();
-    }, 1000)
-
-    return () => clearInterval(interval)
-
   }, []);
 
 
@@ -222,7 +225,11 @@ export default function ShowClients() {
             )}
             renderTopToolbarCustomActions={() => (
               <>
-                <div></div>
+                <Tooltip arrow placement="bottom" title="Reload">
+                  <IconButton onClick={() => handleReload()}>
+                    <RxReload/>
+                  </IconButton>
+                </Tooltip>
                 <Typography
                   style={{
                     fontSize: "1.2rem",
