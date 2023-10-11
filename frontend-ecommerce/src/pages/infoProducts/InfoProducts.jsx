@@ -28,16 +28,40 @@ const InfoProducts = () => {
   const urlBackend = import.meta.env.VITE_BACKEND_URL;
   const { name } = useParams();
   const [loading, setLoading] = useState(true);
-
-  const [products, setProducts] = useState([]);
-  const [sizes, setSizes] = useState(["S", "X", "XL", "M", "XXL"]);
-  const [sizesShoe, setSizesShoe] = useState(["36", "38", "40", "41", "42"]);
-
   const [modalOpen, setModalOpen] = useState(false);
   const [userEnterUser, setUserEnterUser] = useState(false);
-
-  const [selectedSize, setSelectedSize] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [productSize, setProductSize] = useState(["XS", "S", "M", "L", "XL", "XXL"]);
+  const [productSizeShoe, setProductSizeShoe] = useState(["36", "37", "38", "40", "41", "42"]);
   const [sizeSelected, setSizeSelected] = useState(false);
+  const [selectedSize, setSelectedSize] = useState(null);
+
+  useEffect(() => {
+    const trueEnter = verifyEnter();
+    if (localStorage.getItem("accessToken")) {
+      setLoading(false);
+      fetchProducts();
+    } else {
+      navigate("/");
+    }
+    setUserEnterUser(trueEnter);
+    return () => { setUserEnterUser(false); };
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get(`${urlBackend}/product`);
+      setProducts(response.data.result);
+      // const response2 = await axios.get(`${urlBackend}/product/size`);
+      // setProductSize(response2.data.result);
+      // console.log(response2.data.result);
+      // const response3 = await axios.get(`${urlBackend}/product/shoe_size`);
+      // setProductSizeShoe(response3.data.result);
+      // console.log(response3.data.result);
+    } catch (error) {
+      console.error("Error al obtener los productos:", error);
+    }
+  };
 
   const verifyEnter = () => {
     return true;
@@ -51,26 +75,9 @@ const InfoProducts = () => {
     setModalOpen(false);
   };
 
-  useEffect(() => {
-    const trueEnter = verifyEnter();
-    if (localStorage.getItem("accessToken")) {
-      setLoading(false);
-      fetchProducts();
-    } else {
-      navigate("/");
-    }
-
-    setUserEnterUser(trueEnter);
-    return () => { setUserEnterUser(false); };
-  }, []);
-
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get(`${urlBackend}/product`);
-      setProducts(response.data.result);
-    } catch (error) {
-      console.error("Error al obtener los productos:", error);
-    }
+  const handleSizeClick = (size) => {
+    setSelectedSize(size);
+    setSizeSelected(true);
   };
 
   const product = products.find((element) => element.name === name);
@@ -83,23 +90,6 @@ const InfoProducts = () => {
 
   const category = product.category.category.toLowerCase();
 
-  const handleSizeClick = (index) => {
-    setSelectedSize(index);
-    setSizeSelected(true);
-  };
-
-  const seleSize = () => {
-    return Swal.fire({
-      icon: "error",
-      title: "Por favor, selecciona una talla antes de agregar al carrito.",
-      iconColor: "#ff0000",
-      color: "#000",
-      showConfirmButton: false,
-      timer: 1000,
-    });
-  };
-
-  console.log(product)
   return (
     <div style={{ width: "100%", height: "100vh" }}>
       {
@@ -134,10 +124,26 @@ const InfoProducts = () => {
                     <Sizes>
                       <p className="Tiltle">Selecciona una talla:</p>
                       <div className="SizeBox">
-                        {Object.keys(product.shoe_size).map((SizeShoe, index) => (
-                          <button className="Size" onClick={() => handleSizeClick(index)} key={index}
-                            style={{ backgroundColor: selectedSize === index ? "black" : "white", color: selectedSize === index ? "white" : "black", }}>
-                            {product.shoe_size[SizeShoe]}
+                        {/* {Object.keys(product.shoe_size).map((SizeShoe, index) => (
+                          <button
+                            className="Size"
+                            onClick={() => handleSizeClick(product.shoe_size[SizeShoe])}
+                            key={index}
+                            style={{
+                              backgroundColor: selectedSize === product.shoe_size[SizeShoe] ? "black" : "white",
+                              color: selectedSize === product.shoe_size[SizeShoe] ? "white" : "black",
+                            }}
+                          >
+                            {product.shoe_size[SizeShoe].toUpperCase()}
+                          </button>
+                        ))} */}
+                        {productSizeShoe.map((size, index) => (
+                          <button
+                            className="Size"
+                            onClick={() => handleSizeClick(size)}
+                            key={index}
+                            style={{ backgroundColor: selectedSize === size ? "black" : "white", color: selectedSize === size ? "white" : "black" }}>
+                            {size.toUpperCase()}
                           </button>
                         ))}
                       </div>
@@ -146,18 +152,36 @@ const InfoProducts = () => {
                     <Sizes />
                     : <Sizes>
                       <p className="Tiltle">Selecciona una talla:</p>
-                      <div className="SizeBox">
+                      {/* <div className="SizeBox">
                         {Object.keys(product.size).map((Size, index) => (
-                          <button className="Size" onClick={() => handleSizeClick(index)} key={index}
-                            style={{ backgroundColor: selectedSize === index ? "black" : "white", color: selectedSize === index ? "white" : "black", }}>
+                          <button
+                            className="Size"
+                            onClick={() => handleSizeClick(product.size[Size])}
+                            key={index}
+                            style={{
+                              backgroundColor: selectedSize === product.size[Size] ? "black" : "white",
+                              color: selectedSize === product.size[Size] ? "white" : "black",
+                            }}
+                          >
                             {product.size[Size].toUpperCase()}
+                          </button>
+                        ))}
+                      </div> */}
+                      <div className="SizeBox">
+                        {productSize.map((size, index) => (
+                          <button
+                            className="Size"
+                            onClick={() => handleSizeClick(size)}
+                            key={index}
+                            style={{ backgroundColor: selectedSize === size ? "black" : "white", color: selectedSize === size ? "white" : "black" }}>
+                            {size.toUpperCase()}
                           </button>
                         ))}
                       </div>
                     </Sizes>
                   )}
                   <ButtonBuys>
-                    <AddProduct product={product} stock={product.stock} selectedSize={sizes[selectedSize]} category={category}>
+                    <AddProduct product={product} stock={product.stock} selectedSize={selectedSize} category={category}>
                       <Buys>Añadir al Carrito</Buys>
                     </AddProduct>
                   </ButtonBuys>

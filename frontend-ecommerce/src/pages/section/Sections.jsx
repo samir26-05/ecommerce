@@ -59,7 +59,7 @@ export default function Sections() {
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
-      console.log(jwt_decode(localStorage.getItem("accessToken")), "❤❤❤❤");
+      // console.log(jwt_decode(localStorage.getItem("accessToken")), "❤❤❤❤");
       setLoading(false);
     } else {
       navigate("/");
@@ -77,7 +77,7 @@ export default function Sections() {
       try {
         const response = await axios.get(`${urlBackend}/product/`);
         setProducts(response.data.result);
-        console.log(response.data.result);
+        // console.log(response.data.result);
       } catch (error) {
         console.error("Error al obtener los productos:", error);
       }

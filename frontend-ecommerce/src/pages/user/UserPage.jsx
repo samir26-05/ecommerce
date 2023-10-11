@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 /* COMPONENTS */
 import Header from "../../components/Layout/header/Header";
 import NavVertical from "../../components/navs/NavVertical";
@@ -20,7 +19,7 @@ const UserPage = () => {
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
-      console.log(jwt_decode(localStorage.getItem("accessToken")), "❤❤❤❤");
+      // console.log(jwt_decode(localStorage.getItem("accessToken")), "❤❤❤❤");
       setLoading(false);
     } else {
       navigate("/");
