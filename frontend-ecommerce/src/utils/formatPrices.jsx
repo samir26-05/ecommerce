@@ -1,5 +1,5 @@
 const FormatPrice = ({price}) => {
-  return ( 
+  return (
     price.toLocaleString("es-CO", {
       style: "currency",
       currency: "COP",
