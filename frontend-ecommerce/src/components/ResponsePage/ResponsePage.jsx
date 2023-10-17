@@ -166,7 +166,7 @@ const Response = () => {
 
 
   const searchParams = new URLSearchParams(window.location.search);
-
+console.log(order);
 
   // VARIABLES DE ESTILO  
   const textPrimary = {fontWeight:"600", fontSize:"1rem", width:"fit-content"}
@@ -271,7 +271,7 @@ const Response = () => {
         <div style={{width:"90%"}}>
           <FlexRow style={{justifyContent:"space-between", border:"1px solid #000"}}>
             <Typography style={maps}>Total Pedido</Typography>
-            <Typography style={maps}>${order?.total_value - order?.envio}</Typography>
+            <Typography style={maps}>${order?.subtotal}</Typography>
           </FlexRow>
           {order?.discount > 0 ? 
             <FlexRow style={{justifyContent:"space-between", border:"1px solid #000"}}>
@@ -286,7 +286,7 @@ const Response = () => {
           </FlexRow>
           <FlexRow style={{justifyContent:"space-between", border:"1px solid #000"}}>
             <Typography style={maps}>Total a pagar</Typography>
-            <p style={maps1}>${order?.total_value - order?.discount}</p>
+            <p style={maps1}>${order?.total_value}</p>
           </FlexRow>
         </div>
         

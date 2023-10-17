@@ -54,18 +54,9 @@ export default function StockProducts() {
             accessToken: localStorage.getItem("accessToken"),
           },
         }
-      );      
-      /* const successMessage = response.data.message; */
-        Swal.fire({
-          icon: "success",
-          title: "Producto actualizado con éxito",
-          iconColor: "#09ff00",
-          color: "#000",
-          showConfirmButton: false,
-          confirmButtonColor: "#000",
-          timer: 1000,
-        });
-      
+      );
+      alert("Producto actualizado con éxito:", response.data);
+
       //cerrar modal
       exitEditingMode();
       setTimeout(() => {
@@ -278,4 +269,3 @@ export default function StockProducts() {
     </div>
   );
 }
-

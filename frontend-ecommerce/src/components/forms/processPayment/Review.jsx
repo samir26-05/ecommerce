@@ -69,7 +69,7 @@ export default function Review() {
   const valorTotal = subTotal2 + iva - descuento + shipment;
 
   const referenceCode = uuidv4();
-  const amount = subtotalView;
+  const amount = valorTotal;
   const currency = "COP"; // defecto
 
   // Concatenamos las variables en el orden correcto
@@ -116,8 +116,6 @@ export default function Review() {
       console.error(error);
     }
   };
-
-  const subtotal = valorTotal
 
   return (
     <>
@@ -280,7 +278,7 @@ export default function Review() {
           <input name="accountId" type="hidden" value="512321" />
           <input name="description" type="hidden" value="PAGOS ECOMMERCE KALARY" />
           <input name="referenceCode" type="hidden" value={referenceCode} />
-          <input name="amount" type="hidden" value={subtotal} />
+          <input name="amount" type="hidden" value={valorTotal} />
           <input name="tax" type="hidden" value="0" />
           <input name="taxReturnBase" type="hidden" value="0" />
           <input name="currency" type="hidden" value="COP" />
