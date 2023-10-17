@@ -8,6 +8,7 @@ import { LiaShoppingBagSolid } from "react-icons/lia";
 import { AiOutlineMinus } from "react-icons/Ai";
 import { Car } from "./CarStyled";
 import AddProduct from "../../../utils/addCar";
+import FormatPrice from "../../../utils/formatPrices";
 
 const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
   const [active, setActive] = useState(false);
@@ -97,11 +98,7 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                           <span className="Size">Talla: {product.size}</span>}
                       </Link>
                       <span className="Price">
-                        {product.price.toLocaleString("es-CO", {
-                          style: "currency",
-                          currency: "COP",
-                          minimumFractionDigits: 0,
-                        })}
+                        <FormatPrice price={product.price}/>
                       </span>
                     </div>
                     <div className="Buttons">
@@ -155,11 +152,7 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
               <div className="Tiltle">
                 <h3>
                   Total:{" "}
-                  {total.toLocaleString("es-CO", {
-                    style: "currency",
-                    currency: "COP",
-                    minimumFractionDigits: 0,
-                  })}
+                  <FormatPrice price={total}/>
                 </h3>
               </div>
             </div>

@@ -1,18 +1,10 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import {
-  DivCards,
-  ContainerCard,
-  Tiltle,
-  Card,
-  CardContent,
-  CardMedia,
-  Price,
-} from "./SectionsStyled";
+import { DivCards, ContainerCard, Tiltle, Card, CardContent, CardMedia, Price } from "./SectionsStyled";
 import { Link } from "react-router-dom";
-import AddProduct from "../../utils/addCar";  
 import { GiShoppingBag } from "react-icons/gi";
+import FormatPrice from "../../utils/formatPrices";
 
 const ShowProducts = ({ products, currentPage, productsPerPage }) => {
   // Calcular el índice de inicio y fin en función de la página actual
@@ -36,11 +28,7 @@ const ShowProducts = ({ products, currentPage, productsPerPage }) => {
             <CardContent>
               <Tiltle>{item.name}</Tiltle>
               <Price>
-                {item.price.toLocaleString("es-CO", {
-                  style: "currency",
-                  currency: "COP",
-                  minimumFractionDigits: 0,
-                })}
+                <FormatPrice price={item.price}/>
                 <Link to={`/InfoProducts/${item.name}`}>
                   <GiShoppingBag />
                 </Link>

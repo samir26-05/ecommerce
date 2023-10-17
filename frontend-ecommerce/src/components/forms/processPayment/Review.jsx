@@ -14,18 +14,11 @@ import CryptoJS from "crypto-js";
 import axios from "axios";
 /* COMPONENTS */
 import { useCart } from "../../Layout/body/products/CardContext";
+import FormatPrice from "../../../utils/formatPrices";
+import { DivReview } from "./ReviewStyled";
 
 export default function Review() {
-  const [oneClients, setOneClients] = useState({
-    nombre: "",
-    apellido: "",
-    Phone_number: "",
-    address: "",
-    city: "",
-    country: "",
-    postalcode: "",
-    state: "",
-  });
+  const [oneClients, setOneClients] = useState({});
   const [error, setError] = useState(null); // Cambiado para inicializar como nulo
 
   const token = localStorage.getItem("accessToken");
@@ -38,9 +31,7 @@ export default function Review() {
   useEffect(() => {
     async function fetchOneClients() {
       try {
-        const response = await axios.get(
-          `${urlBackend}/user/name/${userName}`,
-          {
+        const response = await axios.get(`${urlBackend}/user/name/${userName}`,{
             headers: {
               accessToken: token,
             },
@@ -67,29 +58,18 @@ export default function Review() {
 
   const { cart, updateCart } = useCart();
   const products = Array.isArray(cart) ? [...cart] : [];
-  const totalCantidadProductos = products.reduce(
-    (total, product) => total + product.quantity,
-    0
-  );
+  const totalCantidadProductos = products.reduce((total, product) => total + product.quantity, 0);
   const isTotalMayor6 = totalCantidadProductos > 6;
-  const descuento = isTotalMayor6
-    ? products.reduce(
-      (total, product) => total + product.price * product.quantity,
-      0
-    ) * 0.1
-    : 0;
+  const descuento = isTotalMayor6 ? products.reduce((total, product) => total + product.price * product.quantity, 0) * 0.06 : 0;
   const shipment = 8000; // Envío
 
-  const subtotal = products.reduce(
-    (total, product) => total + product.price * product.quantity + shipment,
-    0
-  );
-  const iva = subtotal * 0.19;
-  const subTotal2 = subtotal - iva;
-  const valorTotal = subTotal2 + iva - descuento;
+  const subtotalView = products.reduce((total, product) => total + product.price * product.quantity, 0);
+  const iva = subtotalView * 0.19;
+  const subTotal2 = subtotalView - iva;
+  const valorTotal = subTotal2 + iva - descuento + shipment;
 
   const referenceCode = uuidv4();
-  const amount = subtotal;
+  const amount = subtotalView;
   const currency = "COP"; // defecto
 
   // Concatenamos las variables en el orden correcto
@@ -107,7 +87,7 @@ export default function Review() {
 
       await axios.post(`${urlBackend}/order/create`,
         {
-          subtotal: subtotal,
+          subtotal: subtotalView,
           discount: descuento,
           iva: iva,
           shipment: shipment,
@@ -137,22 +117,17 @@ export default function Review() {
     }
   };
 
+  const subtotal = valorTotal
+
   return (
     <>
       <Grid container>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            width: "100%",
-          }}
-        >
+        <DivReview style={{ justifyContent: "space-around",}}>
           <Grid>
             <ListItem>
               <ListItemText
                 primary="Cliente"
-                secondary={
-                  oneClients?.Personal_information?.nombre +
+                secondary={ oneClients?.Personal_information?.nombre +
                   " " +
                   oneClients?.Personal_information?.apellido
                 }
@@ -168,8 +143,7 @@ export default function Review() {
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText
                 primary="Domicilio y contacto"
-                secondary={
-                  oneClients?.Personal_information?.address +
+                secondary={ oneClients?.Personal_information?.address +
                   " / " +
                   oneClients?.Personal_information?.city
                 }
@@ -181,38 +155,20 @@ export default function Review() {
               />
             </ListItem>
           </Grid>
-        </div>
+        </DivReview>
       </Grid>
-      <div
-        style={{
-          fontFamily: "-moz-initial",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+      <div style={{ fontFamily: "-moz-initial", display: "flex", justifyContent: "center",}}>
         <Typography
           variant="h5"
           gutterBottom
-          sx={{ fontFamily: "-moz-initial" }}
-        >
+          sx={{ fontFamily: "-moz-initial" }}>
           Información de compra
         </Typography>
       </div>
 
       <Grid container spacing={0}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "100%",
-            borderBottom: "1px solid gray",
-          }}
-        >
-          <div
-            style={{
-              marginLeft: "4%",
-            }}
-          >
+        <DivReview style={{borderBottom: "1px solid gray",}}>
+          <div style={{ marginLeft: "4%",}}>
             <Grid item>
               <ListItem>
                 <ListItemText>
@@ -221,13 +177,7 @@ export default function Review() {
               </ListItem>
             </Grid>
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "40%",
-            }}
-          >
+          <div style={{ display: "flex", justifyContent: "space-between", width: "40%",}}>
             <Grid item>
               <ListItem>
                 <ListItemText primary="Precio" />
@@ -239,7 +189,7 @@ export default function Review() {
               </ListItem>
             </Grid>
           </div>
-        </div>
+        </DivReview>
       </Grid>
 
       <Grid container spacing={0}>
@@ -249,49 +199,23 @@ export default function Review() {
           return (
             <ListItem
               key={product.name}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "100%",
-              }}
-            >
+              style={{ display: "flex", justifyContent: "space-between", width: "100%",}}>
               <Grid item>
                 <ListItem>
-                  <ListItemText
-                    primary={product.name}
-                    secondary={sizeX}
-                  />
+                  <ListItemText primary={product.name} secondary={sizeX}/>
                 </ListItem>
               </Grid>
 
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "40%",
-                }}
-              >
+              <div style={{ display: "flex", justifyContent: "space-between", width: "40%",}}>
                 <Grid item>
                   <ListItem>
-                    <ListItemText
-                      primary={product.price.toLocaleString("es-CO", {
-                        style: "currency",
-                        currency: "COP",
-                        minimumFractionDigits: 0,
-                      })}
-                    />
+                    <ListItemText primary={<FormatPrice price={product.price}/>}/>
                   </ListItem>
                 </Grid>
 
                 <Grid item>
                   <ListItem>
-                    <ListItemText
-                      primary={totalPrice.toLocaleString("es-CO", {
-                        style: "currency",
-                        currency: "COP",
-                        minimumFractionDigits: 0,
-                      })}
-                    />
+                    <ListItemText primary={<FormatPrice price={totalPrice}/>}/>
                   </ListItem>
                 </Grid>
               </div>
@@ -301,115 +225,53 @@ export default function Review() {
       </Grid>
 
       <Grid item spacing={0}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            flexDirection: "column",
-            width: "100%",
-            padding: "2% 2.5% 0 6%",
-            borderTop: "1px solid gray",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
+        <DivReview style={{ flexDirection: "column", padding: "2% 2.5% 0 6%", borderTop: "1px solid gray",}}>
+          <DivReview>
             <Typography>
               SubTotal: ----------------------------------------------
             </Typography>
             <Typography>
-              {subTotal2.toLocaleString("es-CO", {
-                style: "currency",
-                currency: "COP",
-                minimumFractionDigits: 0,
-              })}
+              <FormatPrice price={subTotal2}/>
             </Typography>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
+          </DivReview>
+          <DivReview>
             <Typography>
               Iva (19%): ---------------------------------------------
             </Typography>
             <Typography>
-              {iva.toLocaleString("es-CO", {
-                style: "currency",
-                currency: "COP",
-                minimumFractionDigits: 0,
-              })}
+              <FormatPrice price={iva}/>
             </Typography>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
+          </DivReview>
+          <DivReview>
             <Typography>
               Gasto de envío: --------------------------------------
             </Typography>
             <Typography>
-              {shipment.toLocaleString("es-CO", {
-                style: "currency",
-                currency: "COP",
-                minimumFractionDigits: 0,
-              })}
+              <FormatPrice price={shipment}/>
             </Typography>
-          </div>
+          </DivReview>
 
           {isTotalMayor6 && (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "100%",
-                paddingBottom: "3%",
-              }}
-            >
+            <DivReview style={{ paddingBottom: "3%",}}>
               <Typography>
-                Descuento (10%): -----------------------------------
+                Descuento (6%): -----------------------------------
               </Typography>
               <Typography>
-                {descuento.toLocaleString("es-CO", {
-                  style: "currency",
-                  currency: "COP",
-                  minimumFractionDigits: 0,
-                })}
+                <FormatPrice price={descuento}/>
               </Typography>
-            </div>
+            </DivReview>
           )}
-        </div>
+        </DivReview>
       </Grid>
       <Grid item spacing={0}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "100%",
-            padding: "2% 2.5% 0 6%",
-            borderTop: "1px solid gray",
-          }}
-        >
+        <DivReview style={{ padding: "2% 2.5% 0 6%", borderTop: "1px solid gray",}}>
           <Typography style={{ fontWeight: "700" }}>
             Total a pagar: ---------------------------------------
           </Typography>
           <Typography style={{ fontWeight: "700" }}>
-            {valorTotal.toLocaleString("es-CO", {
-              style: "currency",
-              currency: "COP",
-              minimumFractionDigits: 0,
-            })}
+            <FormatPrice price={valorTotal}/>
           </Typography>
-        </div>
+        </DivReview>
       </Grid>
 
       <div style={{ display: "flex", justifyContent: "end", padding: "5% 5% 0 0", width: "100%", }}>

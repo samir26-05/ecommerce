@@ -12,6 +12,7 @@ import {
 import { GiShoppingBag } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import FormatPrice from "../../../../utils/formatPrices";
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -52,11 +53,7 @@ export const ProductList = () => {
                 <CardContent>
                   <Tiltle>{product.name}</Tiltle>
                   <Price>
-                    {product.price.toLocaleString("es-CO", {
-                      style: "currency",
-                      currency: "COP",
-                      minimumFractionDigits: 0,
-                    })}
+                    <FormatPrice price={product.price}/>
                     <GiShoppingBag />
                   </Price>
                 </CardContent>

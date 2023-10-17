@@ -58,7 +58,7 @@ export default function DetailsOrder({ order, seeOrder }) {
               value="registrar"
               onClick={handleShowTable}
             >
-              <CgLogOut style={{ fontSize: 30 }} /> ATRAS
+               ATRAS
             </Button>
           </div>
 

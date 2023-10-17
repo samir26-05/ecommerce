@@ -22,6 +22,7 @@ import AddProduct from "../../utils/addCar";
 import Loading from "../../components/loading/Loading";
 import { Modal } from "@mui/material";
 import Swal from "sweetalert2";
+import FormatPrice from "../../utils/formatPrices";
 
 const InfoProducts = () => {
   const navigate = useNavigate();
@@ -120,7 +121,7 @@ const InfoProducts = () => {
                   <Title>
                     <div className="Tiltle">{product.name}</div>
                     <div className="Reference">Ref: {product.product_id}</div>
-                    <div className="Price">{product.price.toLocaleString("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 })} </div>
+                    <div className="Price"><FormatPrice price={product.price}/> </div>
                   </Title>
                   <ColorProducts>
                     <p className="Tiltle">Selecciona un color:</p>
