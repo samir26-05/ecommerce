@@ -23,6 +23,7 @@ export const Section1 = styled.div`
   width: 50%;
   height: 100%;
   display: flex;
+  justify-content: center;
   @media (max-width: 768px) {
     width: 100%;
     height: 50%;
@@ -31,7 +32,6 @@ export const Section1 = styled.div`
 
 export const Image = styled.img`
   height: 100%;
-  width: 100%;
   object-fit: contain;
   box-sizing: border-box;
 `;

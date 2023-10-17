@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import cesta from "../../../assets/Img/cesta.png";
 import { useCart } from "../body/products/CardContext";
 import { MdAdd } from "react-icons/Md";
 import { LiaShoppingBagSolid } from "react-icons/lia";
@@ -9,6 +8,7 @@ import { AiOutlineMinus } from "react-icons/Ai";
 import { Car } from "./CarStyled";
 import AddProduct from "../../../utils/addCar";
 import FormatPrice from "../../../utils/formatPrices";
+import CarClear from "./CarClear";
 
 const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
   const [active, setActive] = useState(false);
@@ -27,16 +27,17 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
 
   const onDeleteProduct = (product) => {
     const results = cart.filter(
-      (item) => item.product_id !== product.product_id
+      (item) =>
+        item.product_id !== product.product_id || item.size !== product.size
     );
     updateCart(results);
   };
 
+
   const onDellProduct = (product) => {
     const updatedCart = [...cart];
     const existingProduct = updatedCart.find(
-      (item) => item.product_id === product.product_id
-    );
+      (item) => item.product_id === product.product_id && item.size === product.size);
     if (existingProduct) {
       if (existingProduct.quantity > 0) {
         existingProduct.quantity--;
@@ -75,7 +76,9 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
         </div>
       </div>
       <div className={`BoxProducts ${active ? "" : "ProductsOff"}`}>
-        {allProducts.length ? (
+        {!allProducts.length ? (
+          <CarClear />
+        ) : (
           <>
             <div className="Products">
               {allProducts.map((product) => (
@@ -94,8 +97,7 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                     <div className="Infoon-product">
                       <Link to={`/InfoProducts/${product.name}`} className="link">
                         <p className="Tiltle">{product.name}</p>
-                        {!product.size ? null : (product.category.category.toLowerCase() === "zapatos") ? <span className="Size">Talla: {product.shoe_size.shoe_size_name}</span> :
-                          <span className="Size">Talla: {product.size}</span>}
+                        {product.category.category.toLowerCase() === "accesorios" ? <span/> : <span className="Size">Talla: {product.size}</span>}
                       </Link>
                       <span className="Price">
                         <FormatPrice price={product.price}/>
@@ -105,7 +107,8 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                       <AddProduct
                         product={product}
                         stock={product.stock}
-                        selectedSize={true}
+                        selectedSize={product.size}
+                        category={product.category.category.toLowerCase()}
                       >
                         <button className="btnAdd">
                           <MdAdd
@@ -151,8 +154,7 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
             <div className="Total">
               <div className="Tiltle">
                 <h3>
-                  Total:{" "}
-                  <FormatPrice price={total}/>
+                  Total: <FormatPrice price={total}/>
                 </h3>
               </div>
             </div>
@@ -174,21 +176,6 @@ const CarBuys = ({ hover, pageUsed, pagePayment, color }) => {
                 <span className="bottom-key-1"></span>
                 <span className="bottom-key-2"></span>
               </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="Vacio">
-              <img src={cesta} alt="Img Cesta" className="VacioImg" />
-              <p className="Tiltle">El carrito está vacío</p>
-              <p className="Text">
-                Aún no tienes compras en nuestra tienda
-                <br />
-                <span>
-                  Pero puedes ver el catalogo ¡y te lo llevamos a casa!
-                </span>
-              </p>
-              <br />
             </div>
           </>
         )}

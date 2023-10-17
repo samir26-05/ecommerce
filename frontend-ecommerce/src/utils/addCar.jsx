@@ -9,7 +9,7 @@ const AddProduct = ({ product, children, stock, selectedSize, category }) => {
   const { cart, updateCart } = useCart();
 
   const onAddProduct = (product) => {
-    if (category === "accesorios" || selectedSize) {
+    if (category === "accesorios" || selectedSize != undefined) {
       Swal.fire({
         icon: "success",
         title: "Producto agregado con éxito",
@@ -17,16 +17,15 @@ const AddProduct = ({ product, children, stock, selectedSize, category }) => {
         color: "#000",
         showConfirmButton: false,
         confirmButtonColor: "#000",
-        timer: 1000,
+        timer: 800,
       });
-      const updatedCart = Array.isArray(cart) ? [...cart] : [];
-      const existingProduct = updatedCart.find(
-        (item) => item.product_id === product.product_id
-      );
 
-      if (existingProduct) {
-        if (existingProduct.quantity < stock) {
-          existingProduct.quantity++;
+      const updatedCart = Array.isArray(cart) ? [...cart] : [];
+      const existingProduct = updatedCart.findIndex((item) => item.product_id === product.product_id && item.size === selectedSize );
+
+      if (existingProduct !== -1) {
+        if (updatedCart[existingProduct].quantity < stock) {
+          updatedCart[existingProduct].quantity++;
           updateCart(updatedCart);
         } else {
           Swal.fire({
@@ -36,7 +35,7 @@ const AddProduct = ({ product, children, stock, selectedSize, category }) => {
             iconColor: "red",
             color: "#000",
             showConfirmButton: false,
-            timer: 1000,
+            timer: 800,
           });
         }
       } else {
