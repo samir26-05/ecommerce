@@ -3,6 +3,8 @@
 import { useCart } from "../components/Layout/body/products/CardContext";
 import Swal from "sweetalert2";
 
+/* Función para agregar productos al carrito */
+
 const AddProduct = ({ product, children, stock, selectedSize, category }) => {
   const { cart, updateCart } = useCart();
 
