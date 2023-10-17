@@ -42,7 +42,7 @@ const InfoProducts = () => {
       setLoading(false);
       fetchProducts();
     } else {
-      navigate("/");
+      navigate("/"); 
     }
     setUserEnterUser(trueEnter);
     return () => { setUserEnterUser(false); };
