@@ -1,3 +1,5 @@
+/* Función para convertir un valor a pesos colombianos */
+
 const FormatPrice = ({price}) => {
   return (
     price.toLocaleString("es-CO", {
