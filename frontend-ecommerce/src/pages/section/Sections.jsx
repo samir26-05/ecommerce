@@ -75,7 +75,7 @@ export default function Sections() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await axios.get(`${urlBackend}/product/`);
+        const response = await axios.get(`${urlBackend}/product`);
         setProducts(response.data.result);
         // console.log(response.data.result);
       } catch (error) {

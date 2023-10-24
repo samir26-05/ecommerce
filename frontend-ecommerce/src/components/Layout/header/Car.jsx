@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../body/products/CardContext";
-import { MdAdd } from "react-icons/Md";
+import { MdAdd } from "react-icons/md";
 import { LiaShoppingBagSolid } from "react-icons/lia";
-import { AiOutlineMinus } from "react-icons/Ai";
+import { AiOutlineMinus } from "react-icons/ai";
 import { Car } from "./CarStyled";
 import AddProduct from "../../../utils/addCar";
 import FormatPrice from "../../../utils/formatPrices";

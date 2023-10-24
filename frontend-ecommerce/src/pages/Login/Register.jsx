@@ -13,7 +13,7 @@ import {
   BoxLink,
   Redes,
   Error,
-} from "./registerStyled";
+} from "./RegisterStyled";
 import Swal from "sweetalert2";
 const urlBackend = import.meta.env.VITE_BACKEND_URL;
 
@@ -165,7 +165,7 @@ const RegisterLogin = () => {
             <p className="a1">
               ¿Ya tienes cuenta?
               <Link to={"/"}>
-                <a className="a2">¡Inicia Sesion!</a>
+                ¡Inicia Sesion!
               </Link>
             </p>
           </BoxLink>

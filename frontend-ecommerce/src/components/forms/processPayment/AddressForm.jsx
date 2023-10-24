@@ -9,7 +9,8 @@ import Swal from "sweetalert2";
 import * as Yup from "yup";
 import { Button } from "@mui/material";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { Error, LoginBoxInput } from "../../../pages/login/registerStyled";
+import { Error, LoginBoxInput } from "../../../pages/Login/RegisterStyled";
+
 
 export default function AddressForm({ onFormValid }) {
   const [oneClients, setOneClients] = useState({

@@ -6,17 +6,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 /* MATERIAL UI */
-import {
-  Button,
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@mui/material";
+import { Button, Box } from "@mui/material";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import SendIcon from "@mui/icons-material/Send";
@@ -72,16 +62,7 @@ export default function NavHorizontal(props) {
   const [setError] = useState();
   const userName = localStorage.getItem("username");
   const token = localStorage.getItem("accessToken");
-  const [oneClients, setOneClients] = useState({
-    nombre: "",
-    apellido: "",
-    Phone_number: "",
-    address: "",
-    city: "",
-    country: "",
-    postalcode: "",
-    state: "",
-  });
+  const [oneClients, setOneClients] = useState({});
 
   const urlBackend = import.meta.env.VITE_BACKEND_URL;
 
@@ -126,56 +107,55 @@ export default function NavHorizontal(props) {
       });
       setOrders(response.data);
     } catch (error) {
-      return
+      return;
     }
   };
 
   useEffect(() => {
     fecthShopping();
-   
   }, []);
 
   const columns = useMemo(
     () => [
       {
-        accessorKey: 'id_order', //access nested data with dot notation
-        header: 'Pedido',
+        accessorKey: "id_order", //access nested data with dot notation
+        header: "Pedido",
         size: 150,
       },
       {
-        accessorKey: 'user_id',
-        header: 'Usuarios',
+        accessorKey: "user_id",
+        header: "Usuarios",
         size: 150,
       },
       {
-        accessorKey: 'updatedAt',
-        header: 'Fecha de creación',
+        accessorKey: "updatedAt",
+        header: "Fecha de creación",
         size: 150,
       },
       {
         accessorKey: "subtotal", //normal accessorKey
-        header: 'Subtotal',
+        header: "Subtotal",
         size: 200,
       },
       {
-        accessorKey: 'total_value', //normal accessorKey
-        header: 'Total',
+        accessorKey: "total_value", //normal accessorKey
+        header: "Total",
         size: 200,
       },
       {
-        accessorKey: 'a', //normal accessorKey
-        header: 'Metódo de pago',
+        accessorKey: "a", //normal accessorKey
+        header: "Metódo de pago",
         size: 200,
       },
       {
-        accessorKey: 'id_state',
-        header: 'Estado del producto',
+        accessorKey: "id_state",
+        header: "Estado del producto",
         size: 150,
       },
     ],
-    [],
+    []
   );
-  
+
   return (
     <Box>
       {type === "buy" ? (
@@ -210,13 +190,10 @@ export default function NavHorizontal(props) {
             <>
               <Div>
                 <CustomTabPanel value={value} index={0}>
-                
                   <MaterialReactTable columns={columns} data={orders} />
                 </CustomTabPanel>
 
-                <CustomTabPanel value={value} index={1}>
-                  
-                </CustomTabPanel>
+                <CustomTabPanel value={value} index={1}></CustomTabPanel>
               </Div>
             </>
           ) : (

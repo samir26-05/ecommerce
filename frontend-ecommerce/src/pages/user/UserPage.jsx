@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 /* COMPONENTS */
@@ -19,7 +20,6 @@ const UserPage = () => {
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
-      // console.log(jwt_decode(localStorage.getItem("accessToken")), "❤❤❤❤");
       setLoading(false);
     } else {
       navigate("/");
@@ -31,7 +31,6 @@ const UserPage = () => {
     return () => {
       setUserEnterUser(false);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

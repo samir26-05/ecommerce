@@ -10,8 +10,8 @@ import {
   Section2,
   LoginBoxInput,
   BoxButton,
-} from "./loginstyled";
-import { BoxLink, Redes } from "./registerStyled";
+} from "./LoginStyled";
+import { BoxLink, Redes } from "./RegisterStyled";
 // import { GoogleLogin } from "react-google-login"; //
 
 const Login = () => {
@@ -94,7 +94,7 @@ const Login = () => {
             <p className="a1">
               ¿No tienes cuenta?
               <Link to={"/register"}>
-                <a className="a2">¡Regístrate!</a>
+                ¡Regístrate!
               </Link>
             </p>
           </BoxLink>
