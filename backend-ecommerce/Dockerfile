@@ -1,0 +1,20 @@
+FROM node:18.18
+
+WORKDIR /app
+COPY package*.json .
+RUN npm install
+#PUERTO DE NODE.
+ENV PORT=5000
+ENV DATABASE_NAME=kalary-ecomerce
+ENV DATABASE_USER=root
+ENV HOST=app.wowdesarrollos.com
+ENV DATABASE_PASSWORD=Z!EWpft96pdVHWT@5Fod
+ENV SECRET_KEY=CLAVESUPERSECRETA
+ENV BACKEND_URL=https://kalarybk.app.wowdesarrollos.com
+#PUERTO DE BD
+ENV PORT_DB=3307
+COPY . .
+#PUERTO DE CONTENEDOR
+EXPOSE 5000
+
+CMD [ "node", "src/index.js"]

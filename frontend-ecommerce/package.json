@@ -10,8 +10,43 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "^5.14.3",
+    "@mui/material": "^5.14.5",
+    "@mui/styled-engine-sc": "^5.12.0",
+    "@mui/styles": "^5.14.9",
+    "@react-icons/all-files": "^4.1.0",
+    "@react-oauth/google": "^0.11.1",
+    "@splinetool/runtime": "^0.9.434",
+    "axios": "^0.24.0",
+    "bcryptjs": "^2.4.3",
+    "cloudflared": "^0.4.0",
+    "crypto-js": "^4.1.1",
+    "formik": "^2.4.3",
+    "install": "^0.13.0",
+    "jwt-decode": "^3.1.2",
+    "material-react-table": "^1.14.0",
+    "npm": "^9.8.1",
+    "pdf-lib": "^1.17.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-awesome-modal": "^2.0.5",
+    "react-bubbly-transitions": "^1.0.1",
+    "react-dom": "^18.2.0",
+    "react-google-login": "^5.2.2",
+    "react-icons": "^4.11.0",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.15.0",
+    "react-slick": "^0.29.0",
+    "react-swipeable-views": "^0.14.0",
+    "react-swipeable-views-utils": "^0.14.0",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^5.3.10",
+    "sweetalert2": "^11.7.27",
+    "swiper": "^10.2.0",
+    "uuid": "^9.0.1",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
@@ -21,6 +56,6 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "vite": "^4.4.5"
+    "vite": "^4.4.9"
   }
 }
