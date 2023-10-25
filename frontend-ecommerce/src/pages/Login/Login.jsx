@@ -2,16 +2,19 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
+import DemoAutoPlay from "../../components/Layout/body/carrusel/AutoPlay";
 import {
   LoginBox,
   MainDiv,
   Section1,
   Section2,
   LoginBoxInput,
-  BoxButton,
-} from "./loginstyled";
+  BoxButton
+} from "./LoginStyled";
 import { BoxLink, Redes } from "./registerStyled";
+
+
+
 // import { GoogleLogin } from "react-google-login"; //
 
 const Login = () => {
@@ -51,7 +54,12 @@ const Login = () => {
   return (
     <MainDiv>
       <Section1>
-        <DemoAutoPlay vista={vista} />
+        <DemoAutoPlay>
+          <div className="Div_1_Slider"></div>
+          <div className="Div_2_Slider"></div>
+          <div className="Div_3_Slider"></div>
+
+        </DemoAutoPlay>
       </Section1>
       <Section2>
         <LoginBox>
@@ -93,9 +101,7 @@ const Login = () => {
           <BoxLink>
             <p className="a1">
               ¿No tienes cuenta?
-              <Link to={"/register"}>
-                <a className="a2">¡Regístrate!</a>
-              </Link>
+              <Link to={"/register"} className="a2">¡Regístrate!</Link>
             </p>
           </BoxLink>
           <div style={{ display: "flex", justifyContent: "center" }}>
