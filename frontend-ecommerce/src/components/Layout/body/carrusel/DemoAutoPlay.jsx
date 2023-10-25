@@ -23,11 +23,6 @@ const DemoAutoPlay = ({ vista }) => {
       color: "#000000",
       transition: "ease 2.5s",
     },
-    // slide1: {
-    //   backgroundImage: `url(${BlackSuit})`,
-    //   backgroundSize: "cover",
-    //   backgroundPosition: "center center",
-    // },
     slide1: {
       backgroundImage: `url(${damaNegro})`,
       backgroundSize: "cover",
