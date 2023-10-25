@@ -9,9 +9,8 @@ import AppBrand from "./Brand/AppBrand";
 
 //img
 import SliderImg1 from "../../../assets/Img/SliderImg1.jpg"
-
-//styled
-import {ContainerP} from "./Styled"
+import damaNegro from "../../../assets/Img/damaNegro.jpg";
+import ropaNegro from "../../../assets/Img/ropaNegro.jpg";
 
 export default function Body() {
   const [allProducts, setAllProducts] = useState([]);
@@ -43,8 +42,8 @@ export default function Body() {
       />
         <DemoAutoPlay>
           <img width={"100%"} src={SliderImg1} style={{margin:"0", padding: "0"}} alt="" />
-          <img width={"100%"} src={SliderImg1} style={{margin:"0", padding: "0"}} alt="" />
-          <img width={"100%"} src={SliderImg1} style={{margin:"0", padding: "0"}} alt="" />
+          <img width={"100%"} src={damaNegro} style={{margin:"0", padding: "0"}} alt="" />
+          <img width={"100%"} src={ropaNegro} style={{margin:"0", padding: "0"}} alt="" />
         </DemoAutoPlay>
 
       <IndexCategory />

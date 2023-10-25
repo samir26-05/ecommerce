@@ -31,8 +31,16 @@ const AutoPLay = ({ children }) => {
   };
 
   return (
-    <div style={{overflow: "hidden"}}>
-      <Slider className="aaaa" {...settings}>
+    <div
+      style={{
+        overflow: "hidden",
+        height: "850px",
+        position: "sticky",
+        top: "0",
+        zIndex: "-100",
+      }}
+    >
+      <Slider {...settings}>
         {React.Children.map(children, (child) => (
           <div>{child}</div>
         ))}
