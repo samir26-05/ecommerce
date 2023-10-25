@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-// Importa el paquete swiper/bundle ## npm install swiper npm install react react-dom
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swiper from "swiper/bundle";
@@ -81,21 +80,6 @@ const sliderData = [
 ];
 
 const Contacto = () => {
-  const [products, setProducts] = useState([]);
-  const urlBackend = import.meta.env.VITE_BACKEND_URL;
-
-  // useEffect(() => {
-  //   async function fetchProducts() {
-  //     try {
-  //       const response = await axios.get(`${urlBackend}/product/`);
-  //       setProducts(response.data.result);
-  //     } catch (error) {
-  //       console.error("Error al obtener los productos:", error);
-  //     }
-  //   }
-
-  //   fetchProducts();
-  // }, []);
 
   useEffect(() => {
     const swiper = new Swiper(".slide-content", {

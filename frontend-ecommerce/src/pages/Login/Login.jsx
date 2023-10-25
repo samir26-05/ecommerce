@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
+import DemoAutoPlay from "../../components/Layout/body/carrusel/AutoPlay";
 import {
   LoginBox,
   MainDiv,
@@ -12,7 +12,6 @@ import {
   BoxButton,
 } from "./LoginStyled";
 import { BoxLink, Redes } from "./RegisterStyled";
-// import { GoogleLogin } from "react-google-login"; //
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,10 +20,7 @@ const Login = () => {
   const urlBackend = import.meta.env.VITE_BACKEND_URL;
 
   let navigate = useNavigate();
-
-  // const responseGoogle = (response) => {
-  //   console.log(response);
-  // }
+  useEffect(() => localStorage.removeItem("accessToken"), [])
 
   const loginn = async (event) => {
     event.preventDefault();
@@ -51,7 +47,12 @@ const Login = () => {
   return (
     <MainDiv>
       <Section1>
-        <DemoAutoPlay vista={vista} />
+        <DemoAutoPlay>
+          <div className="Div_1_Slider"></div>
+          <div className="Div_2_Slider"></div>
+          <div className="Div_3_Slider"></div>
+
+        </DemoAutoPlay>
       </Section1>
       <Section2>
         <LoginBox>
@@ -94,7 +95,7 @@ const Login = () => {
             <p className="a1">
               ¿No tienes cuenta?
               <Link to={"/register"}>
-                ¡Regístrate!
+                <a className="a2">¡Regístrate!</a>
               </Link>
             </p>
           </BoxLink>

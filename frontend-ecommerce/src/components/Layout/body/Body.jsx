@@ -1,11 +1,17 @@
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
-import DemoAutoPlay from "./carrusel/DemoAutoPlay";
+import DemoAutoPlay from "./carrusel/AutoPlay";
 import { useState, useEffect } from "react";
 import { ProductList } from "./products/ProductList";
 import SectionsBody from "./Sections/SectionsBody";
 import IndexCategory from "./Category/IndexCategory";
 import AppBrand from "./Brand/AppBrand";
+
+//img
+import SliderImg1 from "../../../assets/Img/SliderImg1.jpg"
+
+//styled
+import {ContainerP} from "./Styled"
 
 export default function Body() {
   const [allProducts, setAllProducts] = useState([]);
@@ -35,7 +41,12 @@ export default function Body() {
         newCantProducts={setCountProducts}
         isUsedBody={userEnter}
       />
-      <DemoAutoPlay />
+        <DemoAutoPlay>
+          <img width={"100%"} src={SliderImg1} style={{margin:"0", padding: "0"}} alt="" />
+          <img width={"100%"} src={SliderImg1} style={{margin:"0", padding: "0"}} alt="" />
+          <img width={"100%"} src={SliderImg1} style={{margin:"0", padding: "0"}} alt="" />
+        </DemoAutoPlay>
+
       <IndexCategory />
       <ProductList
         allProducts={allProducts}

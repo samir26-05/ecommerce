@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+import damaNegro from "../../assets/Img/damaNegro.jpg";
+import ropaNegro from "../../assets/Img/ropaNegro.jpg";
+import SliderImg1 from "../../assets/Img/SliderImg1.jpg";
 //********************************
 //Componentes Principales
 
@@ -17,6 +20,27 @@ export const Section1 = styled.div`
   box-sizing: border-box;
   width: 50%;
   overflow: hidden;
+  .Div_1_Slider {
+    height: 100vh;
+    width: 100%;
+    background-image: url(${SliderImg1});
+    background-size: cover;
+    background-position: center;
+  }
+  .Div_2_Slider {
+    height: 100vh;
+    width: 100%;
+    background-image: url(${ropaNegro});
+    background-size: cover;
+    background-position: center;
+  }
+  .Div_3_Slider {
+    height: 100vh;
+    width: 100%;
+    background-image: url(${damaNegro});
+    background-size: cover;
+    background-position: center;
+  }
   @media (max-width: 768px) {
     width: 100%;
   }

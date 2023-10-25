@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
-import DemoAutoPlay from "../../components/Layout/body/carrusel/DemoAutoPlay";
+import AutoPlay from "../../components/Layout/body/carrusel/AutoPlay";
 import {
   MainDiv,
   Section1,
@@ -284,7 +284,7 @@ const RegisterLogin = () => {
         </LoginBox>
       </Section1>
       <Section2>
-        <DemoAutoPlay vista={vista} />
+        <AutoPlay/>
       </Section2>
     </MainDiv>
   );
