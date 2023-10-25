@@ -27,7 +27,6 @@ function getStepIcon(step) {
 }
 
 export default function DetailsOrder({ order, seeOrder }) {
-  console.log(order);
   const [table, setTable] = useState(seeOrder);
   const [activeStep, setActiveStep] = useState(0);
 
